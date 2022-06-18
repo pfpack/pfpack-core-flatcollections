@@ -56,7 +56,7 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
         return true;
     }
 
-    public int GetHashCode([DisallowNull] ImmutableArray<T> obj)
+    public int GetHashCode(ImmutableArray<T> obj)
     {
         // The best practice: to return zero instead of to throw ArgumentNullException
         if (obj.IsDefault)

@@ -55,7 +55,7 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
         return true;
     }
 
-    public int GetHashCode([DisallowNull] T[] obj)
+    public int GetHashCode(T[] obj)
     {
         // The best practice: to return zero instead of to throw ArgumentNullException
         if (obj is null)

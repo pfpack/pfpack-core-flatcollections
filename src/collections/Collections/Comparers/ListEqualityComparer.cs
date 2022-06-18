@@ -55,7 +55,7 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
         return true;
     }
 
-    public int GetHashCode([DisallowNull] IList<T> obj)
+    public int GetHashCode(IList<T> obj)
     {
         // The best practice: to return zero instead of to throw ArgumentNullException
         if (obj is null)
