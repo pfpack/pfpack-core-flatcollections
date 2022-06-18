@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace System.Collections.Generic;
+﻿namespace System.Collections.Generic;
 
 public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
 {
