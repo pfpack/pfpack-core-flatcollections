@@ -63,15 +63,13 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
             return default;
         }
 
-        HashCode builder = new();
-
         // To make difference between null and empty collections
-        builder.Add(1);
-
         if (obj.Length is not > 0)
         {
-            return builder.ToHashCode();
+            return HashCode.Combine(1);
         }
+
+        HashCode builder = new();
 
         var comparer = Comparer();
 
