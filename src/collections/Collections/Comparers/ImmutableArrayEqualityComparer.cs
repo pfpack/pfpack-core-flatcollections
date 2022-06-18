@@ -64,13 +64,15 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
             return default;
         }
 
+        HashCode builder = new();
+
         // To make difference between null and empty collections
+        builder.Add(1);
+
         if (obj.Length is not > 0)
         {
-            return HashCode.Combine(1);
+            return builder.ToHashCode();
         }
-
-        HashCode builder = new();
 
         var comparer = Comparer();
 
