@@ -37,16 +37,18 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
             return false;
         }
 
-        if (x.Count > 0)
+        if (x.Count is not > 0)
         {
-            var comparer = Comparer();
+            return true;
+        }
 
-            for (int i = 0; i < x.Count; i++)
+        var comparer = Comparer();
+
+        for (int i = 0; i < x.Count; i++)
+        {
+            if (comparer.Equals(x[i], y[i]) is false)
             {
-                if (comparer.Equals(x[i], y[i]) is false)
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -64,15 +66,17 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
 
         builder.Add(obj.Count);
 
-        if (obj.Count > 0)
+        if (obj.Count is not > 0)
         {
-            var comparer = Comparer();
+            return builder.ToHashCode();
+        }
 
-            for (int i = 0; i < obj.Count; i++)
-            {
-                var item = obj[i];
-                builder.Add(item is not null ? comparer.GetHashCode(item) : default);
-            }
+        var comparer = Comparer();
+
+        for (int i = 0; i < obj.Count; i++)
+        {
+            var item = obj[i];
+            builder.Add(item is not null ? comparer.GetHashCode(item) : default);
         }
 
         return builder.ToHashCode();
