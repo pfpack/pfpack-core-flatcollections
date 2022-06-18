@@ -57,6 +57,7 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
 
     public int GetHashCode([DisallowNull] IReadOnlyList<T> obj)
     {
+        // The best practice: to return zero instead of to throw ArgumentNullException
         if (obj is null)
         {
             return default;
@@ -64,7 +65,8 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
 
         HashCode builder = new();
 
-        builder.Add(obj.Count);
+        // To make difference between null and empty collections
+        builder.Add(1);
 
         if (obj.Count is not > 0)
         {

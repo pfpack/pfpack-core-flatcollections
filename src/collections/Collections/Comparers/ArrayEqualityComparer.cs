@@ -57,6 +57,7 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 
     public int GetHashCode([DisallowNull] T[] obj)
     {
+        // The best practice: to return zero instead of to throw ArgumentNullException
         if (obj is null)
         {
             return default;
@@ -64,7 +65,8 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 
         HashCode builder = new();
 
-        builder.Add(obj.Length);
+        // To make difference between null and empty collections
+        builder.Add(1);
 
         if (obj.Length is not > 0)
         {

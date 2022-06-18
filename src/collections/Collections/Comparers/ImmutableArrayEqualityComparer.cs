@@ -58,6 +58,7 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     public int GetHashCode([DisallowNull] ImmutableArray<T> obj)
     {
+        // The best practice: to return zero instead of to throw ArgumentNullException
         if (obj.IsDefault)
         {
             return default;
@@ -65,7 +66,8 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
         HashCode builder = new();
 
-        builder.Add(obj.Length);
+        // To make difference between null and empty collections
+        builder.Add(1);
 
         if (obj.Length is not > 0)
         {
