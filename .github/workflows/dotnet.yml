@@ -1,0 +1,50 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main, dev, dev/*, feature/*, fix/*, release/* ]
+
+  pull_request:
+    branches: [ main ]
+
+  release:
+    types: [ published ]
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        include-prerelease: false
+
+    # Create Local NuGet Source
+
+    - name: Create Local NuGet Directory
+      run: mkdir ~/nuget
+
+    - name: Add Local Nuget Source
+      run: dotnet nuget add source ~/nuget
+
+    # Collections
+
+    - name: Restore Collections
+      run: dotnet restore ./src/*/*/Collections.csproj
+
+    - name: Build Collections
+      run: dotnet build ./src/*/*/Collections.csproj --no-restore  -c Release
+
+    - name: Pack Collections
+      run: dotnet pack ./src/*/*/Collections.csproj --no-restore -o ~/nuget  -c Release
+
+      # Push
+
+    - name: Push Packages
+      if: ${{ github.event_name == 'release' }}
+      run: dotnet nuget push "../../../nuget/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NuGetSourcePassword }} --skip-duplicate

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/pfpack/early-collections</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pfpack/early-collections</RepositoryUrl>
+    <Company>pfpack</Company>
+    <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
+    <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
+    <Description>EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.</Description>
+    <RootNamespace>System.Collections.Generic</RootNamespace>
+    <AssemblyName>EarlyFuncPack.Collections</AssemblyName>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\docs\collections\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
