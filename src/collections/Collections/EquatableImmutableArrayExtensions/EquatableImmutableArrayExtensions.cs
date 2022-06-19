@@ -2,7 +2,7 @@
 
 public static class EquatableImmutableArrayExtensions
 {
-    public static EquatableImmutableArray<T> AsEquatableImmutableArray<T>(this ImmutableArray<T> items)
+    public static EquatableImmutableArray<T> AsEquatable<T>(this ImmutableArray<T> items)
         =>
         new(items);
 }
