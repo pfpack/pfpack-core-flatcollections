@@ -14,10 +14,6 @@ public static class FlatArrayExtensions
         =>
         new(source);
 
-    public static FlatArray<T> ToFlatArray<T>([AllowNull] this IReadOnlyCollection<T> source)
-        =>
-        new(source);
-
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this IEnumerable<T> source)
         =>
         new(source);

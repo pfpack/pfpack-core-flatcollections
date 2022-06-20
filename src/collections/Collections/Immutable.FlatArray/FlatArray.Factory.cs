@@ -17,10 +17,6 @@ partial class FlatArray
         =>
         new(source);
 
-    public static FlatArray<T> From<T>([AllowNull] IReadOnlyCollection<T> source)
-        =>
-        new(source);
-
     public static FlatArray<T> From<T>([AllowNull] IEnumerable<T> source)
         =>
         new(source);

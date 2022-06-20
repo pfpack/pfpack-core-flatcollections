@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace System.Collections.Immutable;
 
@@ -13,28 +14,13 @@ partial class FlatArray<T>
         =>
         items = source is null
         ? InnerEmptyArray.Value
-        : InnerFactory.Build(source);
+        : InnerBuild(source);
 
     public FlatArray([AllowNull] List<T> source)
         =>
         items = source is null
         ? InnerEmptyArray.Value
-        : InnerFactory.Build(source);
-
-    public FlatArray([AllowNull] IReadOnlyCollection<T> source)
-        =>
-        items = source switch
-        {
-            null => InnerEmptyArray.Value,
-
-            T[] array => InnerFactory.Build(array),
-
-            List<T> list => InnerFactory.Build(list),
-
-            ICollection<T> coll => InnerFactory.Build(coll),
-
-            var coll => InnerFactory.Build(coll)
-        };
+        : InnerBuild(source.ToArray());
 
     public FlatArray([AllowNull] IEnumerable<T> source)
         =>
@@ -42,14 +28,16 @@ partial class FlatArray<T>
         {
             null => InnerEmptyArray.Value,
 
-            T[] array => InnerFactory.Build(array),
+            T[] array => InnerBuild(array),
 
-            List<T> list => InnerFactory.Build(list),
+            List<T> list => InnerBuild(list.ToArray()),
 
-            ICollection<T> coll => InnerFactory.Build(coll),
-
-            IReadOnlyCollection<T> coll => InnerFactory.Build(coll),
-
-            var coll => InnerFactory.Build(coll)
+            var coll => InnerBuild(coll.ToArray())
         };
+
+    private static T[] InnerBuild(T[] source)
+        =>
+        source.Length is not > 0
+        ? InnerEmptyArray.Value
+        : InnerArrayHelper.Copy(source);
 }
