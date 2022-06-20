@@ -9,7 +9,7 @@ partial class FlatArray
         =>
         FlatArray<T>.Empty;
 
-    public static FlatArray<T> From<T>([AllowNull] T[] source)
+    public static FlatArray<T> From<T>([AllowNull] params T[] source)
         =>
         new(source);
 
