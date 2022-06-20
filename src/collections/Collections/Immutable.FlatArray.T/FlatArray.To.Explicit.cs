@@ -10,5 +10,5 @@ partial class FlatArray<T>
 
     public List<T> ToList()
         =>
-        new(InnerCopyArray(items));
+        items.Length > 0 ? new(InnerCopyArray(items)) : new();
 }
