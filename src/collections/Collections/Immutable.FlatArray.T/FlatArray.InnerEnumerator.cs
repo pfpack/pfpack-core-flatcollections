@@ -14,7 +14,9 @@ partial class FlatArray<T>
 
         private T currentItem = default!;
 
-        internal InnerEnumerator(T[] items) => this.items = items;
+        internal InnerEnumerator(T[] items)
+            =>
+            this.items = items;
 
         T IEnumerator<T>.Current => currentItem;
 
@@ -24,12 +26,14 @@ partial class FlatArray<T>
 
         bool IEnumerator.MoveNext()
         {
-            if (currentIndex < items.Length)
+            if (currentIndex >= items.Length)
             {
-                currentIndex++;
+                return false;
             }
 
-            if (currentIndex < items.Length is false)
+            currentIndex++;
+
+            if (currentIndex >= items.Length)
             {
                 return false;
             }
@@ -38,6 +42,8 @@ partial class FlatArray<T>
             return true;
         }
 
-        void IEnumerator.Reset() => currentIndex = defaultIndex;
+        void IEnumerator.Reset()
+            =>
+            currentIndex = defaultIndex;
     }
 }
