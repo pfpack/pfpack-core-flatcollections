@@ -1,20 +1,5 @@
-﻿using System.Collections.Generic;
+﻿namespace System.Collections.Immutable;
 
-namespace System.Collections.Immutable;
-
-public sealed partial class FlatArray<T> : IReadOnlyList<T>, IEquatable<FlatArray<T>>
+public static partial class FlatArray
 {
-    private readonly T[] items;
-
-    public int Length
-        =>
-        items.Length;
-
-    int IReadOnlyCollection<T>.Count
-        =>
-        items.Length;
-
-    public static FlatArray<T> Empty
-        =>
-        InnerEmptyFlatArray.Value;
 }
