@@ -26,20 +26,17 @@ partial class FlatArray<T>
 
         bool IEnumerator.MoveNext()
         {
-            if (currentIndex >= items.Length)
+            if (currentIndex < items.Length)
             {
-                return false;
+                currentIndex++;
+                if (currentIndex < items.Length)
+                {
+                    currentItem = items[currentIndex];
+                    return true;
+                }
             }
 
-            currentIndex++;
-
-            if (currentIndex >= items.Length)
-            {
-                return false;
-            }
-
-            currentItem = items[currentIndex];
-            return true;
+            return false;
         }
 
         void IEnumerator.Reset()
