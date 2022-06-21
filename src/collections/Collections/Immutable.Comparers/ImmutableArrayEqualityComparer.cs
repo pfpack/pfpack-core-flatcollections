@@ -1,6 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
 
-namespace System.Collections.Generic;
+namespace System.Collections.Immutable;
 
 public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<ImmutableArray<T>>
 {
