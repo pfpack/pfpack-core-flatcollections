@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace System.Collections.Immutable;
+namespace System.Collections.Generic;
 
 partial class FlatArrayJsonConverter<T>
 {

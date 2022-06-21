@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace System.Collections.Immutable;
+namespace System.Collections.Generic;
 
 partial class FlatArrayJsonConverterFactory
 {

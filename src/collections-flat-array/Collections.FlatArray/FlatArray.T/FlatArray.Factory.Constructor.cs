@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace System.Collections.Immutable;
+namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {

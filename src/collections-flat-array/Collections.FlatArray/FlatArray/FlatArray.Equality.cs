@@ -1,4 +1,4 @@
-﻿namespace System.Collections.Immutable;
+﻿namespace System.Collections.Generic;
 
 partial class FlatArray
 {

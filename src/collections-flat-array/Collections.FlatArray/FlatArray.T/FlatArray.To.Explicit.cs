@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace System.Collections.Immutable;
+﻿namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
