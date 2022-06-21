@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace System.Collections.Immutable;
 
+[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
 public sealed partial class FlatArray<T> : IReadOnlyList<T>, IEquatable<FlatArray<T>>
 {
     private readonly T[] items;

@@ -17,7 +17,7 @@
     <Description>EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.</Description>
     <RootNamespace>System.Collections.Generic</RootNamespace>
     <AssemblyName>EarlyFuncPack.Collections</AssemblyName>
-    <Version>0.0.1</Version>
+    <Version>0.0.2-build.10</Version>
   </PropertyGroup>
 
   <ItemGroup>
