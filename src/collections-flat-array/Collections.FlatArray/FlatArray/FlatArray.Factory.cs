@@ -10,13 +10,13 @@ partial class FlatArray
 
     public static FlatArray<T> From<T>([AllowNull] params T[] source)
         =>
-        new(source);
+        FlatArray<T>.From(source);
 
     public static FlatArray<T> From<T>([AllowNull] List<T> source)
         =>
-        new(source);
+        FlatArray<T>.From(source);
 
     public static FlatArray<T> From<T>([AllowNull] IEnumerable<T> source)
         =>
-        new(source);
+        FlatArray<T>.From(source);
 }

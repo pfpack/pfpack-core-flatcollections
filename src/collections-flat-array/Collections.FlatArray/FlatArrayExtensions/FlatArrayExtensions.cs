@@ -7,13 +7,13 @@ public static class FlatArrayExtensions
 {
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this T[] source)
         =>
-        new(source);
+        FlatArray<T>.From(source);
 
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this List<T> source)
         =>
-        new(source);
+        FlatArray<T>.From(source);
 
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this IEnumerable<T> source)
         =>
-        new(source);
+        FlatArray<T>.From(source);
 }

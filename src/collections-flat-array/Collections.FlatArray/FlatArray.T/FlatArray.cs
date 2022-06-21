@@ -14,8 +14,4 @@ public sealed partial class FlatArray<T> : IReadOnlyList<T>, IEquatable<FlatArra
     int IReadOnlyCollection<T>.Count
         =>
         items.Length;
-
-    public static FlatArray<T> Empty
-        =>
-        InnerEmptyFlatArray.Value;
 }
