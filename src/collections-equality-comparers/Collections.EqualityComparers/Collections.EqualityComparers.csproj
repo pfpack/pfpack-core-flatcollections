@@ -16,7 +16,7 @@
     <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
     <Description>EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.</Description>
     <RootNamespace>System.Collections.Generic</RootNamespace>
-    <AssemblyName>EarlyFuncPack.Collections</AssemblyName>
+    <AssemblyName>EarlyFuncPack.Collections.EqualityComparers</AssemblyName>
     <Version>0.1.0</Version>
   </PropertyGroup>
 
@@ -25,15 +25,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="..\..\..\docs\collections\README.md">
+    <None Include="..\..\..\docs\collections-equality-comparers\README.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="EarlyFuncPack.Collections.EqualityComparers" Version="0.1.0" />
-    <PackageReference Include="EarlyFuncPack.Collections.FlatArray" Version="0.1.0" />
   </ItemGroup>
 
 </Project>
