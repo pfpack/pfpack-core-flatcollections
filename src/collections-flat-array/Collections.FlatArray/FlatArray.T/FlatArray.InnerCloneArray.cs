@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private static T[] InnerCopyArray(T[] source)
+    private static T[] InnerCloneArray(T[] source)
     {
         var dest = new T[source.Length];
         Array.Copy(source, dest, source.Length);

@@ -38,5 +38,5 @@ partial class FlatArray<T>
         =>
         source.Length is not > 0
         ? InnerEmptyArray.Value
-        : InnerCopyArray(source);
+        : InnerCloneArray(source);
 }
