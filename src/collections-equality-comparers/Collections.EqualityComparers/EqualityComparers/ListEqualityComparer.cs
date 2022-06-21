@@ -44,10 +44,11 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
 
         for (int i = 0; i < x.Count; i++)
         {
-            if (comparer.Equals(x[i], y[i]) is false)
+            if (comparer.Equals(x[i], y[i]))
             {
-                return false;
+                continue;
             }
+            return false;
         }
 
         return true;
