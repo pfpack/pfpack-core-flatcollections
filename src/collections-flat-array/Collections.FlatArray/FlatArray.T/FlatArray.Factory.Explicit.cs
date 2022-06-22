@@ -8,6 +8,8 @@ partial class FlatArray<T>
         =>
         InnerEmptyFlatArray.Value;
 
+    // TODO: return Empty on zero length
+
     public static FlatArray<T> From([AllowNull] params T[] source)
         =>
         new(source);
