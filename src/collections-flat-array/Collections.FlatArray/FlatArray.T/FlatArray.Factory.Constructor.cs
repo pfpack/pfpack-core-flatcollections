@@ -15,7 +15,7 @@ partial class FlatArray<T>
         ? InnerEmptyArray.Value
         : InnerBuildItems(source);
 
-    // TODO: Remove all the constructors except array-based and move their logic to FlatArray<T>.From factories
+    // TODO: Remove all the below constructors and move their logic to FlatArray<T>.From factories
 
     private FlatArray([AllowNull] List<T> source)
         =>
