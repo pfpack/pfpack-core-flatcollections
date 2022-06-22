@@ -17,13 +17,13 @@ partial class FlatArray<T>
 
     // TODO: Remove all the constructors except array-based and move their logic to FlatArray<T>.From factories
 
-    public FlatArray([AllowNull] List<T> source)
+    private FlatArray([AllowNull] List<T> source)
         =>
         items = source is null
         ? InnerEmptyArray.Value
         : InnerBuildItems(source.ToArray());
 
-    public FlatArray([AllowNull] IEnumerable<T> source)
+    private FlatArray([AllowNull] IEnumerable<T> source)
         =>
         items = source switch
         {
