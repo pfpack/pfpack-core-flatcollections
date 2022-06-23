@@ -73,26 +73,26 @@ partial class FlatArray<T>
             return InnerEmptyFlatArray.Value;
         }
 
-        int count = 0;
+        int index = 0;
         var array = new T[4];
 
         do
         {
-            if (count < array.Length)
+            if (index < array.Length)
             {
-                array[count++] = enumerator.Current;
+                array[index++] = enumerator.Current;
             }
             else
             {
                 Array.Resize(ref array, array.Length * 2);
-                array[count++] = enumerator.Current;
+                array[index++] = enumerator.Current;
             }
         }
         while (enumerator.MoveNext());
 
-        if (count < array.Length)
+        if (index < array.Length) // Here the index is equal to the actual count
         {
-            Array.Resize(ref array, count);
+            Array.Resize(ref array, index);
         }
 
         return new(array, default);
