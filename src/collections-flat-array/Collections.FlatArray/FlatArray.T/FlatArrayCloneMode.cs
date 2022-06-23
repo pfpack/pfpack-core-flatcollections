@@ -3,6 +3,6 @@
 public enum FlatArrayCloneMode
 {
     Default,
+    Shallow,
     Deep,
-    Shallow
 }

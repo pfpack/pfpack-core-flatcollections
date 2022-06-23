@@ -14,7 +14,7 @@ partial class FlatArray<T>
         =>
         InnerClone(mode);
 
-    private FlatArray<T> InnerClone(FlatArrayCloneMode mode)  
+    private FlatArray<T> InnerClone(FlatArrayCloneMode mode)
         =>
         new(InnerCloneBuildItems(mode), default);
 
@@ -26,13 +26,13 @@ partial class FlatArray<T>
             =>
             items.Length > 0 ? InnerCloneArray(items) : items,
 
-            FlatArrayCloneMode.Deep
-            =>
-            InnerCloneArray(items),
-
             FlatArrayCloneMode.Shallow
             =>
             items,
+
+            FlatArrayCloneMode.Deep
+            =>
+            InnerCloneArray(items),
 
             _ => throw new ArgumentOutOfRangeException(
                 nameof(mode), mode, "An unexpected value of the clone mode.")
