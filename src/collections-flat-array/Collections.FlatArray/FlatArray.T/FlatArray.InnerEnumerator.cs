@@ -26,8 +26,7 @@ partial class FlatArray<T>
         {
             if (currentIndex < items.Length)
             {
-                currentIndex++;
-                if (currentIndex < items.Length)
+                if (++currentIndex < items.Length)
                 {
                     currentItem = items[currentIndex];
                     return true;
