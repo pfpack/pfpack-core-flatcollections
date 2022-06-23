@@ -1,14 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace System.Collections.Generic;
+﻿namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
-    public static implicit operator T[]([AllowNull] FlatArray<T> flat)
+    public static implicit operator T[](FlatArray<T> flatArray)
         =>
-        flat is not null ? flat.ToArray() : Array.Empty<T>();
+        (flatArray ?? throw new ArgumentNullException(nameof(flatArray)))
+        .ToArray();
 
-    public static implicit operator List<T>([AllowNull] FlatArray<T> flat)
+    public static implicit operator List<T>(FlatArray<T> flatArray)
         =>
-        flat is not null ? flat.ToList() : new();
+        (flatArray ?? throw new ArgumentNullException(nameof(flatArray)))
+        .ToList();
 }
