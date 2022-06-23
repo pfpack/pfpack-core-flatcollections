@@ -15,7 +15,7 @@ partial class FlatArray<T>
 
     public static FlatArray<T> From([AllowNull] List<T> source)
         =>
-        source is not null ? InnerFromICollection(source) : InnerEmptyFlatArray.Value;
+        source is not null ? InnerFromList(source) : InnerEmptyFlatArray.Value;
 
     public static FlatArray<T> From([AllowNull] IEnumerable<T> source)
         =>
@@ -29,13 +29,25 @@ partial class FlatArray<T>
             =>
             InnerFromArray(array),
 
+            List<T> list
+            =>
+            InnerFromList(list),
+
+            FlatArray<T> flatArray
+            =>
+            InnerFromFlatArray(flatArray),
+
             ImmutableArray<T> immutableArray
             =>
             InnerFromImmutableArray(immutableArray),
 
-            ICollection<T> collection
+            ICollection<T> coll
             =>
-            InnerFromICollection(collection),
+            InnerFromICollection(coll),
+
+            IReadOnlyList<T> list
+            =>
+            InnerFromIReadOnlyList(list),
 
             _ =>
             InnerFromIEnumerable(source)
@@ -44,6 +56,14 @@ partial class FlatArray<T>
     private static FlatArray<T> InnerFromArray(T[] source)
         =>
         source.Length > 0 ? new(InnerCloneArray(source), default) : InnerEmptyFlatArray.Value;
+
+    private static FlatArray<T> InnerFromList(List<T> source)
+        =>
+        InnerFromICollection(source);
+
+    private static FlatArray<T> InnerFromFlatArray(FlatArray<T> source)
+        =>
+        source.items.Length > 0 ? new(InnerCloneArray(source), default) : InnerEmptyFlatArray.Value;
 
     private static FlatArray<T> InnerFromImmutableArray(ImmutableArray<T> source)
         =>
@@ -62,6 +82,23 @@ partial class FlatArray<T>
 
         // Clone for the safety purposes
         return new(InnerCloneArray(array), default);
+    }
+
+    private static FlatArray<T> InnerFromIReadOnlyList(IReadOnlyList<T> source)
+    {
+        var count = source.Count;
+        if (count is not > 0)
+        {
+            return InnerEmptyFlatArray.Value;
+        }
+
+        var array = new T[count];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = source[i];
+        }
+
+        return new(array, default);
     }
 
     private static FlatArray<T> InnerFromIEnumerable(IEnumerable<T> source)
