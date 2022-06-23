@@ -90,10 +90,8 @@ partial class FlatArray<T>
         }
         while (enumerator.MoveNext());
 
-        if (index < array.Length) // Here the index is equal to the actual count
-        {
-            Array.Resize(ref array, index);
-        }
+        // Here the index is equal to the actual count
+        Array.Resize(ref array, index);
 
         return new(array, default);
     }
