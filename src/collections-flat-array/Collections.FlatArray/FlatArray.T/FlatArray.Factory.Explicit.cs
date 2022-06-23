@@ -8,17 +8,20 @@ partial class FlatArray<T>
         =>
         InnerEmptyFlatArray.Value;
 
-    // TODO: return Empty on zero length
-
     public static FlatArray<T> From([AllowNull] params T[] source)
         =>
-        new(source);
+        source?.Length > 0 ? new(InnerCloneArray(source), default) : InnerEmptyFlatArray.Value;
 
     public static FlatArray<T> From([AllowNull] List<T> source)
         =>
-        new(source);
+        InnerFrom(source);
 
     public static FlatArray<T> From([AllowNull] IEnumerable<T> source)
         =>
-        new(source);
+        InnerFrom(source);
+
+    private static FlatArray<T> InnerFrom(IEnumerable<T>? source)
+    {
+        throw new NotImplementedException();
+    }
 }

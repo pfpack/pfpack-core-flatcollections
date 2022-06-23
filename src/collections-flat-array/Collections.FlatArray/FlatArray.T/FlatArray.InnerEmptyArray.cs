@@ -2,7 +2,8 @@
 
 partial class FlatArray<T>
 {
-    // To avoid inner use of the global empty instance
+    // Intended for the inner use only, not intended to pass outside
+    // Designed to avoid the inner use of the global Array.Empty<T>() instance
     private static class InnerEmptyArray
     {
 #pragma warning disable CA1825 // Avoid zero-length array allocations
