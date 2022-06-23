@@ -3,7 +3,10 @@
 namespace System.Collections.Generic;
 
 //[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
-public sealed partial class FlatArray<T> : IReadOnlyList<T>, IEquatable<FlatArray<T>>
+public sealed partial class FlatArray<T> :
+    IReadOnlyList<T>,
+    IEquatable<FlatArray<T>>,
+    ICloneable
 {
     private readonly T[] items;
 
