@@ -66,8 +66,24 @@ partial class FlatArray<T>
         source.items.Length > 0 ? new(InnerCloneArray(source), default) : InnerEmptyFlatArray.Value;
 
     private static FlatArray<T> InnerFromImmutableArray(ImmutableArray<T> source)
-        =>
-        source.IsDefault is false ? InnerFromICollection(source) : InnerEmptyFlatArray.Value;
+    {
+        if (source.IsDefault)
+        {
+            return InnerEmptyFlatArray.Value;
+        }
+
+        var count = source.Length;
+        if (count is not > 0)
+        {
+            return InnerEmptyFlatArray.Value;
+        }
+
+        var array = new T[count];
+        source.CopyTo(array, 0);
+
+        // Clone for the safety purposes
+        return new(InnerCloneArray(array), default);
+    }
 
     private static FlatArray<T> InnerFromICollection(ICollection<T> source)
     {
