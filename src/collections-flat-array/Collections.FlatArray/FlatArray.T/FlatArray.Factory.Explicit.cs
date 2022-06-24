@@ -126,25 +126,44 @@ partial class FlatArray<T>
             return InnerEmptyFlatArray.Value;
         }
 
-        int index = 0;
+        uint count = 0;
         var array = new T[4];
+        //const uint maxCapacity = int.MaxValue;
+        uint maxCapacity = unchecked((uint)Array.MaxLength);
 
         do
         {
-            if (index < array.Length)
+            if (count < unchecked((uint)array.Length))
             {
-                array[index++] = enumerator.Current;
+                array[count++] = enumerator.Current;
+            }
+            else if (count < maxCapacity)
+            {
+                uint newCapacity = unchecked((uint)array.Length) * 2;
+                if (newCapacity > maxCapacity)
+                {
+                    newCapacity = maxCapacity;
+                }
+
+                var newArray = new T[newCapacity];
+                Array.Copy(array, newArray, array.Length);
+                array = newArray;
+
+                array[count++] = enumerator.Current;
             }
             else
             {
-                Array.Resize(ref array, array.Length * 2);
-                array[index++] = enumerator.Current;
+                throw new OutOfMemoryException("The input collection is too large to allocate");
             }
         }
         while (enumerator.MoveNext());
 
-        // Here the index is equal to the actual count
-        Array.Resize(ref array, index);
+        if (count < unchecked((uint)array.Length))
+        {
+            var newArray = new T[count];
+            Array.Copy(array, newArray, newArray.Length);
+            array = newArray;
+        }
 
         return new(array, default);
     }
