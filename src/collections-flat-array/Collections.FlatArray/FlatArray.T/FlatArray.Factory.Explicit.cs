@@ -153,7 +153,7 @@ partial class FlatArray<T>
             }
             else
             {
-                throw new OutOfMemoryException("The input collection is too large to allocate");
+                throw new OutOfMemoryException("The input collection is too large to allocate.");
             }
         }
         while (enumerator.MoveNext());
