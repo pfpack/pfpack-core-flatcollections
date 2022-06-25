@@ -22,4 +22,8 @@ public sealed partial class FlatArray<T> :
     public int Count
         =>
         items.Length;
+
+    public bool IsEmpty
+        =>
+        items.Length is not > 0;
 }
