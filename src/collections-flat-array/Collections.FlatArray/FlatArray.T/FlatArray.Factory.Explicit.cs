@@ -101,6 +101,8 @@ partial class FlatArray<T>
     }
 
     private static FlatArray<T> InnerFromIReadOnlyList(IReadOnlyList<T> source)
+    //=>
+    //InnerFromIEnumerable(source, source.Count); // An alternative way
     {
         var count = source.Count;
         if (count is not > 0)
@@ -108,16 +110,36 @@ partial class FlatArray<T>
             return InnerEmptyFlatArray.Value;
         }
 
+        int actualCount = 0;
         var array = new T[count];
+
         for (int i = 0; i < array.Length; i++)
         {
+            if (i < source.Count - 1 is false)
+            {
+                break;
+            }
+
             array[i] = source[i];
+            actualCount++;
+        }
+
+        if (actualCount is not > 0)
+        {
+            return InnerEmptyFlatArray.Value;
+        }
+
+        if (actualCount < array.Length)
+        {
+            var newArray = new T[actualCount];
+            Array.Copy(array, newArray, newArray.Length);
+            array = newArray;
         }
 
         return new(array, default);
     }
 
-    private static FlatArray<T> InnerFromIEnumerable(IEnumerable<T> source)
+    private static FlatArray<T> InnerFromIEnumerable(IEnumerable<T> source, int estimatedCapacity = default)
     {
         using var enumerator = source.GetEnumerator();
 
@@ -127,7 +149,7 @@ partial class FlatArray<T>
         }
 
         uint count = 0;
-        var array = new T[4];
+        var array = new T[estimatedCapacity > 0 ? estimatedCapacity : 4];
         //const uint maxCapacity = int.MaxValue;
         uint maxCapacity = unchecked((uint)Array.MaxLength);
 
