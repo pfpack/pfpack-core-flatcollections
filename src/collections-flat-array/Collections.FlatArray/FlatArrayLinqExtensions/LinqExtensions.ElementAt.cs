@@ -2,10 +2,8 @@
 
 namespace System.Linq;
 
-partial class FlatArrayExtensions
+partial class FlatArrayLinqExtensions
 {
-    // Overload standard Linq extensions to avoid redundant enumeration
-
     public static T ElementAt<T>(this FlatArray<T> source, int index)
     {
         _ = source ?? throw new ArgumentNullException(nameof(source));

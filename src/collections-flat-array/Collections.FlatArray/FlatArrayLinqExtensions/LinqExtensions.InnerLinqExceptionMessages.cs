@@ -1,8 +1,8 @@
 ﻿namespace System.Linq;
 
-partial class FlatArrayExtensions
+partial class FlatArrayLinqExtensions
 {
-    public static class InnerLinqExceptionMessages
+    public static class InnerExceptionMessages
     {
         internal const string SourceEmpty =
             "The source sequence is empty.";
