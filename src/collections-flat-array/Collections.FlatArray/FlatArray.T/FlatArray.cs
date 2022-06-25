@@ -24,12 +24,3 @@ public sealed partial class FlatArray<T> :
         =>
         items.Length;
 }
-
-public static class NotIntendedFlatArrayExtensions
-{
-    [Obsolete("This method is not intended for use. Read Length property instead.", error: true)]
-    [DoesNotReturn]
-    public static int Count<T>(this FlatArray<T> flatArray)
-        =>
-        throw new NotImplementedException();
-}
