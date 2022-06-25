@@ -23,6 +23,10 @@ public sealed partial class FlatArray<T> :
         =>
         items.Length;
 
+    public bool IsNotEmpty
+        =>
+        items.Length > 0;
+
     public bool IsEmpty
         =>
         items.Length is not > 0;
