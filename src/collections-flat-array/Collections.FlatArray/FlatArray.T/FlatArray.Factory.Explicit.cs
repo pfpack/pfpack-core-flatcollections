@@ -113,28 +113,21 @@ partial class FlatArray<T>
         int actualCount = 0;
         var array = new T[count];
 
-        for (int i = 0; i < array.Length; i++)
+        do
         {
-            if (i < source.Count - 1 is false)
+            if (actualCount < array.Length)
             {
-                break;
+                array[actualCount] = source[actualCount];
             }
+            else if (actualCount < count is false)
+            {
+                var newArray = new T[count];
+                Array.Copy(array, newArray, newArray.Length);
+                array = newArray;
 
-            array[i] = source[i];
-            actualCount++;
-        }
-
-        if (actualCount is not > 0)
-        {
-            return InnerEmptyFlatArray.Value;
-        }
-
-        if (actualCount < array.Length)
-        {
-            var newArray = new T[actualCount];
-            Array.Copy(array, newArray, newArray.Length);
-            array = newArray;
-        }
+                array[actualCount] = source[actualCount];
+            }
+        } while (++actualCount < (count = source.Count));
 
         return new(array, default);
     }
