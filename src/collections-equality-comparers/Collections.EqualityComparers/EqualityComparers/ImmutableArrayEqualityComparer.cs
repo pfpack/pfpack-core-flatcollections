@@ -29,10 +29,11 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
         }
 
         // Redundant since the 'reference' equality is already done
-        //if (x.IsDefault && y.IsDefault)
-        //{
-        //    return true;
-        //}
+        // Kept for the safety purposes
+        if (x.IsDefault && y.IsDefault)
+        {
+            return true;
+        }
 
         if (x.IsDefault || y.IsDefault)
         {
