@@ -22,13 +22,13 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     public bool Equals(ImmutableArray<T> x, ImmutableArray<T> y)
     {
-        // 'Reference' equality
+        // ImmutableArray 'reference' equality
         if (x.Equals(y))
         {
             return true;
         }
 
-        // Redundant since 'reference' equality is already done
+        // Redundant since the 'reference' equality is already done
         //if (x.IsDefault && y.IsDefault)
         //{
         //    return true;
