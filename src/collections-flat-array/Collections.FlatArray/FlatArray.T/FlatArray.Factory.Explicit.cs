@@ -119,7 +119,7 @@ partial class FlatArray<T>
             {
                 array[actualCount] = source[actualCount];
             }
-            else if (actualCount < count)
+            else
             {
                 var newArray = new T[count];
                 Array.Copy(array, newArray, array.Length);
@@ -142,8 +142,6 @@ partial class FlatArray<T>
 
     private static FlatArray<T> InnerFromIEnumerable(IEnumerable<T> source, int estimatedCapacity = default)
     {
-        const int defaultCapacity = 4;
-
         using var enumerator = source.GetEnumerator();
 
         if (enumerator.MoveNext() is false)
@@ -152,7 +150,10 @@ partial class FlatArray<T>
         }
 
         uint actualCount = 0;
+
+        const int defaultCapacity = 4;
         var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
+
         //const uint maxCapacity = int.MaxValue;
         uint maxCapacity = unchecked((uint)Array.MaxLength);
 
