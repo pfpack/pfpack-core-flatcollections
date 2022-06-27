@@ -149,24 +149,23 @@ partial class FlatArray<T>
             return InnerEmptyFlatArray.Value;
         }
 
-        uint actualCount = 0;
+        int actualCount = 0;
 
         const int defaultCapacity = 4;
         var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
 
-        //const uint maxCapacity = int.MaxValue;
-        uint maxCapacity = unchecked((uint)Array.MaxLength);
+        int maxCapacity = Math.Max(Array.MaxLength, defaultCapacity);
 
         do
         {
-            if (actualCount < unchecked((uint)array.Length))
+            if (actualCount < array.Length)
             {
                 array[actualCount++] = enumerator.Current;
             }
             else if (actualCount < maxCapacity)
             {
-                uint newCapacity = unchecked((uint)array.Length) * 2;
-                if (newCapacity > maxCapacity)
+                int newCapacity = unchecked(array.Length * 2);
+                if (unchecked((uint)newCapacity) > unchecked((uint)maxCapacity))
                 {
                     newCapacity = maxCapacity;
                 }
@@ -184,7 +183,7 @@ partial class FlatArray<T>
         }
         while (enumerator.MoveNext());
 
-        if (actualCount < unchecked((uint)array.Length))
+        if (actualCount < array.Length)
         {
             var newArray = new T[actualCount];
             Array.Copy(array, newArray, newArray.Length);
