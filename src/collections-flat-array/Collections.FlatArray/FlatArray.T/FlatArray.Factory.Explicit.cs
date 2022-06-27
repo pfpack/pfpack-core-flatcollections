@@ -149,7 +149,7 @@ partial class FlatArray<T>
             return InnerEmptyFlatArray.Value;
         }
 
-        uint actualCount = 0;
+        int actualCount = 0;
 
         const int defaultCapacity = 4;
         var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
@@ -159,7 +159,7 @@ partial class FlatArray<T>
 
         do
         {
-            if (actualCount < unchecked((uint)array.Length))
+            if (actualCount < array.Length)
             {
                 array[actualCount++] = enumerator.Current;
             }
@@ -184,7 +184,7 @@ partial class FlatArray<T>
         }
         while (enumerator.MoveNext());
 
-        if (actualCount < unchecked((uint)array.Length))
+        if (actualCount < array.Length)
         {
             var newArray = new T[actualCount];
             Array.Copy(array, newArray, newArray.Length);
