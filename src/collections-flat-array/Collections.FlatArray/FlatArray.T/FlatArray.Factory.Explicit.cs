@@ -154,7 +154,7 @@ partial class FlatArray<T>
         const int defaultCapacity = 4;
         var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
 
-        int maxCapacity = Math.Max(Array.MaxLength, defaultCapacity);
+        int maxCapacity = Math.Max(Array.MaxLength, array.Length);
 
         do
         {
