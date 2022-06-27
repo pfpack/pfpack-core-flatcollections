@@ -3,7 +3,10 @@
 namespace System.Collections.Generic;
 
 //[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
-public sealed partial class FlatArray<T> : IReadOnlyList<T>, IEquatable<FlatArray<T>>
+public sealed partial class FlatArray<T> :
+    IReadOnlyList<T>,
+    IEquatable<FlatArray<T>>,
+    ICloneable
 {
     private readonly T[] items;
 
@@ -14,4 +17,17 @@ public sealed partial class FlatArray<T> : IReadOnlyList<T>, IEquatable<FlatArra
     int IReadOnlyCollection<T>.Count
         =>
         items.Length;
+
+    [Obsolete("This property is not intended for use. Read Length property instead.", error: true)]
+    public int Count
+        =>
+        items.Length;
+
+    public bool IsNotEmpty
+        =>
+        items.Length > 0;
+
+    public bool IsEmpty
+        =>
+        items.Length is not > 0;
 }

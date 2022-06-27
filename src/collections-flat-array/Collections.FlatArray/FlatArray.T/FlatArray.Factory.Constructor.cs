@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace System.Collections.Generic;
 
@@ -11,34 +10,11 @@ partial class FlatArray<T>
 
     public FlatArray([AllowNull] params T[] source)
         =>
-        items = source is null
-        ? InnerEmptyArray.Value
-        : InnerBuildItems(source);
+        items = source?.Length > 0 ? InnerCloneArray(source) : InnerEmptyArray.Value;
 
-    // TODO: Remove all the below constructors and move their logic to FlatArray<T>.From factories
-
-    private FlatArray([AllowNull] List<T> source)
+    // Creates an instance in raw mode
+    // The unused arg is intended to separate this from the public one
+    private FlatArray(T[] items, int _)
         =>
-        items = source is null
-        ? InnerEmptyArray.Value
-        : InnerBuildItems(source.ToArray());
-
-    private FlatArray([AllowNull] IEnumerable<T> source)
-        =>
-        items = source switch
-        {
-            null => InnerEmptyArray.Value,
-
-            T[] array => InnerBuildItems(array),
-
-            List<T> list => InnerBuildItems(list.ToArray()),
-
-            var coll => InnerBuildItems(coll.ToArray())
-        };
-
-    private static T[] InnerBuildItems(T[] source)
-        =>
-        source.Length is not > 0
-        ? InnerEmptyArray.Value
-        : InnerCloneArray(source);
+        this.items = items;
 }

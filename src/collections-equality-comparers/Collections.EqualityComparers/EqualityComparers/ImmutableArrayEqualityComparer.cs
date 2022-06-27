@@ -22,6 +22,14 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     public bool Equals(ImmutableArray<T> x, ImmutableArray<T> y)
     {
+        // ImmutableArray 'reference' equality
+        if (x.Equals(y))
+        {
+            return true;
+        }
+
+        // Redundant since the 'reference' equality check is already done
+        // Keep for safety purposes to avoid possible NullReferenceException
         if (x.IsDefault && y.IsDefault)
         {
             return true;
@@ -58,7 +66,7 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     public int GetHashCode(ImmutableArray<T> obj)
     {
-        // The best practice: to return zero instead of to throw ArgumentNullException
+        // Return zero instead of throwing ArgumentNullException (the best practice)
         if (obj.IsDefault)
         {
             return default;
@@ -66,7 +74,7 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
         HashCode builder = new();
 
-        // To make difference between null and empty collections
+        // Make difference between null and empty collections
         builder.Add(1);
 
         if (obj.Length is not > 0)

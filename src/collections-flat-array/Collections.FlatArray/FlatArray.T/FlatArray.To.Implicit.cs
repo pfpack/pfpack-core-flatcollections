@@ -4,11 +4,13 @@ namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
-    public static implicit operator T[]([AllowNull] FlatArray<T> flat)
+    [return: MaybeNull, NotNullIfNotNull("flatArray")]
+    public static implicit operator T[]([AllowNull] FlatArray<T> flatArray)
         =>
-        flat is not null ? flat.ToArray() : Array.Empty<T>();
+        flatArray?.ToArray();
 
-    public static implicit operator List<T>([AllowNull] FlatArray<T> flat)
+    [return: MaybeNull, NotNullIfNotNull("flatArray")]
+    public static implicit operator List<T>([AllowNull] FlatArray<T> flatArray)
         =>
-        flat is not null ? flat.ToList() : new();
+        flatArray?.ToList();
 }

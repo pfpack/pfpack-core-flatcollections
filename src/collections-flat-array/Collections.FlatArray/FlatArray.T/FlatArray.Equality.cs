@@ -50,10 +50,11 @@ partial class FlatArray<T>
 
         for (int i = 0; i < left.items.Length; i++)
         {
-            if (itemEqualityComparer.Equals(left.items[i], right.items[i]) is false)
+            if (itemEqualityComparer.Equals(left.items[i], right.items[i]))
             {
-                return false;
+                continue;
             }
+            return false;
         }
 
         return true;
