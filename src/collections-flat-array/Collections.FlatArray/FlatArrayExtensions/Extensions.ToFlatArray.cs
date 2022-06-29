@@ -11,7 +11,17 @@ partial class FlatArrayExtensions
         source is null ? null : FlatArray<T>.From(source);
 
     [return: MaybeNull, NotNullIfNotNull("source")]
+    public static FlatArray<T> ToFlatArray<T>([AllowNull] this FlatArray<T> source)
+        =>
+        source is null ? null : FlatArray<T>.From(source);
+
+    [return: MaybeNull, NotNullIfNotNull("source")]
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this List<T> source)
+        =>
+        source is null ? null : FlatArray<T>.From(source);
+
+    [return: MaybeNull, NotNullIfNotNull("source")]
+    public static FlatArray<T> ToFlatArray<T>([AllowNull] this IReadOnlyList<T> source)
         =>
         source is null ? null : FlatArray<T>.From(source);
 
