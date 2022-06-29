@@ -22,5 +22,5 @@ partial class FlatArray<T>
     [return: NotNullIfNotNull("flatArray")]
     public static implicit operator ImmutableArray<T>?(FlatArray<T>? flatArray)
         =>
-        flatArray is not null ? flatArray.ToImmutableArray() : ImmutableArray<T>.Empty;
+        flatArray is not null ? flatArray.ToImmutableArray() : null;
 }
