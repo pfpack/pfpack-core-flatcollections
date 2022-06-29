@@ -25,8 +25,8 @@ partial class FlatArrayExtensions
         =>
         FlatArray<T>.From(source);
 
-    [return: MaybeNull, NotNullIfNotNull("source")]
-    public static FlatArray<T> ToFlatArray<T>(this ImmutableArray<T>? source)
+    [return: NotNullIfNotNull("source")]
+    public static FlatArray<T>? ToFlatArray<T>(this ImmutableArray<T>? source)
         =>
         source is null ? null : FlatArray<T>.From(source);
 
