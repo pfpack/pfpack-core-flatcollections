@@ -1,3 +1,5 @@
-# EarlyFuncPack Collections
+# PrimeFuncPack Collections
 
-EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.
+PrimeFuncPack Collections is a core library pack for .NET consisting of useful collection extensions:
+- Collection equality comparers (implementing value equality);
+- Immutable FlatArray.

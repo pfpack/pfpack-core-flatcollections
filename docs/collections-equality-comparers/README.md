@@ -1,3 +1,4 @@
-# EarlyFuncPack Collections
+# PrimeFuncPack Collections.EqualityComparers
 
-EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.
+PrimeFuncPack Collections.EqualityComparers is a core library for .NET consisting of collection equality comparers (implementing value equality).
+The Collections.EqualityComparers is shipped as a part of PrimeFuncPack Collections pack.
