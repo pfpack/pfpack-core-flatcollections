@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Generic;
 
@@ -17,6 +18,10 @@ partial class FlatArray
         FlatArray<T>.From(source);
 
     public static FlatArray<T> From<T>([AllowNull] List<T> source)
+        =>
+        FlatArray<T>.From(source);
+
+    public static FlatArray<T> From<T>(ImmutableArray<T> source)
         =>
         FlatArray<T>.From(source);
 
