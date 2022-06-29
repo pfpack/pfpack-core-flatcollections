@@ -13,6 +13,10 @@ partial class FlatArray<T>
         =>
         source is not null ? InnerFromArray(source) : InnerEmptyFlatArray.Value;
 
+    public static FlatArray<T> From([AllowNull] FlatArray<T> source)
+        =>
+        source is not null ? InnerFromFlatArray(source) : InnerEmptyFlatArray.Value;
+
     public static FlatArray<T> From([AllowNull] List<T> source)
         =>
         source is not null ? InnerFromList(source) : InnerEmptyFlatArray.Value;
