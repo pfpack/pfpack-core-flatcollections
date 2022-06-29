@@ -39,7 +39,7 @@ partial class FlatArrayExtensions
     [return: NotNullIfNotNull("source")]
     public static FlatArray<T>? ToFlatArray<T>(this ImmutableArray<T>? source)
         =>
-        source is null ? null : FlatArray<T>.From(source);
+        source is null ? null : FlatArray<T>.From(source.Value);
 
 
     // From IReadOnlyList:
