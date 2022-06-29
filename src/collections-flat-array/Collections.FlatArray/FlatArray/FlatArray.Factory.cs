@@ -20,6 +20,10 @@ partial class FlatArray
         =>
         FlatArray<T>.From(source);
 
+    public static FlatArray<T> From<T>([AllowNull] IReadOnlyList<T> source)
+        =>
+        FlatArray<T>.From(source);
+
     public static FlatArray<T> From<T>([AllowNull] IEnumerable<T> source)
         =>
         FlatArray<T>.From(source);
