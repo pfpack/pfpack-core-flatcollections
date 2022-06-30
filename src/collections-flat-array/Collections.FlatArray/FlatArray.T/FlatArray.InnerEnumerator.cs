@@ -4,40 +4,38 @@ partial class FlatArray<T>
 {
     private sealed class InnerEnumerator : IEnumerator<T>
     {
-        private const int defaultIndex = -1;
-
         private readonly T[] items;
 
-        private int currentIndex = defaultIndex;
+        private int index;
 
-        private T currentItem = default!;
+        private T current = default!;
 
         internal InnerEnumerator(T[] items)
             =>
             this.items = items;
 
-        T IEnumerator<T>.Current => currentItem;
+        public void Dispose() { }
 
-        object IEnumerator.Current => currentItem!;
-
-        void IDisposable.Dispose() { }
-
-        bool IEnumerator.MoveNext()
+        public bool MoveNext()
         {
-            if (currentIndex < items.Length)
+            if (index < items.Length)
             {
-                if (++currentIndex < items.Length)
-                {
-                    currentItem = items[currentIndex];
-                    return true;
-                }
+                current = items[index++];
+                return true;
             }
 
+            current = default!;
             return false;
         }
 
-        void IEnumerator.Reset()
-            =>
-            currentIndex = defaultIndex;
+        public T Current => current;
+
+        object IEnumerator.Current => current!;
+
+        public void Reset()
+        {
+            index = default;
+            current = default!;
+        }
     }
 }
