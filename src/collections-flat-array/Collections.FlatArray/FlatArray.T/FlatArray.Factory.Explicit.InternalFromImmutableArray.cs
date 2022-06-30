@@ -4,7 +4,7 @@ namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
-    private static FlatArray<T> InnerFromImmutableArray(ImmutableArray<T> source)
+    internal static FlatArray<T> InternalFromImmutableArray(ImmutableArray<T> source)
     {
         if (source.IsDefault)
         {

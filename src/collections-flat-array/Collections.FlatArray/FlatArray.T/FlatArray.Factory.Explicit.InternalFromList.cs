@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private static FlatArray<T> InnerFromList(List<T> source)
+    internal static FlatArray<T> InternalFromList(List<T> source)
     {
         var count = source.Count;
         if (count is not > 0)

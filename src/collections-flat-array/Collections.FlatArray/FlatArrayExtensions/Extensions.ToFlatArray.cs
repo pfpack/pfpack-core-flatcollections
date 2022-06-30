@@ -11,7 +11,7 @@ partial class FlatArrayExtensions
     [return: MaybeNull, NotNullIfNotNull("source")]
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this T[] source)
         =>
-        source is null ? null : FlatArray<T>.From(source);
+        source is null ? null : FlatArray<T>.InternalFromArray(source);
 
 
     // From FlatArray:
@@ -19,7 +19,7 @@ partial class FlatArrayExtensions
     [return: MaybeNull, NotNullIfNotNull("source")]
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this FlatArray<T> source)
         =>
-        source is null ? null : FlatArray<T>.From(source);
+        source is null ? null : FlatArray<T>.InternalFromFlatArray(source);
 
 
     // From List:
@@ -27,19 +27,19 @@ partial class FlatArrayExtensions
     [return: MaybeNull, NotNullIfNotNull("source")]
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this List<T> source)
         =>
-        source is null ? null : FlatArray<T>.From(source);
+        source is null ? null : FlatArray<T>.InternalFromList(source);
 
 
     // From ImmutableArray:
 
     public static FlatArray<T> ToFlatArray<T>(this ImmutableArray<T> source)
         =>
-        FlatArray<T>.From(source);
+        FlatArray<T>.InternalFromImmutableArray(source);
 
     [return: NotNullIfNotNull("source")]
     public static FlatArray<T>? ToFlatArray<T>(this ImmutableArray<T>? source)
         =>
-        source is null ? null : FlatArray<T>.From(source.Value);
+        source is null ? null : FlatArray<T>.InternalFromImmutableArray(source.Value);
 
 
     // From IReadOnlyList:
@@ -47,7 +47,7 @@ partial class FlatArrayExtensions
     [return: MaybeNull, NotNullIfNotNull("source")]
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this IReadOnlyList<T> source)
         =>
-        source is null ? null : FlatArray<T>.From(source);
+        source is null ? null : FlatArray<T>.InternalFromIReadOnlyList(source);
 
 
     // From IEnumerable:
@@ -55,5 +55,5 @@ partial class FlatArrayExtensions
     [return: MaybeNull, NotNullIfNotNull("source")]
     public static FlatArray<T> ToFlatArray<T>([AllowNull] this IEnumerable<T> source)
         =>
-        source is null ? null : FlatArray<T>.From(source);
+        source is null ? null : FlatArray<T>.InternalFromIEnumerable(source);
 }

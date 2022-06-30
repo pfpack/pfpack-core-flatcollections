@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private static FlatArray<T> InnerFromArray(T[] source)
+    internal static FlatArray<T> InternalFromArray(T[] source)
         =>
         source.Length > 0 ? new(InnerCloneArray(source), default) : InnerEmptyFlatArray.Value;
 }
