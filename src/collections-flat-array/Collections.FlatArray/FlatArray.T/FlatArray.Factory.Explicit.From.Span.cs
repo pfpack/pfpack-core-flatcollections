@@ -17,19 +17,6 @@ partial class FlatArray<T>
     }
 
     public static FlatArray<T> From(Span<T> source)
-    {
-        var count = source.Length;
-        if (count is not > 0)
-        {
-            return InnerEmptyFlatArray.Value;
-        }
-
-        var array = new T[count];
-        source.CopyTo(new Span<T>(array));
-
-        return new(array, default);
-    }
-    // An alternative implementation:
-    // =>
-    // From((ReadOnlySpan<T>)source);
+        =>
+        From((ReadOnlySpan<T>)source);
 }
