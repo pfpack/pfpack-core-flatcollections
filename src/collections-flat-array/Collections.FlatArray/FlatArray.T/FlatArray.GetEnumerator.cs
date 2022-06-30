@@ -4,9 +4,9 @@ partial class FlatArray<T>
 {
     public IEnumerator<T> GetEnumerator()
         =>
-        new InnerEnumerator(items);
+        items.Length > 0 ? new InnerEnumerator(items) : InnerEnumeratorEmpty.Value;
 
     IEnumerator IEnumerable.GetEnumerator()
         =>
-        new InnerEnumerator(items);
+        GetEnumerator();
 }
