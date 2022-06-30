@@ -32,6 +32,6 @@ partial class FlatArray<T>
         return new(InnerCloneArray(array), default);
     }
     // An alternative implementation:
-    //=>
-    //From((ReadOnlySpan<T>)source);
+    // =>
+    // From((ReadOnlySpan<T>)source);
 }
