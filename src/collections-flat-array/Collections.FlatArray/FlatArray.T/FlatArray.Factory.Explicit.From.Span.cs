@@ -13,8 +13,7 @@ partial class FlatArray<T>
         var array = new T[count];
         source.CopyTo(new Span<T>(array));
 
-        // Clone for the safety purposes
-        return new(InnerCloneArray(array), default);
+        return new(array, default);
     }
 
     public static FlatArray<T> From(Span<T> source)
@@ -28,8 +27,7 @@ partial class FlatArray<T>
         var array = new T[count];
         source.CopyTo(new Span<T>(array));
 
-        // Clone for the safety purposes
-        return new(InnerCloneArray(array), default);
+        return new(array, default);
     }
     // An alternative implementation:
     // =>
