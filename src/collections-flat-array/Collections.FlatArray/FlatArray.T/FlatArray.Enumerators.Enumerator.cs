@@ -2,18 +2,16 @@
 
 partial class FlatArray<T>
 {
-    private sealed class InnerEnumerator : IEnumerator<T>
+    public struct Enumerator
     {
-        private const int defaultIndex = -1;
-
         private readonly T[] items;
 
         private int index;
 
-        internal InnerEnumerator(T[] items)
+        internal Enumerator(T[] items)
         {
             this.items = items;
-            index = defaultIndex;
+            index = -1;
         }
 
         public bool MoveNext()
@@ -32,15 +30,5 @@ partial class FlatArray<T>
             unchecked((uint)index) < (uint)items.Length // index >= 0 && index < items.Length
             ? items[index]
             : throw new InvalidOperationException(InnerExceptionMessages.EnumeratorNotPositioned);
-
-        object IEnumerator.Current
-            =>
-            Current!;
-
-        public void Reset()
-            =>
-            index = defaultIndex;
-
-        public void Dispose() { }
     }
 }

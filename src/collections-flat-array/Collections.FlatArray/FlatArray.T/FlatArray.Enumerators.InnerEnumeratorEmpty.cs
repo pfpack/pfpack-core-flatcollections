@@ -8,9 +8,13 @@ partial class FlatArray<T>
 
         public bool MoveNext() => false;
 
-        public T Current => throw new InvalidOperationException();
+        public T Current
+            =>
+            throw new InvalidOperationException(InnerExceptionMessages.EnumeratorNotPositioned);
 
-        object IEnumerator.Current => throw new InvalidOperationException();
+        object IEnumerator.Current
+            =>
+            throw new InvalidOperationException(InnerExceptionMessages.EnumeratorNotPositioned);
 
         public void Reset() { }
 
