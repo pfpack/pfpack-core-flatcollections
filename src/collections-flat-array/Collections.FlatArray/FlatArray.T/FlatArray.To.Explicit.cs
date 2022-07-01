@@ -15,6 +15,5 @@ partial class FlatArray<T>
 
     public ImmutableArray<T> ToImmutableArray()
         =>
-        // Clone for the safety purposes
-        items.Length > 0 ? ImmutableArray.Create(InnerCloneArray(items)) : ImmutableArray<T>.Empty;
+        items.Length > 0 ? ImmutableArray.Create(items) : ImmutableArray<T>.Empty;
 }
