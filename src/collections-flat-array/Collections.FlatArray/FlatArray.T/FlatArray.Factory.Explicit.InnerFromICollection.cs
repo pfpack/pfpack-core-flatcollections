@@ -13,7 +13,10 @@ partial class FlatArray<T>
         var array = new T[count];
         source.CopyTo(array, 0);
 
-        // Clone for the safety purposes
+        // Make a defensive copy:
+        // Cannot trust that any collection implementation (e.g., not as trusted as List or ImmutableArray)
+        // does not keep a reference to the array passed in CopyTo and does not mutate it
+
         return new(InnerCloneArray(array), default);
     }
 }
