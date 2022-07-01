@@ -4,9 +4,7 @@ partial class FlatArray<T>
 {
     private sealed class InnerEnumeratorEmpty : IEnumerator<T>
     {
-        private InnerEnumeratorEmpty() { }
-
-        internal static readonly InnerEnumeratorEmpty Value = new();
+        internal InnerEnumeratorEmpty() { }
 
         public void Dispose() { }
 
