@@ -27,7 +27,7 @@ partial class FlatArray<T>
 
         public T Current
             =>
-            unchecked((uint)index) < (uint)items.Length
+            unchecked((uint)index) < (uint)items.Length // index >= 0 && index < items.Length
             ? items[index]
             : throw new InvalidOperationException();
 
