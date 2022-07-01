@@ -27,7 +27,7 @@ partial class FlatArray<T>
             else if (actualCount < maxCapacity)
             {
                 int newCapacity = unchecked(array.Length * 2);
-                if (unchecked((uint)newCapacity) > unchecked((uint)maxCapacity))
+                if (unchecked((uint)newCapacity) > (uint)maxCapacity)
                 {
                     newCapacity = maxCapacity;
                 }
