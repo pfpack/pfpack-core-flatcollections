@@ -4,7 +4,7 @@ partial class FlatArray<T>
 {
     public T this[int index]
         =>
-        index >= 0 && index < items.Length
+        unchecked((uint)index) < (uint)items.Length
         ? items[index]
         : throw new ArgumentOutOfRangeException(
             nameof(index), index, InnerExceptionMessages.IndexRangeReqs);
