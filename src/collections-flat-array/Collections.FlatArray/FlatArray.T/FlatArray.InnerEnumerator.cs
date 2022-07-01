@@ -8,7 +8,7 @@ partial class FlatArray<T>
 
         private int index;
 
-        private T current = default!;
+        private T? current;
 
         internal InnerEnumerator(T[] items)
             =>
@@ -24,18 +24,18 @@ partial class FlatArray<T>
                 return true;
             }
 
-            current = default!;
+            current = default;
             return false;
         }
 
-        public T Current => current;
+        public T Current => current!;
 
         object IEnumerator.Current => current!;
 
         public void Reset()
         {
             index = default;
-            current = default!;
+            current = default;
         }
     }
 }
