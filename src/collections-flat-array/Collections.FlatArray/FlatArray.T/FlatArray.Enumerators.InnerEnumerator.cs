@@ -11,10 +11,8 @@ partial class FlatArray<T>
         private int index;
 
         internal InnerEnumerator(T[] items)
-        {
-            this.items = items;
-            index = defaultIndex;
-        }
+            =>
+            (this.items, index) = (items, defaultIndex);
 
         public bool MoveNext()
         {

@@ -9,10 +9,8 @@ partial class FlatArray<T>
         private int index;
 
         internal Enumerator(T[] items)
-        {
-            this.items = items;
-            index = -1;
-        }
+            =>
+            (this.items, index) = (items, -1);
 
         public bool MoveNext()
         {
