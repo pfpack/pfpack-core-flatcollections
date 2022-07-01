@@ -6,18 +6,12 @@ partial class FlatArray<T>
 {
     internal static FlatArray<T> InternalFromImmutableArray(ImmutableArray<T> source)
     {
-        if (source.IsDefault)
+        if (source.IsDefault || source.Length is not > 0)
         {
             return InnerEmptyFlatArray.Value;
         }
 
-        var count = source.Length;
-        if (count is not > 0)
-        {
-            return InnerEmptyFlatArray.Value;
-        }
-
-        var array = new T[count];
+        var array = new T[source.Length];
         source.CopyTo(array, 0);
 
         return new(array, default);
