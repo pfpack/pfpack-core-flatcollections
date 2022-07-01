@@ -14,10 +14,10 @@
     <Company>pfpack</Company>
     <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
     <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
-    <Description>EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.</Description>
+    <Description>PrimeFuncPack Collections is a core library pack for .NET consisting of useful collection extensions such as collection equality comparers and immutable FlatArray.</Description>
     <RootNamespace>System.Collections.Generic</RootNamespace>
-    <AssemblyName>EarlyFuncPack.Collections</AssemblyName>
-    <Version>0.3.0</Version>
+    <AssemblyName>PrimeFuncPack.Collections</AssemblyName>
+    <Version>1.0.0-preview.1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

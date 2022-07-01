@@ -1,3 +1,4 @@
-# EarlyFuncPack Collections
+# PrimeFuncPack Collections.FlatArray
 
-EarlyFuncPack Collections is a core library for .NET consisting of collection extensions.
+PrimeFuncPack Collections.FlatArray is a core library for .NET consisting of immutable FlatArray.
+The Collections.FlatArray is shipped as a part of PrimeFuncPack Collections pack.

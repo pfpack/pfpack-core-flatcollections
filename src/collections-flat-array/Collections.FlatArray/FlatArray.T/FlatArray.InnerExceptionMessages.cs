@@ -6,5 +6,8 @@ partial class FlatArray<T>
     {
         internal const string IndexRangeReqs =
             "The index must be greater than or equal to zero and less than the array length.";
+
+        internal const string EnumeratorNotPositioned =
+            "The enumerator is not positioned on an element of the array.";
     }
 }

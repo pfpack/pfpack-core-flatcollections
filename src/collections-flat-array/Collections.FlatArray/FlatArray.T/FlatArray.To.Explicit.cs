@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Collections.Immutable;
+
+namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
@@ -8,6 +10,9 @@ partial class FlatArray<T>
 
     public List<T> ToList()
         =>
-        // Clone for the safety purposes
-        items.Length > 0 ? new(InnerCloneArray(items)) : new();
+        items.Length > 0 ? new(items) : new();
+
+    public ImmutableArray<T> ToImmutableArray()
+        =>
+        items.Length > 0 ? ImmutableArray.Create(items) : ImmutableArray<T>.Empty;
 }

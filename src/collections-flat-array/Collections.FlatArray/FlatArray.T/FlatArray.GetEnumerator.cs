@@ -2,11 +2,19 @@
 
 partial class FlatArray<T>
 {
-    public IEnumerator<T> GetEnumerator()
+    public Enumerator GetEnumerator()
         =>
-        new InnerEnumerator(items);
+        new(items);
+
+    IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        =>
+        InnerCreateEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
         =>
-        new InnerEnumerator(items);
+        InnerCreateEnumerator();
+
+    private IEnumerator<T> InnerCreateEnumerator()
+        =>
+        items.Length > 0 ? new InnerEnumerator(items) : new InnerEnumeratorEmpty();
 }
