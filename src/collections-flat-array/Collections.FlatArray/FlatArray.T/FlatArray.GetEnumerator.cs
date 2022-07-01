@@ -8,13 +8,18 @@ partial class FlatArray<T>
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
         =>
-        InnerCreateEnumerator();
+        InnerGetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
         =>
-        InnerCreateEnumerator();
+        InnerGetEnumerator();
 
-    private IEnumerator<T> InnerCreateEnumerator()
+    private IEnumerator<T> InnerGetEnumerator()
         =>
-        items.Length > 0 ? new InnerEnumerator(items) : new InnerEnumeratorEmpty();
+        items.Length > 0 ? new InnerEnumerator(items) : InnerEnumeratorEmptyDefault.Value;
+
+    private static class InnerEnumeratorEmptyDefault
+    {
+        internal static readonly InnerEnumeratorEmpty Value = new();
+    }
 }
