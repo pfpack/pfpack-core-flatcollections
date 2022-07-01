@@ -6,14 +6,14 @@ partial class FlatArray<T>
     {
         internal InnerEnumeratorEmpty() { }
 
-        public void Dispose() { }
-
         public bool MoveNext() => false;
 
-        public T Current => default!;
+        public T Current => throw new InvalidOperationException();
 
-        object IEnumerator.Current => default!;
+        object IEnumerator.Current => throw new InvalidOperationException();
 
         public void Reset() { }
+
+        public void Dispose() { }
     }
 }
