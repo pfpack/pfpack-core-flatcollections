@@ -13,7 +13,6 @@ partial class FlatArray<T>
         var array = new T[count];
         source.CopyTo(array, 0);
 
-        // Clone for the safety purposes
-        return new(InnerCloneArray(array), default);
+        return new(array, default);
     }
 }
