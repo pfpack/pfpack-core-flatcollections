@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Generic;
+﻿using static System.FormattableString;
+
+namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
@@ -7,5 +9,5 @@ partial class FlatArray<T>
         unchecked((uint)index) < (uint)items.Length // index >= 0 && index < items.Length
         ? items[index]
         : throw new ArgumentOutOfRangeException(
-            nameof(index), index, InnerExceptionMessages.IndexRangeReqs);
+            nameof(index), Invariant($"{index}"), InnerExceptionMessages.IndexRangeRequirements);
 }

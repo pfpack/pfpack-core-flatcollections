@@ -4,10 +4,13 @@ partial class FlatArray<T>
 {
     private static class InnerExceptionMessages
     {
-        internal const string IndexRangeReqs =
-            "The index must be greater than or equal to zero and less than the array length.";
+        internal const string UnexpectedCloneModeValue =
+            "An unexpected value of the clone mode.";
 
-        internal const string EnumeratorNotPositioned =
-            "The enumerator is not positioned on an element of the array.";
+        internal const string IndexRangeRequirements =
+            "Index must be greater than or equal to zero and less than the array length.";
+
+        internal const string EnumerationEitherNotStartedOrFinished =
+            "Enumeration has either not started or has already finished.";
     }
 }
