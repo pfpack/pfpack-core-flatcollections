@@ -2,9 +2,9 @@
 
 partial class FlatArray<T>
 {
-    private sealed class InnerEnumeratorEmpty : IEnumerator<T>
+    private sealed class InnerEnumeratorObjectEmpty : IEnumerator<T>
     {
-        internal InnerEnumeratorEmpty() { }
+        internal InnerEnumeratorObjectEmpty() { }
 
         public bool MoveNext() => false;
 

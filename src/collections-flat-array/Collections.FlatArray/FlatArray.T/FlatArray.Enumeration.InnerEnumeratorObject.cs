@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private sealed class InnerEnumerator : IEnumerator<T>
+    private sealed class InnerEnumeratorObject : IEnumerator<T>
     {
         private const int defaultIndex = -1;
 
@@ -10,7 +10,7 @@ partial class FlatArray<T>
 
         private int index;
 
-        internal InnerEnumerator(T[] items)
+        internal InnerEnumeratorObject(T[] items)
             =>
             (this.items, index) = (items, defaultIndex);
 
