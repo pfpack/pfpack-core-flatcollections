@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -15,6 +16,6 @@ partial class FlatArrayJsonConverterFactory
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
             args: new object[] { options },
-            culture: null);
+            culture: CultureInfo.InvariantCulture);
     }
 }
