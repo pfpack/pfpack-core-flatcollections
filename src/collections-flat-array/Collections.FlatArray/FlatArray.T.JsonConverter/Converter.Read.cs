@@ -34,7 +34,7 @@ partial class FlatArrayJsonConverter<T>
                 return new(list.ToArray());
             }
 
-            var item = itemConverter.Read(ref reader, itemType, options);
+            var item = itemConverter.Read(ref reader, ItemType, options);
             list.Add(item!);
         }
 

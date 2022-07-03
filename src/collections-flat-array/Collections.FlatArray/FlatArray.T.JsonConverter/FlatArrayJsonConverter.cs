@@ -6,13 +6,16 @@ namespace System.Collections.Generic;
 
 internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArray<T>>
 {
+    private static Type ItemType => ItemTypeDefault.Value;
+
     private readonly JsonConverter<T>? itemConverter;
 
-    private readonly Type itemType;
-
     public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
+        =>
+        itemConverter = (JsonConverter<T>?)options?.GetConverter(ItemType);
+
+    private static class ItemTypeDefault
     {
-        itemType = typeof(T);
-        itemConverter = (JsonConverter<T>?)options?.GetConverter(itemType);
+        internal static readonly Type Value = typeof(T);
     }
 }
