@@ -1,6 +1,4 @@
-﻿using static System.FormattableString;
-
-namespace System.Collections.Generic;
+﻿namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
@@ -37,6 +35,6 @@ partial class FlatArray<T>
             InnerCloneArray(items),
 
             _ => throw new ArgumentOutOfRangeException(
-                nameof(mode), Invariant($"{mode}"), InnerExceptionMessages.UnexpectedCloneModeValue)
+                nameof(mode), InnerExceptionMessages.UnexpectedCloneMode(mode))
         };
 }
