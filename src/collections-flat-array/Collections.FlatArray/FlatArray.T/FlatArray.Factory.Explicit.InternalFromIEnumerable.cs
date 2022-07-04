@@ -32,6 +32,10 @@ partial class FlatArray<T>
             =>
             InnerFromIReadOnlyList(list),
 
+            IReadOnlyCollection<T> coll
+            =>
+            InnerFromIEnumerable(coll, coll.Count),
+
             _ =>
             InnerFromIEnumerable(source)
         };
