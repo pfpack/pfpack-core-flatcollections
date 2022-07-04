@@ -8,6 +8,18 @@ partial class FlatArray<T>
         =>
         source switch
         {
+            T[] array
+            =>
+            InternalFromArray(array),
+
+            List<T> list
+            =>
+            InternalFromList(list),
+
+            FlatArray<T> flatArray
+            =>
+            InternalFromFlatArray(flatArray),
+
             ImmutableArray<T> immutableArray
             =>
             InternalFromImmutableArray(immutableArray),
