@@ -15,8 +15,7 @@ partial class FlatArrayJsonConverter<T>
         {
             var arr = JsonSerializer.Deserialize<T[]>(ref reader, options);
 
-            // Or use FlatArray<T>.From(arr) to get the Empty on zero length
-            return arr is null ? null : new(arr);
+            return arr is null ? null : FlatArray<T>.From(arr);
         }
 
         if (reader.TokenType is not JsonTokenType.StartArray)
@@ -30,11 +29,10 @@ partial class FlatArrayJsonConverter<T>
         {
             if (reader.TokenType is JsonTokenType.EndArray)
             {
-                // Or use FlatArray<T>.From(list) / FlatArray<T>.From(list.ToArray()) to get the Empty on zero length
-                return new(list.ToArray());
+                return FlatArray<T>.From(list);
             }
 
-            var item = itemConverter.Read(ref reader, itemType, options);
+            var item = itemConverter.Read(ref reader, ItemType, options);
             list.Add(item!);
         }
 

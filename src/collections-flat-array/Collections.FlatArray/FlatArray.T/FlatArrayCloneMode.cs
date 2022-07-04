@@ -4,5 +4,5 @@ public enum FlatArrayCloneMode
 {
     Default,
     Shallow,
-    Deep,
+    Deep
 }

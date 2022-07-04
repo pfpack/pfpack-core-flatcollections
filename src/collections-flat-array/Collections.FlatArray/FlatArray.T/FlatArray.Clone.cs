@@ -35,6 +35,6 @@ partial class FlatArray<T>
             InnerCloneArray(items),
 
             _ => throw new ArgumentOutOfRangeException(
-                nameof(mode), mode, "An unexpected value of the clone mode.")
+                nameof(mode), InnerExceptionMessages.UnexpectedCloneMode(mode))
         };
 }
