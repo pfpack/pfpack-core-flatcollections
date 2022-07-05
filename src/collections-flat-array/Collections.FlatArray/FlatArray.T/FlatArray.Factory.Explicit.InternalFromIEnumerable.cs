@@ -26,17 +26,17 @@ partial class FlatArray<T>
 
             ICollection<T> coll
             =>
-            InnerFromICollection(coll),
+            InnerFromICollectionRaw(coll),
 
             IReadOnlyList<T> list
             =>
-            InnerFromIReadOnlyList(list),
+            InnerFromIReadOnlyListRaw(list),
 
             IReadOnlyCollection<T> coll
             =>
-            InnerFromIEnumerable(coll, coll.Count),
+            InnerFromIEnumerableRaw(coll, coll.Count),
 
             _ =>
-            InnerFromIEnumerable(source)
+            InnerFromIEnumerableRaw(source)
         };
 }

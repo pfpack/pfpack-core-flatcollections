@@ -25,6 +25,6 @@ partial class FlatArray<T>
             InternalFromImmutableArray(immutableArray),
 
             _ =>
-            InnerFromIReadOnlyList(source)
+            InnerFromIReadOnlyListRaw(source)
         };
 }

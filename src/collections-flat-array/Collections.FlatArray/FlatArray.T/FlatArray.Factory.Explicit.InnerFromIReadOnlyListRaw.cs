@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private static FlatArray<T> InnerFromIReadOnlyList(IReadOnlyList<T> source)
+    private static FlatArray<T> InnerFromIReadOnlyListRaw(IReadOnlyList<T> source)
     {
         var count = source.Count;
         if (count is not > 0)

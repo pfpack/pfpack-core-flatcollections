@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private static FlatArray<T> InnerFromICollection(ICollection<T> source)
+    private static FlatArray<T> InnerFromICollectionRaw(ICollection<T> source)
     {
         var count = source.Count;
         if (count is not > 0)
