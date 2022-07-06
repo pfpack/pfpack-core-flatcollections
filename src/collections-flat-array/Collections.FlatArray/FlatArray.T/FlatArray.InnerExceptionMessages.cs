@@ -6,6 +6,10 @@ partial class FlatArray<T>
 {
     private static class InnerExceptionMessages
     {
+        internal const string SourceTooLarge
+            =
+            "The source is too large to allocate.";
+
         internal static string UnexpectedCloneMode(FlatArrayCloneMode actualValue)
             =>
             Invariant(
