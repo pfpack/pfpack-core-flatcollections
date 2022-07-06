@@ -29,10 +29,6 @@ partial class FlatArray<T>
         =>
         source is not null ? InternalFromImmutableArray(source.Value) : InnerEmptyFlatArray.Value;
 
-    public static FlatArray<T> From([AllowNull] IReadOnlyList<T> source)
-        =>
-        source is not null ? InternalFromIReadOnlyList(source) : InnerEmptyFlatArray.Value;
-
     public static FlatArray<T> From([AllowNull] IEnumerable<T> source)
         =>
         source is not null ? InternalFromIEnumerable(source) : InnerEmptyFlatArray.Value;

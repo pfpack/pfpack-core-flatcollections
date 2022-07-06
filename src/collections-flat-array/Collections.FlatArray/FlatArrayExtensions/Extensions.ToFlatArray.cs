@@ -42,14 +42,6 @@ partial class FlatArrayExtensions
         source is null ? null : FlatArray<T>.InternalFromImmutableArray(source.Value);
 
 
-    // From IReadOnlyList:
-
-    [return: MaybeNull, NotNullIfNotNull("source")]
-    public static FlatArray<T> ToFlatArray<T>([AllowNull] this IReadOnlyList<T> source)
-        =>
-        source is null ? null : FlatArray<T>.InternalFromIReadOnlyList(source);
-
-
     // From IEnumerable:
 
     [return: MaybeNull, NotNullIfNotNull("source")]
