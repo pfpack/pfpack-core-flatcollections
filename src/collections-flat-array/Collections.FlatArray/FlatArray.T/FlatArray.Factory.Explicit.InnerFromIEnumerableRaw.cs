@@ -2,7 +2,7 @@
 
 partial class FlatArray<T>
 {
-    private static FlatArray<T> InnerFromIEnumerable(IEnumerable<T> source, int estimatedCapacity = default)
+    private static FlatArray<T> InnerFromIEnumerableRaw(IEnumerable<T> source, int estimatedCapacity = default)
     {
         using var enumerator = source.GetEnumerator();
 
