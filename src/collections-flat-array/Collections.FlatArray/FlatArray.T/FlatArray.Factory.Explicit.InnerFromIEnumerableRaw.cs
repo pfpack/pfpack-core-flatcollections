@@ -16,20 +16,18 @@ partial class FlatArray<T>
         const int defaultCapacity = 4;
         var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
 
-        int maxCapacity = Math.Max(Array.MaxLength, array.Length);
-
         do
         {
             if (actualCount < array.Length)
             {
                 array[actualCount++] = enumerator.Current;
             }
-            else if (actualCount < maxCapacity)
+            else if (actualCount < InnerMaxLength)
             {
                 int newCapacity = unchecked(array.Length * 2);
-                if (unchecked((uint)newCapacity) > (uint)maxCapacity)
+                if (unchecked((uint)newCapacity) > (uint)InnerMaxLength)
                 {
-                    newCapacity = maxCapacity;
+                    newCapacity = InnerMaxLength;
                 }
 
                 var newArray = new T[newCapacity];

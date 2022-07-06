@@ -30,4 +30,8 @@ public sealed partial class FlatArray<T> :
     public bool IsEmpty
         =>
         items.Length is not > 0;
+
+    private static int InnerMaxLength
+        =>
+        Array.MaxLength;
 }
