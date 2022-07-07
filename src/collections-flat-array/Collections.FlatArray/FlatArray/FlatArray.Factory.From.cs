@@ -5,10 +5,6 @@ namespace System.Collections.Generic;
 
 partial class FlatArray
 {
-    public static FlatArray<T> Empty<T>()
-        =>
-        FlatArray<T>.Empty;
-
     public static FlatArray<T> From<T>([AllowNull] params T[] source)
         =>
         FlatArray<T>.From(source);

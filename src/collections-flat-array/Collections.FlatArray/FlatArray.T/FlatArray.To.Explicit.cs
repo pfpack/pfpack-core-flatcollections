@@ -6,7 +6,7 @@ partial class FlatArray<T>
 {
     public T[] ToArray()
         =>
-        items.Length > 0 ? InnerCloneArray(items) : Array.Empty<T>();
+        items.Length > 0 ? InnerArrayHelper.Clone(items) : Array.Empty<T>();
 
     public List<T> ToList()
         =>

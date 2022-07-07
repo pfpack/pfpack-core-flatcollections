@@ -10,7 +10,7 @@ partial class FlatArray<T>
 
     public FlatArray([AllowNull] params T[] source)
         =>
-        items = source?.Length > 0 ? InnerCloneArray(source) : InnerEmptyArray.Value;
+        items = source?.Length > 0 ? InnerArrayHelper.Clone(source) : InnerEmptyArray.Value;
 
     // Creates an instance in raw mode
     // The unused arg is intended to separate this from the public one
