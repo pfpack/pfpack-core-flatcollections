@@ -8,12 +8,12 @@ partial class FlatArray<T>
     [return: NotNullIfNotNull("source")]
     public static implicit operator FlatArray<T>?(T[]? source)
         =>
-        source is null ? null : InternalFactory.FromArray(source);
+        source is not null ? InternalFactory.FromArray(source) : null;
 
     [return: NotNullIfNotNull("source")]
     public static implicit operator FlatArray<T>?(List<T>? source)
         =>
-        source is null ? null : InternalFactory.FromList(source);
+        source is not null ? InternalFactory.FromList(source) : null;
 
     public static implicit operator FlatArray<T>(ImmutableArray<T> source)
         =>
@@ -22,5 +22,5 @@ partial class FlatArray<T>
     [return: NotNullIfNotNull("source")]
     public static implicit operator FlatArray<T>?(ImmutableArray<T>? source)
         =>
-        source is null ? null : InternalFactory.FromImmutableArray(source.Value);
+        source is not null ? InternalFactory.FromImmutableArray(source.Value) : null;
 }
