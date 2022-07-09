@@ -64,9 +64,6 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
 
         HashCode builder = new();
 
-        // Make difference between null and empty collections
-        builder.Add(0);
-
         if (obj.Count is not > 0)
         {
             return builder.ToHashCode();

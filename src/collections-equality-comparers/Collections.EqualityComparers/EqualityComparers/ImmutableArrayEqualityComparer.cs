@@ -74,9 +74,6 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
         HashCode builder = new();
 
-        // Make difference between null and empty collections
-        builder.Add(0);
-
         if (obj.Length is not > 0)
         {
             return builder.ToHashCode();
