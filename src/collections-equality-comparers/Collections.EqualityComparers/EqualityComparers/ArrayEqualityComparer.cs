@@ -65,7 +65,7 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
         HashCode builder = new();
 
         // Make difference between null and empty collections
-        builder.Add(1);
+        builder.Add(0);
 
         if (obj.Length is not > 0)
         {
