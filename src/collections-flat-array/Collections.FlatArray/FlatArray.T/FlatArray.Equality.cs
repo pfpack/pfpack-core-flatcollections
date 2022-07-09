@@ -43,7 +43,7 @@ partial class FlatArray<T>
 
         for (int i = 0; i < left.items.Length; i++)
         {
-            if (ItemComparer.Value.Equals(left.items[i], right.items[i]))
+            if (InnerItemComparer.Value.Equals(left.items[i], right.items[i]))
             {
                 continue;
             }
@@ -62,7 +62,7 @@ partial class FlatArray<T>
         for (int i = 0; i < items.Length; i++)
         {
             var item = items[i];
-            builder.Add(item is not null ? ItemComparer.Value.GetHashCode(item) : default);
+            builder.Add(item is not null ? InnerItemComparer.Value.GetHashCode(item) : default);
         }
 
         return builder.ToHashCode();
@@ -76,7 +76,7 @@ partial class FlatArray<T>
         =>
         typeof(FlatArray<T>);
 
-    private static class ItemComparer
+    private static class InnerItemComparer
     {
         internal static readonly EqualityComparer<T> Value = EqualityComparer<T>.Default;
     }
