@@ -4,17 +4,15 @@ namespace System.Collections.Immutable;
 
 public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<ImmutableArray<T>>
 {
-    private readonly IEqualityComparer<T>? comparer;
+    private readonly IEqualityComparer<T> comparer;
 
-    private IEqualityComparer<T> Comparer()
+    public ImmutableArrayEqualityComparer()
         =>
-        comparer ?? EqualityComparer<T>.Default;
-
-    public ImmutableArrayEqualityComparer() { }
+        comparer = EqualityComparer<T>.Default;
 
     public ImmutableArrayEqualityComparer(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer;
+        this.comparer = comparer ?? EqualityComparer<T>.Default;
 
     public static ImmutableArrayEqualityComparer<T> Default
         =>
@@ -45,13 +43,6 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
             return false;
         }
 
-        if (x.Length is not > 0)
-        {
-            return true;
-        }
-
-        var comparer = Comparer();
-
         for (int i = 0; i < x.Length; i++)
         {
             if (comparer.Equals(x[i], y[i]))
@@ -66,20 +57,13 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     public int GetHashCode(ImmutableArray<T> obj)
     {
-        // Return zero instead of throwing ArgumentNullException (the best practice)
+        // Return zero instead of throwing ArgumentNullException
         if (obj.IsDefault)
         {
             return default;
         }
 
         HashCode builder = new();
-
-        if (obj.Length is not > 0)
-        {
-            return builder.ToHashCode();
-        }
-
-        var comparer = Comparer();
 
         for (int i = 0; i < obj.Length; i++)
         {

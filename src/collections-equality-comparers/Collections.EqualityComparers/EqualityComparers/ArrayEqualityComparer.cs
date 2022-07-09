@@ -2,17 +2,15 @@
 
 public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 {
-    private readonly IEqualityComparer<T>? comparer;
+    private readonly IEqualityComparer<T> comparer;
 
-    private IEqualityComparer<T> Comparer()
+    public ArrayEqualityComparer()
         =>
-        comparer ?? EqualityComparer<T>.Default;
-
-    public ArrayEqualityComparer() { }
+        comparer = EqualityComparer<T>.Default;
 
     public ArrayEqualityComparer(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer;
+        this.comparer = comparer ?? EqualityComparer<T>.Default;
 
     public static ArrayEqualityComparer<T> Default
         =>
@@ -35,13 +33,6 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
             return false;
         }
 
-        if (x.Length is not > 0)
-        {
-            return true;
-        }
-
-        var comparer = Comparer();
-
         for (int i = 0; i < x.Length; i++)
         {
             if (comparer.Equals(x[i], y[i]))
@@ -56,20 +47,13 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 
     public int GetHashCode(T[] obj)
     {
-        // Return zero instead of throwing ArgumentNullException (the best practice)
+        // Return zero instead of throwing ArgumentNullException
         if (obj is null)
         {
             return default;
         }
 
         HashCode builder = new();
-
-        if (obj.Length is not > 0)
-        {
-            return builder.ToHashCode();
-        }
-
-        var comparer = Comparer();
 
         for (int i = 0; i < obj.Length; i++)
         {
