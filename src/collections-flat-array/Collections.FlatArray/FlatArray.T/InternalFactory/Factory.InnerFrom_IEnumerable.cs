@@ -27,12 +27,12 @@ partial class FlatArray<T>
                 {
                     array[actualCount++] = enumerator.Current;
                 }
-                else if (actualCount < InnerMaxLength)
+                else if (actualCount < InnerMaxLength.Value)
                 {
                     int newCapacity = unchecked(array.Length * 2);
-                    if (unchecked((uint)newCapacity) > (uint)InnerMaxLength)
+                    if (unchecked((uint)newCapacity) > (uint)InnerMaxLength.Value)
                     {
-                        newCapacity = InnerMaxLength;
+                        newCapacity = InnerMaxLength.Value;
                     }
 
                     var newArray = new T[newCapacity];

@@ -4,6 +4,9 @@ partial class FlatArray<T>
 {
     partial class InternalFactory
     {
-        private static int InnerMaxLength => Array.MaxLength;
+        private static class InnerMaxLength
+        {
+            internal static readonly int Value = Array.MaxLength;
+        }
     }
 }
