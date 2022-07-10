@@ -5,22 +5,22 @@ namespace System.Collections.Generic;
 
 partial class FlatArray<T>
 {
-    [return: MaybeNull, NotNullIfNotNull("source")]
-    public static implicit operator FlatArray<T>([AllowNull] T[] source)
+    [return: NotNullIfNotNull("source")]
+    public static implicit operator FlatArray<T>?(T[]? source)
         =>
-        source is null ? null : InternalFromArray(source);
+        source is not null ? InternalFactory.FromArray(source) : null;
 
-    [return: MaybeNull, NotNullIfNotNull("source")]
-    public static implicit operator FlatArray<T>([AllowNull] List<T> source)
+    [return: NotNullIfNotNull("source")]
+    public static implicit operator FlatArray<T>?(List<T>? source)
         =>
-        source is null ? null : InternalFromList(source);
+        source is not null ? InternalFactory.FromList(source) : null;
 
     public static implicit operator FlatArray<T>(ImmutableArray<T> source)
         =>
-        InternalFromImmutableArray(source);
+        InternalFactory.FromImmutableArray(source);
 
     [return: NotNullIfNotNull("source")]
     public static implicit operator FlatArray<T>?(ImmutableArray<T>? source)
         =>
-        source is null ? null : InternalFromImmutableArray(source.Value);
+        source is not null ? InternalFactory.FromImmutableArray(source.Value) : null;
 }

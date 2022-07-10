@@ -41,16 +41,9 @@ partial class FlatArray<T>
             return false;
         }
 
-        if (left.items.Length is not > 0)
-        {
-            return true;
-        }
-
-        var itemEqualityComparer = ItemEqualityComparer();
-
         for (int i = 0; i < left.items.Length; i++)
         {
-            if (itemEqualityComparer.Equals(left.items[i], right.items[i]))
+            if (InnerItemComparer.Value.Equals(left.items[i], right.items[i]))
             {
                 continue;
             }
@@ -66,17 +59,10 @@ partial class FlatArray<T>
 
         builder.Add(EqualityContractComparer.GetHashCode(EqualityContract));
 
-        if (items.Length is not > 0)
-        {
-            return builder.GetHashCode();
-        }
-
-        var itemEqualityComparer = ItemEqualityComparer();
-
         for (int i = 0; i < items.Length; i++)
         {
             var item = items[i];
-            builder.Add(item is not null ? itemEqualityComparer.GetHashCode(item) : default);
+            builder.Add(item is not null ? InnerItemComparer.Value.GetHashCode(item) : default);
         }
 
         return builder.ToHashCode();
@@ -90,7 +76,8 @@ partial class FlatArray<T>
         =>
         typeof(FlatArray<T>);
 
-    private static EqualityComparer<T> ItemEqualityComparer()
-        =>
-        EqualityComparer<T>.Default;
+    private static class InnerItemComparer
+    {
+        internal static readonly EqualityComparer<T> Value = EqualityComparer<T>.Default;
+    }
 }

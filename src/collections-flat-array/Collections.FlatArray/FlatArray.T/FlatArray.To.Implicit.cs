@@ -17,10 +17,10 @@ partial class FlatArray<T>
 
     public static implicit operator ImmutableArray<T>([AllowNull] FlatArray<T> flatArray)
         =>
-        flatArray is not null ? flatArray.ToImmutableArray() : ImmutableArray<T>.Empty;
+        flatArray?.ToImmutableArray() ?? ImmutableArray<T>.Empty;
 
     [return: NotNullIfNotNull("flatArray")]
     public static implicit operator ImmutableArray<T>?(FlatArray<T>? flatArray)
         =>
-        flatArray is not null ? flatArray.ToImmutableArray() : null;
+        flatArray?.ToImmutableArray();
 }

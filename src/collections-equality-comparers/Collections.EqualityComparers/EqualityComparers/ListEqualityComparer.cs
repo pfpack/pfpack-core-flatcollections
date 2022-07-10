@@ -2,17 +2,15 @@
 
 public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
 {
-    private readonly IEqualityComparer<T>? comparer;
+    private readonly IEqualityComparer<T> comparer;
 
-    private IEqualityComparer<T> Comparer()
+    public ListEqualityComparer()
         =>
-        comparer ?? EqualityComparer<T>.Default;
-
-    public ListEqualityComparer() { }
+        comparer = EqualityComparer<T>.Default;
 
     public ListEqualityComparer(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer;
+        this.comparer = comparer ?? EqualityComparer<T>.Default;
 
     public static ListEqualityComparer<T> Default
         =>
@@ -35,13 +33,6 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
             return false;
         }
 
-        if (x.Count is not > 0)
-        {
-            return true;
-        }
-
-        var comparer = Comparer();
-
         for (int i = 0; i < x.Count; i++)
         {
             if (comparer.Equals(x[i], y[i]))
@@ -56,23 +47,13 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
 
     public int GetHashCode(IList<T> obj)
     {
-        // Return zero instead of throwing ArgumentNullException (the best practice)
+        // Return zero instead of throwing ArgumentNullException
         if (obj is null)
         {
             return default;
         }
 
         HashCode builder = new();
-
-        // Make difference between null and empty collections
-        builder.Add(1);
-
-        if (obj.Count is not > 0)
-        {
-            return builder.ToHashCode();
-        }
-
-        var comparer = Comparer();
 
         for (int i = 0; i < obj.Count; i++)
         {

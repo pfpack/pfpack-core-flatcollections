@@ -24,7 +24,7 @@ partial class FlatArray<T>
         {
             FlatArrayCloneMode.Default
             =>
-            items.Length > 0 ? InnerCloneArray(items) : items,
+            items.Length > 0 ? InnerArrayHelper.Clone(items) : items,
 
             FlatArrayCloneMode.Shallow
             =>
@@ -32,7 +32,7 @@ partial class FlatArray<T>
 
             FlatArrayCloneMode.Deep
             =>
-            InnerCloneArray(items),
+            InnerArrayHelper.Clone(items),
 
             _ => throw new ArgumentOutOfRangeException(
                 nameof(mode), InnerExceptionMessages.UnexpectedCloneMode(mode))
