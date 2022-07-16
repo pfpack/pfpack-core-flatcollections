@@ -1,6 +1,8 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
 
-public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
+namespace System.Collections.Generic;
+
+public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqualityComparer<List<T>>
 {
     private readonly IEqualityComparer<T> comparer;
 
@@ -17,6 +19,23 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
         DefaultInstance.Value;
 
     public bool Equals(IList<T>? x, IList<T>? y)
+        =>
+        InnerEquals(x, y);
+
+    public bool Equals(List<T>? x, List<T>? y)
+        =>
+        InnerEquals(x, y);
+
+    public int GetHashCode(IList<T> obj)
+        =>
+        InnerGetHashCode(obj);
+
+    public int GetHashCode(List<T> obj)
+        =>
+        InnerGetHashCode(obj);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool InnerEquals(IList<T>? x, IList<T>? y)
     {
         if (ReferenceEquals(x, y))
         {
@@ -45,7 +64,8 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
         return true;
     }
 
-    public int GetHashCode(IList<T> obj)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private int InnerGetHashCode(IList<T> obj)
     {
         // Return zero instead of throwing ArgumentNullException
         if (obj is null)
