@@ -13,5 +13,23 @@ partial class FlatArray<T>
             Array.Copy(source, dest, source.Length);
             return dest;
         }
+
+        // The caller MUST ensure the new size is GREATER than the source size
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static void ExtendUnchecked(ref T[] array, int newSize)
+        {
+            var newArray = new T[newSize];
+            Array.Copy(array, newArray, array.Length);
+            array = newArray;
+        }
+
+        // The caller MUST ensure the new size is LESS than the source size
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static void TruncateUnchecked(ref T[] array, int newSize)
+        {
+            var newArray = new T[newSize];
+            Array.Copy(array, newArray, newArray.Length);
+            array = newArray;
+        }
     }
 }

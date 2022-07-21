@@ -16,9 +16,9 @@ partial class FlatArray<T>
                 return InnerEmptyFlatArray.Value;
             }
 
-            int actualCount = 0;
-
             const int defaultCapacity = 4;
+
+            int actualCount = 0;
             var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
 
             do
@@ -29,16 +29,8 @@ partial class FlatArray<T>
                 }
                 else if (actualCount < InnerMaxLength.Value)
                 {
-                    int newCapacity = unchecked(array.Length * 2);
-                    if (unchecked((uint)newCapacity) > (uint)InnerMaxLength.Value)
-                    {
-                        newCapacity = InnerMaxLength.Value;
-                    }
-
-                    var newArray = new T[newCapacity];
-                    Array.Copy(array, newArray, array.Length);
-                    array = newArray;
-
+                    int newCapacity = InnerComputeNewCapacity(array.Length, InnerMaxLength.Value);
+                    InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
                     array[actualCount++] = enumerator.Current;
                 }
                 else
@@ -50,12 +42,20 @@ partial class FlatArray<T>
 
             if (actualCount < array.Length)
             {
-                var newArray = new T[actualCount];
-                Array.Copy(array, newArray, newArray.Length);
-                array = newArray;
+                InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
             }
 
             return new(array, default);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int InnerComputeNewCapacity(int currentSize, int maxCapacity)
+        {
+            int newCapacity = unchecked(currentSize * 2);
+
+            return unchecked((uint)newCapacity) <= (uint)maxCapacity
+                ? newCapacity
+                : maxCapacity;
         }
     }
 }
