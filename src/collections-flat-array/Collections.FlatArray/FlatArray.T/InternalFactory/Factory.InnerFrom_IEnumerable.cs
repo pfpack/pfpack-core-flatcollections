@@ -27,9 +27,9 @@ partial class FlatArray<T>
                 {
                     array[actualCount++] = enumerator.Current;
                 }
-                else if (actualCount < InnerMaxLength.Value)
+                else if (actualCount < Array.MaxLength)
                 {
-                    int newCapacity = InnerComputeNewCapacity(array.Length, InnerMaxLength.Value);
+                    int newCapacity = InnerComputeNewCapacity(array.Length, Array.MaxLength);
                     InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
                     array[actualCount++] = enumerator.Current;
                 }
