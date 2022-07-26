@@ -17,7 +17,7 @@ partial class FlatArray<T>
 
     public static bool operator !=(FlatArray<T>? left, FlatArray<T>? right)
         =>
-        Equals(left, right) is false;
+        Equals(left, right) is not true;
 
     public static bool Equals(FlatArray<T>? left, FlatArray<T>? right)
     {

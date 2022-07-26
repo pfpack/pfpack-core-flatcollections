@@ -11,7 +11,7 @@ partial class FlatArray<T>
         {
             using var enumerator = source.GetEnumerator();
 
-            if (enumerator.MoveNext() is false)
+            if (enumerator.MoveNext() is not true)
             {
                 return InnerEmptyFlatArray.Value;
             }
