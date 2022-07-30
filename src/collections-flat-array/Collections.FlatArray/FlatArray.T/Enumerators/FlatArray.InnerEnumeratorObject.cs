@@ -16,9 +16,10 @@ partial class FlatArray<T>
 
         public bool MoveNext()
         {
-            if (index + 1 < items.Length)
+            int next = index + 1;
+            if (next < items.Length)
             {
-                index++;
+                index = next;
                 return true;
             }
 

@@ -4,19 +4,22 @@ partial class FlatArray<T>
 {
     public struct Enumerator
     {
+        private const int defaultIndex = -1;
+
         private readonly T[] items;
 
         private int index;
 
         internal Enumerator(T[] items)
             =>
-            (this.items, index) = (items, -1);
+            (this.items, index) = (items, defaultIndex);
 
         public bool MoveNext()
         {
-            if (index + 1 < items.Length)
+            int next = index + 1;
+            if (next < items.Length)
             {
-                index++;
+                index = next;
                 return true;
             }
 
