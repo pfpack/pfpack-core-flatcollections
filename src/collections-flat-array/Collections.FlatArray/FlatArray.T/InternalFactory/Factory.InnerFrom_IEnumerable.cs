@@ -35,7 +35,7 @@ partial class FlatArray<T>
                 }
                 else
                 {
-                    throw new OutOfMemoryException(InnerExceptionMessages.SourceTooLarge);
+                    throw InnerExceptionFactory.SourceTooLarge();
                 }
             }
             while (enumerator.MoveNext());

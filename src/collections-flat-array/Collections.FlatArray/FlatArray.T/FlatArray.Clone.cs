@@ -34,7 +34,7 @@ partial class FlatArray<T>
             =>
             InnerArrayHelper.Clone(items),
 
-            _ => throw new ArgumentOutOfRangeException(
-                nameof(mode), InnerExceptionMessages.UnexpectedCloneMode(mode))
+            _ =>
+            throw InnerExceptionFactory.UnexpectedCloneMode(nameof(mode), mode)
         };
 }

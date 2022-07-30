@@ -30,7 +30,6 @@ partial class FlatArray<T>
             =>
             unchecked((uint)index) < (uint)items.Length // index >= 0 && index < items.Length
             ? items[index]
-            : throw new InvalidOperationException(
-                InnerExceptionMessages.EnumerationEitherNotStartedOrFinished);
+            : throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
     }
 }
