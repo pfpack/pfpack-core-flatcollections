@@ -11,8 +11,8 @@ partial class FlatArrayLinqExtensions
         return source.Length switch
         {
             1 => source[0],
-            > 1 => throw new InvalidOperationException(InnerExceptionMessages.SourceMoreThanOneElement),
-            _ => throw new InvalidOperationException(InnerExceptionMessages.SourceEmpty)
+            > 1 => throw InnerExceptionFactory.SourceMoreThanOneElement(),
+            _ => throw InnerExceptionFactory.SourceEmpty()
         };
     }
 
@@ -23,7 +23,7 @@ partial class FlatArrayLinqExtensions
         return source.Length switch
         {
             1 => source[0],
-            > 1 => throw new InvalidOperationException(InnerExceptionMessages.SourceMoreThanOneElement),
+            > 1 => throw InnerExceptionFactory.SourceMoreThanOneElement(),
             _ => default!
         };
     }
