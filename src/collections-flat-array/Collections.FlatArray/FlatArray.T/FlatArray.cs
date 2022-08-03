@@ -1,8 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace System.Collections.Generic;
 
 //[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
+[DebuggerDisplay("Length = {Length}")]
 public sealed partial class FlatArray<T> :
     IReadOnlyList<T>,
     IEquatable<FlatArray<T>>,
