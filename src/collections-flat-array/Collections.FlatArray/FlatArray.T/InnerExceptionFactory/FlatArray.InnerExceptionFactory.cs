@@ -23,7 +23,10 @@ partial class FlatArray<T>
             new("The source is too large to allocate.");
 
         private static string InnerBuildOutOfRangeMessage<TValue>(string message, TValue actualValue)
-            =>
-            Invariant($"{message}{(message.TrimEnd().EndsWith('.') ? null : ".")} Actual value was {actualValue}.");
+        {
+            var separator = message.TrimEnd().EndsWith('.') ? null : ".";
+
+            return Invariant($"{message}{separator} Actual value was {actualValue}.");
+        }
     }
 }
