@@ -16,9 +16,9 @@ partial class FlatArray<T>
 
     private FlatArray<T> InnerClone(FlatArrayCloneMode mode)
         =>
-        new(InnerCloneBuildItems(mode), default);
+        new(InnerCloneItems(mode), default);
 
-    private T[] InnerCloneBuildItems(FlatArrayCloneMode mode)
+    private T[] InnerCloneItems(FlatArrayCloneMode mode)
         =>
         mode switch
         {
