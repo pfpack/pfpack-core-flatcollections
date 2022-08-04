@@ -16,9 +16,9 @@ partial class FlatArray<T>
 
     private FlatArray<T> InnerClone(FlatArrayCloneMode mode)
         =>
-        new(InnerCloneItems(mode), default);
+        new(InnerCloneItems(mode, nameof(mode)), default);
 
-    private T[] InnerCloneItems(FlatArrayCloneMode mode)
+    private T[] InnerCloneItems(FlatArrayCloneMode mode, string paramName)
         =>
         mode switch
         {
@@ -35,6 +35,6 @@ partial class FlatArray<T>
             InnerArrayHelper.Clone(items),
 
             _ =>
-            throw InnerExceptionFactory.UnexpectedCloneMode(nameof(mode), mode)
+            throw InnerExceptionFactory.UnexpectedCloneMode(paramName, mode)
         };
 }
