@@ -4,19 +4,19 @@ partial class FlatArray<T>
 {
     public FlatArray<T> Clone()
         =>
-        InnerClone(default);
+        new(InnerCloneItemsDefault(), default);
 
     object ICloneable.Clone()
         =>
-        InnerClone(default);
+        Clone();
 
     public FlatArray<T> Clone(FlatArrayCloneMode mode)
         =>
-        InnerClone(mode);
-
-    private FlatArray<T> InnerClone(FlatArrayCloneMode mode)
-        =>
         new(InnerCloneItems(mode, nameof(mode)), default);
+
+    private T[] InnerCloneItemsDefault()
+        =>
+        items.Length > 0 ? InnerArrayHelper.Clone(items) : items;
 
     private T[] InnerCloneItems(FlatArrayCloneMode mode, string paramName)
         =>
@@ -24,7 +24,7 @@ partial class FlatArray<T>
         {
             FlatArrayCloneMode.Default
             =>
-            items.Length > 0 ? InnerArrayHelper.Clone(items) : items,
+            InnerCloneItemsDefault(),
 
             FlatArrayCloneMode.Shallow
             =>
