@@ -22,19 +22,12 @@ partial class FlatArray<T>
         =>
         mode switch
         {
-            FlatArrayCloneMode.Default
-            =>
-            InnerCloneItemsDefault(),
+            FlatArrayCloneMode.Default => InnerCloneItemsDefault(),
 
-            FlatArrayCloneMode.Shallow
-            =>
-            items,
+            FlatArrayCloneMode.Shallow => items,
 
-            FlatArrayCloneMode.Deep
-            =>
-            InnerArrayHelper.Clone(items),
+            FlatArrayCloneMode.Deep => InnerArrayHelper.Clone(items),
 
-            _ =>
-            throw InnerExceptionFactory.UnexpectedCloneMode(paramName, mode)
+            _ => throw InnerExceptionFactory.UnexpectedCloneMode(paramName, mode)
         };
 }
