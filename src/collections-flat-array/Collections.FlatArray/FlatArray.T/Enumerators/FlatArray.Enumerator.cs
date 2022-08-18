@@ -28,7 +28,7 @@ partial class FlatArray<T>
 
         public T Current
             =>
-            unchecked((uint)index) < (uint)items.Length // index >= 0 && index < items.Length
+            index >= 0 && index < items.Length
             ? items[index]
             : throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
     }
