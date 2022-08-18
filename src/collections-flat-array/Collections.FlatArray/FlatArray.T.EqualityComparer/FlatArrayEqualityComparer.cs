@@ -35,7 +35,7 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
 
         for (int i = 0; i < x.Length; i++)
         {
-            if (comparer.Equals(x.InternalItem(i), y.InternalItem(i)))
+            if (comparer.Equals(x.InternalGetItem(i), y.InternalGetItem(i)))
             {
                 continue;
             }
@@ -57,7 +57,7 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
 
         for (int i = 0; i < obj.Length; i++)
         {
-            var item = obj.InternalItem(i);
+            var item = obj.InternalGetItem(i);
             builder.Add(item is not null ? comparer.GetHashCode(item) : default);
         }
 
