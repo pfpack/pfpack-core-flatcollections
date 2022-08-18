@@ -7,5 +7,5 @@ partial class FlatArray<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal T InternalGetItem(int index)
         =>
-        items[index]; // no range check
+        items[index]; // delegate range check to array indexer
 }
