@@ -29,7 +29,7 @@ partial class FlatArray<T>
                 }
                 else if (actualCount < Array.MaxLength)
                 {
-                    int newCapacity = InnerComputeNewCapacity(array.Length, Array.MaxLength);
+                    int newCapacity = InnerEstimateCapacity(array.Length, Array.MaxLength);
                     InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
                     array[actualCount++] = enumerator.Current;
                 }
@@ -49,13 +49,21 @@ partial class FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int InnerComputeNewCapacity(int currentSize, int maxCapacity)
+        private static int InnerEstimateCapacity(int size, int maxCapacity)
         {
-            int newCapacity = unchecked(currentSize * 2);
+            int capacity = unchecked(size * 2);
 
-            return unchecked((uint)newCapacity) <= (uint)maxCapacity
-                ? newCapacity
-                : maxCapacity;
+            if (capacity < 0) // handle the overflow case
+            {
+                return maxCapacity;
+            }
+
+            if (capacity > maxCapacity)
+            {
+                return maxCapacity;
+            }
+
+            return capacity;
         }
     }
 }
