@@ -5,7 +5,7 @@ namespace System.Collections.Generic;
 partial class FlatArray<T>
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal T InternalItemGet(int index)
+    internal T InternalItem(int index)
         =>
         items[index]; // delegate range check to array indexer
 }
