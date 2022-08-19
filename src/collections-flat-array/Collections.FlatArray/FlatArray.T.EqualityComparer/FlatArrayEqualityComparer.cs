@@ -28,7 +28,7 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
             return false;
         }
 
-        if (FlatArray<T>.InternalItemsReferenceEquals(x, y))
+        if (FlatArray<T>.InternalItemsSame(x, y))
         {
             return true;
         }
@@ -40,7 +40,7 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
 
         for (int i = 0; i < x.Length; i++)
         {
-            if (comparer.Equals(x.InternalGetItem(i), y.InternalGetItem(i)))
+            if (comparer.Equals(x.InternalItemGet(i), y.InternalItemGet(i)))
             {
                 continue;
             }
@@ -62,7 +62,7 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
 
         for (int i = 0; i < obj.Length; i++)
         {
-            var item = obj.InternalGetItem(i);
+            var item = obj.InternalItemGet(i);
             builder.Add(item is not null ? comparer.GetHashCode(item) : default);
         }
 
