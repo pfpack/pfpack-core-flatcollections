@@ -4,13 +4,17 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
 {
     private readonly IEqualityComparer<T> comparer;
 
-    public FlatArrayEqualityComparer()
+    private FlatArrayEqualityComparer(IEqualityComparer<T> comparer)
         =>
-        comparer = EqualityComparer<T>.Default;
+        this.comparer = comparer;
 
-    public FlatArrayEqualityComparer(IEqualityComparer<T>? comparer)
+    public static FlatArrayEqualityComparer<T> Create(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer ?? EqualityComparer<T>.Default;
+        new(comparer ?? EqualityComparer<T>.Default);
+
+    public static FlatArrayEqualityComparer<T> Create()
+        =>
+        new(EqualityComparer<T>.Default);
 
     public static FlatArrayEqualityComparer<T> Default
         =>
@@ -71,6 +75,6 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
 
     private static class DefaultInstance
     {
-        internal static readonly FlatArrayEqualityComparer<T> Value = new();
+        internal static readonly FlatArrayEqualityComparer<T> Value = Create();
     }
 }

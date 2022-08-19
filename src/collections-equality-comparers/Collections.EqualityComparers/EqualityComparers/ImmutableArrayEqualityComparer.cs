@@ -6,13 +6,17 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 {
     private readonly IEqualityComparer<T> comparer;
 
-    public ImmutableArrayEqualityComparer()
+    private ImmutableArrayEqualityComparer(IEqualityComparer<T> comparer)
         =>
-        comparer = EqualityComparer<T>.Default;
+        this.comparer = comparer;
 
-    public ImmutableArrayEqualityComparer(IEqualityComparer<T>? comparer)
+    public static ImmutableArrayEqualityComparer<T> Create(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer ?? EqualityComparer<T>.Default;
+        new(comparer ?? EqualityComparer<T>.Default);
+
+    public static ImmutableArrayEqualityComparer<T> Create()
+        =>
+        new(EqualityComparer<T>.Default);
 
     public static ImmutableArrayEqualityComparer<T> Default
         =>
@@ -76,6 +80,6 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     private static class DefaultInstance
     {
-        internal static readonly ImmutableArrayEqualityComparer<T> Value = new();
+        internal static readonly ImmutableArrayEqualityComparer<T> Value = Create();
     }
 }

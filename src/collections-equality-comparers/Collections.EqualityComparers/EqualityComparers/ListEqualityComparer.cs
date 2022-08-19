@@ -6,13 +6,17 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqua
 {
     private readonly IEqualityComparer<T> comparer;
 
-    public ListEqualityComparer()
+    private ListEqualityComparer(IEqualityComparer<T> comparer)
         =>
-        comparer = EqualityComparer<T>.Default;
+        this.comparer = comparer;
 
-    public ListEqualityComparer(IEqualityComparer<T>? comparer)
+    public static ListEqualityComparer<T> Create(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer ?? EqualityComparer<T>.Default;
+        new(comparer ?? EqualityComparer<T>.Default);
+
+    public static ListEqualityComparer<T> Create()
+        =>
+        new(EqualityComparer<T>.Default);
 
     public static ListEqualityComparer<T> Default
         =>
@@ -86,6 +90,6 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqua
 
     private static class DefaultInstance
     {
-        internal static readonly ListEqualityComparer<T> Value = new();
+        internal static readonly ListEqualityComparer<T> Value = Create();
     }
 }
