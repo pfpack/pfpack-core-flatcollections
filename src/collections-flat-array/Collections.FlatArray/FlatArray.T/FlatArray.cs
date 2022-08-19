@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace System.Collections.Generic;
 
 //[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
-[DebuggerDisplay("Length = {Length}")]
+[DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
 public sealed partial class FlatArray<T> :
     IReadOnlyList<T>,
     IEquatable<FlatArray<T>>,
