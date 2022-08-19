@@ -20,7 +20,7 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
 
     public static ImmutableArrayEqualityComparer<T> Default
         =>
-        DefaultInstance.Value;
+        InnerDefault.Value;
 
     public bool Equals(ImmutableArray<T> x, ImmutableArray<T> y)
     {
@@ -78,7 +78,7 @@ public sealed class ImmutableArrayEqualityComparer<T> : IEqualityComparer<Immuta
         return builder.ToHashCode();
     }
 
-    private static class DefaultInstance
+    private static class InnerDefault
     {
         internal static readonly ImmutableArrayEqualityComparer<T> Value = Create();
     }

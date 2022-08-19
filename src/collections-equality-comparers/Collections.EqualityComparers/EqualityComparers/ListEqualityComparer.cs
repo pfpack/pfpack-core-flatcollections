@@ -20,7 +20,7 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqua
 
     public static ListEqualityComparer<T> Default
         =>
-        DefaultInstance.Value;
+        InnerDefault.Value;
 
     public bool Equals(IList<T>? x, IList<T>? y)
         =>
@@ -88,7 +88,7 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqua
         return builder.ToHashCode();
     }
 
-    private static class DefaultInstance
+    private static class InnerDefault
     {
         internal static readonly ListEqualityComparer<T> Value = Create();
     }

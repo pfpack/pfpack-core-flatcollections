@@ -18,7 +18,7 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
 
     public static ReadOnlyListEqualityComparer<T> Default
         =>
-        DefaultInstance.Value;
+        InnerDefault.Value;
 
     public bool Equals(IReadOnlyList<T>? x, IReadOnlyList<T>? y)
     {
@@ -68,7 +68,7 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
         return builder.ToHashCode();
     }
 
-    private static class DefaultInstance
+    private static class InnerDefault
     {
         internal static readonly ReadOnlyListEqualityComparer<T> Value = Create();
     }

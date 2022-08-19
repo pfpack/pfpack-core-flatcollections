@@ -20,7 +20,7 @@ partial class FlatArray<T>
 
         public static EqualityComparer Default
             =>
-            DefaultInstance.Value;
+            InnerDefault.Value;
 
         public bool Equals(FlatArray<T>? x, FlatArray<T>? y)
         {
@@ -75,7 +75,7 @@ partial class FlatArray<T>
             return builder.ToHashCode();
         }
 
-        private static class DefaultInstance
+        private static class InnerDefault
         {
             internal static readonly EqualityComparer Value = Create();
         }

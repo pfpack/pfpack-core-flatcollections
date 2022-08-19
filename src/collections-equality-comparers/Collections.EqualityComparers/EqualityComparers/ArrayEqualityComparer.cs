@@ -18,7 +18,7 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 
     public static ArrayEqualityComparer<T> Default
         =>
-        DefaultInstance.Value;
+        InnerDefault.Value;
 
     public bool Equals(T[]? x, T[]? y)
     {
@@ -68,7 +68,7 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
         return builder.ToHashCode();
     }
 
-    private static class DefaultInstance
+    private static class InnerDefault
     {
         internal static readonly ArrayEqualityComparer<T> Value = Create();
     }
