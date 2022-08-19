@@ -28,6 +28,11 @@ public sealed class FlatArrayEqualityComparer<T> : IEqualityComparer<FlatArray<T
             return false;
         }
 
+        if (FlatArray<T>.InternalItemsReferenceEquals(x, y))
+        {
+            return true;
+        }
+
         if (x.Length != y.Length)
         {
             return false;
