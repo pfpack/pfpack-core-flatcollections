@@ -48,7 +48,7 @@ partial class FlatArray<T>
             return new(array, default);
         }
 
-        // The caller MUST ensure the size and the maxCapacity are GREATER than zero
+        // The caller MUST ensure the size and the max capacity are GREATER than zero
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int InnerEstimateCapacity(int size, int maxCapacity)
         {
