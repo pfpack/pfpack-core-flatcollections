@@ -4,17 +4,21 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
 {
     private readonly IEqualityComparer<T> comparer;
 
-    public ReadOnlyListEqualityComparer()
+    private ReadOnlyListEqualityComparer(IEqualityComparer<T> comparer)
         =>
-        comparer = EqualityComparer<T>.Default;
+        this.comparer = comparer;
 
-    public ReadOnlyListEqualityComparer(IEqualityComparer<T>? comparer)
+    public static ReadOnlyListEqualityComparer<T> Create(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer ?? EqualityComparer<T>.Default;
+        new(comparer ?? EqualityComparer<T>.Default);
+
+    public static ReadOnlyListEqualityComparer<T> Create()
+        =>
+        new(EqualityComparer<T>.Default);
 
     public static ReadOnlyListEqualityComparer<T> Default
         =>
-        DefaultInstance.Value;
+        InnerDefault.Value;
 
     public bool Equals(IReadOnlyList<T>? x, IReadOnlyList<T>? y)
     {
@@ -64,8 +68,8 @@ public sealed class ReadOnlyListEqualityComparer<T> : IEqualityComparer<IReadOnl
         return builder.ToHashCode();
     }
 
-    private static class DefaultInstance
+    private static class InnerDefault
     {
-        internal static readonly ReadOnlyListEqualityComparer<T> Value = new();
+        internal static readonly ReadOnlyListEqualityComparer<T> Value = Create();
     }
 }

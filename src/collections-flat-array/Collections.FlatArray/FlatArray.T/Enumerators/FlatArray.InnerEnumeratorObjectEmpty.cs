@@ -10,13 +10,11 @@ partial class FlatArray<T>
 
         public T Current
             =>
-            throw new InvalidOperationException(
-                InnerExceptionMessages.EnumerationEitherNotStartedOrFinished);
+            throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
 
         object IEnumerator.Current
             =>
-            throw new InvalidOperationException(
-                InnerExceptionMessages.EnumerationEitherNotStartedOrFinished);
+            throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
 
         public void Reset() { }
 

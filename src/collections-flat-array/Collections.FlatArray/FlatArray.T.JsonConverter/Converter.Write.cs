@@ -14,15 +14,15 @@ partial class FlatArrayJsonConverter<T>
 
         writer.WriteStartArray();
 
-        foreach (var item in value)
+        for (int i = 0; i < value.Length; i++)
         {
             if (itemConverter is not null)
             {
-                itemConverter.Write(writer, item, options);
+                itemConverter.Write(writer, value.InternalItem(i), options);
             }
             else
             {
-                JsonSerializer.Serialize(writer, item, options);
+                JsonSerializer.Serialize(writer, value.InternalItem(i), options);
             }
         }
 

@@ -1,22 +1,45 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
 
-public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
+namespace System.Collections.Generic;
+
+public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqualityComparer<List<T>>
 {
     private readonly IEqualityComparer<T> comparer;
 
-    public ListEqualityComparer()
+    private ListEqualityComparer(IEqualityComparer<T> comparer)
         =>
-        comparer = EqualityComparer<T>.Default;
+        this.comparer = comparer;
 
-    public ListEqualityComparer(IEqualityComparer<T>? comparer)
+    public static ListEqualityComparer<T> Create(IEqualityComparer<T>? comparer)
         =>
-        this.comparer = comparer ?? EqualityComparer<T>.Default;
+        new(comparer ?? EqualityComparer<T>.Default);
+
+    public static ListEqualityComparer<T> Create()
+        =>
+        new(EqualityComparer<T>.Default);
 
     public static ListEqualityComparer<T> Default
         =>
-        DefaultInstance.Value;
+        InnerDefault.Value;
 
     public bool Equals(IList<T>? x, IList<T>? y)
+        =>
+        InnerEquals(x, y);
+
+    public bool Equals(List<T>? x, List<T>? y)
+        =>
+        InnerEquals(x, y);
+
+    public int GetHashCode(IList<T> obj)
+        =>
+        InnerGetHashCode(obj);
+
+    public int GetHashCode(List<T> obj)
+        =>
+        InnerGetHashCode(obj);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool InnerEquals(IList<T>? x, IList<T>? y)
     {
         if (ReferenceEquals(x, y))
         {
@@ -45,7 +68,8 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
         return true;
     }
 
-    public int GetHashCode(IList<T> obj)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private int InnerGetHashCode(IList<T> obj)
     {
         // Return zero instead of throwing ArgumentNullException
         if (obj is null)
@@ -64,8 +88,8 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>
         return builder.ToHashCode();
     }
 
-    private static class DefaultInstance
+    private static class InnerDefault
     {
-        internal static readonly ListEqualityComparer<T> Value = new();
+        internal static readonly ListEqualityComparer<T> Value = Create();
     }
 }

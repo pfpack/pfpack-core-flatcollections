@@ -26,10 +26,7 @@ partial class FlatArray<T>
                 }
                 else
                 {
-                    var newArray = new T[count];
-                    Array.Copy(array, newArray, array.Length);
-                    array = newArray;
-
+                    InnerArrayHelper.ExtendUnchecked(ref array, count);
                     array[actualCount] = source[actualCount];
                 }
             }
@@ -37,9 +34,7 @@ partial class FlatArray<T>
 
             if (actualCount < array.Length)
             {
-                var newArray = new T[actualCount];
-                Array.Copy(array, newArray, newArray.Length);
-                array = newArray;
+                InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
             }
 
             return new(array, default);

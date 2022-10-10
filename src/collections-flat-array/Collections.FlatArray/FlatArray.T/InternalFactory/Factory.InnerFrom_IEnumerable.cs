@@ -11,14 +11,14 @@ partial class FlatArray<T>
         {
             using var enumerator = source.GetEnumerator();
 
-            if (enumerator.MoveNext() is false)
+            if (enumerator.MoveNext() is not true)
             {
                 return InnerEmptyFlatArray.Value;
             }
 
-            int actualCount = 0;
-
             const int defaultCapacity = 4;
+
+            int actualCount = 0;
             var array = new T[estimatedCapacity > 0 ? estimatedCapacity : defaultCapacity];
 
             do
@@ -27,35 +27,44 @@ partial class FlatArray<T>
                 {
                     array[actualCount++] = enumerator.Current;
                 }
-                else if (actualCount < InnerMaxLength.Value)
+                else if (actualCount < Array.MaxLength)
                 {
-                    int newCapacity = unchecked(array.Length * 2);
-                    if (unchecked((uint)newCapacity) > (uint)InnerMaxLength.Value)
-                    {
-                        newCapacity = InnerMaxLength.Value;
-                    }
-
-                    var newArray = new T[newCapacity];
-                    Array.Copy(array, newArray, array.Length);
-                    array = newArray;
-
+                    int newCapacity = InnerEstimateCapacity(array.Length, Array.MaxLength);
+                    InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
                     array[actualCount++] = enumerator.Current;
                 }
                 else
                 {
-                    throw new OutOfMemoryException(InnerExceptionMessages.SourceTooLarge);
+                    throw InnerExceptionFactory.SourceTooLarge();
                 }
             }
             while (enumerator.MoveNext());
 
             if (actualCount < array.Length)
             {
-                var newArray = new T[actualCount];
-                Array.Copy(array, newArray, newArray.Length);
-                array = newArray;
+                InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
             }
 
             return new(array, default);
+        }
+
+        // The caller MUST ensure the size and the max capacity are GREATER than zero
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int InnerEstimateCapacity(int size, int maxCapacity)
+        {
+            int capacity = unchecked(size * 2);
+
+            if (capacity < 0) // handle the overflow case
+            {
+                return maxCapacity;
+            }
+
+            if (capacity > maxCapacity)
+            {
+                return maxCapacity;
+            }
+
+            return capacity;
         }
     }
 }

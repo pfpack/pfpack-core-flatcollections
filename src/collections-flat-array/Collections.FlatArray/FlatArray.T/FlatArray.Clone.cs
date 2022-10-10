@@ -4,37 +4,30 @@ partial class FlatArray<T>
 {
     public FlatArray<T> Clone()
         =>
-        InnerClone(default);
+        new(InnerCloneItemsDefault(), default);
 
     object ICloneable.Clone()
         =>
-        InnerClone(default);
+        Clone();
 
     public FlatArray<T> Clone(FlatArrayCloneMode mode)
         =>
-        InnerClone(mode);
+        new(InnerCloneItems(mode, nameof(mode)), default);
 
-    private FlatArray<T> InnerClone(FlatArrayCloneMode mode)
+    private T[] InnerCloneItemsDefault()
         =>
-        new(InnerCloneBuildItems(mode), default);
+        items.Length > 0 ? InnerArrayHelper.Clone(items) : items;
 
-    private T[] InnerCloneBuildItems(FlatArrayCloneMode mode)
+    private T[] InnerCloneItems(FlatArrayCloneMode mode, string paramName)
         =>
         mode switch
         {
-            FlatArrayCloneMode.Default
-            =>
-            items.Length > 0 ? InnerArrayHelper.Clone(items) : items,
+            FlatArrayCloneMode.Default => InnerCloneItemsDefault(),
 
-            FlatArrayCloneMode.Shallow
-            =>
-            items,
+            FlatArrayCloneMode.Shallow => items,
 
-            FlatArrayCloneMode.Deep
-            =>
-            InnerArrayHelper.Clone(items),
+            FlatArrayCloneMode.Deep => InnerArrayHelper.Clone(items),
 
-            _ => throw new ArgumentOutOfRangeException(
-                nameof(mode), InnerExceptionMessages.UnexpectedCloneMode(mode))
+            _ => throw InnerExceptionFactory.UnexpectedCloneMode(paramName, mode)
         };
 }

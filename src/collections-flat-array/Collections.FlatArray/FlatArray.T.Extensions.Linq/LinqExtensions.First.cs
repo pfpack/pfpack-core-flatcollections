@@ -10,7 +10,7 @@ partial class FlatArrayLinqExtensions
 
         return source.Length > 0
             ? source[0]
-            : throw new InvalidOperationException(InnerExceptionMessages.SourceEmpty);
+            : throw InnerExceptionFactory.SourceEmpty();
     }
 
     public static T FirstOrDefault<T>(this FlatArray<T> source)
