@@ -15,12 +15,12 @@ public readonly partial struct FlatArray<T> :
 
     private readonly T[]? items;
 
-    [MemberNotNullWhen(true, nameof(items))]
+    [MemberNotNullWhen(returnValue: true, nameof(items))]
     private bool InnerIsNotEmpty
         =>
         length != default;
 
-    [MemberNotNullWhen(false, nameof(items))]
+    [MemberNotNullWhen(returnValue: false, nameof(items))]
     private bool InnerIsEmpty
         =>
         length == default;
