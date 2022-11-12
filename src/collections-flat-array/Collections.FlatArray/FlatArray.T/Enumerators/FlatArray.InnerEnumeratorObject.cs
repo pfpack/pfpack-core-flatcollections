@@ -1,10 +1,10 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     private sealed class InnerEnumeratorObject : IEnumerator<T>
     {
-        private const int defaultIndex = -1;
+        private const int DefaultIndex = -1;
 
         private readonly T[] items;
 
@@ -12,7 +12,7 @@ partial class FlatArray<T>
 
         internal InnerEnumeratorObject(T[] items)
             =>
-            (this.items, index) = (items, defaultIndex);
+            (this.items, index) = (items, DefaultIndex);
 
         public bool MoveNext()
         {
@@ -27,18 +27,21 @@ partial class FlatArray<T>
         }
 
         public T Current
-            =>
-            index >= 0 && index < items.Length
-            ? items[index]
-            : throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+        {
+            get
+            {
+                if (index >= 0 && index < items.Length)
+                {
+                    return items[index];
+                }
 
-        object IEnumerator.Current
-            =>
-            Current!;
+                throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+            }
+        }
 
-        public void Reset()
-            =>
-            index = defaultIndex;
+        object IEnumerator.Current => Current!;
+
+        public void Reset() => index = DefaultIndex;
 
         public void Dispose() { }
     }

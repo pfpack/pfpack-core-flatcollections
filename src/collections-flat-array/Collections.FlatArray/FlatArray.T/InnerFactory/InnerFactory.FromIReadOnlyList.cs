@@ -2,17 +2,17 @@
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
-    partial class InternalFactory
+    partial class InnerFactory
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static FlatArray<T> InnerFrom_IReadOnlyList(IReadOnlyList<T> source)
+        internal static FlatArray<T> FromIReadOnlyList(IReadOnlyList<T> source)
         {
             var count = source.Count;
             if (count is not > 0)
             {
-                return InnerEmptyFlatArray.Value;
+                return default;
             }
 
             int actualCount = 0;

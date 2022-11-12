@@ -1,10 +1,10 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public Enumerator GetEnumerator()
         =>
-        new(items);
+        new(items ?? InnerEmptyArray.Value);
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
         =>
@@ -16,7 +16,7 @@ partial class FlatArray<T>
 
     private IEnumerator<T> InnerGetEnumeratorObject()
         =>
-        items.Length > 0 ? new InnerEnumeratorObject(items) : InnerEnumeratorObjectEmptyDefault.Value;
+        InnerIsNotEmpty ? new InnerEnumeratorObject(items) : InnerEnumeratorObjectEmptyDefault.Value;
 
     private static class InnerEnumeratorObjectEmptyDefault
     {

@@ -2,18 +2,18 @@
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
-    partial class InternalFactory
+    partial class InnerFactory
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static FlatArray<T> InnerFrom_IEnumerable(IEnumerable<T> source, int estimatedCapacity = default)
+        internal static FlatArray<T> FromIEnumerable(IEnumerable<T> source, int estimatedCapacity = default)
         {
             using var enumerator = source.GetEnumerator();
 
             if (enumerator.MoveNext() is not true)
             {
-                return InnerEmptyFlatArray.Value;
+                return default;
             }
 
             const int defaultCapacity = 4;

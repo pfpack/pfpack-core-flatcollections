@@ -2,10 +2,11 @@
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
+    // Delegate null (empty) check to the caller; delegate range check to the array indexer
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal T InternalItem(int index)
         =>
-        items[index]; // delegate range check to array indexer
+        items![index];
 }

@@ -1,35 +1,48 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace System.Collections.Generic;
 
 //[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
 [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
-public sealed partial class FlatArray<T> :
+public readonly partial struct FlatArray<T> :
     IReadOnlyList<T>,
     IEquatable<FlatArray<T>>,
     ICloneable
 {
-    private readonly T[] items;
+    private readonly int length;
+
+    private readonly T[]? items;
+
+    [MemberNotNullWhen(true, nameof(items))]
+    private bool InnerIsNotEmpty
+        =>
+        length != default;
+
+    [MemberNotNullWhen(false, nameof(items))]
+    private bool InnerIsEmpty
+        =>
+        length == default;
 
     public int Length
         =>
-        items.Length;
+        length;
 
     int IReadOnlyCollection<T>.Count
         =>
-        items.Length;
+        length;
 
-    [Obsolete("This property is not intended for use. Read Length property instead.", error: true)]
+    [Obsolete("This property is not intended for use. Read the Length property instead.", error: true)]
     public int Count
         =>
-        items.Length;
+        length;
 
     public bool IsNotEmpty
         =>
-        items.Length > 0;
+        length != default;
 
     public bool IsEmpty
         =>
-        items.Length is not > 0;
+        length == default;
 }

@@ -2,5 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    public static readonly FlatArray<T> Empty;
+    private static partial class InnerFactory
+    {
+    }
 }

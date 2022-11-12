@@ -5,20 +5,14 @@ namespace System.Linq;
 partial class FlatArrayLinqExtensions
 {
     public static T First<T>(this FlatArray<T> source)
-    {
-        _ = source ?? throw new ArgumentNullException(nameof(source));
-
-        return source.Length > 0
+        =>
+        source.IsNotEmpty
             ? source[0]
             : throw InnerExceptionFactory.SourceEmpty();
-    }
 
-    public static T FirstOrDefault<T>(this FlatArray<T> source)
-    {
-        _ = source ?? throw new ArgumentNullException(nameof(source));
-
-        return source.Length > 0
+    public static T? FirstOrDefault<T>(this FlatArray<T> source)
+        =>
+        source.IsNotEmpty
             ? source[0]
-            : default!;
-    }
+            : default;
 }

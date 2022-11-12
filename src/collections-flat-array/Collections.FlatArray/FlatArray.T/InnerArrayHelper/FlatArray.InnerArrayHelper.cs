@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     private static class InnerArrayHelper
     {

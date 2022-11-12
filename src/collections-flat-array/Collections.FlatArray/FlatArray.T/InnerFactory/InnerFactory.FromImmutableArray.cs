@@ -3,16 +3,16 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
-    partial class InternalFactory
+    partial class InnerFactory
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static FlatArray<T> InnerFrom_ImmutableArray(ImmutableArray<T> source)
+        internal static FlatArray<T> FromImmutableArray(ImmutableArray<T> source)
         {
-            if (source.IsDefault || source.Length is not > 0)
+            if (source.IsDefaultOrEmpty)
             {
-                return InnerEmptyFlatArray.Value;
+                return default;
             }
 
             var array = new T[source.Length];

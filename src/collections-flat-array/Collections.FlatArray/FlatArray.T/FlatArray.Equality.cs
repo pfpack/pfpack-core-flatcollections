@@ -1,49 +1,46 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Diagnostics.CodeAnalysis;
 
-partial class FlatArray<T>
+namespace System.Collections.Generic;
+
+partial struct FlatArray<T>
 {
-    public bool Equals(FlatArray<T>? other)
+    public static bool Equals(FlatArray<T> left, FlatArray<T> right)
         =>
-        Equals(this, other);
+        left.Equals(right);
 
-    public override bool Equals(object? obj)
+    public static bool operator ==(FlatArray<T> left, FlatArray<T> right)
+        =>
+        left.Equals(right);
+
+    public static bool operator !=(FlatArray<T> left, FlatArray<T> right)
+        =>
+        left.Equals(right) is not true;
+
+    public override bool Equals([NotNullWhen(true)] object? obj)
         =>
         obj is FlatArray<T> other &&
-        Equals(this, other);
+        Equals(other);
 
-    public static bool operator ==(FlatArray<T>? left, FlatArray<T>? right)
-        =>
-        Equals(left, right);
-
-    public static bool operator !=(FlatArray<T>? left, FlatArray<T>? right)
-        =>
-        Equals(left, right) is not true;
-
-    public static bool Equals(FlatArray<T>? left, FlatArray<T>? right)
+    public bool Equals(FlatArray<T> other)
     {
-        if (ReferenceEquals(left, right))
-        {
-            return true;
-        }
-
-        if (left is null || right is null)
+        if (length != other.length)
         {
             return false;
         }
 
-        if (ReferenceEquals(left.items, right.items))
+        if (InnerIsEmpty)
         {
             return true;
         }
 
-        if (left.items.Length != right.items.Length)
+        if (ReferenceEquals(items, other.items))
         {
-            return false;
+            return true;
         }
 
-        for (int i = 0; i < left.items.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            if (InnerItemComparer.Value.Equals(left.items[i], right.items[i]))
+            if (InnerItemComparer.Value.Equals(items[i], other.items![i]))
             {
                 continue;
             }
@@ -59,6 +56,11 @@ partial class FlatArray<T>
 
         builder.Add(EqualityContractComparer.GetHashCode(EqualityContract));
 
+        if (InnerIsEmpty)
+        {
+            return builder.ToHashCode();
+        }
+
         for (int i = 0; i < items.Length; i++)
         {
             var item = items[i];
@@ -68,13 +70,13 @@ partial class FlatArray<T>
         return builder.ToHashCode();
     }
 
-    private static EqualityComparer<Type> EqualityContractComparer
-        =>
-        EqualityComparer<Type>.Default;
-
     private static Type EqualityContract
         =>
         typeof(FlatArray<T>);
+
+    private static EqualityComparer<Type> EqualityContractComparer
+        =>
+        EqualityComparer<Type>.Default;
 
     private static class InnerItemComparer
     {

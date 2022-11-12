@@ -3,29 +3,67 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public static FlatArray<T> From([AllowNull] params T[] source)
         =>
-        source is not null ? InternalFactory.FromArray(source) : InnerEmptyFlatArray.Value;
+        source is null ? default : InnerFactory.FromArray(source);
 
-    public static FlatArray<T> From([AllowNull] FlatArray<T> source)
+    public static FlatArray<T> From(FlatArray<T> source)
         =>
-        source is not null ? InternalFactory.FromFlatArray(source) : InnerEmptyFlatArray.Value;
+        InnerFactory.FromFlatArray(source);
+
+    public static FlatArray<T> From(FlatArray<T>? source)
+        =>
+        source is null ? default : InnerFactory.FromFlatArray(source.Value);
 
     public static FlatArray<T> From([AllowNull] List<T> source)
         =>
-        source is not null ? InternalFactory.FromList(source) : InnerEmptyFlatArray.Value;
+        source is null ? default : InnerFactory.FromList(source);
 
     public static FlatArray<T> From(ImmutableArray<T> source)
         =>
-        InternalFactory.FromImmutableArray(source);
+        InnerFactory.FromImmutableArray(source);
 
     public static FlatArray<T> From(ImmutableArray<T>? source)
         =>
-        source is not null ? InternalFactory.FromImmutableArray(source.Value) : InnerEmptyFlatArray.Value;
+        source is null ? default : InnerFactory.FromImmutableArray(source.Value);
 
     public static FlatArray<T> From([AllowNull] IEnumerable<T> source)
         =>
-        source is not null ? InternalFactory.FromIEnumerable(source) : InnerEmptyFlatArray.Value;
+        source switch
+        {
+            null => default,
+
+            T[] array
+            =>
+            InnerFactory.FromArray(array),
+
+            List<T> list
+            =>
+            InnerFactory.FromList(list),
+
+            FlatArray<T> flatArray
+            =>
+            InnerFactory.FromFlatArray(flatArray),
+
+            ImmutableArray<T> immutableArray
+            =>
+            InnerFactory.FromImmutableArray(immutableArray),
+
+            ICollection<T> coll
+            =>
+            InnerFactory.FromICollection(coll),
+
+            IReadOnlyList<T> list
+            =>
+            InnerFactory.FromIReadOnlyList(list),
+
+            IReadOnlyCollection<T> coll
+            =>
+            InnerFactory.FromIEnumerable(coll, coll.Count),
+
+            _ =>
+            InnerFactory.FromIEnumerable(source)
+        };
 }
