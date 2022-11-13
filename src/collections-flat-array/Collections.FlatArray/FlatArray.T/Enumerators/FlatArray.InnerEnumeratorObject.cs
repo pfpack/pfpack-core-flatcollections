@@ -14,8 +14,10 @@ partial struct FlatArray<T>
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal InnerEnumeratorObject(T[] items)
-            =>
-            (this.items, index) = (items, DefaultIndex);
+        {
+            this.items = items;
+            index = DefaultIndex;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()

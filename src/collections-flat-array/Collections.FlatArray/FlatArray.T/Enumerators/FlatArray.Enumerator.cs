@@ -8,14 +8,16 @@ partial struct FlatArray<T>
     {
         private const int DefaultIndex = -1;
 
-        private readonly T[] items;
+        private readonly ReadOnlySpan<T> items;
 
         private int index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal Enumerator(T[] items)
-            =>
-            (this.items, index) = (items, DefaultIndex);
+        internal Enumerator(ReadOnlySpan<T> items)
+        {
+            this.items = items;
+            index = DefaultIndex;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()
