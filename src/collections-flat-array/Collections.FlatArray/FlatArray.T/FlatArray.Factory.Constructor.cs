@@ -17,7 +17,7 @@ partial struct FlatArray<T>
         items = InnerArrayHelper.Clone(source);
     }
 
-    // Creates an instance without making a defensive copy
+    // Initializes an instance in 'as is' mode without any processing and creation of a defensive copy
     //
     // Since the invariant of FlatArray implies the empty FlatArray contains null underlying array,
     // the caller MUST ensure the items size is GREATER than zero

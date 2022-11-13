@@ -18,8 +18,8 @@ partial struct FlatArray<T>
             var array = new T[count];
             source.CopyTo(array, 0);
 
-            // Make a defensive copy for an arbitrary implementation of ICollection
-            // (not as trusted implementation as List or ImmutableArray)
+            // Create a defensive copy for an arbitrary ICollection implementation
+            // that is not as trusted as List or ImmutableArray
             var arrayCopy = InnerArrayHelper.Clone(array);
 
             return new(arrayCopy, default);
