@@ -33,11 +33,6 @@ public readonly partial struct FlatArray<T> :
         =>
         length;
 
-    [Obsolete("This property is not intended for use. Read the Length property instead.", error: true)]
-    public int Count
-        =>
-        length;
-
     public bool IsNotEmpty
         =>
         length != default;
