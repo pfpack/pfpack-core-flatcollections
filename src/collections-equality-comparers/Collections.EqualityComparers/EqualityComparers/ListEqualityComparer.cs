@@ -82,7 +82,7 @@ public sealed class ListEqualityComparer<T> : IEqualityComparer<IList<T>>, IEqua
         for (int i = 0; i < obj.Count; i++)
         {
             var item = obj[i];
-            builder.Add(item is not null ? comparer.GetHashCode(item) : default);
+            builder.Add(item is null ? default : comparer.GetHashCode(item));
         }
 
         return builder.ToHashCode();

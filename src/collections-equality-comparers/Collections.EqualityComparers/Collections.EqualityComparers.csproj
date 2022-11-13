@@ -17,7 +17,7 @@
     <Description>PrimeFuncPack Collections.EqualityComparers is a core library for .NET consisting of collection equality comparers (implementing value equality).</Description>
     <RootNamespace>System.Collections.Generic</RootNamespace>
     <AssemblyName>EarlyFuncPack.Collections.EqualityComparers</AssemblyName>
-    <Version>0.4.0</Version>
+    <Version>0.4.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
