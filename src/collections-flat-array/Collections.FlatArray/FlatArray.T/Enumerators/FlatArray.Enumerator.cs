@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    public struct Enumerator
+    public ref struct Enumerator
     {
         private const int DefaultIndex = -1;
 
@@ -26,13 +26,13 @@ partial struct FlatArray<T>
             return false;
         }
 
-        public T Current
+        public ref readonly T Current
         {
             get
             {
                 if (index >= 0 && index < items.Length)
                 {
-                    return items[index];
+                    return ref items[index];
                 }
 
                 throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();

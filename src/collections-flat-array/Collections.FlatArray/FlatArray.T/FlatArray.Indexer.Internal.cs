@@ -6,7 +6,7 @@ partial struct FlatArray<T>
 {
     // Delegate null (empty) check to the caller; delegate range check to the array indexer
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal T InternalItem(int index)
+    internal ref readonly T InternalItem(int index)
         =>
-        items![index];
+        ref items![index];
 }
