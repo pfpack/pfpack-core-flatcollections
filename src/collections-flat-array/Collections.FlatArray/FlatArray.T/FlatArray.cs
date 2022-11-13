@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace System.Collections.Generic;
@@ -15,26 +16,11 @@ public readonly partial struct FlatArray<T> :
 
     private readonly T[]? items;
 
-    [MemberNotNullWhen(returnValue: true, nameof(items))]
-    private bool InnerIsNotEmpty
-        =>
-        length != default;
-
-    [MemberNotNullWhen(returnValue: false, nameof(items))]
-    private bool InnerIsEmpty
-        =>
-        length == default;
-
     public int Length
         =>
         length;
 
     int IReadOnlyCollection<T>.Count
-        =>
-        length;
-
-    [Obsolete("This property is not intended for use. Read the Length property instead.", error: true)]
-    public int Count
         =>
         length;
 
@@ -45,4 +31,26 @@ public readonly partial struct FlatArray<T> :
     public bool IsEmpty
         =>
         length == default;
+
+    // Inner state helpers:
+
+    [MemberNotNullWhen(returnValue: true, nameof(items))]
+    private bool InnerIsNotEmpty
+        =>
+        length != default;
+
+    [MemberNotNullWhen(returnValue: false, nameof(items))]
+    private bool InnerIsEmpty
+        =>
+        length == default;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ReadOnlySpan<T> InnerAsSpan()
+        =>
+        length != default ? new ReadOnlySpan<T>(items) : ReadOnlySpan<T>.Empty;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ReadOnlyMemory<T> InnerAsMemory()
+        =>
+        length != default ? new ReadOnlyMemory<T>(items) : ReadOnlyMemory<T>.Empty;
 }
