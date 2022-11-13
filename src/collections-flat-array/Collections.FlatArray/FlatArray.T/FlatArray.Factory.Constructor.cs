@@ -17,9 +17,12 @@ partial struct FlatArray<T>
         items = InnerArrayHelper.Clone(source);
     }
 
-    // Creates an instance in raw mode
-    // The caller MUST ensure the items size is GREATER than zero
-    // The unused arg is intended to separate this from the public one
+    // Creates an instance without making a defensive copy
+    //
+    // Since the invariant of FlatArray implies the empty FlatArray contains null underlying array,
+    // the caller MUST ensure the items size is GREATER than zero
+    //
+    // Note: The unused arg is intended to separate this from the public one
     private FlatArray(T[] items, int _)
     {
         Debug.Assert(items.Length != default);
