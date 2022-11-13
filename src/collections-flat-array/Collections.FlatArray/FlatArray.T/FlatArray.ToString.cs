@@ -6,5 +6,5 @@ partial struct FlatArray<T>
 {
     public override string ToString()
         =>
-        Invariant($"FlatArray[{typeof(T)}]:{{ \"Length\": {Length} }}");
+        Invariant($"FlatArray<{typeof(T).Name}>[{Length}]");
 }
