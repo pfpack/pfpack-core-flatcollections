@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public FlatArray([AllowNull] params T[] source)
     {
         if (source is null || source.Length == default)
@@ -23,6 +25,7 @@ partial struct FlatArray<T>
     // the caller MUST ensure the items size is GREATER than zero
     //
     // Note: The unused arg is intended to separate this from the public one
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private FlatArray(T[] items, int _)
     {
         Debug.Assert(items.Length != default);
