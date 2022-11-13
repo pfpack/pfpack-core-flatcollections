@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
@@ -10,10 +12,12 @@ partial struct FlatArray<T>
 
         private int index;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal InnerEnumeratorObject(T[] items)
             =>
             (this.items, index) = (items, DefaultIndex);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()
         {
             int next = index + 1;
