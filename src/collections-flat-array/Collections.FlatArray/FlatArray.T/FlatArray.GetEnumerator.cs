@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
@@ -14,6 +16,7 @@ partial struct FlatArray<T>
         =>
         InnerGetEnumeratorObject();
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private IEnumerator<T> InnerGetEnumeratorObject()
         =>
         InnerIsNotEmpty ? new InnerEnumeratorObject(items) : InnerEnumeratorObjectEmptyDefault.Value;
