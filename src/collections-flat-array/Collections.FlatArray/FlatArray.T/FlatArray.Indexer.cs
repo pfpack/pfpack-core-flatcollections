@@ -6,7 +6,7 @@ partial struct FlatArray<T>
     {
         get
         {
-            if (items is not null)
+            if (InnerIsNotEmpty)
             {
                 if (index >= 0 && index < items.Length)
                 {
