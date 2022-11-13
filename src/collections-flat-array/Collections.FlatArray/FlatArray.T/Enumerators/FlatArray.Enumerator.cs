@@ -1,19 +1,25 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
 
-partial class FlatArray<T>
+namespace System.Collections.Generic;
+
+partial struct FlatArray<T>
 {
-    public struct Enumerator
+    public ref struct Enumerator
     {
-        private const int defaultIndex = -1;
+        private const int DefaultIndex = -1;
 
-        private readonly T[] items;
+        private readonly ReadOnlySpan<T> items;
 
         private int index;
 
-        internal Enumerator(T[] items)
-            =>
-            (this.items, index) = (items, defaultIndex);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal Enumerator(ReadOnlySpan<T> items)
+        {
+            this.items = items;
+            index = DefaultIndex;
+        }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()
         {
             int next = index + 1;
@@ -26,10 +32,17 @@ partial class FlatArray<T>
             return false;
         }
 
-        public T Current
-            =>
-            index >= 0 && index < items.Length
-            ? items[index]
-            : throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+        public ref readonly T Current
+        {
+            get
+            {
+                if (index >= 0 && index < items.Length)
+                {
+                    return ref items[index];
+                }
+
+                throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+            }
+        }
     }
 }

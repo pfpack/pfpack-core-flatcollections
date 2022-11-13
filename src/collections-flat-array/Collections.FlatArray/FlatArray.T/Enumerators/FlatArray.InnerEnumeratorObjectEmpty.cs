@@ -1,6 +1,6 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     private sealed class InnerEnumeratorObjectEmpty : IEnumerator<T>
     {

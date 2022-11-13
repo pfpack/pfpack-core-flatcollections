@@ -1,12 +1,12 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public static FlatArray<T> From(ReadOnlySpan<T> source)
         =>
-        source.Length > 0 ? new(source.ToArray(), default) : InnerEmptyFlatArray.Value;
+        source.IsEmpty ? default : new(source.ToArray(), default);
 
     public static FlatArray<T> From(Span<T> source)
         =>
-        source.Length > 0 ? new(source.ToArray(), default) : InnerEmptyFlatArray.Value;
+        source.IsEmpty ? default : new(source.ToArray(), default);
 }

@@ -1,10 +1,12 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
 
-partial class FlatArray<T>
+namespace System.Collections.Generic;
+
+partial struct FlatArray<T>
 {
     public Enumerator GetEnumerator()
         =>
-        new(items);
+        new(InnerIsNotEmpty ? new ReadOnlySpan<T>(items) : ReadOnlySpan<T>.Empty);
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
         =>
@@ -14,9 +16,10 @@ partial class FlatArray<T>
         =>
         InnerGetEnumeratorObject();
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private IEnumerator<T> InnerGetEnumeratorObject()
         =>
-        items.Length > 0 ? new InnerEnumeratorObject(items) : InnerEnumeratorObjectEmptyDefault.Value;
+        InnerIsNotEmpty ? new InnerEnumeratorObject(items) : InnerEnumeratorObjectEmptyDefault.Value;
 
     private static class InnerEnumeratorObjectEmptyDefault
     {

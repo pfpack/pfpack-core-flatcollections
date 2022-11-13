@@ -2,14 +2,10 @@
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     private static class InnerExceptionFactory
     {
-        internal static ArgumentOutOfRangeException UnexpectedCloneMode(string paramName, FlatArrayCloneMode actualValue)
-            =>
-            new(paramName, InnerBuildOutOfRangeMessage("An unexpected value of the clone mode.", actualValue));
-
         internal static ArgumentOutOfRangeException IndexOutOfRange(string paramName, int actualValue)
             =>
             new(paramName, InnerBuildOutOfRangeMessage("Index must be greater than or equal to zero and less than the array length.", actualValue));

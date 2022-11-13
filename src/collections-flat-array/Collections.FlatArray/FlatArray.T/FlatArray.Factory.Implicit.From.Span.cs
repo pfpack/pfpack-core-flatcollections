@@ -1,6 +1,6 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public static implicit operator FlatArray<T>(ReadOnlySpan<T> source)
         =>

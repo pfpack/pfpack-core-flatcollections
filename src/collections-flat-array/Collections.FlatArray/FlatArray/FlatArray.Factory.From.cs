@@ -9,7 +9,11 @@ partial class FlatArray
         =>
         FlatArray<T>.From(source);
 
-    public static FlatArray<T> From<T>([AllowNull] FlatArray<T> source)
+    public static FlatArray<T> From<T>(FlatArray<T> source)
+        =>
+        FlatArray<T>.From(source);
+
+    public static FlatArray<T> From<T>(FlatArray<T>? source)
         =>
         FlatArray<T>.From(source);
 

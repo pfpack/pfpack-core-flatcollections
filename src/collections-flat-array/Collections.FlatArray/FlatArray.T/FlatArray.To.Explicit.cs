@@ -2,17 +2,17 @@
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public T[] ToArray()
         =>
-        items.Length > 0 ? InnerArrayHelper.Clone(items) : InnerEmptyArray.OuterValue;
+        InnerIsNotEmpty ? InnerArrayHelper.Clone(items) : InnerEmptyArray.OuterValue;
 
     public List<T> ToList()
         =>
-        items.Length > 0 ? new(items) : new();
+        InnerIsNotEmpty ? new(items) : new();
 
     public ImmutableArray<T> ToImmutableArray()
         =>
-        items.Length > 0 ? ImmutableArray.Create(items) : ImmutableArray<T>.Empty;
+        InnerIsNotEmpty ? ImmutableArray.Create(items) : ImmutableArray<T>.Empty;
 }

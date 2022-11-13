@@ -62,7 +62,7 @@ public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
         for (int i = 0; i < obj.Length; i++)
         {
             var item = obj[i];
-            builder.Add(item is not null ? comparer.GetHashCode(item) : default);
+            builder.Add(item is null ? default : comparer.GetHashCode(item));
         }
 
         return builder.ToHashCode();

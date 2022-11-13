@@ -3,24 +3,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
-    [return: NotNullIfNotNull("source")]
-    public static implicit operator FlatArray<T>?(T[]? source)
+    public static implicit operator FlatArray<T>([AllowNull] T[] source)
         =>
-        source is not null ? InternalFactory.FromArray(source) : null;
+        From(source);
 
-    [return: NotNullIfNotNull("source")]
-    public static implicit operator FlatArray<T>?(List<T>? source)
+    public static implicit operator FlatArray<T>([AllowNull] List<T> source)
         =>
-        source is not null ? InternalFactory.FromList(source) : null;
+        From(source);
 
     public static implicit operator FlatArray<T>(ImmutableArray<T> source)
         =>
-        InternalFactory.FromImmutableArray(source);
-
-    [return: NotNullIfNotNull("source")]
-    public static implicit operator FlatArray<T>?(ImmutableArray<T>? source)
-        =>
-        source is not null ? InternalFactory.FromImmutableArray(source.Value) : null;
+        From(source);
 }

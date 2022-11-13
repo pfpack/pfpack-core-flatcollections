@@ -1,19 +1,25 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
 
-partial class FlatArray<T>
+namespace System.Collections.Generic;
+
+partial struct FlatArray<T>
 {
     private sealed class InnerEnumeratorObject : IEnumerator<T>
     {
-        private const int defaultIndex = -1;
+        private const int DefaultIndex = -1;
 
         private readonly T[] items;
 
         private int index;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal InnerEnumeratorObject(T[] items)
-            =>
-            (this.items, index) = (items, defaultIndex);
+        {
+            this.items = items;
+            index = DefaultIndex;
+        }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()
         {
             int next = index + 1;
@@ -27,18 +33,21 @@ partial class FlatArray<T>
         }
 
         public T Current
-            =>
-            index >= 0 && index < items.Length
-            ? items[index]
-            : throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+        {
+            get
+            {
+                if (index >= 0 && index < items.Length)
+                {
+                    return items[index];
+                }
 
-        object IEnumerator.Current
-            =>
-            Current!;
+                throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+            }
+        }
 
-        public void Reset()
-            =>
-            index = defaultIndex;
+        object IEnumerator.Current => Current!;
+
+        public void Reset() => index = DefaultIndex;
 
         public void Dispose() { }
     }

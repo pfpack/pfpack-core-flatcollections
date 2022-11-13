@@ -1,6 +1,6 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public ReadOnlySpan<T> AsSpan()
         =>

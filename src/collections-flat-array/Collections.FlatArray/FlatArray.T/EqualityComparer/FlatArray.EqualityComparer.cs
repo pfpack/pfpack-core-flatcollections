@@ -1,6 +1,6 @@
 ﻿namespace System.Collections.Generic;
 
-partial class FlatArray<T>
+partial struct FlatArray<T>
 {
     public sealed class EqualityComparer : IEqualityComparer<FlatArray<T>>
     {
@@ -22,16 +22,16 @@ partial class FlatArray<T>
             =>
             InnerDefault.Value;
 
-        public bool Equals(FlatArray<T>? x, FlatArray<T>? y)
+        public bool Equals(FlatArray<T> x, FlatArray<T> y)
         {
-            if (ReferenceEquals(x, y))
-            {
-                return true;
-            }
-
-            if (x is null || y is null)
+            if (x.length != y.length)
             {
                 return false;
+            }
+
+            if (x.InnerIsEmpty)
+            {
+                return true;
             }
 
             if (ReferenceEquals(x.items, y.items))
@@ -39,14 +39,9 @@ partial class FlatArray<T>
                 return true;
             }
 
-            if (x.items.Length != y.items.Length)
-            {
-                return false;
-            }
-
             for (int i = 0; i < x.items.Length; i++)
             {
-                if (comparer.Equals(x.items[i], y.items[i]))
+                if (comparer.Equals(x.items[i], y.items![i]))
                 {
                     continue;
                 }
@@ -58,18 +53,17 @@ partial class FlatArray<T>
 
         public int GetHashCode(FlatArray<T> obj)
         {
-            // Return zero instead of throwing ArgumentNullException
-            if (obj is null)
-            {
-                return default;
-            }
-
             HashCode builder = new();
+
+            if (obj.InnerIsEmpty)
+            {
+                return builder.ToHashCode();
+            }
 
             for (int i = 0; i < obj.items.Length; i++)
             {
                 var item = obj.items[i];
-                builder.Add(item is not null ? comparer.GetHashCode(item) : default);
+                builder.Add(item is null ? default : comparer.GetHashCode(item));
             }
 
             return builder.ToHashCode();
