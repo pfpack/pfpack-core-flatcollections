@@ -8,7 +8,7 @@ partial struct FlatArray<T>
     {
         public bool Equals(Builder other)
             =>
-            length == other.Length &&
+            length == other.length &&
             ReferenceEquals(items, other.items) &&
             isBuilt == other.isBuilt;
 
@@ -24,6 +24,7 @@ partial struct FlatArray<T>
             =>
             left.Equals(right) is not true;
 
+        // This method is not supported as ref structs cannot be boxed
         [Obsolete("Equals(object?) on FlatArray<T>.Builder will always throw an exception. Use the Equals(FlatArray<T>.Builder) instead.", error: true)]
         [DoesNotReturn]
 #pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
@@ -32,6 +33,7 @@ partial struct FlatArray<T>
             =>
             throw new NotSupportedException();
 
+        // This method is not supported as ref structs cannot be boxed
         [Obsolete("GetHashCode() on FlatArray<T>.Builder will always throw an exception.", error: true)]
         [DoesNotReturn]
 #pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
