@@ -17,7 +17,7 @@
     <Description>PrimeFuncPack Collections is a core library pack for .NET consisting of useful collection extensions such as collection equality comparers and immutable FlatArray.</Description>
     <RootNamespace>System.Collections.Generic</RootNamespace>
     <AssemblyName>EarlyFuncPack.Collections</AssemblyName>
-    <Version>0.5.0</Version>
+    <Version>0.6.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="EarlyFuncPack.Collections.EqualityComparers" Version="0.4.1" />
-    <PackageReference Include="EarlyFuncPack.Collections.FlatArray" Version="0.5.0" />
+    <PackageReference Include="EarlyFuncPack.Collections.FlatArray" Version="0.6.0" />
   </ItemGroup>
 
 </Project>
