@@ -11,7 +11,7 @@ partial struct FlatArray<T>
     // the caller MUST ensure the length is GREATER than zero
     //
     // Note: The unused arg is intended to separate this from the public one
-
+    //
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private FlatArray(T[] items, int _)
     {
