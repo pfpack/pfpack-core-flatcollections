@@ -4,16 +4,16 @@ namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
-    public ref struct Enumerator
+    public struct Enumerator
     {
         private const int DefaultIndex = -1;
 
-        private readonly ReadOnlySpan<T> items;
+        private readonly T[] items;
 
         private int index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal Enumerator(ReadOnlySpan<T> items)
+        internal Enumerator(T[] items)
         {
             this.items = items;
             index = DefaultIndex;

@@ -6,6 +6,14 @@ partial struct FlatArray<T>
 {
     private static class InnerExceptionFactory
     {
+        internal static InvalidOperationException AlreadyBuilt()
+            =>
+            new("The array is already built.");
+
+        internal static ArgumentOutOfRangeException LengthOutOfRange(string paramName, int actualValue)
+            =>
+            new(paramName, InnerBuildOutOfRangeMessage("Array length must be greater than or equal to zero.", actualValue));
+
         internal static ArgumentOutOfRangeException IndexOutOfRange(string paramName, int actualValue)
             =>
             new(paramName, InnerBuildOutOfRangeMessage("Index must be greater than or equal to zero and less than the array length.", actualValue));
