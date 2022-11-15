@@ -8,7 +8,7 @@ partial struct FlatArray<T>
         {
             if (isBuilt)
             {
-                throw new InvalidOperationException("The flat array is already built.");
+                throw InnerExceptionFactory.AlreadyBuilt();
             }
 
             isBuilt = true;
