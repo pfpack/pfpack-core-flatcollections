@@ -6,7 +6,7 @@ partial struct FlatArray<T>
 {
     public Enumerator GetEnumerator()
         =>
-        new(InnerAsSpan());
+        new(InnerIsNotEmpty ? items : InnerEmptyArray.Value);
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
         =>

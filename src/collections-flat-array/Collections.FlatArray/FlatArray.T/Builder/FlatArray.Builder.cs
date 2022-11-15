@@ -1,31 +1,17 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
-    public readonly ref partial struct Builder
+    public ref partial struct Builder
     {
         private readonly int length;
 
         private readonly T[]? items;
 
-        public Builder(int length)
-        {
-            if (length is not >= 0)
-            {
-                throw InnerExceptionFactory.LengthOutOfRange(nameof(length), length);
-            }
-
-            if (length == default)
-            {
-                this = default;
-                return;
-            }
-
-            this.length = length;
-            items = new T[length];
-        }
+        private bool isBuilt;
 
         public int Length
             =>
@@ -39,8 +25,6 @@ partial struct FlatArray<T>
             =>
             length == default;
 
-        // Inner state helpers:
-
         [MemberNotNullWhen(returnValue: true, nameof(items))]
         private bool InnerIsNotEmpty
             =>
@@ -51,8 +35,9 @@ partial struct FlatArray<T>
             =>
             length == default;
 
-        public FlatArray<T> Build()
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Span<T> InnerAsSpan()
             =>
-            InnerIsNotEmpty ? new FlatArray<T>(items, default) : default;
+            InnerIsNotEmpty ? new(items) : Span<T>.Empty;
     }
 }

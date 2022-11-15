@@ -4,9 +4,9 @@ partial struct FlatArray<T>
 {
     public ReadOnlySpan<T> AsSpan()
         =>
-        InnerAsSpan();
+        InnerIsNotEmpty ? new(items) : ReadOnlySpan<T>.Empty;
 
     public ReadOnlyMemory<T> AsMemory()
         =>
-        InnerAsMemory();
+        InnerIsNotEmpty ? new(items) : ReadOnlyMemory<T>.Empty;
 }
