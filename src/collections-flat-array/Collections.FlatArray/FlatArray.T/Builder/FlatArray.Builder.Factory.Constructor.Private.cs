@@ -11,6 +11,7 @@ partial struct FlatArray<T>
         //
         // Since the invariant of Builder implies the empty Builder contains null underlying array,
         // the caller MUST ensure the length is GREATER than zero
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Builder(int length)
         {
