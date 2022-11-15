@@ -6,6 +6,6 @@ partial struct FlatArray<T>
     {
         public Enumerator GetEnumerator()
             =>
-            new(InnerIsNotEmpty ? new ReadOnlySpan<T>(items) : ReadOnlySpan<T>.Empty);
+            new(InnerAsReadOnlySpan());
     }
 }
