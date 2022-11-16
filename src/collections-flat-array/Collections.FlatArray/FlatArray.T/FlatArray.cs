@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace System.Collections.Generic;
@@ -40,4 +41,14 @@ public readonly partial struct FlatArray<T> :
     private bool InnerIsEmpty
         =>
         length == default;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ReadOnlySpan<T> InnerAsSpan()
+        =>
+        InnerIsNotEmpty ? new(items) : ReadOnlySpan<T>.Empty;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ReadOnlyMemory<T> InnerAsMemory()
+        =>
+        InnerIsNotEmpty ? new(items) : ReadOnlyMemory<T>.Empty;
 }
