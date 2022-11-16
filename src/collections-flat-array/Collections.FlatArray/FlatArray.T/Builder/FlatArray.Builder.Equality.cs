@@ -25,7 +25,7 @@ partial struct FlatArray<T>
             left.Equals(right) is not true;
 
         // This method is not supported as ref structs cannot be boxed
-        [Obsolete("Equals(object?) on FlatArray<T>.Builder will always throw an exception. Use the Equals(FlatArray<T>.Builder) instead.", error: true)]
+        [Obsolete("Equals(Object?) on FlatArray<T>.Builder will always throw an exception. Use the Equals(FlatArray<T>.Builder) instead.", error: true)]
         [DoesNotReturn]
 #pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         public override bool Equals([NotNullWhen(true)] object? obj)
