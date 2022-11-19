@@ -11,7 +11,7 @@ partial struct FlatArray<T>
                 throw InnerExceptionFactory.LengthOutOfRange(nameof(length), length);
             }
 
-            return length != default ? new(length) : default;
+            return length == default ? default : new(new T[length], default);
         }
     }
 }
