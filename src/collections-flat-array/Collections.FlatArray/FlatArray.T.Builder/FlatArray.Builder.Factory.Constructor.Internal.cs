@@ -15,7 +15,7 @@ partial struct FlatArray<T>
         // Note: The unused arg is intended to separate this from the public one
         //
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Builder(T[] items, int _)
+        internal Builder(T[] items, int _)
         {
             Debug.Assert(items.Length != default);
 
