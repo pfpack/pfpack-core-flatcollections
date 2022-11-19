@@ -10,6 +10,7 @@ partial struct FlatArray<T>
             =>
             InternalCreate(length);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Builder InternalCreate(
             int length,
             [CallerArgumentExpression("length")] string paramName = "")
