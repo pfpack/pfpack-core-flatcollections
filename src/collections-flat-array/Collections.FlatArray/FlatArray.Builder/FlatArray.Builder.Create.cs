@@ -6,6 +6,6 @@ partial class FlatArray
     {
         public static FlatArray<T>.Builder Create<T>(int length)
             =>
-            FlatArray<T>.Builder.Create(length);
+            FlatArray<T>.Builder.InternalCreate(length);
     }
 }
