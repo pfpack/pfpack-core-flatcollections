@@ -13,7 +13,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Builder InternalCreate(
             int length,
-            [CallerArgumentExpression("length")] string paramName = "")
+            [CallerArgumentExpression(nameof(length))] string paramName = "")
         {
             if (length is not >= 0)
             {
