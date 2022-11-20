@@ -20,7 +20,6 @@ partial struct FlatArray<T>
         T item1)
     {
         length = 2;
-
         items = new[]
         {
             item0,
@@ -37,7 +36,6 @@ partial struct FlatArray<T>
         T item2)
     {
         length = 3;
-
         items = new[]
         {
             item0,
@@ -56,7 +54,6 @@ partial struct FlatArray<T>
         T item3)
     {
         length = 4;
-
         items = new[]
         {
             item0,
@@ -77,7 +74,6 @@ partial struct FlatArray<T>
         T item4)
     {
         length = 5;
-
         items = new[]
         {
             item0,
@@ -100,7 +96,6 @@ partial struct FlatArray<T>
         T item5)
     {
         length = 6;
-
         items = new[]
         {
             item0,
@@ -125,7 +120,6 @@ partial struct FlatArray<T>
         T item6)
     {
         length = 7;
-
         items = new[]
         {
             item0,
@@ -152,7 +146,6 @@ partial struct FlatArray<T>
         T item7)
     {
         length = 8;
-
         items = new[]
         {
             item0,
@@ -181,7 +174,6 @@ partial struct FlatArray<T>
         T item8)
     {
         length = 9;
-
         items = new[]
         {
             item0,
@@ -212,7 +204,6 @@ partial struct FlatArray<T>
         T item9)
     {
         length = 10;
-
         items = new[]
         {
             item0,
@@ -245,7 +236,6 @@ partial struct FlatArray<T>
         T item10)
     {
         length = 11;
-
         items = new[]
         {
             item0,
@@ -280,7 +270,6 @@ partial struct FlatArray<T>
         T item11)
     {
         length = 12;
-
         items = new[]
         {
             item0,
@@ -317,7 +306,6 @@ partial struct FlatArray<T>
         T item12)
     {
         length = 13;
-
         items = new[]
         {
             item0,
@@ -356,7 +344,6 @@ partial struct FlatArray<T>
         T item13)
     {
         length = 14;
-
         items = new[]
         {
             item0,
@@ -397,7 +384,6 @@ partial struct FlatArray<T>
         T item14)
     {
         length = 15;
-
         items = new[]
         {
             item0,
@@ -440,7 +426,6 @@ partial struct FlatArray<T>
         T item15)
     {
         length = 16;
-
         items = new[]
         {
             item0,

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
@@ -17,7 +17,7 @@
     <Description>PrimeFuncPack Collections is a core library pack for .NET consisting of useful collection extensions such as collection equality comparers and immutable FlatArray.</Description>
     <RootNamespace>System.Collections.Generic</RootNamespace>
     <AssemblyName>EarlyFuncPack.Collections</AssemblyName>
-    <Version>0.7.0</Version>
+    <Version>0.8.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="EarlyFuncPack.Collections.EqualityComparers" Version="0.4.1" />
-    <PackageReference Include="EarlyFuncPack.Collections.FlatArray" Version="0.7.0" />
+    <PackageReference Include="EarlyFuncPack.Collections.FlatArray" Version="0.8.0" />
   </ItemGroup>
 
 </Project>
