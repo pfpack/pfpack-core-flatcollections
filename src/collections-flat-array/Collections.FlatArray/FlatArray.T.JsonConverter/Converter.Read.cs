@@ -16,25 +16,8 @@ partial class FlatArrayJsonConverter<T>
             throw new JsonException("The last processed JSON token is not the start of an array.");
         }
 
-        if (itemConverter is null)
-        {
-            var arr = JsonSerializer.Deserialize<T[]>(ref reader, options);
-            return arr is null ? default : new(arr);
-        }
+        var arr = JsonSerializer.Deserialize<T[]>(ref reader, InnerSelectOptions(options));
 
-        var list = new List<T>();
-
-        while (reader.Read())
-        {
-            if (reader.TokenType is JsonTokenType.EndArray)
-            {
-                return FlatArray<T>.From(list);
-            }
-
-            var item = itemConverter.Read(ref reader, ItemType, options);
-            list.Add(item!);
-        }
-
-        throw new JsonException();
+        return arr is null ? default : new(arr);
     }
 }
