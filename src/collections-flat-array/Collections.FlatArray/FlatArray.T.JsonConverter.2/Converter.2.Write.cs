@@ -6,6 +6,8 @@ partial class FlatArrayJsonConverter2<T>
 {
     public override void Write(Utf8JsonWriter writer, FlatArray<T> value, JsonSerializerOptions options)
     {
+        _ = writer ?? throw new ArgumentNullException(nameof(writer));
+
         writer.WriteStartArray();
 
         for (int i = 0; i < value.Length; i++)
