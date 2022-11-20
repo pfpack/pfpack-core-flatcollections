@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace System.Collections.Generic;
 
-internal sealed partial class FlatArrayJsonConverter1<T> : JsonConverter<FlatArray<T>>
+internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArray<T>>
 {
     private readonly JsonConverter<T> itemConverter;
 
-    public FlatArrayJsonConverter1([AllowNull] JsonSerializerOptions options)
+    public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
         =>
 #if NET7_0_OR_GREATER
         itemConverter = InnerBuildItemConverter(options ?? JsonSerializerOptions.Default);

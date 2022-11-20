@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace System.Collections.Generic;
 
-partial class FlatArrayJsonConverter1<T>
+partial class FlatArrayJsonConverter<T>
 {
     public override void Write(Utf8JsonWriter writer, FlatArray<T> value, JsonSerializerOptions options)
     {
