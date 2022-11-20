@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -8,16 +9,22 @@ partial class FlatArrayJsonConverterFactory
 {
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
+        Debug.Assert(CanConvert(typeToConvert));
+
         _ = typeToConvert ?? throw new ArgumentNullException(nameof(typeToConvert));
 
         var itemType = typeToConvert.GetGenericArguments()[0];
 
-        return (JsonConverter?)Activator.CreateInstance(
+        var converter = (JsonConverter?)Activator.CreateInstance(
             type: InnerJsonConverterType.MakeGenericType(itemType),
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
             args: new object[] { options },
             culture: null);
+
+        Debug.Assert(converter is not null);
+
+        return converter;
     }
 
     private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter<>);
