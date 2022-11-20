@@ -1,3 +1,9 @@
+#define USE_CONVERTER_V1
+//#define USE_CONVERTER_V2
+//#define USE_CONVERTER_V3
+//#define USE_CONVERTER_V2_1
+//#define USE_CONVERTER_V3_1
+
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
@@ -19,7 +25,7 @@ partial class FlatArrayJsonConverterFactory
             type: InnerJsonConverterType.MakeGenericType(itemType),
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
-            args: new object?[] { options },
+            args: InnerBuildArgs(options),
             culture: null);
 
         Debug.Assert(converter is not null);
@@ -27,5 +33,29 @@ partial class FlatArrayJsonConverterFactory
         return converter;
     }
 
+#if USE_CONVERTER_V1
     private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter<>);
+
+    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => new object?[] { options };
+#elif USE_CONVERTER_V2
+    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter2<>);
+
+    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => new object?[] { options };
+#elif USE_CONVERTER_V3
+    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter3<>);
+
+    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => new object?[] { options };
+#elif USE_CONVERTER_V2_1
+    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter21<>);
+
+#pragma warning disable IDE0060 // Remove unused parameter
+    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => null;
+#pragma warning restore IDE0060 // Remove unused parameter
+#elif USE_CONVERTER_V3_1
+    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter31<>);
+
+#pragma warning disable IDE0060 // Remove unused parameter
+    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => null;
+#pragma warning restore IDE0060 // Remove unused parameter
+#endif
 }
