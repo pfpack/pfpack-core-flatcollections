@@ -30,7 +30,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 #if !NET7_0_OR_GREATER
     private static class InnerJsonSerializerOptionsDefault
     {
-        internal static readonly JsonSerializerOptions Value = new(JsonSerializerDefaults.General);
+        internal static readonly JsonSerializerOptions Value = new();
     }
 #endif
 }
