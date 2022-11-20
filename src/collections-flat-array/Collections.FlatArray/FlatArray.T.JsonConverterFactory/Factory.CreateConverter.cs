@@ -19,7 +19,7 @@ partial class FlatArrayJsonConverterFactory
             type: InnerJsonConverterType.MakeGenericType(itemType),
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
-            args: new object[] { options },
+            args: new object?[] { options },
             culture: null);
 
         Debug.Assert(converter is not null);
