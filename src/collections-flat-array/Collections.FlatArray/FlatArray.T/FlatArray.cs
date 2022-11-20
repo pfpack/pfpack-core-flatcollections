@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace System.Collections.Generic;
 
-//[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
+[JsonConverter(typeof(FlatArrayJsonConverterFactory))]
 [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
 public readonly partial struct FlatArray<T> :
     IReadOnlyList<T>,

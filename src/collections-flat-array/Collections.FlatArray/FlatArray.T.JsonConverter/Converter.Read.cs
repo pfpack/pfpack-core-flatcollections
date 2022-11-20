@@ -4,23 +4,22 @@ namespace System.Collections.Generic;
 
 partial class FlatArrayJsonConverter<T>
 {
-    public override FlatArray<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override FlatArray<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType is JsonTokenType.Null)
         {
-            return null;
+            return default;
+        }
+
+        if (reader.TokenType is not JsonTokenType.StartArray)
+        {
+            throw new JsonException("The last processed JSON token is not the start of an array.");
         }
 
         if (itemConverter is null)
         {
             var arr = JsonSerializer.Deserialize<T[]>(ref reader, options);
-
-            return arr is null ? null : FlatArray<T>.From(arr);
-        }
-
-        if (reader.TokenType is not JsonTokenType.StartArray)
-        {
-            throw new JsonException();
+            return arr is null ? default : new(arr);
         }
 
         var list = new List<T>();

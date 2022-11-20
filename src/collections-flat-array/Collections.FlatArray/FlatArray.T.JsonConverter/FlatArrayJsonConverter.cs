@@ -11,6 +11,10 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
     private readonly JsonConverter<T>? itemConverter;
 
     public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
-        =>
-        itemConverter = (JsonConverter<T>?)options?.GetConverter(ItemType);
+    {
+        if (options is not null)
+        {
+            itemConverter = (JsonConverter<T>)options.GetConverter(ItemType);
+        }
+    }
 }
