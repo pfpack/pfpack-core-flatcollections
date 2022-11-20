@@ -18,6 +18,6 @@ partial class FlatArrayJsonConverter3<T>
 
         var arr = JsonSerializer.Deserialize<T[]>(ref reader, this.options ?? options);
 
-        return arr is null ? default : new(arr);
+        return new(arr);
     }
 }
