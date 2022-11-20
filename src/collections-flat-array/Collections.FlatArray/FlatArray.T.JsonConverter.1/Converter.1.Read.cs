@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace System.Collections.Generic;
 
-partial class AlternateFlatArrayJsonConverter<T>
+partial class FlatArrayJsonConverter1<T>
 {
     public override FlatArray<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -16,12 +16,6 @@ partial class AlternateFlatArrayJsonConverter<T>
             throw new JsonException("The last processed JSON token is not the start of an array.");
         }
 
-        if (itemConverter is null)
-        {
-            var arr = JsonSerializer.Deserialize<T[]>(ref reader, options);
-            return arr is null ? default : new(arr);
-        }
-
         var list = new List<T>();
 
         while (reader.Read())
@@ -31,10 +25,10 @@ partial class AlternateFlatArrayJsonConverter<T>
                 return FlatArray<T>.From(list);
             }
 
-            var item = itemConverter.Read(ref reader, ItemType, options);
+            var item = itemConverter.Read(ref reader, InnerItemType.Value, options);
             list.Add(item!);
         }
 
-        throw new JsonException();
+        throw new JsonException("The JSON reading completed, but the end of the array was not found.");
     }
 }
