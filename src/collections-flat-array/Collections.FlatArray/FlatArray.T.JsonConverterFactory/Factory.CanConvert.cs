@@ -6,7 +6,7 @@ partial class FlatArrayJsonConverterFactory
 {
     public override bool CanConvert(Type typeToConvert)
     {
-        // The internal implementation: the param is expected to be not null
+        // Internal implementation: the param is expected to be not null
         Debug.Assert(typeToConvert is not null);
 
         return

@@ -7,7 +7,7 @@ partial class FlatArrayJsonConverter<T>
 {
     public override FlatArray<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        // The internal implementation: the param is expected to be not null
+        // Internal implementation: the param is expected to be not null
         Debug.Assert(options is not null);
 
         if (reader.TokenType is JsonTokenType.Null)
