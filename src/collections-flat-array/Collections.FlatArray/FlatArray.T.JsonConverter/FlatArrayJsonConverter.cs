@@ -8,7 +8,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 {
     private readonly JsonConverter<T> itemConverter;
 
-    internal FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
+    public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
     {
         // Null check for the sake of clarity:
         // the param is expected to be not null by the convention
