@@ -9,7 +9,7 @@ partial class FlatArrayJsonConverterFactory
 {
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        // Internal implementation: the params are expected to be not null
+        // Internal implementation: the params are expected to be not null by the convention
         Debug.Assert(typeToConvert is not null);
         Debug.Assert(options is not null);
 
