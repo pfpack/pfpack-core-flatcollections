@@ -14,9 +14,4 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 
         itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
     }
-
-    private static class InnerItemType
-    {
-        internal static readonly Type Value = typeof(T);
-    }
 }
