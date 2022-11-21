@@ -11,7 +11,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 
     public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
         =>
-        itemConverter = InnerBuildItemConverter(options ?? InnerOptionsDefault);
+        itemConverter = InnerBuildItemConverter(options ?? InnerGetOptionsDefault());
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static JsonConverter<T> InnerBuildItemConverter(JsonSerializerOptions options)
