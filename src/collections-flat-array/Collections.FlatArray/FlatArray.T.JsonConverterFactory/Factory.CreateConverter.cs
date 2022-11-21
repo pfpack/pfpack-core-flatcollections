@@ -9,9 +9,9 @@ partial class FlatArrayJsonConverterFactory
 {
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        Debug.Assert(CanConvert(typeToConvert));
-
         _ = typeToConvert ?? throw new ArgumentNullException(nameof(typeToConvert));
+
+        Debug.Assert(CanConvert(typeToConvert));
 
         var itemType = typeToConvert.GetGenericArguments()[0];
 
