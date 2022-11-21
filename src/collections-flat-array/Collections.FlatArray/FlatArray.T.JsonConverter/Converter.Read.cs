@@ -6,6 +6,8 @@ partial class FlatArrayJsonConverter<T>
 {
     public override FlatArray<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
+        options ??= InnerGetOptionsDefault();
+
         if (reader.TokenType is JsonTokenType.Null)
         {
             return default;
