@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -8,7 +7,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 {
     private readonly JsonConverter<T> itemConverter;
 
-    public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
+    public FlatArrayJsonConverter(JsonSerializerOptions options)
     {
         // Null check for the sake of clarity:
         // the param is expected to be not null by the convention
