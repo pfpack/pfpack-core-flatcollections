@@ -6,6 +6,8 @@ partial class FlatArrayJsonConverter<T>
 {
     public override void Write(Utf8JsonWriter writer, FlatArray<T> value, JsonSerializerOptions options)
     {
+        // Null check for the sake of clarity:
+        // the params are expected to be not null by the convention
         _ = writer ?? throw new ArgumentNullException(nameof(writer));
         options ??= InnerGetOptionsDefault();
 

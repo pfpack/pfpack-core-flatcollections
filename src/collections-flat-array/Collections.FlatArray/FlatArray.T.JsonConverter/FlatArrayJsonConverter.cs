@@ -10,6 +10,8 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 
     internal FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
     {
+        // Null check for the sake of clarity:
+        // the param is expected to be not null by the convention
         options ??= InnerGetOptionsDefault();
 
         itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
