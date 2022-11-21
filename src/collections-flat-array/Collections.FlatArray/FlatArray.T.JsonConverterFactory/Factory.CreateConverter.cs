@@ -17,7 +17,7 @@ partial class FlatArrayJsonConverterFactory
 
         var converter = (JsonConverter?)Activator.CreateInstance(
             type: InnerJsonConverterType.MakeGenericType(itemType),
-            bindingAttr: BindingFlags.Instance | BindingFlags.Public,
+            bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic,
             binder: null,
             args: new object?[] { options },
             culture: null);
