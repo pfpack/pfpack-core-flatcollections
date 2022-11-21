@@ -14,5 +14,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
         Debug.Assert(options is not null);
 
         itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
+
+        Debug.Assert(itemConverter is not null);
     }
 }
