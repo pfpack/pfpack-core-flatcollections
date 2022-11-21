@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,9 +10,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 
     public FlatArrayJsonConverter(JsonSerializerOptions options)
     {
-        // Null check for the sake of good order:
-        // the param is expected to be not null by the convention
-        options ??= InnerGetOptionsDefault();
+        Debug.Assert(options is not null);
 
         itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
     }
