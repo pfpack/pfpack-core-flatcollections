@@ -1,9 +1,3 @@
-#define USE_CONVERTER_V1
-//#define USE_CONVERTER_V2
-//#define USE_CONVERTER_V3
-//#define USE_CONVERTER_V2_1
-//#define USE_CONVERTER_V3_1
-
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
@@ -15,47 +9,24 @@ partial class FlatArrayJsonConverterFactory
 {
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        Debug.Assert(CanConvert(typeToConvert));
+        // Internal implementation: the params are expected to be not null by the convention
+        Debug.Assert(typeToConvert is not null);
+        Debug.Assert(options is not null);
 
-        _ = typeToConvert ?? throw new ArgumentNullException(nameof(typeToConvert));
+        Debug.Assert(CanConvert(typeToConvert));
 
         var itemType = typeToConvert.GetGenericArguments()[0];
 
         var converter = (JsonConverter?)Activator.CreateInstance(
-            type: InnerJsonConverterType.MakeGenericType(itemType),
+            type: typeof(FlatArrayJsonConverter<>).MakeGenericType(itemType),
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
-            args: InnerBuildArgs(options),
+            args: new object?[] { options },
             culture: null);
 
+        // CreateInstance returns null only for the Nullable<T> instances with no value
         Debug.Assert(converter is not null);
 
         return converter;
     }
-
-#if USE_CONVERTER_V1
-    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter<>);
-
-    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => new object?[] { options };
-#elif USE_CONVERTER_V2
-    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter2<>);
-
-    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => new object?[] { options };
-#elif USE_CONVERTER_V3
-    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter3<>);
-
-    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => new object?[] { options };
-#elif USE_CONVERTER_V2_1
-    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter21<>);
-
-#pragma warning disable IDE0060 // Remove unused parameter
-    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => null;
-#pragma warning restore IDE0060 // Remove unused parameter
-#elif USE_CONVERTER_V3_1
-    private static Type InnerJsonConverterType => typeof(FlatArrayJsonConverter31<>);
-
-#pragma warning disable IDE0060 // Remove unused parameter
-    private static object?[]? InnerBuildArgs(JsonSerializerOptions options) => null;
-#pragma warning restore IDE0060 // Remove unused parameter
-#endif
 }

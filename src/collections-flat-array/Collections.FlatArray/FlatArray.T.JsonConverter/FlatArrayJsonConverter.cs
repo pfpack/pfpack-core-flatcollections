@@ -1,5 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,28 +8,13 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 {
     private readonly JsonConverter<T> itemConverter;
 
-    public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
-        =>
-#if NET7_0_OR_GREATER
-        itemConverter = InnerBuildItemConverter(options ?? JsonSerializerOptions.Default);
-#else
-        itemConverter = InnerBuildItemConverter(options ?? InnerJsonSerializerOptionsDefault.Value);
-#endif
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static JsonConverter<T> InnerBuildItemConverter(JsonSerializerOptions options)
-        =>
-        (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
-
-    private static class InnerItemType
+    public FlatArrayJsonConverter(JsonSerializerOptions options)
     {
-        internal static readonly Type Value = typeof(T);
-    }
+        // Internal implementation: the param is expected to be not null by the convention
+        Debug.Assert(options is not null);
 
-#if !NET7_0_OR_GREATER
-    private static class InnerJsonSerializerOptionsDefault
-    {
-        internal static readonly JsonSerializerOptions Value = new(JsonSerializerDefaults.General);
+        itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
+
+        Debug.Assert(itemConverter is not null);
     }
-#endif
 }
