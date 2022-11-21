@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -10,13 +9,11 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
     private readonly JsonConverter<T> itemConverter;
 
     public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
-        =>
-        itemConverter = InnerBuildItemConverter(options ?? InnerGetOptionsDefault());
+    {
+        options ??= InnerGetOptionsDefault();
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static JsonConverter<T> InnerBuildItemConverter(JsonSerializerOptions options)
-        =>
-        (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
+        itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
+    }
 
     private static class InnerItemType
     {
