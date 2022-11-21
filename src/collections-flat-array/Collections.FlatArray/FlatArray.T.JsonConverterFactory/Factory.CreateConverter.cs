@@ -22,6 +22,8 @@ partial class FlatArrayJsonConverterFactory
             args: new object?[] { options },
             culture: null);
 
+        // The converter is expected to be not null:
+        // CreateInstance returns null only for the Nullable<T> instances with no value
         Debug.Assert(converter is not null);
 
         return converter;
