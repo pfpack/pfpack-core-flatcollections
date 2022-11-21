@@ -10,11 +10,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 
     public FlatArrayJsonConverter(JsonSerializerOptions? options)
         =>
-#if NET7_0_OR_GREATER
-        itemConverter = InnerBuildItemConverter(options ?? JsonSerializerOptions.Default);
-#else
-        itemConverter = InnerBuildItemConverter(options ?? InnerJsonSerializerOptionsDefault.Value);
-#endif
+        itemConverter = InnerBuildItemConverter(options ?? InnerOptionsDefault);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static JsonConverter<T> InnerBuildItemConverter(JsonSerializerOptions options)
@@ -25,11 +21,4 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
     {
         internal static readonly Type Value = typeof(T);
     }
-
-#if !NET7_0_OR_GREATER
-    private static class InnerJsonSerializerOptionsDefault
-    {
-        internal static readonly JsonSerializerOptions Value = new();
-    }
-#endif
 }
