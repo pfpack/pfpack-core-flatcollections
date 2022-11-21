@@ -9,7 +9,9 @@ partial class FlatArrayJsonConverterFactory
 {
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        _ = typeToConvert ?? throw new ArgumentNullException(nameof(typeToConvert));
+        // The internal implementation: the params are expected to be not null
+        Debug.Assert(typeToConvert is not null);
+        Debug.Assert(options is not null);
 
         Debug.Assert(CanConvert(typeToConvert));
 
@@ -22,7 +24,6 @@ partial class FlatArrayJsonConverterFactory
             args: new object?[] { options },
             culture: null);
 
-        // The result is expected to be not null:
         // CreateInstance returns null only for the Nullable<T> instances with no value
         Debug.Assert(converter is not null);
 

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace System.Collections.Generic;
@@ -6,10 +7,9 @@ partial class FlatArrayJsonConverter<T>
 {
     public override void Write(Utf8JsonWriter writer, FlatArray<T> value, JsonSerializerOptions options)
     {
-        // Null checks for the sake of good order:
-        // the params are expected to be not null by the convention
-        _ = writer ?? throw new ArgumentNullException(nameof(writer));
-        options ??= InnerGetOptionsDefault();
+        // The internal implementation: the params are expected to be not null
+        Debug.Assert(writer is not null);
+        Debug.Assert(options is not null);
 
         writer.WriteStartArray();
 
