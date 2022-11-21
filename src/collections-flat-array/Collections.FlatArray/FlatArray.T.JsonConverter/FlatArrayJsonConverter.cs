@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -8,7 +9,7 @@ internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArra
 {
     private readonly JsonConverter<T> itemConverter;
 
-    public FlatArrayJsonConverter(JsonSerializerOptions? options)
+    public FlatArrayJsonConverter([AllowNull] JsonSerializerOptions options)
         =>
         itemConverter = InnerBuildItemConverter(options ?? InnerOptionsDefault);
 
