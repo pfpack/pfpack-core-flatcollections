@@ -1,6 +1,4 @@
-﻿using static System.FormattableString;
-
-namespace System.Collections.Generic;
+﻿namespace System.Collections.Generic;
 
 partial class FlatList<T>
 {
