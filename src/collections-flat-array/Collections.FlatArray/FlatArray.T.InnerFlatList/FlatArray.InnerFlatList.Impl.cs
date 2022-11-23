@@ -10,8 +10,19 @@ partial struct FlatArray<T>
 
         public T this[int index]
         {
-            get => items[index];
-            set => throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            get
+            {
+                if (index >= 0 && index < items.Length)
+                {
+                    return items[index];
+                }
+
+                throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
+            }
+            set
+            {
+                throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            }
         }
 
         public int IndexOf(T item)
