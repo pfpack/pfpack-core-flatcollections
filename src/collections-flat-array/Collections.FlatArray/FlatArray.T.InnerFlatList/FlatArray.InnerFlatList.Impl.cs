@@ -4,7 +4,7 @@ partial struct FlatArray<T>
 {
     partial class InnerFlatList
     {
-        bool ICollection<T>.IsReadOnly => true;
+        public bool IsReadOnly => true;
 
         public int Count => items.Length;
 
