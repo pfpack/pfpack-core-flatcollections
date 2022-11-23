@@ -43,6 +43,11 @@ public readonly partial struct FlatArray<T> :
         length == default;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private T[] InnerAsArray()
+        =>
+        InnerIsNotEmpty ? items : InnerEmptyArray.Value;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()
         =>
         InnerIsNotEmpty ? new(items) : ReadOnlySpan<T>.Empty;
