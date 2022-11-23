@@ -32,6 +32,6 @@ partial class FlatArrayJsonConverter<T>
             list.Add(item!);
         }
 
-        throw new JsonException("The JSON reading completed, but the end of the array was not found.");
+        throw new JsonException("Reading the JSON completed, but the end of the array was not found.");
     }
 }
