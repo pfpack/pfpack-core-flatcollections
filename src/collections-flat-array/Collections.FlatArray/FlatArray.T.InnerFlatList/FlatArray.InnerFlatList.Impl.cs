@@ -4,9 +4,9 @@ partial struct FlatArray<T>
 {
     partial class InnerFlatList
     {
-        public int Count => items.Length;
-
         public bool IsReadOnly => true;
+
+        public int Count => items.Length;
 
         public T this[int index]
         {

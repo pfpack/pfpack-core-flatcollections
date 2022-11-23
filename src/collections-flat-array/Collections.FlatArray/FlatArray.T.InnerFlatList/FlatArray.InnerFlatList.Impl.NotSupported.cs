@@ -12,22 +12,22 @@ partial struct FlatArray<T>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
 
         [DoesNotReturn]
-        public bool Remove(T item)
-            =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
-
-        [DoesNotReturn]
-        public void Clear()
-            =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
-
-        [DoesNotReturn]
         public void Insert(int index, T item)
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
 
         [DoesNotReturn]
+        public bool Remove(T item)
+            =>
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+
+        [DoesNotReturn]
         public void RemoveAt(int index)
+            =>
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+
+        [DoesNotReturn]
+        public void Clear()
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
     }
