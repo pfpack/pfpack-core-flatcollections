@@ -4,5 +4,5 @@ partial struct FlatArray<T>
 {
     public Enumerator GetEnumerator()
         =>
-        new(InnerAsArray());
+        new(InnerAsSpan());
 }
