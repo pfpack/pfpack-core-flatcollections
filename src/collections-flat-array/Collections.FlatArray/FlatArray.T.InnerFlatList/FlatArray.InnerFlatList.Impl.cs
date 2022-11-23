@@ -6,7 +6,13 @@ partial struct FlatArray<T>
     {
         public int Count => items.Length;
 
-        public T this[int index] => items[index];
+        public bool IsReadOnly => true;
+
+        public T this[int index]
+        {
+            get => items[index];
+            set => throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+        }
 
         public int IndexOf(T item)
             =>

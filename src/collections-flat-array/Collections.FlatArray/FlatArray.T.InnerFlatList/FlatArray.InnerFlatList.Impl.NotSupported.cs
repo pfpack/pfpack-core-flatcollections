@@ -7,27 +7,27 @@ partial struct FlatArray<T>
     partial class InnerFlatList
     {
         [DoesNotReturn]
-        void ICollection<T>.Add(T item)
+        public void Add(T item)
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
 
         [DoesNotReturn]
-        bool ICollection<T>.Remove(T item)
+        public bool Remove(T item)
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
 
         [DoesNotReturn]
-        void ICollection<T>.Clear()
+        public void Clear()
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
 
         [DoesNotReturn]
-        void IList<T>.Insert(int index, T item)
+        public void Insert(int index, T item)
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
 
         [DoesNotReturn]
-        void IList<T>.RemoveAt(int index)
+        public void RemoveAt(int index)
             =>
             throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
     }
