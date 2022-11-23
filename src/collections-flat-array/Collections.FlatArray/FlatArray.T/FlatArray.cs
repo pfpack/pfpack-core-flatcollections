@@ -7,9 +7,7 @@ namespace System.Collections.Generic;
 
 [JsonConverter(typeof(FlatArrayJsonConverterFactory))]
 [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
-public readonly partial struct FlatArray<T> :
-    IEquatable<FlatArray<T>>,
-    ICloneable
+public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
 {
     private readonly int length;
 
