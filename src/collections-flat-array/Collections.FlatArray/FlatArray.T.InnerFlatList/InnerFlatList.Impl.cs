@@ -22,7 +22,7 @@ partial struct FlatArray<T>
 
         public IEnumerator<T> GetEnumerator()
             =>
-            items.Length != default ? new InnerEnumerator(items) : InnerEnumeratorEmptyDefault.Value;
+            items.Length != default ? new InnerEnumeratorObject(items) : InnerEnumeratorEmptyDefault.Value;
 
         IEnumerator IEnumerable.GetEnumerator()
             =>
@@ -30,7 +30,7 @@ partial struct FlatArray<T>
 
         private static class InnerEnumeratorEmptyDefault
         {
-            internal static readonly InnerEnumeratorEmpty Value = new();
+            internal static readonly InnerEnumeratorObjectEmpty Value = new();
         }
     }
 }
