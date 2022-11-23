@@ -26,6 +26,10 @@ partial struct FlatArray<T>
             =>
             new("The source is too large to allocate.");
 
+        internal static NotSupportedException NotSupportedOnReadOnlyCollection()
+            =>
+            new("The operation is not supported on read-only collection.");
+
         private static string InnerBuildOutOfRangeMessage<TValue>(string message, TValue actualValue)
         {
             var separator = message.TrimEnd().EndsWith('.') ? null : ".";
