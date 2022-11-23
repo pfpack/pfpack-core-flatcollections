@@ -4,7 +4,7 @@ namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
-    private sealed class InnerEnumeratorObject : IEnumerator<T>
+    private sealed class InnerEnumerator : IEnumerator<T>
     {
         private const int DefaultIndex = -1;
 
@@ -13,7 +13,7 @@ partial struct FlatArray<T>
         private int index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal InnerEnumeratorObject(T[] items)
+        internal InnerEnumerator(T[] items)
         {
             this.items = items;
             index = DefaultIndex;

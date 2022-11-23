@@ -19,10 +19,10 @@ partial struct FlatArray<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private IEnumerator<T> InnerGetEnumeratorObject()
         =>
-        InnerIsNotEmpty ? new InnerEnumeratorObject(items) : InnerEnumeratorObjectEmptyDefault.Value;
+        InnerIsNotEmpty ? new InnerEnumerator(items) : InnerEnumeratorEmptyDefault.Value;
 
-    private static class InnerEnumeratorObjectEmptyDefault
+    private static class InnerEnumeratorEmptyDefault
     {
-        internal static readonly InnerEnumeratorObjectEmpty Value = new();
+        internal static readonly InnerEnumeratorEmpty Value = new();
     }
 }
