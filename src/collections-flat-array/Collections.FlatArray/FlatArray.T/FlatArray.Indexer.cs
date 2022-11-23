@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    public readonly ref T this[int index]
+    public ref readonly T this[int index]
     {
         get
         {
