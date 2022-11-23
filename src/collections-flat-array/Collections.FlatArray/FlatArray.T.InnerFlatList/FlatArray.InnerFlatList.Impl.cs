@@ -11,7 +11,7 @@ partial struct FlatArray<T>
         public T this[int index]
         {
             get => items[index];
-            set => throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+            set => throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
         }
 
         public int IndexOf(T item)

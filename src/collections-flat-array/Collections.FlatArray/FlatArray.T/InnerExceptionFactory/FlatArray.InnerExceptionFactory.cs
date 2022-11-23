@@ -26,9 +26,9 @@ partial struct FlatArray<T>
             =>
             new("The source is too large to allocate.");
 
-        internal static NotSupportedException NotSupportedOnReadOnlyCollection()
+        internal static NotSupportedException NotSupportedOnReadOnlyArray()
             =>
-            new("The operation is not supported on read-only collection.");
+            new("The operation is not supported on read-only array.");
 
         private static string InnerBuildOutOfRangeMessage<TValue>(string message, TValue actualValue)
         {

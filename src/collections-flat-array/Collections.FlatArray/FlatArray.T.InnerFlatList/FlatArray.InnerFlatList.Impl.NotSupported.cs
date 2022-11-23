@@ -9,26 +9,26 @@ partial struct FlatArray<T>
         [DoesNotReturn]
         public void Add(T item)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         public void Insert(int index, T item)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         public bool Remove(T item)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         public void RemoveAt(int index)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         public void Clear()
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyCollection();
+            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
     }
 }
