@@ -17,20 +17,4 @@ partial struct FlatArray<T>
             throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
         }
     }
-
-    T IReadOnlyList<T>.this[int index]
-    {
-        get
-        {
-            if (InnerIsNotEmpty)
-            {
-                if (index >= 0 && index < items.Length)
-                {
-                    return items[index];
-                }
-            }
-
-            throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
-        }
-    }
 }
