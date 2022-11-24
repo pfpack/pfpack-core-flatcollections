@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
@@ -10,6 +12,7 @@ partial struct FlatArray<T>
 
         public T this[int index]
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (index >= 0 && index < items.Length)
