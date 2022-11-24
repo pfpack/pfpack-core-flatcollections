@@ -37,15 +37,10 @@ partial struct FlatArray<T>
 
             public ref T Current
             {
-                get
-                {
-                    if (index >= 0 && index < items.Length)
-                    {
-                        return ref items[index];
-                    }
-
-                    throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
-                }
+                // Delegate range check to the indexer for performance purposes
+                // IndexOutOfRangeException will be thrown instead of InvalidOperationException
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                get => ref items[index];
             }
         }
     }
