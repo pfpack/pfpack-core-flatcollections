@@ -24,11 +24,12 @@ partial struct FlatArray<T>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool MoveNext()
             {
-                int next = index + 1;
-                if (next < items.Length)
+                if (index < items.Length)
                 {
-                    index = next;
-                    return true;
+                    if (++index < items.Length)
+                    {
+                        return true;
+                    }
                 }
 
                 return false;
