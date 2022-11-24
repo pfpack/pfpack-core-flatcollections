@@ -7,20 +7,13 @@ namespace System.Collections.Generic;
 
 [JsonConverter(typeof(FlatArrayJsonConverterFactory))]
 [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
-public readonly partial struct FlatArray<T> :
-    IReadOnlyList<T>,
-    IEquatable<FlatArray<T>>,
-    ICloneable
+public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
 {
     private readonly int length;
 
     private readonly T[]? items;
 
     public int Length
-        =>
-        length;
-
-    int IReadOnlyCollection<T>.Count
         =>
         length;
 
@@ -41,6 +34,11 @@ public readonly partial struct FlatArray<T> :
     private bool InnerIsEmpty
         =>
         length == default;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private T[] InnerAsArray()
+        =>
+        InnerIsNotEmpty ? items : InnerEmptyArray.Value;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()

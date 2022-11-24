@@ -25,21 +25,29 @@ partial struct FlatArray<T>
             left.Equals(right) is not true;
 
         // This method is not supported as ref structs cannot be boxed
-        [Obsolete("Equals(Object?) on FlatArray<T>.Builder will always throw an exception. Use the Equals(FlatArray<T>.Builder) instead.", error: true)]
+        [Obsolete(EqualsNotSupportedMessage, error: true)]
         [DoesNotReturn]
 #pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         public override bool Equals([NotNullWhen(true)] object? obj)
 #pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
             =>
-            throw new NotSupportedException();
+            throw new NotSupportedException(EqualsNotSupportedMessage);
 
         // This method is not supported as ref structs cannot be boxed
-        [Obsolete("GetHashCode() on FlatArray<T>.Builder will always throw an exception.", error: true)]
+        [Obsolete(GetHashCodeNotSupportedMessage, error: true)]
         [DoesNotReturn]
 #pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         public override int GetHashCode()
 #pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
             =>
-            throw new NotSupportedException();
+            throw new NotSupportedException(GetHashCodeNotSupportedMessage);
+
+        private const string EqualsNotSupportedMessage
+            =
+            "Equals(Object) on FlatArray<T>.Builder is not supported. Use the Equals(Builder) instead.";
+
+        private const string GetHashCodeNotSupportedMessage
+            =
+            "GetHashCode() on FlatArray<T>.Builder is not supported.";
     }
 }

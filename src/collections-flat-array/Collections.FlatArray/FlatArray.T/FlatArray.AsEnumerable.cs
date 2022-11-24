@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    public Enumerator GetEnumerator()
+    public IEnumerable<T> AsEnumerable()
         =>
-        new(InnerAsSpan());
+        new InnerFlatList(InnerAsArray());
 }

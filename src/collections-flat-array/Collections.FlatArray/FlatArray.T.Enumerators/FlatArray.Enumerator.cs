@@ -4,16 +4,16 @@ namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
-    private sealed class InnerEnumeratorObject : IEnumerator<T>
+    public ref struct Enumerator
     {
         private const int DefaultIndex = -1;
 
-        private readonly T[] items;
+        private readonly ReadOnlySpan<T> items;
 
         private int index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal InnerEnumeratorObject(T[] items)
+        internal Enumerator(ReadOnlySpan<T> items)
         {
             this.items = items;
             index = DefaultIndex;
@@ -32,23 +32,17 @@ partial struct FlatArray<T>
             return false;
         }
 
-        public T Current
+        public ref readonly T Current
         {
             get
             {
                 if (index >= 0 && index < items.Length)
                 {
-                    return items[index];
+                    return ref items[index];
                 }
 
                 throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
             }
         }
-
-        object IEnumerator.Current => Current!;
-
-        public void Reset() => index = DefaultIndex;
-
-        public void Dispose() { }
     }
 }

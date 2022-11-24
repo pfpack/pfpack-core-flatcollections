@@ -4,7 +4,7 @@ namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
-    public struct Enumerator
+    private sealed class InnerEnumerator : IEnumerator<T>
     {
         private const int DefaultIndex = -1;
 
@@ -13,7 +13,7 @@ partial struct FlatArray<T>
         private int index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal Enumerator(T[] items)
+        internal InnerEnumerator(T[] items)
         {
             this.items = items;
             index = DefaultIndex;
@@ -32,17 +32,23 @@ partial struct FlatArray<T>
             return false;
         }
 
-        public ref readonly T Current
+        public T Current
         {
             get
             {
                 if (index >= 0 && index < items.Length)
                 {
-                    return ref items[index];
+                    return items[index];
                 }
 
                 throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
             }
         }
+
+        object IEnumerator.Current => Current!;
+
+        public void Reset() => index = DefaultIndex;
+
+        public void Dispose() { }
     }
 }

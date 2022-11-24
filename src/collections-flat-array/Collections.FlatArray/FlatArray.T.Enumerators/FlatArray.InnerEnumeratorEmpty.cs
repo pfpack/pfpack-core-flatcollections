@@ -2,9 +2,9 @@
 
 partial struct FlatArray<T>
 {
-    private sealed class InnerEnumeratorObjectEmpty : IEnumerator<T>
+    private sealed class InnerEnumeratorEmpty : IEnumerator<T>
     {
-        internal InnerEnumeratorObjectEmpty() { }
+        internal InnerEnumeratorEmpty() { }
 
         public bool MoveNext() => false;
 

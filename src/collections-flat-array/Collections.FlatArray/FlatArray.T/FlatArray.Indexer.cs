@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    public readonly ref T this[int index]
+    public ref readonly T this[int index]
     {
         get
         {
@@ -11,22 +11,6 @@ partial struct FlatArray<T>
                 if (index >= 0 && index < items.Length)
                 {
                     return ref items[index];
-                }
-            }
-
-            throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
-        }
-    }
-
-    T IReadOnlyList<T>.this[int index]
-    {
-        get
-        {
-            if (InnerIsNotEmpty)
-            {
-                if (index >= 0 && index < items.Length)
-                {
-                    return items[index];
                 }
             }
 
