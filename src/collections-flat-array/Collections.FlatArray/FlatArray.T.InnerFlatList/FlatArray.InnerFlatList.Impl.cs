@@ -35,6 +35,7 @@ partial struct FlatArray<T>
 
         public void CopyTo(T[] array, int arrayIndex)
             =>
+            // Delegate null and range checks to Array.Copy
             Array.Copy(items, 0, array, arrayIndex, items.Length);
 
         public IEnumerator<T> GetEnumerator()
