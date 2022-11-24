@@ -37,10 +37,15 @@ partial struct FlatArray<T>
 
             public T Current
             {
-                // Delegate range check to the indexer for performance purposes
-                // IndexOutOfRangeException will be thrown instead of InvalidOperationException
-                [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get => items[index];
+                get
+                {
+                    if (index >= 0 && index < items.Length)
+                    {
+                        return items[index];
+                    }
+
+                    throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+                }
             }
 
             object IEnumerator.Current => Current!;
