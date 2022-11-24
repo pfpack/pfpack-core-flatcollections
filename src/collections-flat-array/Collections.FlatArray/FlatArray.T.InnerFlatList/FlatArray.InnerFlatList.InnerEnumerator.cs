@@ -37,6 +37,7 @@ partial struct FlatArray<T>
 
             public T Current
             {
+                [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (index >= 0 && index < items.Length)
