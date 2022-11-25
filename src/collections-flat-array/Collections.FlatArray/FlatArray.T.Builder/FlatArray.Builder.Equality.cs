@@ -6,7 +6,7 @@ partial struct FlatArray<T>
 {
     partial struct Builder
     {
-        // The Builder Equality implements reference comparison
+        // The Builder Equality implements a reference-based comparison
 
         public bool Equals(Builder other)
             =>
