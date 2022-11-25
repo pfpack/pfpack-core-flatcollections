@@ -19,9 +19,8 @@ partial struct FlatArray<T>
         {
             Debug.Assert(items.Length != default);
 
-            length = items.Length;
+            span = new(items);
             this.items = items;
-            isBuilt = false;
         }
     }
 }

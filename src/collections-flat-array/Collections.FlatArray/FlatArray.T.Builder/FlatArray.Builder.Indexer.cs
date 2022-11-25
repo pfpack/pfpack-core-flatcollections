@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
@@ -6,18 +8,10 @@ partial struct FlatArray<T>
     {
         public ref T this[int index]
         {
-            get
-            {
-                if (InnerIsNotEmpty)
-                {
-                    if (index >= 0 && index < items.Length)
-                    {
-                        return ref items[index];
-                    }
-                }
-
-                throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
-            }
+            // Delegate range check to the indexer for performance purposes
+            // IndexOutOfRangeException will be thrown
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => ref span[index];
         }
     }
 }

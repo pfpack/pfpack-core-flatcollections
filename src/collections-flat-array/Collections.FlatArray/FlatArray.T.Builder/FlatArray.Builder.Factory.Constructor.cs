@@ -16,9 +16,10 @@ partial struct FlatArray<T>
                 return;
             }
 
-            length = source.Length;
-            items = InnerArrayHelper.Clone(source);
-            isBuilt = false;
+            var items = InnerArrayHelper.Clone(source);
+
+            span = new(items);
+            this.items = items;
         }
     }
 }
