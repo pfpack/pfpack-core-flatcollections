@@ -21,7 +21,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ConstructFromArray_SourceArrayIsNull_InnerItemsIsNull()
+    public void ConstructFromArray_SourceArrayIsNull_ExpectInnerItemsIsNull()
     {
         string[]? sourceArray = null;
         var source = new FlatArray<string>(sourceArray);
@@ -43,7 +43,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ConstructFromArray_SourceArrayIsEmpty_InnerItemsIsNull()
+    public void ConstructFromArray_SourceArrayIsEmpty_ExpectInnerItemsIsNull()
     {
         var sourceArray = Array.Empty<RecordType?>();
         var source = new FlatArray<RecordType?>(sourceArray);
@@ -71,7 +71,7 @@ partial class FlatArrayTest
     [InlineData(Zero)]
     [InlineData(PlusFifteen, MinusOne, MinusFifteen, PlusFifteen)]
     [InlineData(12, 15, 1, 91, 7, -95, 21, 0, 5, 6, 7, 901, 98, -266, 78, 62, 21, 35, 75, 212, 51)]
-    public void ConstructFromArray_SourceArrayIsNotEmpty_InnerItemsAreEqualToSourceArrayItems(
+    public void ConstructFromArray_SourceArrayIsNotEmpty_ExpectInnerItemsAreEqualToSourceArrayItems(
         params int[] sourceArray)
     {
         var source = new FlatArray<int>(sourceArray);
