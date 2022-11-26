@@ -12,7 +12,10 @@ partial struct FlatArray<T>
             }
 
             var items = this.items!;
+
+            // Clear the builder before moving the items to the result array
             this = default;
+
             return new(items, default);
         }
     }
