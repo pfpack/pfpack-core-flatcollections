@@ -6,12 +6,12 @@ partial struct FlatArray<T>
 {
     partial struct Builder
     {
-        public static Builder Create(int length)
+        public static Builder OfLength(int length)
             =>
-            InternalCreate(length);
+            InternalOfLength(length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Builder InternalCreate(
+        internal static Builder InternalOfLength(
             int length,
             [CallerArgumentExpression(nameof(length))] string paramName = "")
         {
