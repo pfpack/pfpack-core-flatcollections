@@ -12,10 +12,7 @@ partial class FlatArrayJsonConverter<T>
 
         writer.WriteStartArray();
 
-        for (int i = 0; i < value.Length; i++)
-        {
-            itemConverter.Write(writer, value.InternalItem(i), options);
-        }
+        value.ForEach(item => itemConverter.Write(writer, item, options));
 
         writer.WriteEndArray();
     }
