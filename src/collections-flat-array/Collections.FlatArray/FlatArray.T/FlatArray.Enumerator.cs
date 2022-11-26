@@ -22,11 +22,12 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()
         {
-            int next = index + 1;
-            if (next < items.Length)
+            if (index < items.Length)
             {
-                index = next;
-                return true;
+                if (++index < items.Length)
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -34,15 +35,10 @@ partial struct FlatArray<T>
 
         public ref readonly T Current
         {
-            get
-            {
-                if (index >= 0 && index < items.Length)
-                {
-                    return ref items[index];
-                }
-
-                throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
-            }
+            // Delegate range check to the indexer for performance purposes
+            // IndexOutOfRangeException will be thrown instead of InvalidOperationException
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => ref items[index];
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
@@ -52,6 +53,9 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int InnerEstimateCapacity(int size, int maxCapacity)
         {
+            Debug.Assert(size > 0);
+            Debug.Assert(maxCapacity > 0);
+
             int capacity = unchecked(size * 2);
 
             if (capacity < 0) // handle the overflow case

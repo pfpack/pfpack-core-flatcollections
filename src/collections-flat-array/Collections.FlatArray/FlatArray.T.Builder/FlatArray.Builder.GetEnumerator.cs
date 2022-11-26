@@ -6,6 +6,6 @@ partial struct FlatArray<T>
     {
         public Enumerator GetEnumerator()
             =>
-            new(InnerAsReadOnlySpan());
+            new(span);
     }
 }
