@@ -6,12 +6,14 @@ partial struct FlatArray<T>
     {
         get
         {
-            if (InnerIsNotEmpty)
+            if (InnerIsEmpty)
             {
-                if (index >= 0 && index < items.Length)
-                {
-                    return ref items[index];
-                }
+                throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
+            }
+
+            if (index >= 0 && index < items.Length)
+            {
+                return ref items[index];
             }
 
             throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);

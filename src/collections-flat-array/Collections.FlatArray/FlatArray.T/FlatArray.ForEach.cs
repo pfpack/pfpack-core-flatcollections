@@ -1,11 +1,20 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
     public void ForEach(Action<T> action)
-    {
-        _ = action ?? throw new ArgumentNullException(nameof(action));
+        =>
+        InternalForEach(action ?? throw new ArgumentNullException(nameof(action)));
 
+    public void ForEach(Action<int, T> action)
+        =>
+        InnerForEach(action ?? throw new ArgumentNullException(nameof(action)));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal void InternalForEach(Action<T> action)
+    {
         if (InnerIsEmpty)
         {
             return;
@@ -17,10 +26,9 @@ partial struct FlatArray<T>
         }
     }
 
-    public void ForEach(Action<int, T> action)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void InnerForEach(Action<int, T> action)
     {
-        _ = action ?? throw new ArgumentNullException(nameof(action));
-
         if (InnerIsEmpty)
         {
             return;
