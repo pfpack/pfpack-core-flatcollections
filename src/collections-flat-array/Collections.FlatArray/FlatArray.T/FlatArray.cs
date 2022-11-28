@@ -43,10 +43,10 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()
         =>
-        InnerIsNotEmpty ? new(items) : ReadOnlySpan<T>.Empty;
+        InnerIsNotEmpty ? new(items, 0, length) : ReadOnlySpan<T>.Empty;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlyMemory<T> InnerAsMemory()
         =>
-        InnerIsNotEmpty ? new(items) : ReadOnlyMemory<T>.Empty;
+        InnerIsNotEmpty ? new(items, 0, length) : ReadOnlyMemory<T>.Empty;
 }

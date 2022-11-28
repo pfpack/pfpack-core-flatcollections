@@ -11,7 +11,7 @@ partial struct FlatArray<T>
                 throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
             }
 
-            if (index >= 0 && index < items.Length)
+            if (index >= 0 && index < length)
             {
                 return ref items[index];
             }

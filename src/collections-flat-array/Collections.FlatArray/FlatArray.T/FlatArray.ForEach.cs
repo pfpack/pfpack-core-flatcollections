@@ -20,7 +20,7 @@ partial struct FlatArray<T>
             return;
         }
 
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < length; i++)
         {
             action.Invoke(items[i]);
         }
@@ -34,7 +34,7 @@ partial struct FlatArray<T>
             return;
         }
 
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < length; i++)
         {
             action.Invoke(i, items[i]);
         }
