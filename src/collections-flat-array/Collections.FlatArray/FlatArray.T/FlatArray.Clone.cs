@@ -1,8 +1,15 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
     public FlatArray<T> Clone()
+        =>
+        InnerClone();
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private FlatArray<T> InnerClone()
         =>
         InnerIsNotEmpty ? new(InnerArrayHelper.Clone(items), default) : default;
 }

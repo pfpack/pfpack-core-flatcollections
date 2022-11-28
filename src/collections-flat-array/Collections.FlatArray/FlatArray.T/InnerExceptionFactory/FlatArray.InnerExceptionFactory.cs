@@ -8,11 +8,19 @@ partial struct FlatArray<T>
     {
         internal static ArgumentOutOfRangeException LengthOutOfRange(string paramName, int actualValue)
             =>
-            new(paramName, InnerBuildOutOfRangeMessage("Array length must be greater than or equal to zero.", actualValue));
+            new(paramName, Invariant($"Array length must be greater than or equal to zero. Actual value was {actualValue}."));
+
+        internal static ArgumentOutOfRangeException CapacityOutOfRange(string paramName, int actualValue)
+            =>
+            new(paramName, Invariant($"Capacity must be greater than or equal to zero. Actual value was {actualValue}."));
+
+        internal static ArgumentOutOfRangeException CapacityOutOfRange(string paramName, int actualValue, int length)
+            =>
+            new(paramName, Invariant($"Capacity must be greater than or equal to the array length. Actual value was {actualValue}. Length was {length}."));
 
         internal static ArgumentOutOfRangeException IndexOutOfRange(string paramName, int actualValue)
             =>
-            new(paramName, InnerBuildOutOfRangeMessage("Index must be greater than or equal to zero and less than the array length.", actualValue));
+            new(paramName, Invariant($"Index must be greater than or equal to zero and less than the array length. Actual value was {actualValue}."));
 
         internal static InvalidOperationException EnumerationEitherNotStartedOrFinished()
             =>
@@ -25,12 +33,5 @@ partial struct FlatArray<T>
         internal static NotSupportedException NotSupportedOnReadOnlyArray()
             =>
             new("The operation is not supported on read-only array.");
-
-        private static string InnerBuildOutOfRangeMessage<TValue>(string message, TValue actualValue)
-        {
-            var separator = message.TrimEnd().EndsWith('.') ? null : ".";
-
-            return Invariant($"{message}{separator} Actual value was {actualValue}.");
-        }
     }
 }
