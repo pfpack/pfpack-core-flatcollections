@@ -23,7 +23,7 @@ partial class FlatArrayTest
     [InlineData(PlusFifteen, null, MinusOne)]
     public void GetLength_SourceIsNotDefault_ExpectInnerLength(params int?[] sourceItems)
     {
-        var source = TestHelper.CreateFlatArrayByInnerConstructor(sourceItems);
+        var source = TestHelper.Initialize(sourceItems);
 
         var actual = source.Length;
         var expected = sourceItems.Length;

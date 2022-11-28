@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Moq;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -15,7 +14,7 @@ partial class FlatArrayTest
     public void ForEach_ActionIsNull_ExpectArgumentNullException(
         bool isDefault)
     {
-        var source = isDefault ? default : TestHelper.CreateFlatArrayByInnerConstructor(new[] { SomeString, EmptyString });
+        var source = isDefault ? default : TestHelper.Initialize(new[] { SomeString, EmptyString });
 
         Action<string> action = null!;
         var ex = Assert.Throws<ArgumentNullException>(Test);
@@ -46,14 +45,18 @@ partial class FlatArrayTest
             PlusFifteen, One, Zero
         };
 
-        var source = TestHelper.CreateFlatArrayByInnerConstructor(sourceItems);
-        var mockAction = new Mock<IItemAction<int>>();
+        var expectedQueue = new Queue<int>(sourceItems);
 
-        source.ForEach(mockAction.Object.Invoke);
+        var source = TestHelper.Initialize(sourceItems);
+        source.ForEach(Invoke);
 
-        mockAction.Verify(a => a.Invoke(PlusFifteen), Times.Once);
-        mockAction.Verify(a => a.Invoke(One), Times.Once);
-        mockAction.Verify(a => a.Invoke(Zero), Times.Once);
+        Assert.Empty(expectedQueue);
+
+        void Invoke(int actual)
+        {
+            var expected = expectedQueue.Dequeue();
+            Assert.StrictEqual(expected, actual);
+        }
     }
 
     [Theory]
@@ -62,7 +65,7 @@ partial class FlatArrayTest
     public void ForEachWithIndex_ActionIsNull_ExpectArgumentNullException(
         bool isDefault)
     {
-        var source = isDefault ? default : TestHelper.CreateFlatArrayByInnerConstructor(new bool?[] { true, null, false });
+        var source = isDefault ? default : TestHelper.Initialize(new bool?[] { true, null, false });
         
         Action<int, bool?> action = null!;
         var ex = Assert.Throws<ArgumentNullException>(Test);
@@ -93,15 +96,28 @@ partial class FlatArrayTest
             "First", "Second", EmptyString, "Fourth", EmptyString
         };
 
-        var source = TestHelper.CreateFlatArrayByInnerConstructor(sourceItems);
-        var mockAction = new Mock<IItemAction<string>>();
+        var expectedSequence = new KeyValuePair<int, string>[]
+        {
+            new(0, "First"),
+            new(1, "Second"),
+            new(2, EmptyString),
+            new(3, "Fourth"),
+            new(4, EmptyString)
+        };
 
-        source.ForEach(mockAction.Object.InvokeWithIndex);
+        var expectedQueue = new Queue<KeyValuePair<int, string>>(expectedSequence);
 
-        mockAction.Verify(a => a.InvokeWithIndex(0, "First"), Times.Once);
-        mockAction.Verify(a => a.InvokeWithIndex(1, "Second"), Times.Once);
-        mockAction.Verify(a => a.InvokeWithIndex(2, string.Empty), Times.Once);
-        mockAction.Verify(a => a.InvokeWithIndex(3, "Fourth"), Times.Once);
-        mockAction.Verify(a => a.InvokeWithIndex(4, string.Empty), Times.Once);
+        var source = TestHelper.Initialize(sourceItems);
+        source.ForEach(Invoke);
+
+        Assert.Empty(expectedQueue);
+
+        void Invoke(int index, string item)
+        {
+            var expected = expectedQueue.Dequeue();
+
+            Assert.StrictEqual(expected.Key, index);
+            Assert.Equal(expected.Value, item);
+        }
     }
 }
