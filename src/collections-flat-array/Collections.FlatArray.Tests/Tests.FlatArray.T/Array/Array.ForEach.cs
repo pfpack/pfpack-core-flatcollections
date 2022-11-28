@@ -14,7 +14,7 @@ partial class FlatArrayTest
     public void ForEach_ActionIsNull_ExpectArgumentNullException(
         bool isDefault)
     {
-        var source = isDefault ? default : TestHelper.Initialize(new[] { SomeString, EmptyString });
+        var source = isDefault ? default : new[] { SomeString, EmptyString }.InitializeFlatArray();
 
         Action<string> action = null!;
         var ex = Assert.Throws<ArgumentNullException>(Test);
@@ -47,7 +47,7 @@ partial class FlatArrayTest
 
         var expectedQueue = new Queue<int>(sourceItems);
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         source.ForEach(Invoke);
 
         Assert.Empty(expectedQueue);
@@ -65,7 +65,7 @@ partial class FlatArrayTest
     public void ForEachWithIndex_ActionIsNull_ExpectArgumentNullException(
         bool isDefault)
     {
-        var source = isDefault ? default : TestHelper.Initialize(new bool?[] { true, null, false });
+        var source = isDefault ? default : new bool?[] { true, null, false }.InitializeFlatArray();
         
         Action<int, bool?> action = null!;
         var ex = Assert.Throws<ArgumentNullException>(Test);
@@ -107,7 +107,7 @@ partial class FlatArrayTest
 
         var expectedQueue = new Queue<KeyValuePair<int, string>>(expectedSequence);
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         source.ForEach(Invoke);
 
         Assert.Empty(expectedQueue);

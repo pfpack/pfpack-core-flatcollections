@@ -27,7 +27,7 @@ partial class FlatArrayTest
             SomeTextRecordStruct, AnotherTextRecordStruct
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
 
         var actual = source.AsSpan();
         var expected = sourceItems.AsSpan();

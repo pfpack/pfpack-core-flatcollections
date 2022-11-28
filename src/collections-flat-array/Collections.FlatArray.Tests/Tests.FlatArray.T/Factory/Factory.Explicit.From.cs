@@ -66,7 +66,7 @@ partial class FlatArrayTest
     public void FromFlatArray_SourceIsNotDefault_ExpectInnerStateIsSourceArray(
         params string?[] sourceArray)
     {
-        var source = TestHelper.Initialize(sourceArray);
+        var source = sourceArray.InitializeFlatArray();
         var actual = FlatArray<string?>.From(source);
 
         TestHelper.VerifyInnerState(sourceArray.Length, sourceArray, actual);

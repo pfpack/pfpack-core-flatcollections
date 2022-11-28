@@ -26,7 +26,7 @@ partial class FlatArrayTest
             ZeroIdRefType, PlusFifteenIdRefType
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var actual = source.ToString();
 
         Assert.Contains("2", actual, StringComparison.InvariantCulture);

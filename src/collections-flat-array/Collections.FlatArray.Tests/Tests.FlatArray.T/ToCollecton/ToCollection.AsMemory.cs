@@ -27,7 +27,7 @@ partial class FlatArrayTest
             PlusFifteenIdRefType, ZeroIdRefType, null, MinusFifteenIdRefType
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
 
         var actual = source.AsMemory();
         var expected = sourceItems.AsMemory();

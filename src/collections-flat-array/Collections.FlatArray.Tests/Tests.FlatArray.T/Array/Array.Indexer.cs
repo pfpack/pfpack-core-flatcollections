@@ -31,7 +31,7 @@ partial class FlatArrayTest
     public void Indexer_IndexIsInRange_ExpectItemIsFromSourceItemsByIndex(
         int index, params string?[] sourceItems)
     {
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
 
         var actual = source[index];
         var expected = sourceItems[index];
@@ -46,7 +46,7 @@ partial class FlatArrayTest
     public void Indexer_IndexIsOutOfRange_ExpectArgumentOutOfRangeException(
         int index, params string?[] sourceItems)
     {
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var ex = Assert.Throws<ArgumentOutOfRangeException>(Test);
 
         Assert.Equal("index", ex.ParamName);

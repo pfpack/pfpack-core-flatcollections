@@ -26,7 +26,7 @@ partial class FlatArrayTest
             ZeroIdRefType, PlusFifteenIdRefType
         };
 
-        RefType[] actual = TestHelper.Initialize(sourceItems);
+        RefType[] actual = sourceItems.InitializeFlatArray();
         Assert.Equal(sourceItems, actual);
     }
 
@@ -38,7 +38,7 @@ partial class FlatArrayTest
             MinusOne, PlusFifteen, Zero
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         int[] result = source;
 
         result[2] += 1;
@@ -60,7 +60,7 @@ partial class FlatArrayTest
             false, null, true
         };
 
-        List<bool?> actual = TestHelper.Initialize(sourceItems);
+        List<bool?> actual = sourceItems.InitializeFlatArray();
         Assert.Equal(sourceItems, actual);
     }
 
@@ -72,7 +72,7 @@ partial class FlatArrayTest
             SomeTextStructType, LowerSomeTextStructType
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         List<StructType> result = source;
 
         result[0] = default;
@@ -98,7 +98,7 @@ partial class FlatArrayTest
             MinusFifteen, One, PlusFifteen
         };
 
-        ImmutableArray<int?> actual = TestHelper.Initialize(sourceItems);
+        ImmutableArray<int?> actual = sourceItems.InitializeFlatArray();
         Assert.Equal(sourceItems, actual);
     }
 }

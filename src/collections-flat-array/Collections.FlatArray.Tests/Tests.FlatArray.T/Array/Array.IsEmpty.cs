@@ -21,7 +21,7 @@ partial class FlatArrayTest
     [InlineData(null, SomeString, LowerSomeString, EmptyString, AnotherString)]
     public void IsEmpty_SourceIsNotDefault_ExpectFalse(params string?[] sourceItems)
     {
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var actual = source.IsEmpty;
 
         Assert.False(actual);

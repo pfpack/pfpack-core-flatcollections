@@ -28,7 +28,7 @@ partial class FlatArrayTest
             SomeTextRecordStruct, null, default(RecordStruct), AnotherTextRecordStruct
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var actual = source.ToArray();
 
         Assert.Equal(sourceItems, actual);
@@ -42,7 +42,7 @@ partial class FlatArrayTest
             PlusFifteenIdRefType, MinusFifteenIdRefType
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var result = source.ToArray();
 
         result[0] = ZeroIdRefType;
@@ -66,7 +66,7 @@ partial class FlatArrayTest
             MinusFifteenIdSomeStringNameRecord, ZeroIdNullNameRecord, MinusFifteenIdNullNameRecord
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var actual = source.ToList();
 
         Assert.Equal(sourceItems, actual);
@@ -80,7 +80,7 @@ partial class FlatArrayTest
             SomeString, LowerAnotherString, EmptyString
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var result = source.ToList();
 
         result[1] = MixedWhiteSpacesString;
@@ -108,7 +108,7 @@ partial class FlatArrayTest
             "One", "Two", "Three", "Four", "Five"
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var actual = source.ToImmutableArray();
 
         Assert.Equal(sourceItems, actual);

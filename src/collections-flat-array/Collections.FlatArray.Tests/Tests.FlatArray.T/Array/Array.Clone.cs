@@ -26,7 +26,7 @@ partial class FlatArrayTest
             MinusFifteenIdNullNameRecord, ZeroIdNullNameRecord, PlusFifteenIdSomeStringNameRecord
         };
 
-        var source = TestHelper.Initialize(sourceItems);
+        var source = sourceItems.InitializeFlatArray();
         var actual = source.Clone();
 
         TestHelper.VerifyInnerState(sourceItems.Length, sourceItems, actual);

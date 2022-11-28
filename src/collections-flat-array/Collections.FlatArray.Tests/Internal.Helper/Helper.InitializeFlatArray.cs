@@ -5,7 +5,7 @@ namespace PrimeFuncPack.Collections.FlatArray.Tests;
 
 partial class TestHelper
 {
-    internal static FlatArray<T> Initialize<T>(T[] items, int? length = null)
+    internal static FlatArray<T> InitializeFlatArray<T>(this T[] items, int? length = null)
     {
         Debug.Assert(items.Length is not 0);
 
