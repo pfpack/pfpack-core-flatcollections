@@ -30,7 +30,8 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void TruncateUnchecked(ref T[] array, int newSize)
         {
-            Debug.Assert(newSize >= 0 && newSize < array.Length);
+            Debug.Assert(newSize >= 0);
+            Debug.Assert(newSize < array.Length);
 
             var newArray = new T[newSize];
             Array.Copy(array, newArray, newArray.Length);

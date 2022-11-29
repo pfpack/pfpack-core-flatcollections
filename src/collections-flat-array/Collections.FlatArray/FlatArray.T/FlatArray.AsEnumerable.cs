@@ -4,5 +4,5 @@ partial struct FlatArray<T>
 {
     public IEnumerable<T> AsEnumerable()
         =>
-        new InnerFlatList(InnerAsArray());
+        new InnerFlatList(length, InnerAsArray());
 }

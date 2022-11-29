@@ -8,14 +8,14 @@ partial struct FlatArray<T>
     {
         public bool IsReadOnly => true;
 
-        public int Count => items.Length;
+        public int Count => length;
 
         public T this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                if (index >= 0 && index < items.Length)
+                if (index >= 0 && index < length)
                 {
                     return items[index];
                 }
@@ -30,20 +30,20 @@ partial struct FlatArray<T>
 
         public int IndexOf(T item)
             =>
-            Array.IndexOf(items, item);
+            Array.IndexOf(items, item, 0, length);
 
         public bool Contains(T item)
             =>
-            Array.IndexOf(items, item) >= 0;
+            Array.IndexOf(items, item, 0, length) >= 0;
 
         public void CopyTo(T[] array, int arrayIndex)
             =>
             // Delegate null and range checks to Array.Copy
-            Array.Copy(items, 0, array, arrayIndex, items.Length);
+            Array.Copy(items, 0, array, arrayIndex, length);
 
         public IEnumerator<T> GetEnumerator()
             =>
-            items.Length != default ? new InnerEnumerator(items) : InnerEnumeratorEmptyDefault.Value;
+            length != default ? new InnerEnumerator(length, items) : InnerEnumeratorEmptyDefault.Value;
 
         IEnumerator IEnumerable.GetEnumerator()
             =>
