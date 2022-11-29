@@ -35,7 +35,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromFlatArray(FlatArray<T> source)
             =>
-            source.InnerIsEmpty ? default : new(InnerArrayHelper.Clone(source.items), default);
+            source.InnerIsNotEmpty ? new(InnerArrayHelper.Clone(source.items), default) : default;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromList(List<T> source)

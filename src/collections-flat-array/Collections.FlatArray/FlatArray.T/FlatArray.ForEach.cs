@@ -15,28 +15,18 @@ partial struct FlatArray<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal void InternalForEach(Action<T> action)
     {
-        if (InnerIsEmpty)
-        {
-            return;
-        }
-
         for (int i = 0; i < length; i++)
         {
-            action.Invoke(items[i]);
+            action.Invoke(items![i]);
         }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void InnerForEach(Action<int, T> action)
     {
-        if (InnerIsEmpty)
-        {
-            return;
-        }
-
         for (int i = 0; i < length; i++)
         {
-            action.Invoke(i, items[i]);
+            action.Invoke(i, items![i]);
         }
     }
 }
