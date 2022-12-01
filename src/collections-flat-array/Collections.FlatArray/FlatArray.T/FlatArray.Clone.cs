@@ -11,5 +11,5 @@ partial struct FlatArray<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private FlatArray<T> InnerClone()
         =>
-        InnerIsNotEmpty ? new(InnerArrayHelper.Clone(items), default) : default;
+        InnerIsNotEmpty ? new(InnerArrayHelper.Copy(items, length), default) : default;
 }

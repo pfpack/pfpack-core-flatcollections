@@ -15,6 +15,17 @@ partial struct FlatArray<T>
             return dest;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static T[] Copy(T[] source, int length)
+        {
+            Debug.Assert(length >= 0);
+            Debug.Assert(length <= source.Length);
+
+            var dest = new T[length];
+            Array.Copy(source, dest, length);
+            return dest;
+        }
+
         // The caller MUST ensure the new size is GREATER than the source size
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void ExtendUnchecked(ref T[] array, int newSize)
@@ -30,8 +41,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void TruncateUnchecked(ref T[] array, int newSize)
         {
-            Debug.Assert(newSize >= 0);
-            Debug.Assert(newSize < array.Length);
+            Debug.Assert(newSize >= 0 && newSize < array.Length);
 
             var newArray = new T[newSize];
             Array.Copy(array, newArray, newArray.Length);
