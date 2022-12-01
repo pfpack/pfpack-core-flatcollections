@@ -20,8 +20,8 @@ partial class FlatArrayTest
     [Fact]
     public void EqualsWithObject_SourceIsDefaultAndObjectIsDefaultAnotherType_ExpectFalse()
     {
-        var source = default(FlatArray<RecordType?>);
-        object other = default(FlatArray<RefType?>);
+        var source = default(FlatArray<int>);
+        object other = default(FlatArray<int?>);
 
         var actual = source.Equals(other);
         Assert.False(actual);
