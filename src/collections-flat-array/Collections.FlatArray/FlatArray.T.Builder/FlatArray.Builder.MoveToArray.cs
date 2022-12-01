@@ -16,7 +16,7 @@ partial struct FlatArray<T>
             // Clear the builder before moving the items to the result array
             this = default;
 
-            return new(items, default);
+            return new(span.Length, items);
         }
     }
 }
