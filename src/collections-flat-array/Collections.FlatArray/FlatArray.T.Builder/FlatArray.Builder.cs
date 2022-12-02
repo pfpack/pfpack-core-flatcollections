@@ -1,7 +1,10 @@
-﻿namespace System.Collections.Generic;
+﻿using System.Diagnostics;
+
+namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
+    [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
 #pragma warning disable IDE0064 // Make readonly fields writable
     public ref partial struct Builder
 #pragma warning restore IDE0064 // Make readonly fields writable

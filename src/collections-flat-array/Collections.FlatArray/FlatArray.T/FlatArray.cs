@@ -36,17 +36,17 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
         length == default;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private T[] InnerAsArray()
+    private T[] InnerItems()
         =>
         InnerIsNotEmpty ? items : InnerEmptyArray.Value;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()
         =>
-        InnerIsNotEmpty ? new(items) : ReadOnlySpan<T>.Empty;
+        InnerIsNotEmpty ? new(items, 0, length) : ReadOnlySpan<T>.Empty;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlyMemory<T> InnerAsMemory()
         =>
-        InnerIsNotEmpty ? new(items) : ReadOnlyMemory<T>.Empty;
+        InnerIsNotEmpty ? new(items, 0, length) : ReadOnlyMemory<T>.Empty;
 }
