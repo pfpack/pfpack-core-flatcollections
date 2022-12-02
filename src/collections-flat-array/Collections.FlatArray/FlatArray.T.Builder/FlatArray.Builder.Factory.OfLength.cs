@@ -26,7 +26,7 @@ partial struct FlatArray<T>
 
             if (capacity >= length is not true)
             {
-                throw InnerExceptionFactory.CapacityOutOfRange(nameof(capacity), capacity, length: length);
+                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToLength(nameof(capacity), capacity, length: length);
             }
 
             // TODO: Implement dynamic builder
