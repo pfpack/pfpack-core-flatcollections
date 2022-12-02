@@ -9,10 +9,32 @@ partial struct FlatArray<T>
         InnerIsNotEmpty ? InnerArrayHelper.Copy(items, length) : InnerEmptyArray.OuterValue;
 
     public List<T> ToList()
-        =>
-        InnerIsNotEmpty ? new(items) : new();
+    {
+        if (InnerIsEmpty)
+        {
+            return new();
+        }
+
+        if (length < items.Length)
+        {
+            return new(InnerArrayHelper.Copy(items, length));
+        }
+
+        return new(items);
+    }
 
     public ImmutableArray<T> ToImmutableArray()
-        =>
-        InnerIsNotEmpty ? ImmutableArray.Create(items) : ImmutableArray<T>.Empty;
+    {
+        if (InnerIsEmpty)
+        {
+            return ImmutableArray<T>.Empty;
+        }
+
+        if (length < items.Length)
+        {
+            return ImmutableArray.Create(InnerArrayHelper.Copy(items, length));
+        }
+
+        return ImmutableArray.Create(items);
+    }
 }
