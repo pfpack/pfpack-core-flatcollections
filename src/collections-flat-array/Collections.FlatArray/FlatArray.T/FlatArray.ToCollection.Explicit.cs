@@ -17,7 +17,14 @@ partial struct FlatArray<T>
 
         if (length < items.Length)
         {
-            return new(InnerArrayHelper.Copy(items, length));
+            List<T> result = new(capacity: length);
+
+            for (int i = 0; i < length; i++)
+            {
+                result.Add(items[i]);
+            }
+
+            return result;
         }
 
         return new(items);
@@ -32,7 +39,7 @@ partial struct FlatArray<T>
 
         if (length < items.Length)
         {
-            return ImmutableArray.Create(InnerArrayHelper.Copy(items, length));
+            return ImmutableArray.Create(items, 0, length);
         }
 
         return ImmutableArray.Create(items);
