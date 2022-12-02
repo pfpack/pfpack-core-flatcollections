@@ -30,7 +30,7 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
         =>
         length != default;
 
-    [MemberNotNullWhen(returnValue: true, nameof(items))]
+    [MemberNotNullWhen(returnValue: false, nameof(items))]
     private bool InnerIsEmpty
         =>
         length == default;
