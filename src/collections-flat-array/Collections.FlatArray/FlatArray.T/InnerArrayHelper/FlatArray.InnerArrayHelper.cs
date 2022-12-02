@@ -18,8 +18,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T[] Copy(T[] source, int length)
         {
-            Debug.Assert(length >= 0);
-            Debug.Assert(length <= source.Length);
+            Debug.Assert(length >= 0 && length <= source.Length);
 
             var dest = new T[length];
             Array.Copy(source, dest, length);
