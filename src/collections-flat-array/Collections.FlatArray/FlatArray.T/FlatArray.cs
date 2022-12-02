@@ -31,7 +31,7 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
         length != default;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private T[] InnerAsArray()
+    private T[] InnerItems()
         =>
         InnerIsNotEmpty ? items : InnerEmptyArray.Value;
 
