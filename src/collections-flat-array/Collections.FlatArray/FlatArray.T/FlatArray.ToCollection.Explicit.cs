@@ -6,13 +6,44 @@ partial struct FlatArray<T>
 {
     public T[] ToArray()
         =>
-        InnerIsNotEmpty ? InnerArrayHelper.Clone(items) : InnerEmptyArray.OuterValue;
+        InnerIsNotEmpty ? InnerArrayHelper.Copy(items, length) : InnerEmptyArray.OuterValue;
 
     public List<T> ToList()
-        =>
-        InnerIsNotEmpty ? new(items) : new();
+    {
+        if (InnerIsEmpty)
+        {
+            return new();
+        }
+
+        if (length < items.Length)
+        {
+            // The most efficient way to build a list for this case
+
+            List<T> result = new(capacity: length);
+
+            for (int i = 0; i < length; i++)
+            {
+                result.Add(items[i]);
+            }
+
+            return result;
+        }
+
+        return new(items);
+    }
 
     public ImmutableArray<T> ToImmutableArray()
-        =>
-        InnerIsNotEmpty ? ImmutableArray.Create(items) : ImmutableArray<T>.Empty;
+    {
+        if (InnerIsEmpty)
+        {
+            return ImmutableArray<T>.Empty;
+        }
+
+        if (length < items.Length)
+        {
+            return ImmutableArray.Create(items, 0, length);
+        }
+
+        return ImmutableArray.Create(items);
+    }
 }

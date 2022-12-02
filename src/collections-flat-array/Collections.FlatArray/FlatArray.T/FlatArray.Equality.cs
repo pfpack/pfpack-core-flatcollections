@@ -28,7 +28,7 @@ partial struct FlatArray<T>
             return false;
         }
 
-        if (InnerIsEmpty)
+        if (length == default)
         {
             return true;
         }
@@ -38,9 +38,9 @@ partial struct FlatArray<T>
             return true;
         }
 
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < length; i++)
         {
-            if (InnerItemComparer.Value.Equals(items[i], other.items![i]))
+            if (InnerItemComparer.Value.Equals(items![i], other.items![i]))
             {
                 continue;
             }
@@ -56,14 +56,9 @@ partial struct FlatArray<T>
 
         builder.Add(EqualityContractComparer.GetHashCode(EqualityContract));
 
-        if (InnerIsEmpty)
+        for (int i = 0; i < length; i++)
         {
-            return builder.ToHashCode();
-        }
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            var item = items[i];
+            var item = items![i];
             builder.Add(item is null ? default : InnerItemComparer.Value.GetHashCode(item));
         }
 

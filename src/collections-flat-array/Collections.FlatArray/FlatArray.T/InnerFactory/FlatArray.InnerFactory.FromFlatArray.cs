@@ -9,6 +9,6 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static FlatArray<T> FromFlatArray(FlatArray<T> source)
             =>
-            source.Clone();
+            source.InnerClone();
     }
 }
