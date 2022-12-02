@@ -1,4 +1,4 @@
-namespace PrimeFuncPack.Collections.FlatArray.Tests;
+namespace PrimeFuncPack.Collections.Tests;
 
 public sealed partial class FlatArrayTest
 {

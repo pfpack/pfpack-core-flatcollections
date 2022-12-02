@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace PrimeFuncPack.Collections.FlatArray.Tests;
+namespace PrimeFuncPack.Collections.Tests;
 
 internal static partial class TestHelper
 {

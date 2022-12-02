@@ -9,7 +9,7 @@
     <IsPackable>false</IsPackable>
     <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
     <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
-    <RootNamespace>PrimeFuncPack.Collections.FlatArray.Tests</RootNamespace>
+    <RootNamespace>PrimeFuncPack.Collections.Tests</RootNamespace>
     <AssemblyName>PrimeFuncPack.Collections.FlatArray.Tests</AssemblyName>
   </PropertyGroup>
 

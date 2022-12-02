@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 
-namespace PrimeFuncPack.Collections.FlatArray.Tests;
+namespace PrimeFuncPack.Collections.Tests;
 
 partial class FlatArrayTest
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace PrimeFuncPack.Collections.FlatArray.Tests;
+namespace PrimeFuncPack.Collections.Tests;
 
 partial class TestHelper
 {

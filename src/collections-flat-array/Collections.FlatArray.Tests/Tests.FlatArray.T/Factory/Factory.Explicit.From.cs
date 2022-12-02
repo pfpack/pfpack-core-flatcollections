@@ -6,7 +6,7 @@ using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
-namespace PrimeFuncPack.Collections.FlatArray.Tests;
+namespace PrimeFuncPack.Collections.Tests;
 
 partial class FlatArrayTest
 {

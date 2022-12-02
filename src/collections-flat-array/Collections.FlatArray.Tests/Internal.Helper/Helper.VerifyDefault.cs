@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace PrimeFuncPack.Collections.FlatArray.Tests;
+namespace PrimeFuncPack.Collections.Tests;
 
 partial class TestHelper
 {
