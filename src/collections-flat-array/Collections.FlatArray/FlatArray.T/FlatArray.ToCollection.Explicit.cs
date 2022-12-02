@@ -17,6 +17,8 @@ partial struct FlatArray<T>
 
         if (length < items.Length)
         {
+            // The most efficient way to build a list for this case
+
             List<T> result = new(capacity: length);
 
             for (int i = 0; i < length; i++)
