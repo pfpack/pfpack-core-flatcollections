@@ -32,4 +32,21 @@ partial class FlatArrayTest
         Assert.Contains("2", actual, StringComparison.InvariantCulture);
         Assert.Contains("RefType", actual, StringComparison.InvariantCulture);
     }
+
+    [Fact]
+    public void ToString_InnerLengthIsLessThanInnerItemsLength_ExpectStringContainsLengthAndTypeName()
+    {
+        var innerItems = new[]
+        {
+            MinusFifteen, PlusFifteen, Zero, int.MaxValue, One
+        };
+
+        const int innerLength = 3;
+
+        var source = innerItems.InitializeFlatArray(innerLength);
+        var actual = source.ToString();
+
+        Assert.Contains(innerLength.ToString(), actual, StringComparison.InvariantCulture);
+        Assert.Contains("Int32", actual, StringComparison.InvariantCulture);
+    }
 }

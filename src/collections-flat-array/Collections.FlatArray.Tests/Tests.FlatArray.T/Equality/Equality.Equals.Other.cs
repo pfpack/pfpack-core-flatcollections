@@ -67,9 +67,10 @@ partial class FlatArrayTest
             new() { Id = MinusOne, Name = SomeString },
             new() { Id = int.MaxValue, Name = null },
             null,
-            MinusFifteenIdSomeStringNameRecord
+            MinusFifteenIdSomeStringNameRecord,
+            ZeroIdNullNameRecord
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(4);
 
         var other = new RecordType?[]
         {
@@ -78,7 +79,7 @@ partial class FlatArrayTest
             null,
             MinusFifteenIdSomeStringNameRecord
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(4);
 
         var actual = source.Equals(other);
         Assert.True(actual);

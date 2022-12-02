@@ -25,13 +25,14 @@ partial class FlatArrayTest
     }
 
     [Theory]
-    [InlineData(0, EmptyString)]
-    [InlineData(2, SomeString, AnotherString, null, LowerSomeString)]
-    [InlineData(3, null, "One", "Two", "Three")]
+    [InlineData(0, 1, EmptyString)]
+    [InlineData(1, 2, AnotherString, SomeString, LowerSomeString)]
+    [InlineData(2, 3, SomeString, AnotherString, null, LowerSomeString)]
+    [InlineData(3, 4, null, "One", "Two", "Three")]
     public void Indexer_IndexIsInRange_ExpectItemIsFromSourceItemsByIndex(
-        int index, params string?[] sourceItems)
+        int index, int sourceLength, params string?[] sourceItems)
     {
-        var source = sourceItems.InitializeFlatArray();
+        var source = sourceItems.InitializeFlatArray(sourceLength);
 
         var actual = source[index];
         var expected = sourceItems[index];
@@ -40,13 +41,14 @@ partial class FlatArrayTest
     }
 
     [Theory]
-    [InlineData(1, SomeString)]
-    [InlineData(5, EmptyString, SomeString)]
-    [InlineData(-1, LowerSomeString, null, SomeString)]
+    [InlineData(1, 1, SomeString)]
+    [InlineData(1, 1, EmptyString, AnotherString)]
+    [InlineData(5, 2, EmptyString, SomeString)]
+    [InlineData(-1, 3, LowerSomeString, null, SomeString)]
     public void Indexer_IndexIsOutOfRange_ExpectArgumentOutOfRangeException(
-        int index, params string?[] sourceItems)
+        int index, int sourceLength, params string?[] sourceItems)
     {
-        var source = sourceItems.InitializeFlatArray();
+        var source = sourceItems.InitializeFlatArray(sourceLength);
         var ex = Assert.Throws<ArgumentOutOfRangeException>(Test);
 
         Assert.Equal("index", ex.ParamName);

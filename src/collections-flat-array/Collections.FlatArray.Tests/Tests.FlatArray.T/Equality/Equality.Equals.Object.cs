@@ -132,18 +132,20 @@ partial class FlatArrayTest
             SomeString,
             null,
             EmptyString,
-            AnotherString
+            AnotherString,
+            WhiteSpaceString
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(4);
 
         object other = new[]
         {
             SomeString,
             null,
             EmptyString,
-            AnotherString
+            AnotherString,
+            TabString
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(4);
 
         var actual = source.Equals(other);
         Assert.True(actual);

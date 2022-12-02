@@ -35,6 +35,25 @@ partial class FlatArrayTest
     }
 
     [Fact]
+    public void ToArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    {
+        var sourceItems = new[]
+        {
+            EmptyString, AnotherString, SomeString, LowerSomeString, WhiteSpaceString
+        };
+
+        var source = sourceItems.InitializeFlatArray(4);
+        var actual = source.ToArray();
+
+        var expected = new[]
+        {
+            EmptyString, AnotherString, SomeString, LowerSomeString
+        };
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ToArray_ThenModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new RefType[]
@@ -70,6 +89,25 @@ partial class FlatArrayTest
         var actual = source.ToList();
 
         Assert.Equal(sourceItems, actual);
+    }
+
+    [Fact]
+    public void ToList_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    {
+        var sourceItems = new[]
+        {
+            PlusFifteenIdRefType, null, MinusFifteenIdRefType
+        };
+
+        var source = sourceItems.InitializeFlatArray(2);
+        var actual = source.ToList();
+
+        var expected = new List<RefType?>
+        {
+            PlusFifteenIdRefType, null
+        };
+
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -112,5 +150,21 @@ partial class FlatArrayTest
         var actual = source.ToImmutableArray();
 
         Assert.Equal(sourceItems, actual);
+    }
+
+    [Fact]
+    public void ToImmutableArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    {
+        var sourceItems = new[]
+        {
+            SomeTextRecordStruct, AnotherTextRecordStruct
+        };
+
+        var source = sourceItems.InitializeFlatArray(1);
+
+        var actual = source.ToImmutableArray();
+        var expected = new[] { SomeTextRecordStruct }.ToImmutableArray();
+
+        Assert.Equal<IEnumerable<RecordStruct>>(expected, actual);
     }
 }

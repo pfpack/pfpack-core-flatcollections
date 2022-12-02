@@ -68,15 +68,16 @@ partial class FlatArrayTest
             new { Id = One, Name = SomeString },
             new { Id = PlusFifteen, Name = AnotherString }
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(2);
 
         var right = new object?[]
         {
             null,
             new { Id = One, Name = SomeString },
-            new { Id = PlusFifteen, Name = AnotherString }
+            new { Id = PlusFifteen, Name = AnotherString },
+            new()
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(2);
 
         var actual = left != right;
         Assert.False(actual);

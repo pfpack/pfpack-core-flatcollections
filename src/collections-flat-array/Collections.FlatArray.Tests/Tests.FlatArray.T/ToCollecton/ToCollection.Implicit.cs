@@ -31,6 +31,25 @@ partial class FlatArrayTest
     }
 
     [Fact]
+    public void ImplicitToArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    {
+        var sourceItems = new[]
+        {
+            decimal.One, decimal.MinusOne
+        };
+
+        var source = sourceItems.InitializeFlatArray(1);
+        decimal[] actual = source;
+
+        var expected = new[]
+        {
+            decimal.One
+        };
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ImplicitToArray_ThenModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[]
@@ -62,6 +81,25 @@ partial class FlatArrayTest
 
         List<bool?> actual = sourceItems.InitializeFlatArray();
         Assert.Equal(sourceItems, actual);
+    }
+
+    [Fact]
+    public void ImplicitToList_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    {
+        var sourceItems = new RecordStruct?[]
+        {
+            default(RecordStruct), SomeTextRecordStruct, AnotherTextRecordStruct, null
+        };
+
+        var source = sourceItems.InitializeFlatArray(3);
+        List<RecordStruct?> actual = source;
+
+        var expected = new List<RecordStruct?>
+        {
+            default(RecordStruct), SomeTextRecordStruct, AnotherTextRecordStruct
+        };
+
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -100,5 +138,19 @@ partial class FlatArrayTest
 
         ImmutableArray<int?> actual = sourceItems.InitializeFlatArray();
         Assert.Equal(sourceItems, actual);
+    }
+
+    [Fact]
+    public void ImplicitToImmutableArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    {
+        var sourceItems = new[]
+        {
+            EmptyString, null, SomeString, UpperAnotherString, AnotherString
+        };
+
+        ImmutableArray<string?> actual = sourceItems.InitializeFlatArray(3);
+        var expected = new[] { EmptyString, null, SomeString }.ToImmutableArray();
+
+        Assert.Equal<IEnumerable<string?>>(expected, actual);
     }
 }

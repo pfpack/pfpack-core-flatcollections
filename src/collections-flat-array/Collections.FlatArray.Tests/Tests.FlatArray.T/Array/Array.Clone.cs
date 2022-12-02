@@ -31,4 +31,23 @@ partial class FlatArrayTest
 
         TestHelper.VerifyInnerState(sourceItems.Length, sourceItems, actual);
     }
+
+    [Fact]
+    public void Clone_SourceLengthIsNotEqualToInnerArrayLength_ExpectClonedLengthIsEqualToSourceLength()
+    {
+        var sourceItems = new RecordStruct?[]
+        {
+            UpperSomeTextRecordStruct, null, AnotherTextRecordStruct, SomeTextRecordStruct
+        };
+
+        var source = sourceItems.InitializeFlatArray(3);
+        var actual = source.Clone();
+
+        var expectedItems = new RecordStruct?[]
+        {
+            UpperSomeTextRecordStruct, null, AnotherTextRecordStruct
+        };
+
+        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+    }
 }

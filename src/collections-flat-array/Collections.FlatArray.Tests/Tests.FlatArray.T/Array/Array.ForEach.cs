@@ -45,9 +45,9 @@ partial class FlatArrayTest
             PlusFifteen, One, Zero
         };
 
-        var expectedQueue = new Queue<int>(sourceItems);
-
         var source = sourceItems.InitializeFlatArray();
+
+        var expectedQueue = new Queue<int>(sourceItems);
         source.ForEach(Invoke);
 
         Assert.Empty(expectedQueue);
@@ -56,6 +56,33 @@ partial class FlatArrayTest
         {
             var expected = expectedQueue.Dequeue();
             Assert.StrictEqual(expected, actual);
+        }
+    }
+
+    [Fact]
+    public void ForEach_InnerLengthIsLessThenItemsLength_ExpectActionCalledLengthTimes()
+    {
+        var sourceItems = new[]
+        {
+            SomeString, null, AnotherString, EmptyString
+        };
+
+        var source = sourceItems.InitializeFlatArray(3);
+
+        var expectedQueue = new Queue<string?>();
+
+        expectedQueue.Enqueue(SomeString);
+        expectedQueue.Enqueue(null);
+        expectedQueue.Enqueue(AnotherString);
+
+        source.ForEach(Invoke);
+
+        Assert.Empty(expectedQueue);
+
+        void Invoke(string? actual)
+        {
+            var expected = expectedQueue.Dequeue();
+            Assert.Equal(expected, actual);
         }
     }
 
@@ -96,6 +123,8 @@ partial class FlatArrayTest
             "First", "Second", EmptyString, "Fourth", EmptyString
         };
 
+        var source = sourceItems.InitializeFlatArray();
+
         var expectedSequence = new KeyValuePair<int, string>[]
         {
             new(0, "First"),
@@ -106,13 +135,41 @@ partial class FlatArrayTest
         };
 
         var expectedQueue = new Queue<KeyValuePair<int, string>>(expectedSequence);
-
-        var source = sourceItems.InitializeFlatArray();
         source.ForEach(Invoke);
 
         Assert.Empty(expectedQueue);
 
         void Invoke(int index, string item)
+        {
+            var expected = expectedQueue.Dequeue();
+
+            Assert.StrictEqual(expected.Key, index);
+            Assert.Equal(expected.Value, item);
+        }
+    }
+
+    [Fact]
+    public void ForEachWithIndex_InnerLengthIsLessThenItemsLength_ExpectActionCalledLengthTimes()
+    {
+        var sourceItems = new[]
+        {
+            MinusFifteen, One, int.MinValue, PlusFifteen, MinusOne, Zero, int.MaxValue
+        };
+
+        var source = sourceItems.InitializeFlatArray(4);
+
+        var expectedQueue = new Queue<KeyValuePair<int, int>>();
+
+        expectedQueue.Enqueue(new(0, MinusFifteen));
+        expectedQueue.Enqueue(new(1, One));
+        expectedQueue.Enqueue(new(2, int.MinValue));
+        expectedQueue.Enqueue(new(3, PlusFifteen));
+
+        source.ForEach(Invoke);
+
+        Assert.Empty(expectedQueue);
+
+        void Invoke(int index, int item)
         {
             var expected = expectedQueue.Dequeue();
 

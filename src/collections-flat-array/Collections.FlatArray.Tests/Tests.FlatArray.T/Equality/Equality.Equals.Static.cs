@@ -68,15 +68,16 @@ partial class FlatArrayTest
             MinusOne,
             Zero
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(3);
 
         var right = new[]
         {
             MinusFifteen,
             MinusOne,
-            Zero
+            Zero,
+            int.MaxValue
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(3);
 
         var actual = FlatArray<int>.Equals(left, right);
         Assert.True(actual);

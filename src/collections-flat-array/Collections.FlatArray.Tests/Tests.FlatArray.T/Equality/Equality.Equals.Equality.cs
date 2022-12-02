@@ -66,9 +66,10 @@ partial class FlatArrayTest
         {
             null,
             SomeString,
-            EmptyString
+            EmptyString,
+            AnotherString
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(3);
 
         var right = new[]
         {
@@ -76,7 +77,7 @@ partial class FlatArrayTest
             SomeString,
             EmptyString
         }
-        .InitializeFlatArray();
+        .InitializeFlatArray(3);
 
         var actual = left == right;
         Assert.True(actual);
