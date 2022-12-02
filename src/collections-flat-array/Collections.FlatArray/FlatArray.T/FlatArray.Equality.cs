@@ -61,7 +61,7 @@ partial struct FlatArray<T>
             return builder.ToHashCode();
         }
 
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < length; i++)
         {
             var item = items[i];
             builder.Add(item is null ? default : InnerItemComparer.Value.GetHashCode(item));

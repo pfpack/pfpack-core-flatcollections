@@ -18,6 +18,16 @@ partial class FlatArrayTest
     }
 
     [Fact]
+    public void EqualsWithObject_SourceIsDefaultAndObjectIsNotFlatArray_ExpectFalse()
+    {
+        var source = default(FlatArray<RecordStruct>);
+        object? other = default(RecordStruct);
+
+        var actual = source.Equals(other);
+        Assert.False(actual);
+    }
+
+    [Fact]
     public void EqualsWithObject_SourceIsDefaultAndObjectIsDefaultAnotherType_ExpectFalse()
     {
         var source = default(FlatArray<int>);
@@ -68,6 +78,16 @@ partial class FlatArrayTest
     }
 
     [Fact]
+    public void EqualsWithObject_SourceIsNotDefaultAndObjectIsNotFlatArray_ExpectFalse()
+    {
+        var source = new int[] { PlusFifteen }.InitializeFlatArray();
+        object? other = new int[] { PlusFifteen };
+
+        var actual = source.Equals(other);
+        Assert.False(actual);
+    }
+
+    [Fact]
     public void EqualsWithObject_SourceIsNotDefaultAndObjectIsDefault_ExpectFalse()
     {
         var source = new string?[]
@@ -95,7 +115,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void EqualsWithObject_SourceItemsAreEqualToObjectAnotherTypeItems_ExpectTrue()
+    public void EqualsWithObject_SourceItemsAreEqualToObjectAnotherTypeItems_ExpectFalse()
     {
         var source = new int[] { 25, 31 }.InitializeFlatArray();
         object other = new long[] { 25, 31 }.InitializeFlatArray();
@@ -107,7 +127,7 @@ partial class FlatArrayTest
     [Fact]
     public void EqualsWithObject_SourceItemsAreEqualToObjectItems_ExpectTrue()
     {
-        var source = new []
+        var source = new[]
         {
             SomeString,
             null,
@@ -116,7 +136,7 @@ partial class FlatArrayTest
         }
         .InitializeFlatArray();
 
-        object other = new []
+        object other = new[]
         {
             SomeString,
             null,
