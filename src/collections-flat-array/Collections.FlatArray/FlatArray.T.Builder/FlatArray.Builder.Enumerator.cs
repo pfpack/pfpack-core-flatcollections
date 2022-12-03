@@ -45,7 +45,9 @@ partial struct FlatArray<T>
                         return ref builder.items![index];
                     }
 
-                    throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+                    // The builder length may have changed since the last successful MoveNext
+                    // Thus, throw IndexOutOfRangeException instead of InvalidOperationException
+                    throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
                 }
             }
         }
