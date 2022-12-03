@@ -10,6 +10,6 @@ partial class FlatArrayTest
     public void Empty_ExpectInnerStateIsDefault()
     {
         var actual = FlatArray<StructType?>.Empty;
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 }

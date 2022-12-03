@@ -35,7 +35,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void ToArray_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {
@@ -54,7 +54,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToArray_ThenModifyResult_ExpectInnerStateHasNotChanged()
+    public void ToArray_ThanModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new RefType[]
         {
@@ -65,7 +65,7 @@ partial class FlatArrayTest
         var result = source.ToArray();
 
         result[0] = ZeroIdRefType;
-        TestHelper.VerifyInnerState(2, sourceItems, source);
+        source.VerifyInnerState(2, sourceItems);
     }
 
     [Fact]
@@ -92,7 +92,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToList_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void ToList_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {
@@ -111,7 +111,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToList_ThenModifyResult_ExpectInnerStateHasNotChanged()
+    public void ToList_ThanModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new string[]
         {
@@ -124,7 +124,7 @@ partial class FlatArrayTest
         result[1] = MixedWhiteSpacesString;
         result.Remove(SomeString);
 
-        TestHelper.VerifyInnerState(3, sourceItems, source);
+        source.VerifyInnerState(3, sourceItems);
     }
 
     [Fact]
@@ -153,7 +153,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToImmutableArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void ToImmutableArray_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {

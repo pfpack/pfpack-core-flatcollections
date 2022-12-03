@@ -60,7 +60,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ForEach_InnerLengthIsLessThenItemsLength_ExpectActionCalledLengthTimes()
+    public void ForEach_InnerLengthIsLessThanItemsLength_ExpectActionCalledLengthTimes()
     {
         var sourceItems = new[]
         {
@@ -149,7 +149,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ForEachWithIndex_InnerLengthIsLessThenItemsLength_ExpectActionCalledLengthTimes()
+    public void ForEachWithIndex_InnerLengthIsLessThanItemsLength_ExpectActionCalledLengthTimes()
     {
         var sourceItems = new[]
         {

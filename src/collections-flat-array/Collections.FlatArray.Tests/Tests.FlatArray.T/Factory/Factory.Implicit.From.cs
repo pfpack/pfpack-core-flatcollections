@@ -15,14 +15,14 @@ partial class FlatArrayTest
         StructType[]? source = null;
         FlatArray<StructType> actual = source;
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
     public void ImplicitFromArray_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<RecordType> actual = Array.Empty<RecordType>();
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Theory]
@@ -32,11 +32,11 @@ partial class FlatArrayTest
         params string?[] source)
     {
         FlatArray<string?> actual = source;
-        TestHelper.VerifyInnerState(source.Length, source, actual);
+        actual.VerifyInnerState(source.Length, source);
     }
 
     [Fact]
-    public void ImplicitFromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
+    public void ImplicitFromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { MinusOne, PlusFifteen, MinusFifteen };
         FlatArray<int> actual = sourceArray;
@@ -44,7 +44,7 @@ partial class FlatArrayTest
         sourceArray[0] += 1;
         var expectedItems = new[] { MinusOne, PlusFifteen, MinusFifteen };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 
     [Fact]
@@ -53,14 +53,14 @@ partial class FlatArrayTest
         List<RefType>? source = null;
         FlatArray<RefType> actual = source;
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
     public void ImplicitFromList_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<long> actual = new List<long>();
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
@@ -78,11 +78,11 @@ partial class FlatArrayTest
             SomeString, EmptyString
         };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 
     [Fact]
-    public void ImplicitFromList_ThenModifySource_ExpectInnerStateHasNotChanged()
+    public void ImplicitFromList_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<byte?>
         {
@@ -99,7 +99,7 @@ partial class FlatArrayTest
             0, 75, byte.MaxValue, 121, 235, null
         };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 
     [Fact]
@@ -108,7 +108,7 @@ partial class FlatArrayTest
         var source = default(ImmutableArray<RefType>);
         FlatArray<RefType> actual = source;
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
@@ -129,6 +129,6 @@ partial class FlatArrayTest
             "One", "Two", "Three", "Four", null
         };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 }

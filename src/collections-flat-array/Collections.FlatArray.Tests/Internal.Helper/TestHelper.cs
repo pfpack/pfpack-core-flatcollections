@@ -1,33 +1,29 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace PrimeFuncPack.Collections.Tests;
 
 internal static partial class TestHelper
 {
-    private static int GetInnerLength<T>(this FlatArray<T> array)
+    private static T GetStructFieldValue<T>(this object source, string fieldName)
+        where T : struct
         =>
-        GetFlatArrayLengthFieldInfo<T>().GetValue(array) switch
+        source.GetType().GetInnerFieldInfoOrThrow(fieldName).GetValue(source) switch
         {
-            int length => length,
-            var unexpected => throw new InvalidOperationException($"An unexpected inner length value: {unexpected}")
+            T fieldValue => fieldValue,
+            var unexpected => throw new InvalidOperationException($"An unexpected field '{fieldName}' value: {unexpected}")
         };
 
-    private static T[]? GetInnerItems<T>(this FlatArray<T> array)
+    private static T? GetFieldValue<T>(this object source, string fieldName)
         =>
-        (T[]?)GetFlatArrayItemsFieldInfo<T>().GetValue(array);
+        (T?)source.GetType().GetInnerFieldInfoOrThrow(fieldName).GetValue(source);
 
-    private static FieldInfo GetFlatArrayLengthFieldInfo<T>()
+    private static void SetFieldValue<T>(this object source, string fieldName, T fieldValue)
         =>
-        GetInnerFieldInfoOrThrow<T>("length");
+        source.GetType().GetInnerFieldInfoOrThrow(fieldName).SetValue(source, fieldValue);
 
-    private static FieldInfo GetFlatArrayItemsFieldInfo<T>()
+    private static FieldInfo GetInnerFieldInfoOrThrow(this Type type, string fieldName)
         =>
-        GetInnerFieldInfoOrThrow<T>("items");
-
-    private static FieldInfo GetInnerFieldInfoOrThrow<T>(string fieldName)
-        =>
-        typeof(FlatArray<T>).GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
+        type.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
             ?? throw new InvalidOperationException($"An inner field '{fieldName}' of the FlatArray<T> type was not found");
 }

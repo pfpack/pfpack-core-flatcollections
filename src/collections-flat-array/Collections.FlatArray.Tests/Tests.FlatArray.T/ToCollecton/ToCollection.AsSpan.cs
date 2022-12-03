@@ -36,7 +36,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void AsSpan_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void AsSpan_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {

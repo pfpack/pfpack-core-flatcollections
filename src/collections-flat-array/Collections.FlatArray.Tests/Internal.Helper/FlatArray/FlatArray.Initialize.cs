@@ -12,8 +12,8 @@ partial class TestHelper
         // Use a boxed default array instance to modify its inner state next
         object array = default(FlatArray<T>);
 
-        GetFlatArrayLengthFieldInfo<T>().SetValue(array, length ?? items.Length);
-        GetFlatArrayItemsFieldInfo<T>().SetValue(array, items);
+        array.SetFieldValue("length", length ?? items.Length);
+        array.SetFieldValue("items", items);
 
         return (FlatArray<T>)array;
     }

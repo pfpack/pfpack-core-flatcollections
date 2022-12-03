@@ -14,7 +14,7 @@ partial class FlatArrayTest
         var source = default(ReadOnlySpan<RecordType>);
         var actual = FlatArray<RecordType>.From(source);
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Theory]
@@ -26,7 +26,7 @@ partial class FlatArrayTest
         var source = new ReadOnlySpan<string?>(sourceItems);
         var actual = FlatArray<string?>.From(source);
 
-        TestHelper.VerifyInnerState(sourceItems.Length, sourceItems, actual);
+        actual.VerifyInnerState(sourceItems.Length, sourceItems);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ partial class FlatArrayTest
         var source = default(Span<StructType?>);
         var actual = FlatArray<StructType?>.From(source);
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
@@ -47,11 +47,11 @@ partial class FlatArrayTest
         const int expectedLength = 5;
         var expectedItems = new[] { 5, 11, -17, 27, -81 };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
-    public void FromSpan_ThenModifySource_ExpectInnerStateHasNotChanged()
+    public void FromSpan_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[]
         {
@@ -68,6 +68,6 @@ partial class FlatArrayTest
             PlusFifteenIdRefType, ZeroIdRefType
         };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 }

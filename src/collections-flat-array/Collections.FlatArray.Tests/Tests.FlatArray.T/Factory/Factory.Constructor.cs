@@ -14,7 +14,7 @@ partial class FlatArrayTest
         int[]? source = null;
         var actual = new FlatArray<int>(source);
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
@@ -23,7 +23,7 @@ partial class FlatArrayTest
         var source = Array.Empty<RefType>();
         var actual = new FlatArray<RefType>(source);
 
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Theory]
@@ -34,11 +34,11 @@ partial class FlatArrayTest
         params string?[] source)
     {
         var actual = new FlatArray<string?>(source);
-        TestHelper.VerifyInnerState(source.Length, source, actual);
+        actual.VerifyInnerState(source.Length, source);
     }
 
     [Fact]
-    public void ConstructFromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
+    public void ConstructFromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { MinusFifteen, Zero, int.MaxValue };
         var actual = new FlatArray<int>(sourceArray);
@@ -46,6 +46,6 @@ partial class FlatArrayTest
         sourceArray[0] = PlusFifteen;
         var expectedItems = new[] { MinusFifteen, Zero, int.MaxValue };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 }

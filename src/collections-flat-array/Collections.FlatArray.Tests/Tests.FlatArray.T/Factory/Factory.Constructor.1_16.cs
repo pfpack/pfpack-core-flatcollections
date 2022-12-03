@@ -17,7 +17,7 @@ partial class FlatArrayTest
         const int expectedLength = 1;
         var expectedItems = new[] { item };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -28,7 +28,7 @@ partial class FlatArrayTest
         const int expectedLength = 2;
         var expectedItems = new[] { PlusFifteenIdLowerSomeStringNameRecord, null };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ partial class FlatArrayTest
         const int expectedLength = 3;
         var expectedItems = new[] { SomeString, AnotherString, string.Empty };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ partial class FlatArrayTest
         const int expectedLength = 4;
         var expectedItems = new[] { null, PlusFifteenIdRefType, MinusFifteenIdRefType, ZeroIdRefType };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -61,7 +61,7 @@ partial class FlatArrayTest
         const int expectedLength = 5;
         var expectedItems = new[] { 51, 2801, -71, int.MaxValue, 67 };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -72,7 +72,7 @@ partial class FlatArrayTest
         const int expectedLength = 6;
         var expectedItems = new[] { "1:One", "2:Two", "3:Three", "4:Four", "5:Five", null };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -88,7 +88,7 @@ partial class FlatArrayTest
             null, 1478, -791, double.PositiveInfinity, 78.891, 9, double.Epsilon
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -104,7 +104,7 @@ partial class FlatArrayTest
             189165, 41, 6, 0, 891, 2546, 64, 147
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -122,7 +122,7 @@ partial class FlatArrayTest
             UpperSomeString, WhiteSpaceString, UpperAnotherString, TabString
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -138,7 +138,7 @@ partial class FlatArrayTest
             127, 95, 221, 54, 7, 86, 74, 1, 82, 17
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -156,7 +156,7 @@ partial class FlatArrayTest
             "Fifth", "Fourth", "Third", "Second", "First"
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -174,7 +174,7 @@ partial class FlatArrayTest
             871, Zero, 551, -3092, 27, -893
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -192,7 +192,7 @@ partial class FlatArrayTest
             "Eighth", "Ninth", "Tenth", "Eleventh", "Twelfth", "Thirteenth"
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -210,7 +210,7 @@ partial class FlatArrayTest
             long.MinValue, 11, 27, 95123, Zero, 82, 61
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -228,7 +228,7 @@ partial class FlatArrayTest
             78612, -21, -188, Zero, int.MaxValue, PlusFifteen, 51
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 
     [Fact]
@@ -246,6 +246,6 @@ partial class FlatArrayTest
             "Nine", "Ten", "Eleven", "Twelve", string.Empty, "Fourteen", "Fifteen", "Sixteen"
         };
 
-        TestHelper.VerifyInnerState(expectedLength, expectedItems, actual);
+        actual.VerifyInnerState(expectedLength, expectedItems);
     }
 }

@@ -36,7 +36,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void AsMemory_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void AsMemory_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {

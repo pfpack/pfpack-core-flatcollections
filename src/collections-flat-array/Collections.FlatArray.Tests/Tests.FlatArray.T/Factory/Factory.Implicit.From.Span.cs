@@ -12,7 +12,7 @@ partial class FlatArrayTest
     public void ImplicitFromReadOnlySpan_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<bool?> actual = default(ReadOnlySpan<bool?>);
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Theory]
@@ -22,14 +22,14 @@ partial class FlatArrayTest
         params int[] sourceItems)
     {
         FlatArray<int> actual = new ReadOnlySpan<int>(sourceItems);
-        TestHelper.VerifyInnerState(sourceItems.Length, sourceItems, actual);
+        actual.VerifyInnerState(sourceItems.Length, sourceItems);
     }
 
     [Fact]
     public void ImplicitFromSpan_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<RefType> actual = default(Span<RefType>);
-        TestHelper.VerifyDefaultState(actual);
+        actual.VerifyDefaultState();
     }
 
     [Fact]
@@ -38,11 +38,11 @@ partial class FlatArrayTest
         var sourceItems = new[] { MinusFifteenIdRefType, ZeroIdRefType, null };
         FlatArray<RefType?> actual = new Span<RefType?>(sourceItems);
 
-        TestHelper.VerifyInnerState(sourceItems.Length, sourceItems, actual);
+        actual.VerifyInnerState(sourceItems.Length, sourceItems);
     }
 
     [Fact]
-    public void ImplicitFromSpan_ThenModifySource_ExpectInnerStateHasNotChanged()
+    public void ImplicitFromSpan_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[] { 1, 71, -289, 55, 91 };
         var source = sourceItems.AsSpan();
@@ -51,6 +51,6 @@ partial class FlatArrayTest
         source[0] += 5;
 
         var expectedItems = new[] { 1, 71, -289, 55, 91 };
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 }

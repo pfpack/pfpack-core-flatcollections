@@ -31,7 +31,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitToArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void ImplicitToArray_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {
@@ -50,7 +50,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitToArray_ThenModifyResult_ExpectInnerStateHasNotChanged()
+    public void ImplicitToArray_ThanModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[]
         {
@@ -61,7 +61,7 @@ partial class FlatArrayTest
         int[] result = source;
 
         result[2] += 1;
-        TestHelper.VerifyInnerState(3, sourceItems, source);
+        source.VerifyInnerState(3, sourceItems);
     }
 
     [Fact]
@@ -84,7 +84,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitToList_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void ImplicitToList_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new RecordStruct?[]
         {
@@ -103,7 +103,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitToList_ThenModifyResult_ExpectInnerStateHasNotChanged()
+    public void ImplicitToList_ThanModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[]
         {
@@ -116,7 +116,7 @@ partial class FlatArrayTest
         result[0] = default;
         result.Remove(LowerSomeTextStructType);
 
-        TestHelper.VerifyInnerState(2, sourceItems, source);
+        source.VerifyInnerState(2, sourceItems);
     }
 
     [Fact]
@@ -141,7 +141,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitToImmutableArray_InnerLengthIsLessThenItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void ImplicitToImmutableArray_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {

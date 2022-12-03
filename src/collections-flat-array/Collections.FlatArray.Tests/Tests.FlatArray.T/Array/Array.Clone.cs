@@ -29,7 +29,7 @@ partial class FlatArrayTest
         var source = sourceItems.InitializeFlatArray();
         var actual = source.Clone();
 
-        TestHelper.VerifyInnerState(sourceItems.Length, sourceItems, actual);
+        actual.VerifyInnerState(sourceItems.Length, sourceItems);
     }
 
     [Fact]
@@ -48,6 +48,6 @@ partial class FlatArrayTest
             UpperSomeTextRecordStruct, null, AnotherTextRecordStruct
         };
 
-        TestHelper.VerifyInnerState(expectedItems.Length, expectedItems, actual);
+        actual.VerifyInnerState(expectedItems.Length, expectedItems);
     }
 }
