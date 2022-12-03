@@ -8,10 +8,16 @@ partial struct FlatArray<T>
     {
         public ref T this[int index]
         {
-            // Delegate range check to the indexer for performance purposes
-            // IndexOutOfRangeException will be thrown
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => ref span[index];
+            get
+            {
+                if (index >= 0 && index < length)
+                {
+                    return ref items![index];
+                }
+
+                throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
+            }
         }
     }
 }

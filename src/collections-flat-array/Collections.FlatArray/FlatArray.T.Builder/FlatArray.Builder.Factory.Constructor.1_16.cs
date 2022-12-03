@@ -13,7 +13,7 @@ partial struct FlatArray<T>
             var items = new[] { item };
             Debug.Assert(items.Length == 1);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -29,7 +29,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 2);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -47,7 +47,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 3);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -67,7 +67,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 4);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -89,7 +89,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 5);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -113,7 +113,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 6);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -139,7 +139,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 7);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -167,7 +167,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 8);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -197,7 +197,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 9);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -229,7 +229,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 10);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -263,7 +263,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 11);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -299,7 +299,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 12);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -337,7 +337,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 13);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -377,7 +377,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 14);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -419,7 +419,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 15);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
 
@@ -463,7 +463,7 @@ partial struct FlatArray<T>
             };
             Debug.Assert(items.Length == 16);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
     }
