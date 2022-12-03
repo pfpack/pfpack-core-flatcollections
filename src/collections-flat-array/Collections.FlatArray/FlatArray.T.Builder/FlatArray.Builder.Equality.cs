@@ -10,7 +10,8 @@ partial struct FlatArray<T>
 
         public bool Equals(Builder other)
             =>
-            span == other.span;
+            length == other.length &&
+            ReferenceEquals(items, other.items);
 
         public static bool Equals(Builder left, Builder right)
             =>

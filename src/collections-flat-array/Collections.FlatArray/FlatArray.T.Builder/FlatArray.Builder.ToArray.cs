@@ -7,6 +7,6 @@ partial struct FlatArray<T>
         // TODO: Make public when dynamic builder is implemented
         internal FlatArray<T> ToArray()
             =>
-            span.IsEmpty ? default : new(span.ToArray(), default);
+            InnerIsNotEmpty ? new(InnerArrayHelper.Copy(items, length), default) : default;
     }
 }

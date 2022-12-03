@@ -1,28 +1,43 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
 partial struct FlatArray<T>
 {
     [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
-#pragma warning disable IDE0064 // Make readonly fields writable
     public ref partial struct Builder
-#pragma warning restore IDE0064 // Make readonly fields writable
     {
-        private readonly Span<T> span;
+        private readonly int length;
 
         private readonly T[]? items;
 
         public int Length
             =>
-            span.Length;
+            length;
 
         public bool IsNotEmpty
             =>
-            span.IsEmpty is not true;
+            length != default;
 
         public bool IsEmpty
             =>
-            span.IsEmpty;
+            length == default;
+
+        [MemberNotNullWhen(returnValue: true, nameof(items))]
+        private bool InnerIsNotEmpty
+            =>
+            length != default;
+
+        [MemberNotNullWhen(returnValue: false, nameof(items))]
+        private bool InnerIsEmpty
+            =>
+            length == default;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Span<T> InnerAsSpan()
+            =>
+            InnerIsNotEmpty ? new(items, 0, length) : Span<T>.Empty;
     }
 }

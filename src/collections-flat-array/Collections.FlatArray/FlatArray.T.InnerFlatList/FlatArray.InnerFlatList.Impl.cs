@@ -43,15 +43,10 @@ partial struct FlatArray<T>
 
         public IEnumerator<T> GetEnumerator()
             =>
-            length != default ? new InnerEnumerator(length, items) : InnerEnumeratorEmptyDefault.Value;
+            new InnerEnumerator(length, items);
 
         IEnumerator IEnumerable.GetEnumerator()
             =>
             GetEnumerator();
-
-        private static class InnerEnumeratorEmptyDefault
-        {
-            internal static readonly InnerEnumeratorEmpty Value = new();
-        }
     }
 }

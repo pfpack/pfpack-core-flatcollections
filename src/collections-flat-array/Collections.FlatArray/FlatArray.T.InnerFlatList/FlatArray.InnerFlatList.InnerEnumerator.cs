@@ -20,8 +20,7 @@ partial struct FlatArray<T>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal InnerEnumerator(int length, T[] items)
             {
-                Debug.Assert(length >= 0);
-                Debug.Assert(length <= items.Length);
+                Debug.Assert(length >= 0 && length <= items.Length);
 
                 this.length = length;
                 this.items = items;

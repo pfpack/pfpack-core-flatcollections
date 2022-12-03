@@ -6,17 +6,18 @@ partial struct FlatArray<T>
     {
         public FlatArray<T> MoveToArray()
         {
-            if (span.IsEmpty)
+            if (InnerIsEmpty)
             {
                 return default;
             }
 
-            var items = this.items!;
+            var length = this.length;
+            var items = this.items;
 
             // Clear the builder before moving the items to the result array
             this = default;
 
-            return new(span.Length, items);
+            return new(length, items);
         }
     }
 }

@@ -19,7 +19,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(items.Length != default);
 
-            span = new(items);
+            length = items.Length;
             this.items = items;
         }
     }
