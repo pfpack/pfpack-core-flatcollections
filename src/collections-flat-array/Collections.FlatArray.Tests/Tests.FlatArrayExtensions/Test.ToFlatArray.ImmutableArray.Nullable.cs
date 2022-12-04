@@ -14,7 +14,7 @@ partial class FlatArrayExtensionsTest
         ImmutableArray<string?>? source = null;
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -23,7 +23,7 @@ partial class FlatArrayExtensionsTest
         ImmutableArray<RecordStruct>? source = new ImmutableArray<RecordStruct>();;
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]

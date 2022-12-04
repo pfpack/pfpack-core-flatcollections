@@ -6,13 +6,13 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayBuilderTest
 {
     [Fact]
     public void ConstructFromArray_SourceIsNull_ExpectInnerStateIsDefault()
     {
-        int[]? source = null;
-        var actual = new FlatArray<int>(source);
+        RecordType[]? source = null;
+        var actual = new FlatArray<RecordType>.Builder(source);
 
         actual.VerifyInnerState(default, default);
     }
@@ -20,21 +20,21 @@ partial class FlatArrayTest
     [Fact]
     public void ConstructFromArray_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = Array.Empty<RefType>();
-        var actual = new FlatArray<RefType>(source);
+        var source = Array.Empty<RecordStruct?>();
+        var actual = new FlatArray<RecordStruct?>.Builder(source);
 
         actual.VerifyInnerState(default, default);
     }
 
     [Theory]
-    [InlineData(SomeString)]
-    [InlineData(null, LowerAnotherString, EmptyString, WhiteSpaceString, UpperSomeString)]
-    [InlineData("01", "02", "03", null, "05", "06", "07", "08", "09", "10", EmptyString, "12", "13", "14", "15", "16", "17")]
+    [InlineData(AnotherString)]
+    [InlineData(SomeString, LowerAnotherString, EmptyString, null, UpperSomeString)]
+    [InlineData("01", "02", "03", "04", "05", "06", "07", null, "09", "10", "11", "12", "13", "14", TabString, "16", "17")]
     public void ConstructFromArray_SourceIsNotEmpty_ExpectInnerStateIsSource(
         params string?[] source)
     {
         var coppied = source.GetCopy();
-        var actual = new FlatArray<string?>(source);
+        var actual = new FlatArray<string?>.Builder(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);
     }
@@ -42,11 +42,11 @@ partial class FlatArrayTest
     [Fact]
     public void ConstructFromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
-        var sourceArray = new[] { MinusFifteen, Zero, int.MaxValue };
-        var actual = new FlatArray<int>(sourceArray);
+        var sourceArray = new[] { PlusFifteenIdRefType, ZeroIdRefType };
+        var actual = new FlatArray<RefType>.Builder(sourceArray);
 
-        sourceArray[0] = PlusFifteen;
-        var expectedItems = new[] { MinusFifteen, Zero, int.MaxValue };
+        sourceArray[0] = MinusFifteenIdRefType;
+        var expectedItems = new[] { PlusFifteenIdRefType, ZeroIdRefType };
 
         actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }

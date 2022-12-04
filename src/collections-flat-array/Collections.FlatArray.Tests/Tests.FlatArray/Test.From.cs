@@ -16,7 +16,7 @@ partial class FlatArrayStaticTest
         StructType[]? source = null;
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -25,7 +25,7 @@ partial class FlatArrayStaticTest
         var source = Array.Empty<RefType?>();
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -59,7 +59,7 @@ partial class FlatArrayStaticTest
         var source = default(FlatArray<RecordType>);
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -82,7 +82,7 @@ partial class FlatArrayStaticTest
         var source = default(FlatArray<StructType?>?);
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -91,7 +91,7 @@ partial class FlatArrayStaticTest
         FlatArray<long>? source = default(FlatArray<long>);
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -111,7 +111,7 @@ partial class FlatArrayStaticTest
         List<byte?>? source = null;
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -120,7 +120,7 @@ partial class FlatArrayStaticTest
         var source = new List<object?>();
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -169,7 +169,7 @@ partial class FlatArrayStaticTest
         var source = default(ImmutableArray<RecordStruct?>);
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -192,7 +192,7 @@ partial class FlatArrayStaticTest
         ImmutableArray<RefType?>? source = null;
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -201,7 +201,7 @@ partial class FlatArrayStaticTest
         ImmutableArray<StructType>? source = new ImmutableArray<StructType>();;
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -224,7 +224,7 @@ partial class FlatArrayStaticTest
         IEnumerable<DateOnly>? source = null;
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -233,7 +233,7 @@ partial class FlatArrayStaticTest
         var source = Enumerable.Empty<RecordType>();
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -264,7 +264,7 @@ partial class FlatArrayStaticTest
         var source = new StubCollection<RefType>(new());
         var actual = FlatArray.From<RefType>(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -313,7 +313,7 @@ partial class FlatArrayStaticTest
         var source = new StubReadOnlyList<string?>(new());
         var actual = FlatArray.From<string?>(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -342,7 +342,7 @@ partial class FlatArrayStaticTest
         var source = new StubReadOnlyCollection<long>(sourceItems);
 
         var actual = FlatArray.From<long>(source);
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]

@@ -14,7 +14,7 @@ partial class FlatArrayStaticTest
         var source = default(ReadOnlySpan<StructType?>);
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -37,7 +37,7 @@ partial class FlatArrayStaticTest
         var source = default(Span<RefType>);
         var actual = FlatArray.From(source);
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]

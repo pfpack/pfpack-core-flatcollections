@@ -15,7 +15,7 @@ partial class FlatArrayExtensionsTest
         IEnumerable<RefType?>? source = null;
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ partial class FlatArrayExtensionsTest
         var source = Enumerable.Empty<StructType?>();
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -55,7 +55,7 @@ partial class FlatArrayExtensionsTest
         var source = new StubCollection<RecordType>(new());
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -104,7 +104,7 @@ partial class FlatArrayExtensionsTest
         var source = new StubReadOnlyList<DateOnly?>(new());
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ partial class FlatArrayExtensionsTest
         var source = new StubReadOnlyCollection<StructType>(sourceItems);
 
         var actual = source.ToFlatArray();
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]

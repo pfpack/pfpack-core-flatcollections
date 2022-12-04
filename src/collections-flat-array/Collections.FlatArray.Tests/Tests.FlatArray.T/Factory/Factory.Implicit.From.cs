@@ -15,14 +15,14 @@ partial class FlatArrayTest
         StructType[]? source = null;
         FlatArray<StructType> actual = source;
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
     public void ImplicitFromArray_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<RecordType> actual = Array.Empty<RecordType>();
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Theory]
@@ -55,14 +55,14 @@ partial class FlatArrayTest
         List<RefType>? source = null;
         FlatArray<RefType> actual = source;
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
     public void ImplicitFromList_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<long> actual = new List<long>();
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -110,7 +110,7 @@ partial class FlatArrayTest
         var source = default(ImmutableArray<RefType>);
         FlatArray<RefType> actual = source;
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]

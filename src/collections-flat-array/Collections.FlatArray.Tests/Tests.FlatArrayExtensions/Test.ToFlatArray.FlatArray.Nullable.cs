@@ -14,7 +14,7 @@ partial class FlatArrayExtensionsTest
         var source = default(FlatArray<RecordType?>?);
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
@@ -23,7 +23,7 @@ partial class FlatArrayExtensionsTest
         FlatArray<StructType>? source = default(FlatArray<StructType>);
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]

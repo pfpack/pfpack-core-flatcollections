@@ -14,7 +14,7 @@ partial class FlatArrayExtensionsTest
         var source = default(ReadOnlySpan<long?>);
         var actual = source.ToFlatArray();
 
-        actual.VerifyDefaultState();
+        actual.VerifyInnerState(default, default);
     }
 
     [Fact]
