@@ -61,7 +61,7 @@ partial class FlatArrayTest
         int[] result = source;
 
         result[2] += 1;
-        source.VerifyInnerState(3, sourceItems);
+        source.VerifyInnerState(sourceItems, 3);
     }
 
     [Fact]
@@ -116,7 +116,7 @@ partial class FlatArrayTest
         result[0] = default;
         result.Remove(LowerSomeTextStructType);
 
-        source.VerifyInnerState(2, sourceItems);
+        source.VerifyInnerState(sourceItems, 2);
     }
 
     [Fact]

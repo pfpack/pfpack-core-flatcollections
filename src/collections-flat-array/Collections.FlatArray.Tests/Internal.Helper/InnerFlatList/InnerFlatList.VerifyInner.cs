@@ -5,7 +5,7 @@ namespace PrimeFuncPack.Collections.Tests;
 
 partial class TestHelper
 {
-    internal static void VerifyInnerFlatListState<T>(this IEnumerable<T> actual, int expectedLength, T[] expectedItems)
+    internal static void VerifyInnerFlatListState<T>(this IEnumerable<T> actual, T[] expectedItems, int expectedLength)
     {
         var actualTypeName = actual.GetType().Name;
         const string expectedTypeName = "InnerFlatList";

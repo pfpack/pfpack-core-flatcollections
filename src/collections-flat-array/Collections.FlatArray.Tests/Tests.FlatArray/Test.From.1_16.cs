@@ -16,7 +16,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 1;
         var expectedItems = new[] { item };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 2;
         var expectedItems = new[] { MinusFifteenIdRefType, null };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 3;
         var expectedItems = new[] { SomeTextRecordStruct, default, AnotherTextRecordStruct };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -49,7 +49,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 4;
         var expectedItems = new[] { TabString, null, AnotherString, SomeString };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -60,7 +60,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 5;
         var expectedItems = new byte[] { 151, 21, byte.MaxValue, 211, 55 };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -71,7 +71,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 6;
         var expectedItems = new decimal?[] { decimal.MinusOne, 251.7m, null, -252, 97.86m, 751 };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -82,18 +82,23 @@ partial class FlatArrayStaticTest
         const int expectedLength = 7;
         var expectedItems = new[] { "One", "Two", "Three", "Four", "Five", null, "Seven" };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
     public void FromEightItems_ExpectInnerStateIsSourceItems()
     {
-        var actual = FlatArray.From<object?>(PlusFifteen, null, SomeString, decimal.MinusOne, byte.MaxValue, false, int.MinValue, AnotherString);
+        var actual = FlatArray.From<object?>(
+            PlusFifteen, null, SomeString, decimal.MinusOne, byte.MaxValue, false, int.MinValue, AnotherString);
 
         const int expectedLength = 8;
-        var expectedItems = new object?[] { PlusFifteen, null, SomeString, decimal.MinusOne, byte.MaxValue, false, int.MinValue, AnotherString };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        var expectedItems = new object?[]
+        {
+            PlusFifteen, null, SomeString, decimal.MinusOne, byte.MaxValue, false, int.MinValue, AnotherString
+        };
+
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -104,7 +109,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 9;
         var expectedItems = new long?[] { long.MinValue, -891, -3781, 0, 24681, -90, -1, null, 681 };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -115,7 +120,7 @@ partial class FlatArrayStaticTest
         const int expectedLength = 10;
         var expectedItems = new[] { MinusFifteen, 861, Zero, int.MaxValue, 168, -90123, default, 27, -32, -955 };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -131,7 +136,7 @@ partial class FlatArrayStaticTest
             decimal.MinusOne, 8691.719m, 1361, null, 75, 682, 827, 954, decimal.MaxValue, 13289, 88
         };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -147,7 +152,7 @@ partial class FlatArrayStaticTest
             -75, 2155, 790, 825, 351, 541, 975601, long.MaxValue, 7891, null, 571, 622
         };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -163,7 +168,7 @@ partial class FlatArrayStaticTest
             98, -276.54, 681, double.Epsilon, -89.7801, 9950, double.MaxValue, -5.985, double.PositiveInfinity, 98.71, -9701, 72, 75
         };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -179,7 +184,7 @@ partial class FlatArrayStaticTest
             0, 2, 6, 3, 91, byte.MaxValue, 71, 5, 71, 52, null, 211, 86, 23
         };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -197,7 +202,7 @@ partial class FlatArrayStaticTest
             "Eight", null, "Six", "Five", "Four", "Three", "Two", "One"
         };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -215,6 +220,6 @@ partial class FlatArrayStaticTest
             9005, decimal.MaxValue, 198234.71m, decimal.One, decimal.MinValue, 7, -191, -275000.01m
         };
 
-        actual.VerifyInnerState(expectedLength, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 }

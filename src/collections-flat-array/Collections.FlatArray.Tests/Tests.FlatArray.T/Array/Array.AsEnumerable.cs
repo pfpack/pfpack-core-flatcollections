@@ -14,7 +14,7 @@ partial class FlatArrayTest
         var source = default(FlatArray<StructType?>);
         var actual = source.AsEnumerable();
 
-        actual.VerifyInnerFlatListState(0, Array.Empty<StructType?>());
+        actual.VerifyInnerFlatListState(Array.Empty<StructType?>(), 0);
     }
 
     [Theory]
@@ -24,9 +24,11 @@ partial class FlatArrayTest
     public void AsEnumerable_SourceIsNotDefault_ExpectInnerFlatListCorrectLengthState(
         int length, params string?[] items)
     {
+        var coppied = items.GetCopy();
+
         var source = items.InitializeFlatArray(length);
         var actual = source.AsEnumerable();
 
-        actual.VerifyInnerFlatListState(length, items);
+        actual.VerifyInnerFlatListState(coppied, length);
     }
 }

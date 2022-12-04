@@ -33,8 +33,10 @@ partial class FlatArrayTest
     public void ConstructFromArray_SourceIsNotEmpty_ExpectInnerStateIsSource(
         params string?[] source)
     {
+        var coppied = source.GetCopy();
         var actual = new FlatArray<string?>(source);
-        actual.VerifyInnerState(source.Length, source);
+
+        actual.VerifyInnerState(coppied, coppied.Length);
     }
 
     [Fact]
@@ -46,6 +48,6 @@ partial class FlatArrayTest
         sourceArray[0] = PlusFifteen;
         var expectedItems = new[] { MinusFifteen, Zero, int.MaxValue };
 
-        actual.VerifyInnerState(expectedItems.Length, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 }

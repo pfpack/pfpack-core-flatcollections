@@ -8,13 +8,13 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayStaticTest
 {
     [Fact]
     public void FromArray_SourceIsNull_ExpectInnerStateIsDefault()
     {
-        object?[]? source = null;
-        var actual = FlatArray<object?>.From(source);
+        StructType[]? source = null;
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -22,8 +22,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromArray_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = Array.Empty<StructType>();
-        var actual = FlatArray<StructType>.From(source);
+        var source = Array.Empty<RefType?>();
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -36,7 +36,7 @@ partial class FlatArrayTest
         params int?[] source)
     {
         var coppied = source.GetCopy();
-        var actual = FlatArray<int?>.From(source);
+        var actual = FlatArray.From(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);
     }
@@ -45,7 +45,7 @@ partial class FlatArrayTest
     public void FromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { "One", "Two", "Three" };
-        var actual = FlatArray<string>.From(sourceArray);
+        var actual = FlatArray.From(sourceArray);
 
         sourceArray[1] = "2";
         var expectedItems = new[] { "One", "Two", "Three" };
@@ -56,22 +56,22 @@ partial class FlatArrayTest
     [Fact]
     public void FromFlatArray_SourceIsDefault_ExpectInnerStateIsDefault()
     {
-        var source = default(FlatArray<RefType>);
-        var actual = FlatArray<RefType>.From(source);
+        var source = default(FlatArray<RecordType>);
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
 
     [Theory]
     [InlineData(SomeString, AnotherString)]
-    [InlineData(LowerSomeString, null, SomeString, EmptyString, WhiteSpaceString)]
+    [InlineData(LowerSomeString, TabString, SomeString, EmptyString, WhiteSpaceString)]
     public void FromFlatArray_SourceIsNotDefault_ExpectInnerStateIsSourceArray(
-        params string?[] sourceArray)
+        params string[] sourceArray)
     {
         var coppied = sourceArray.GetCopy();
 
         var source = sourceArray.InitializeFlatArray();
-        var actual = FlatArray<string?>.From(source);
+        var actual = FlatArray.From(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);
     }
@@ -79,8 +79,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromList_SourceIsNull_ExpectInnerStateIsDefault()
     {
-        List<DateOnly>? source = null;
-        var actual = FlatArray<DateOnly>.From(source);
+        List<byte?>? source = null;
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -88,8 +88,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromList_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = new List<RefType>();
-        var actual = FlatArray<RefType>.From(source);
+        var source = new List<object?>();
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -97,17 +97,17 @@ partial class FlatArrayTest
     [Fact]
     public void FromList_SourceIsNotEmpty_ExpectInnerStateAreSourceItems()
     {
-        var source = new List<RecordStruct?>
+        var source = new List<RefType>
         {
-            SomeTextRecordStruct, null, AnotherTextRecordStruct
+            MinusFifteenIdRefType, ZeroIdRefType
         };
 
-        var actual = FlatArray<RecordStruct?>.From(source);
+        var actual = FlatArray.From(source);
 
-        const int expectedLength = 3;
-        var expectedItems = new RecordStruct?[]
+        const int expectedLength = 2;
+        var expectedItems = new[]
         {
-            SomeTextRecordStruct, null, AnotherTextRecordStruct
+            MinusFifteenIdRefType, ZeroIdRefType
         };
 
         actual.VerifyInnerState(expectedItems, expectedLength);
@@ -121,7 +121,7 @@ partial class FlatArrayTest
             MinusFifteenIdSomeStringNameRecord, ZeroIdNullNameRecord, PlusFifteenIdSomeStringNameRecord
         };
 
-        var actual = FlatArray<RecordType>.From(sourceList);
+        var actual = FlatArray.From(sourceList);
 
         sourceList[0] = PlusFifteenIdLowerSomeStringNameRecord;
         sourceList.Add(MinusFifteenIdNullNameRecord);
@@ -137,8 +137,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromImmutableArray_SourceIsDefault_ExpectInnerStateIsDefault()
     {
-        var source = default(ImmutableArray<long?>);
-        var actual = FlatArray<long?>.From(source);
+        var source = default(ImmutableArray<RecordStruct?>);
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -152,7 +152,7 @@ partial class FlatArrayTest
         var coppied = sourceArray.GetCopy();
 
         var source = sourceArray.ToImmutableArray();
-        var actual = FlatArray<string?>.From(source);
+        var actual = FlatArray.From(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);
     }
@@ -160,8 +160,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromNullableImmutableArray_SourceIsNull_ExpectInnerStateIsDefault()
     {
-        ImmutableArray<RecordType>? source = null;
-        var actual = FlatArray<RecordType>.From(source);
+        ImmutableArray<RefType?>? source = null;
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -169,22 +169,22 @@ partial class FlatArrayTest
     [Fact]
     public void FromNullableImmutableArray_SourceIsDefault_ExpectInnerStateIsDefault()
     {
-        ImmutableArray<RefType?>? source = new ImmutableArray<RefType?>();;
-        var actual = FlatArray<RefType?>.From(source);
+        ImmutableArray<StructType>? source = new ImmutableArray<StructType>();;
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
 
     [Theory]
-    [InlineData(PlusFifteen)]
-    [InlineData(null, MinusFifteen, Zero)]
+    [InlineData(One)]
+    [InlineData(MinusFifteen, Zero, PlusFifteen)]
     public void FromNullableImmutableArray_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
-        params int?[] sourceItems)
+        params int[] sourceItems)
     {
         var coppied = sourceItems.GetCopy();
 
         var source = sourceItems.ToImmutableArray();
-        var actual = FlatArray<int?>.From(source);
+        var actual = FlatArray.From(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);
     }
@@ -192,8 +192,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromEnumerable_SourceIsNull_ExpectInnerStateIsDefault()
     {
-        IEnumerable<DateTime>? source = null;
-        var actual = FlatArray<DateTime>.From(source);
+        IEnumerable<DateOnly>? source = null;
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
@@ -201,26 +201,26 @@ partial class FlatArrayTest
     [Fact]
     public void FromEnumerable_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = Enumerable.Empty<RefType?>();
-        var actual = FlatArray<RefType?>.From(source);
+        var source = Enumerable.Empty<RecordType>();
+        var actual = FlatArray.From(source);
 
         actual.VerifyDefaultState();
     }
 
     [Theory]
-    [InlineData(AnotherString)]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")]
+    [InlineData(SomeString)]
+    [InlineData("01", "02", "03", "04", "05", "06", null, "08", "09", "10", "11", "12")]
     public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
-        params string[] sourceItems)
+        params string?[] sourceItems)
     {
         var coppied = sourceItems.GetCopy();
 
         var source = GetSource();
-        var actual = FlatArray<string>.From(source);
+        var actual = FlatArray.From(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);
 
-        IEnumerable<string> GetSource()
+        IEnumerable<string?> GetSource()
         {
             foreach (var item in sourceItems)
             {
@@ -232,8 +232,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromCollection_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = new StubCollection<StructType?>(new());
-        var actual = FlatArray<StructType?>.From(source);
+        var source = new StubCollection<RefType>(new());
+        var actual = FlatArray.From<RefType>(source);
 
         actual.VerifyDefaultState();
     }
@@ -241,17 +241,17 @@ partial class FlatArrayTest
     [Fact]
     public void FromCollection_SourceIsNotEmpty_ExpectInnerStateAreSourceItems()
     {
-        var sourceItems = new List<RefType?>
+        var sourceItems = new List<RecordStruct>
         {
-            PlusFifteenIdRefType, ZeroIdRefType, null
+            SomeTextRecordStruct, default, AnotherTextRecordStruct
         };
 
-        var source = new StubCollection<RefType?>(sourceItems);
-        var actual = FlatArray<RefType?>.From(source);
+        var source = new StubCollection<RecordStruct>(sourceItems);
+        var actual = FlatArray.From<RecordStruct>(source);
 
         var expectedItems = new[]
         {
-            PlusFifteenIdRefType, ZeroIdRefType, null
+            SomeTextRecordStruct, default, AnotherTextRecordStruct
         };
 
         actual.VerifyInnerState(expectedItems, expectedItems.Length);
@@ -260,19 +260,19 @@ partial class FlatArrayTest
     [Fact]
     public void FromCollection_ThanModifySource_ExpectInnerStateHasNotChanged()
     {
-        var sourceList = new List<StructType>
+        var sourceList = new List<StructType?>
         {
-            SomeTextStructType, default
+            null, SomeTextStructType
         };
 
-        var source = new StubCollection<StructType>(sourceList);
-        var actual = FlatArray<StructType>.From(source);
+        var source = new StubCollection<StructType?>(sourceList);
+        var actual = FlatArray.From<StructType?>(source);
 
         source.Remove(SomeTextStructType);
 
-        var expectedItems = new[]
+        var expectedItems = new StructType?[]
         {
-            SomeTextStructType, default
+            null, SomeTextStructType
         };
 
         actual.VerifyInnerState(expectedItems, expectedItems.Length);
@@ -281,8 +281,8 @@ partial class FlatArrayTest
     [Fact]
     public void FromReadOnlyList_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = new StubReadOnlyList<RefType>(new());
-        var actual = FlatArray<RefType>.From(source);
+        var source = new StubReadOnlyList<string?>(new());
+        var actual = FlatArray.From<string?>(source);
 
         actual.VerifyDefaultState();
     }
@@ -296,7 +296,7 @@ partial class FlatArrayTest
         };
 
         var source = new StubCollection<RecordStruct>(sourceItems);
-        var actual = FlatArray<RecordStruct>.From(source);
+        var actual = FlatArray.From<RecordStruct>(source);
 
         var expectedItems = new[]
         {
@@ -309,10 +309,10 @@ partial class FlatArrayTest
     [Fact]
     public void FromReadOnlyCollection_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var sourceItems = Array.Empty<string?>();
-        var source = new StubReadOnlyCollection<string?>(sourceItems);
+        var sourceItems = Array.Empty<long>();
+        var source = new StubReadOnlyCollection<long>(sourceItems);
 
-        var actual = FlatArray<string?>.From(source);
+        var actual = FlatArray.From<long>(source);
         actual.VerifyDefaultState();
     }
 
@@ -321,15 +321,15 @@ partial class FlatArrayTest
     {
         var sourceItems = new[]
         {
-            null, PlusFifteenIdRefType, ZeroIdRefType
+            ZeroIdRefType, PlusFifteenIdRefType
         };
 
-        var source = new StubReadOnlyCollection<RefType?>(sourceItems);
-        var actual = FlatArray<RefType?>.From(source);
+        var source = new StubReadOnlyCollection<RefType>(sourceItems);
+        var actual = FlatArray.From<RefType>(source);
 
         var expectedItems = new[]
         {
-            null, PlusFifteenIdRefType, ZeroIdRefType
+            ZeroIdRefType, PlusFifteenIdRefType
         };
 
         actual.VerifyInnerState(expectedItems, expectedItems.Length);

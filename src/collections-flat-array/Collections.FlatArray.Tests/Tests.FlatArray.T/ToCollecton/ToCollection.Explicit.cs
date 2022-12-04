@@ -65,7 +65,7 @@ partial class FlatArrayTest
         var result = source.ToArray();
 
         result[0] = ZeroIdRefType;
-        source.VerifyInnerState(2, sourceItems);
+        source.VerifyInnerState(sourceItems, 2);
     }
 
     [Fact]
@@ -124,7 +124,7 @@ partial class FlatArrayTest
         result[1] = MixedWhiteSpacesString;
         result.Remove(SomeString);
 
-        source.VerifyInnerState(3, sourceItems);
+        source.VerifyInnerState(sourceItems, 3);
     }
 
     [Fact]

@@ -21,8 +21,10 @@ partial class FlatArrayTest
     public void ImplicitFromReadOnlySpan_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
         params int[] sourceItems)
     {
+        var coppied = sourceItems.GetCopy();
         FlatArray<int> actual = new ReadOnlySpan<int>(sourceItems);
-        actual.VerifyInnerState(sourceItems.Length, sourceItems);
+
+        actual.VerifyInnerState(coppied, coppied.Length);
     }
 
     [Fact]
@@ -38,7 +40,7 @@ partial class FlatArrayTest
         var sourceItems = new[] { MinusFifteenIdRefType, ZeroIdRefType, null };
         FlatArray<RefType?> actual = new Span<RefType?>(sourceItems);
 
-        actual.VerifyInnerState(sourceItems.Length, sourceItems);
+        actual.VerifyInnerState(sourceItems, sourceItems.Length);
     }
 
     [Fact]
@@ -51,6 +53,6 @@ partial class FlatArrayTest
         source[0] += 5;
 
         var expectedItems = new[] { 1, 71, -289, 55, 91 };
-        actual.VerifyInnerState(expectedItems.Length, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 }

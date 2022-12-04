@@ -31,8 +31,10 @@ partial class FlatArrayTest
     public void ImplicitFromArray_SourceIsNotEmpty_ExpectInnerStateIsSourceArray(
         params string?[] source)
     {
+        var coppied = source.GetCopy();
         FlatArray<string?> actual = source;
-        actual.VerifyInnerState(source.Length, source);
+
+        actual.VerifyInnerState(coppied, coppied.Length);
     }
 
     [Fact]
@@ -44,7 +46,7 @@ partial class FlatArrayTest
         sourceArray[0] += 1;
         var expectedItems = new[] { MinusOne, PlusFifteen, MinusFifteen };
 
-        actual.VerifyInnerState(expectedItems.Length, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 
     [Fact]
@@ -78,7 +80,7 @@ partial class FlatArrayTest
             SomeString, EmptyString
         };
 
-        actual.VerifyInnerState(expectedItems.Length, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 
     [Fact]
@@ -99,7 +101,7 @@ partial class FlatArrayTest
             0, 75, byte.MaxValue, 121, 235, null
         };
 
-        actual.VerifyInnerState(expectedItems.Length, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 
     [Fact]
@@ -129,6 +131,6 @@ partial class FlatArrayTest
             "One", "Two", "Three", "Four", null
         };
 
-        actual.VerifyInnerState(expectedItems.Length, expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 }
