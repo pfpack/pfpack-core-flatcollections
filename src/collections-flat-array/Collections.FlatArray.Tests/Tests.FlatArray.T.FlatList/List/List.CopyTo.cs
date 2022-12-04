@@ -33,10 +33,10 @@ partial class FlatArrayFlatListTest
         int arrayIndex, params string?[] array)
     {
         var source = TestHelper.CreateEmptyFlatList<string?>();
-        var cloned = array.Clone();
+        var coppied = array.GetCopy();
 
         source.CopyTo(array, arrayIndex);
-        Assert.Equal(cloned, array);
+        Assert.Equal(coppied, array);
     }
 
     [Theory]

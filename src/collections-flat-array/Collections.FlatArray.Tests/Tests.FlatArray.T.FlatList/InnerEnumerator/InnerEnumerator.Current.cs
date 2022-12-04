@@ -13,10 +13,11 @@ partial class FlatArrayFlatListTest
     public void InnerEnumerator_Current_IndexIsInRange_ExpectItemByIndex(
         int index, int sourceLength, params string?[] sourceItems)
     {
+        var coppied = sourceItems.GetCopy();
         var source = sourceItems.InitializeFlatListEnumerator(sourceLength, index);
 
         var actual = source.Current;
-        var expected = sourceItems[index];
+        var expected = coppied[index];
 
         Assert.Equal(expected, actual);
     }
