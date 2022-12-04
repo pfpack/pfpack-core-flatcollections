@@ -4,7 +4,7 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-internal static class FlatArrayFlatListTestSource
+internal static class FlatListTestSource
 {
     public static IEnumerable<object[]> GetRecordTypeCopyToInRangeTestData()
         =>

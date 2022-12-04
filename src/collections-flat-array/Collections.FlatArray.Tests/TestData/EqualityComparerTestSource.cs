@@ -4,7 +4,7 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-internal static class FlatArrayEqualityComparerTestSource
+internal static class EqualityComparerTestSource
 {
     public static IEnumerable<object[]> GetInt32ItemHashCodeTestData()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
-using static PrimeFuncPack.Collections.Tests.FlatArrayFlatListTestSource;
+using static PrimeFuncPack.Collections.Tests.FlatListTestSource;
 
 namespace PrimeFuncPack.Collections.Tests;
 
@@ -83,7 +83,7 @@ partial class FlatArrayFlatListTest
     }
 
     [Theory]
-    [MemberData(nameof(GetRecordTypeCopyToInRangeTestData), MemberType = typeof(FlatArrayFlatListTestSource))]
+    [MemberData(nameof(GetRecordTypeCopyToInRangeTestData), MemberType = typeof(FlatListTestSource))]
     public void CopyTo_SourceIsNotEmptyAndArrayIndexIsInRange_ExpectCorrectArray(
         IList<RecordType?> source, RecordType?[] array, int arrayIndex, RecordType?[] expected)
     {

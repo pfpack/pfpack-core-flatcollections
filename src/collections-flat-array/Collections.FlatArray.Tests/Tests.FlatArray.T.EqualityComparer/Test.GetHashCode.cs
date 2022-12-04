@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using Xunit;
-using static PrimeFuncPack.Collections.Tests.FlatArrayEqualityComparerTestSource;
+using static PrimeFuncPack.Collections.Tests.EqualityComparerTestSource;
 
 namespace PrimeFuncPack.Collections.Tests;
 
 partial class FlatArrayEqualityComparerTest
 {
     [Theory]
-    [MemberData(nameof(GetInt32ItemHashCodeTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetInt32ItemHashCodeTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void GetHashCode_ItemTypeIsInt32_ExpectCorrectHashCode(
         FlatArray<int>.EqualityComparer source, FlatArray<int> array, int expected)
     {
@@ -16,7 +16,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringItemHashCodeTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetStringItemHashCodeTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void GetHashCode_ItemTypeIsString_ExpectCorrectHashCode(
         FlatArray<string?>.EqualityComparer source, FlatArray<string?> array, int expected)
     {

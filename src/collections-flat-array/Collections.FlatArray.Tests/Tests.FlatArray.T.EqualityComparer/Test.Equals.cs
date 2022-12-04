@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
-using static PrimeFuncPack.Collections.Tests.FlatArrayEqualityComparerTestSource;
+using static PrimeFuncPack.Collections.Tests.EqualityComparerTestSource;
 
 namespace PrimeFuncPack.Collections.Tests;
 
 partial class FlatArrayEqualityComparerTest
 {
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
-    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftIsDefaultAndRightIsDefault_ExpectTrue(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -21,7 +21,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftIsDefaultAndRightIsNotDefault_ExpectFalse(
         FlatArray<int>.EqualityComparer source)
     {
@@ -33,8 +33,8 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
-    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftIsNotDefaultAndRightIsDefault_ExpectFalse(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -46,7 +46,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftLengthIsNotEqualToRightLength_ExpectFalse(
         FlatArray<int>.EqualityComparer source)
     {
@@ -60,7 +60,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_ComparerIsDefault_LeftItemsAreEqualToRightItems_ExpectTrue(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -72,7 +72,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_ComparerIsIgnoreCaseComparer_LeftItemsAreEqualWithoutCaseToRightItems_ExpectTrue(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -84,7 +84,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftItemsAreNotEqualToRightItems_ExpectFalse(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -96,7 +96,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(FlatArrayEqualityComparerTestSource))]
+    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void DefaultItemComparer_Equals_LeftItemsOrderAreNotSameAsRightItemsOrder_ExpectFalse(
         FlatArray<int>.EqualityComparer source)
     {
