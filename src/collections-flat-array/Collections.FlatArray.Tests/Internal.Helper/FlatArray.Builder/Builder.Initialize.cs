@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
@@ -6,26 +5,24 @@ namespace PrimeFuncPack.Collections.Tests;
 
 partial class TestHelper
 {
-    internal static FlatArray<T>.Builder InitializeFlatArrayBuilder<T>(this T[] items, int index)
+    internal static FlatArray<T>.Builder InitializeFlatArrayBuilder<T>(this T[] items, int? length = null)
     {
         var source = default(FlatArray<T>.Builder);
 
-        GetFlatArrayBuilderItemsSetter<T>().Invoke(source, new(items));
-        GetFlatArrayBuilderIndexSetter<T>().Invoke(source, index);
+        GetFlatArrayBuilderFieldSetter<T, T[]>("items").Invoke(source, items);
+        GetFlatArrayBuilderFieldSetter<T, int>("length").Invoke(source, length ?? items.Length);
 
         return source;
     }
 
-    private delegate void FlatArrayBuilderItemsSetter<T>(in FlatArray<T>.Builder source, ReadOnlySpan<T> items);
+    private delegate void FlatArrayBuilderFieldSetter<T, TValue>(in FlatArray<T>.Builder source, TValue value);
 
-    private delegate void FlatArrayBuilderIndexSetter<T>(in FlatArray<T>.Builder source, int index);
-
-    private static FlatArrayBuilderItemsSetter<T> GetFlatArrayBuilderItemsSetter<T>()
+    private static FlatArrayBuilderFieldSetter<T, TValue> GetFlatArrayBuilderFieldSetter<T, TValue>(string fieldName)
     {
         var type = typeof(FlatArray<T>.Builder);
-        var fieldInfo = typeof(FlatArray<T>.Builder).GetInnerFieldInfoOrThrow("items");
+        var fieldInfo = type.GetInnerFieldInfoOrThrow(fieldName);
 
-        var method = new DynamicMethod("SetInnerItems", typeof(void), new[] { type.MakeByRefType(), typeof(ReadOnlySpan<T>) }, type, true);
+        var method = new DynamicMethod("SetInnerValue", typeof(void), new[] { type.MakeByRefType(), typeof(TValue) }, type, true);
         var ilGenerator = method.GetILGenerator();
 
         ilGenerator.Emit(OpCodes.Ldarg_0);
@@ -33,22 +30,7 @@ partial class TestHelper
         ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
         ilGenerator.Emit(OpCodes.Ret);
 
-        return (FlatArrayBuilderItemsSetter<T>)method.CreateDelegate(typeof(FlatArrayBuilderItemsSetter<>).MakeGenericType(typeof(T)));
-    }
-
-    private static FlatArrayBuilderIndexSetter<T> GetFlatArrayBuilderIndexSetter<T>()
-    {
-        var type = typeof(FlatArray<T>.Builder);
-        var fieldInfo = typeof(FlatArray<T>.Builder).GetInnerFieldInfoOrThrow("index");
-
-        var method = new DynamicMethod("SetInnerIndex", typeof(void), new[] { type.MakeByRefType(), typeof(int) }, type, true);
-        var ilGenerator = method.GetILGenerator();
-
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldarg_1);
-        ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
-        ilGenerator.Emit(OpCodes.Ret);
-
-        return (FlatArrayBuilderIndexSetter<T>)method.CreateDelegate(typeof(FlatArrayBuilderIndexSetter<>).MakeGenericType(typeof(T)));
+        var setter = method.CreateDelegate(typeof(FlatArrayBuilderFieldSetter<,>).MakeGenericType(typeof(T), typeof(TValue)));
+        return (FlatArrayBuilderFieldSetter<T, TValue>)setter;
     }
 }
