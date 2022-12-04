@@ -77,6 +77,35 @@ partial class FlatArrayStaticTest
     }
 
     [Fact]
+    public void FromNullableFlatArray_SourceIsNull_ExpectInnerStateIsDefault()
+    {
+        var source = default(FlatArray<StructType?>?);
+        var actual = FlatArray<StructType?>.From(source);
+
+        actual.VerifyDefaultState();
+    }
+
+    [Fact]
+    public void FromNullableFlatArray_SourceIsDefault_ExpectInnerStateIsDefault()
+    {
+        FlatArray<long>? source = default(FlatArray<long>);
+        var actual = FlatArray<long>.From(source);
+
+        actual.VerifyDefaultState();
+    }
+
+    [Fact]
+    public void FromNullableFlatArray_SourceIsNotDefault_ExpectInnerStateIsSourceArray()
+    {
+        FlatArray<string>? source = new[] { SomeString, AnotherString }.InitializeFlatArray();
+
+        var actual = FlatArray<string>.From(source);
+        var expectedItems = new[] { SomeString, AnotherString };
+
+        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+    }
+
+    [Fact]
     public void FromList_SourceIsNull_ExpectInnerStateIsDefault()
     {
         List<byte?>? source = null;
