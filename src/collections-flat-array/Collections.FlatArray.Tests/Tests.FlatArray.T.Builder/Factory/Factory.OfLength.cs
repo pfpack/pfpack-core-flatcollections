@@ -31,32 +31,12 @@ partial class FlatArrayBuilderTest
     [Theory]
     [InlineData(1)]
     [InlineData(15)]
-    public void OfLength_LengthIsMoreThanZeroAndLessThanMaxArrayLength_ExpectDefaultValuesOfSourceLengthState(
+    public void OfLength_LengthIsMoreThanZero_ExpectDefaultValuesOfSourceLengthState(
         int length)
     {
         var actual = FlatArray<RefType?>.Builder.OfLength(length);
         var expectedItems = new RefType?[length];
 
         actual.VerifyInnerState(expectedItems, length);
-    }
-
-    [Fact]
-    public void OfLength_LengthIsMaxArrayLength_ExpectInnerLengthIsMaxArrayLength()
-    {
-        var length = Array.MaxLength;
-        var actual = FlatArray<RefType?>.Builder.OfLength(length);
-
-        actual.VerifyInnerLength(length, length);
-    }
-
-    [Fact]
-    public void OfLength_LengthIsGreaterThanMaxArrayLength_ExpectArgumentOutOfRangeException()
-    {
-        var length = Array.MaxLength + 1;
-        _ = Assert.Throws<OutOfMemoryException>(Test);
-
-        void Test()
-            =>
-            _ = FlatArray<RecordType?>.Builder.OfLength(length);
     }
 }

@@ -16,16 +16,5 @@ partial class TestHelper
         Assert.StrictEqual(expectedLength, actualLength);
     }
 
-    internal static void VerifyInnerLength<T>(this FlatArray<T>.Builder actual, int? expectedItemsLength, int expectedLength)
-    {
-        var type = typeof(FlatArray<T>.Builder);
-
-        var actualItems = type.CreateGetter<BuilderFieldGetter<T, T[]?>>("items").Invoke(actual);
-        Assert.StrictEqual(expectedItemsLength, actualItems?.Length);
-
-        var actualLength = type.CreateGetter<BuilderFieldGetter<T, int>>("length").Invoke(actual);
-        Assert.StrictEqual(expectedLength, actualLength);
-    }
-
     private delegate TValue BuilderFieldGetter<T, TValue>(in FlatArray<T>.Builder source);
 }
