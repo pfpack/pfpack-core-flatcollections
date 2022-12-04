@@ -21,12 +21,7 @@ partial class FlatArrayTest
     public void EqualsStatic_LeftIsDefaultAndRightIsNotDefault_ExpectFalse()
     {
         var left = default(FlatArray<RefType?>);
-
-        var right = new RefType?[]
-        {
-            null
-        }
-        .InitializeFlatArray();
+        var right = new RefType?[] { null }.InitializeFlatArray();
 
         var actual = FlatArray<RefType?>.Equals(left, right);
         Assert.False(actual);
@@ -35,12 +30,7 @@ partial class FlatArrayTest
     [Fact]
     public void EqualsStatic_LeftIsNotDefaultAndRightIsDefault_ExpectFalse()
     {
-        var left = new[]
-        {
-            default(int)
-        }
-        .InitializeFlatArray();
-
+        var left = new int[] { default }.InitializeFlatArray();
         var right = default(FlatArray<int>);
 
         var actual = FlatArray<int>.Equals(left, right);
@@ -62,22 +52,8 @@ partial class FlatArrayTest
     [Fact]
     public void EqualsStatic_LeftItemsAreEqualToRightItems_ExpectTrue()
     {
-        var left = new[]
-        {
-            MinusFifteen,
-            MinusOne,
-            Zero
-        }
-        .InitializeFlatArray(3);
-
-        var right = new[]
-        {
-            MinusFifteen,
-            MinusOne,
-            Zero,
-            int.MaxValue
-        }
-        .InitializeFlatArray(3);
+        var left = new[] { MinusFifteen, MinusOne, Zero }.InitializeFlatArray(3);
+        var right = new[] { MinusFifteen, MinusOne, Zero, int.MaxValue }.InitializeFlatArray(3);
 
         var actual = FlatArray<int>.Equals(left, right);
         Assert.True(actual);
@@ -86,17 +62,8 @@ partial class FlatArrayTest
     [Fact]
     public void EqualsStatic_LeftItemsAreNotEqualToRightItems_ExpectFalse()
     {
-        var left = new StructType[]
-        {
-            default, SomeTextStructType
-        }
-        .InitializeFlatArray();
-
-        var right = new StructType[]
-        {
-            default, LowerSomeTextStructType
-        }
-        .InitializeFlatArray();
+        var left = new StructType[] { default, SomeTextStructType }.InitializeFlatArray();
+        var right = new StructType[] { default, LowerSomeTextStructType }.InitializeFlatArray();
 
         var actual = FlatArray<StructType>.Equals(left, right);
         Assert.False(actual);
