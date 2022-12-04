@@ -155,12 +155,13 @@ partial class FlatArrayTest
         sourceList[0] = PlusFifteenIdLowerSomeStringNameRecord;
         sourceList.Add(MinusFifteenIdNullNameRecord);
 
+        const int expectedLength = 3;
         var expectedItems = new[]
         {
             MinusFifteenIdSomeStringNameRecord, ZeroIdNullNameRecord, PlusFifteenIdSomeStringNameRecord
         };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyInnerState(expectedItems, expectedLength);
     }
 
     [Fact]
@@ -207,7 +208,7 @@ partial class FlatArrayTest
     [Theory]
     [InlineData(PlusFifteen)]
     [InlineData(null, MinusFifteen, Zero)]
-    public void FromNullableImmutableArray_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
+    public void FromNullableImmutableArray_SourceIsNotDefault_ExpectInnerStateAreSourceItems(
         params int?[] sourceItems)
     {
         var coppied = sourceItems.GetCopy();
