@@ -23,7 +23,7 @@ partial class TestHelper
     private static FlatArrayEnumeratorItemsSetter<T> GetFlatArrayEnumeratorItemsSetter<T>()
     {
         var type = typeof(FlatArray<T>.Enumerator);
-        var fieldInfo = typeof(FlatArray<T>.Enumerator).GetInnerFieldInfoOrThrow("items");
+        var fieldInfo = type.GetInnerFieldInfoOrThrow("items");
 
         var method = new DynamicMethod("SetInnerItems", typeof(void), new[] { type.MakeByRefType(), typeof(ReadOnlySpan<T>) }, type, true);
         var ilGenerator = method.GetILGenerator();
@@ -39,7 +39,7 @@ partial class TestHelper
     private static FlatArrayEnumeratorIndexSetter<T> GetFlatArrayEnumeratorIndexSetter<T>()
     {
         var type = typeof(FlatArray<T>.Enumerator);
-        var fieldInfo = typeof(FlatArray<T>.Enumerator).GetInnerFieldInfoOrThrow("index");
+        var fieldInfo = type.GetInnerFieldInfoOrThrow("index");
 
         var method = new DynamicMethod("SetInnerIndex", typeof(void), new[] { type.MakeByRefType(), typeof(int) }, type, true);
         var ilGenerator = method.GetILGenerator();
