@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace PrimeFuncPack.Collections.Tests;
 
@@ -23,32 +22,18 @@ partial class TestHelper
     private static FlatArrayEnumeratorItemsSetter<T> GetFlatArrayEnumeratorItemsSetter<T>()
     {
         var type = typeof(FlatArray<T>.Enumerator);
-        var fieldInfo = type.GetInnerFieldInfoOrThrow("items");
+        var method = type.CreateSetter("items");
 
-        var method = new DynamicMethod("SetInnerItems", typeof(void), new[] { type.MakeByRefType(), typeof(ReadOnlySpan<T>) }, type, true);
-        var ilGenerator = method.GetILGenerator();
-
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldarg_1);
-        ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
-        ilGenerator.Emit(OpCodes.Ret);
-
-        return (FlatArrayEnumeratorItemsSetter<T>)method.CreateDelegate(typeof(FlatArrayEnumeratorItemsSetter<>).MakeGenericType(typeof(T)));
+        var setter = method.CreateDelegate(typeof(FlatArrayEnumeratorItemsSetter<>).MakeGenericType(typeof(T)));
+        return (FlatArrayEnumeratorItemsSetter<T>)setter;
     }
 
     private static FlatArrayEnumeratorIndexSetter<T> GetFlatArrayEnumeratorIndexSetter<T>()
     {
         var type = typeof(FlatArray<T>.Enumerator);
-        var fieldInfo = type.GetInnerFieldInfoOrThrow("index");
+        var method = type.CreateSetter("index");
 
-        var method = new DynamicMethod("SetInnerIndex", typeof(void), new[] { type.MakeByRefType(), typeof(int) }, type, true);
-        var ilGenerator = method.GetILGenerator();
-
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldarg_1);
-        ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
-        ilGenerator.Emit(OpCodes.Ret);
-
-        return (FlatArrayEnumeratorIndexSetter<T>)method.CreateDelegate(typeof(FlatArrayEnumeratorIndexSetter<>).MakeGenericType(typeof(T)));
+        var setter = method.CreateDelegate(typeof(FlatArrayEnumeratorIndexSetter<>).MakeGenericType(typeof(T)));
+        return (FlatArrayEnumeratorIndexSetter<T>)setter;
     }
 }

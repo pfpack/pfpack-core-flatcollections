@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace PrimeFuncPack.Collections.Tests;
 
@@ -26,4 +27,35 @@ internal static partial class TestHelper
         =>
         type.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
             ?? throw new InvalidOperationException($"An inner field '{fieldName}' of the FlatArray<T> type was not found");
+
+    private static DynamicMethod CreateGetter(this Type ownerType, string fieldName)
+    {
+        var fieldInfo = ownerType.GetInnerFieldInfoOrThrow(fieldName);
+        var methodName = "GetInner" + fieldName;
+
+        var method = new DynamicMethod(methodName, fieldInfo.FieldType, new[] { ownerType.MakeByRefType() }, ownerType, true);
+        var ilGenerator = method.GetILGenerator();
+
+        ilGenerator.Emit(OpCodes.Ldarg_0);
+        ilGenerator.Emit(OpCodes.Ldfld, fieldInfo);
+        ilGenerator.Emit(OpCodes.Ret);
+
+        return method;
+    }
+
+    private static DynamicMethod CreateSetter(this Type ownerType, string fieldName)
+    {
+        var fieldInfo = ownerType.GetInnerFieldInfoOrThrow(fieldName);
+        var methodName = "SetInner" + fieldName;
+
+        var method = new DynamicMethod(methodName, typeof(void), new[] { ownerType.MakeByRefType(), fieldInfo.FieldType }, ownerType, true);
+        var ilGenerator = method.GetILGenerator();
+
+        ilGenerator.Emit(OpCodes.Ldarg_0);
+        ilGenerator.Emit(OpCodes.Ldarg_1);
+        ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
+        ilGenerator.Emit(OpCodes.Ret);
+
+        return method;
+    }
 }

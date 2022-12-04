@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using Xunit;
 
 namespace PrimeFuncPack.Collections.Tests;
@@ -13,40 +12,28 @@ partial class TestHelper
         Assert.Equal(expectedItems, actualItems.ToArray());
 
         var actualIndex = GetFlatArrayEnumeratorIndexGetter<T>().Invoke(actual);
-        Assert.Equal(expectedIndex, actualIndex);
+        Assert.StrictEqual(expectedIndex, actualIndex);
     }
 
-    private delegate int FlatArrayEnumeratorIndexGetter<T>(in FlatArray<T>.Enumerator source);
-
     private delegate ReadOnlySpan<T> FlatArrayEnumeratorItemsGetter<T>(in FlatArray<T>.Enumerator source);
+
+    private delegate int FlatArrayEnumeratorIndexGetter<T>(in FlatArray<T>.Enumerator source);
 
     private static FlatArrayEnumeratorItemsGetter<T> GetFlatArrayEnumeratorItemsGetter<T>()
     {
         var type = typeof(FlatArray<T>.Enumerator);
-        var fieldInfo = type.GetInnerFieldInfoOrThrow("items");
+        var method = type.CreateGetter("items");
 
-        var method = new DynamicMethod("GetInnerItems", typeof(ReadOnlySpan<T>), new[] { type.MakeByRefType() }, type, true);
-        var ilGenerator = method.GetILGenerator();
-
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldfld, fieldInfo);
-        ilGenerator.Emit(OpCodes.Ret);
-
-        return (FlatArrayEnumeratorItemsGetter<T>)method.CreateDelegate(typeof(FlatArrayEnumeratorItemsGetter<>).MakeGenericType(typeof(T)));
+        var getter = method.CreateDelegate(typeof(FlatArrayEnumeratorItemsGetter<>).MakeGenericType(typeof(T)));
+        return (FlatArrayEnumeratorItemsGetter<T>)getter;
     }
 
     private static FlatArrayEnumeratorIndexGetter<T> GetFlatArrayEnumeratorIndexGetter<T>()
     {
         var type = typeof(FlatArray<T>.Enumerator);
-        var fieldInfo = type.GetInnerFieldInfoOrThrow("index");
+        var method = type.CreateGetter("index");
 
-        var method = new DynamicMethod("GetInnerIndex", typeof(int), new[] { type.MakeByRefType() }, type, true);
-        var ilGenerator = method.GetILGenerator();
-
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldfld, fieldInfo);
-        ilGenerator.Emit(OpCodes.Ret);
-
-        return (FlatArrayEnumeratorIndexGetter<T>)method.CreateDelegate(typeof(FlatArrayEnumeratorIndexGetter<>).MakeGenericType(typeof(T)));
+        var getter = method.CreateDelegate(typeof(FlatArrayEnumeratorIndexGetter<>).MakeGenericType(typeof(T)));
+        return (FlatArrayEnumeratorIndexGetter<T>)getter;
     }
 }

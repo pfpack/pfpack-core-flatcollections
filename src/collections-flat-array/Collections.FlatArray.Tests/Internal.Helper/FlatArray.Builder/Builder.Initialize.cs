@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace PrimeFuncPack.Collections.Tests;
 
@@ -20,15 +19,7 @@ partial class TestHelper
     private static FlatArrayBuilderFieldSetter<T, TValue> GetFlatArrayBuilderFieldSetter<T, TValue>(string fieldName)
     {
         var type = typeof(FlatArray<T>.Builder);
-        var fieldInfo = type.GetInnerFieldInfoOrThrow(fieldName);
-
-        var method = new DynamicMethod("SetInnerValue", typeof(void), new[] { type.MakeByRefType(), typeof(TValue) }, type, true);
-        var ilGenerator = method.GetILGenerator();
-
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldarg_1);
-        ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
-        ilGenerator.Emit(OpCodes.Ret);
+        var method = type.CreateSetter(fieldName);
 
         var setter = method.CreateDelegate(typeof(FlatArrayBuilderFieldSetter<,>).MakeGenericType(typeof(T), typeof(TValue)));
         return (FlatArrayBuilderFieldSetter<T, TValue>)setter;
