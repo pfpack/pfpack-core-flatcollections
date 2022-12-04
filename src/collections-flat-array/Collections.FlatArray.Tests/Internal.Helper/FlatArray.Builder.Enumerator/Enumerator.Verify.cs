@@ -8,32 +8,16 @@ partial class TestHelper
     internal static void VerifyInnerState<T>(
         this FlatArray<T>.Builder.Enumerator actual, T[]? expectedBuilderItems, int expectedBuilderLength, int expectedIndex)
     {
-        var actualBuilder = GetFlatArrayBuilderEnumeratorBuilderGetter<T>().Invoke(actual);
+        var type = typeof(FlatArray<T>.Builder.Enumerator);
+
+        var actualBuilder = type.CreateGetter<BuilderEnumeratorBuilderGetter<T>>("builder").Invoke(actual);
         actualBuilder.VerifyInnerState(expectedBuilderItems, expectedBuilderLength);
 
-        var actualIndex = GetFlatArrayBuilderEnumeratorIndexGetter<T>().Invoke(actual);
+        var actualIndex = type.CreateGetter<BuilderEnumeratorIndexGetter<T>>("index").Invoke(actual);
         Assert.StrictEqual(expectedIndex, actualIndex);
     }
 
-    private delegate FlatArray<T>.Builder FlatArrayBuilderEnumeratorBuilderGetter<T>(in FlatArray<T>.Builder.Enumerator source);
+    private delegate FlatArray<T>.Builder BuilderEnumeratorBuilderGetter<T>(in FlatArray<T>.Builder.Enumerator source);
 
-    private delegate int FlatArrayBuilderEnumeratorIndexGetter<T>(in FlatArray<T>.Builder.Enumerator source);
-
-    private static FlatArrayBuilderEnumeratorBuilderGetter<T> GetFlatArrayBuilderEnumeratorBuilderGetter<T>()
-    {
-        var type = typeof(FlatArray<T>.Builder.Enumerator);
-        var method = type.CreateGetter("builder");
-
-        var getter = method.CreateDelegate(typeof(FlatArrayBuilderEnumeratorBuilderGetter<>).MakeGenericType(typeof(T)));
-        return (FlatArrayBuilderEnumeratorBuilderGetter<T>)getter;
-    }
-
-    private static FlatArrayBuilderEnumeratorIndexGetter<T> GetFlatArrayBuilderEnumeratorIndexGetter<T>()
-    {
-        var type = typeof(FlatArray<T>.Builder.Enumerator);
-        var method = type.CreateGetter("index");
-
-        var getter = method.CreateDelegate(typeof(FlatArrayBuilderEnumeratorIndexGetter<>).MakeGenericType(typeof(T)));
-        return (FlatArrayBuilderEnumeratorIndexGetter<T>)getter;
-    }
+    private delegate int BuilderEnumeratorIndexGetter<T>(in FlatArray<T>.Builder.Enumerator source);
 }

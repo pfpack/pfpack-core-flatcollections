@@ -26,9 +26,10 @@ internal static partial class TestHelper
     private static FieldInfo GetInnerFieldInfoOrThrow(this Type type, string fieldName)
         =>
         type.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
-            ?? throw new InvalidOperationException($"An inner field '{fieldName}' of the FlatArray<T> type was not found");
+        ?? throw new InvalidOperationException($"An inner field '{fieldName}' of the FlatArray<T> type was not found");
 
-    private static DynamicMethod CreateGetter(this Type ownerType, string fieldName)
+    private static TDelegate CreateGetter<TDelegate>(this Type ownerType, string fieldName)
+        where TDelegate : Delegate
     {
         var fieldInfo = ownerType.GetInnerFieldInfoOrThrow(fieldName);
         var methodName = "GetInner" + fieldName;
@@ -40,10 +41,11 @@ internal static partial class TestHelper
         ilGenerator.Emit(OpCodes.Ldfld, fieldInfo);
         ilGenerator.Emit(OpCodes.Ret);
 
-        return method;
+        return (TDelegate)method.CreateDelegate(typeof(TDelegate));
     }
 
-    private static DynamicMethod CreateSetter(this Type ownerType, string fieldName)
+    private static TDelegate CreateSetter<TDelegate>(this Type ownerType, string fieldName)
+        where TDelegate : Delegate
     {
         var fieldInfo = ownerType.GetInnerFieldInfoOrThrow(fieldName);
         var methodName = "SetInner" + fieldName;
@@ -56,6 +58,6 @@ internal static partial class TestHelper
         ilGenerator.Emit(OpCodes.Stfld, fieldInfo);
         ilGenerator.Emit(OpCodes.Ret);
 
-        return method;
+        return (TDelegate)method.CreateDelegate(typeof(TDelegate));
     }
 }

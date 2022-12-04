@@ -6,10 +6,10 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-partial class FlatArrayEnumeratorTest
+partial class FlatArrayTest
 {
     [Fact]
-    public void Current_SourceIsDefault_ExpectArgumentOutOfRangeException()
+    public void Enumerator_Current_SourceIsDefault_ExpectIndexOutOfRangeException()
     {
         var source = default(FlatArray<StructType>.Enumerator);
         
@@ -29,7 +29,7 @@ partial class FlatArrayEnumeratorTest
     [InlineData(0, false)]
     [InlineData(1, true, null, false)]
     [InlineData(4, false, true, true, null, false)]
-    public void Current_IndexIsInRange_ExpectItemByIndex(
+    public void Enumerator_Current_IndexIsInRange_ExpectItemByIndex(
         int index, params bool?[] sourceItems)
     {
         var coppiedItems = sourceItems.GetCopy();
@@ -46,7 +46,7 @@ partial class FlatArrayEnumeratorTest
     [InlineData(1, SomeString)]
     [InlineData(5, AnotherString, EmptyString, null)]
     [InlineData(-1, TabString, SomeString)]
-    public void Current_IndexIsNotInRange_ExpectIndexOutOfRangeException(
+    public void Enumerator_Current_IndexIsNotInRange_ExpectIndexOutOfRangeException(
         int index, params string?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatArrayEnumerator(index);

@@ -6,10 +6,10 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-partial class FlatArrayEnumeratorTest
+partial class FlatArrayTest
 {
     [Fact]
-    public void MoveNext_SourceIsDefault_ExpectFalseAndDefaultState()
+    public void Enumerator_MoveNext_SourceIsDefault_ExpectFalseAndDefaultState()
     {
         var source = default(FlatArray<RefType>.Enumerator);
         var actual = source.MoveNext();
@@ -22,7 +22,7 @@ partial class FlatArrayEnumeratorTest
     [InlineData(-1, MinusFifteen)]
     [InlineData(0, null, PlusFifteen, Zero)]
     [InlineData(2, MinusOne, PlusFifteen, MinusFifteen, Zero)]
-    public void MoveNext_IndexIsLessThanLengthMinusOne_ExpectTrueAndNextIndex(
+    public void Enumerator_MoveNext_IndexIsLessThanLengthMinusOne_ExpectTrueAndNextIndex(
         int index, params int?[] items)
     {
         var coppiedItems = items.GetCopy();
@@ -38,7 +38,7 @@ partial class FlatArrayEnumeratorTest
     [InlineData(0)]
     [InlineData(1, SomeString)]
     [InlineData(3, AnotherString, EmptyString)]
-    public void MoveNext_IndexIsEqualToLengthOrGreate_ExpectFalseAndIndexHasNotChanged(
+    public void Enumerator_MoveNext_IndexIsEqualToLengthOrGreate_ExpectFalseAndIndexHasNotChanged(
         int index, params string?[] items)
     {
         var coppied = items.GetCopy();

@@ -7,21 +7,13 @@ partial class TestHelper
     internal static FlatArray<T>.Builder InitializeFlatArrayBuilder<T>(this T[] items, int? length = null)
     {
         var source = default(FlatArray<T>.Builder);
+        var type = typeof(FlatArray<T>.Builder);
 
-        GetFlatArrayBuilderFieldSetter<T, T[]>("items").Invoke(source, items);
-        GetFlatArrayBuilderFieldSetter<T, int>("length").Invoke(source, length ?? items.Length);
+        type.CreateSetter<BuilderFieldSetter<T, T[]>>("items").Invoke(source, items);
+        type.CreateSetter<BuilderFieldSetter<T, int>>("length").Invoke(source, length ?? items.Length);
 
         return source;
     }
 
-    private delegate void FlatArrayBuilderFieldSetter<T, TValue>(in FlatArray<T>.Builder source, TValue value);
-
-    private static FlatArrayBuilderFieldSetter<T, TValue> GetFlatArrayBuilderFieldSetter<T, TValue>(string fieldName)
-    {
-        var type = typeof(FlatArray<T>.Builder);
-        var method = type.CreateSetter(fieldName);
-
-        var setter = method.CreateDelegate(typeof(FlatArrayBuilderFieldSetter<,>).MakeGenericType(typeof(T), typeof(TValue)));
-        return (FlatArrayBuilderFieldSetter<T, TValue>)setter;
-    }
+    private delegate void BuilderFieldSetter<T, TValue>(in FlatArray<T>.Builder source, TValue value);
 }

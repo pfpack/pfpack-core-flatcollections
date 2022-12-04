@@ -63,7 +63,7 @@ partial class FlatArrayStaticTest
     }
 
     [Theory]
-    [InlineData(SomeString, AnotherString)]
+    [InlineData(SomeString)]
     [InlineData(LowerSomeString, TabString, SomeString, EmptyString, WhiteSpaceString)]
     public void FromFlatArray_SourceIsNotDefault_ExpectInnerStateIsSourceArray(
         params string[] sourceArray)
