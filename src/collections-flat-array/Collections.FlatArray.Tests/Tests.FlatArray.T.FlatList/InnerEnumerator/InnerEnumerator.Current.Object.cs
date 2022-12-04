@@ -24,6 +24,8 @@ partial class FlatArrayFlatListTest
     }
 
     [Theory]
+    [InlineData(0, 0)]
+    [InlineData(-1, 0)]
     [InlineData(1, 1, EmptyString)]
     [InlineData(3, 2, SomeString, null, EmptyString, WhiteSpaceString)]
     [InlineData(-1, 3, UpperSomeString, SomeString, TabString)]

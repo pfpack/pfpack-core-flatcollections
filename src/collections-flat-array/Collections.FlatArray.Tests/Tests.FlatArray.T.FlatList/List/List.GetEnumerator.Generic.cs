@@ -1,3 +1,4 @@
+using System;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -7,14 +8,12 @@ namespace PrimeFuncPack.Collections.Tests;
 partial class FlatArrayFlatListTest
 {
     [Fact]
-    public void GetEnumeratorGeneric_SourceIsEmpty_ExpectTypeIsInnerEnumeratorEmpty()
+    public void GetEnumeratorGeneric_SourceIsEmpty_ExpectTypeIsInnerEnumeratorCorrectState()
     {
         var source = TestHelper.CreateEmptyFlatList<RecordType>();
+        var actual = source.GetEnumerator();
 
-        var actual = source.GetEnumerator().GetType().Name;
-        const string expected = "InnerEnumeratorEmpty";
-
-        Assert.Equal(expected, actual);
+        actual.VerifyInnerFlatListEnumeratorState(Array.Empty<RecordType>(), 0, -1);
     }
 
     [Theory]

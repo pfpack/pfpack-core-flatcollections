@@ -23,6 +23,8 @@ partial class FlatArrayFlatListTest
     }
 
     [Theory]
+    [InlineData(0, 0)]
+    [InlineData(-1, 0)]
     [InlineData(1, 1, PlusFifteen, MinusFifteen)]
     [InlineData(3, 2, null, MinusFifteen, Zero)]
     [InlineData(-1, 3, MinusOne, One, PlusFifteen)]
