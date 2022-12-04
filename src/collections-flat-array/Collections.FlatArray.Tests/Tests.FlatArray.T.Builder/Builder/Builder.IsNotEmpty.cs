@@ -5,24 +5,24 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Collections.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayBuilderTest
 {
     [Fact]
-    public void IsNotEmpty_SourceIsDefault_ExpectFalse()
+    public void IsNotEmpty_SourceIsDefault_ExpectTrue()
     {
-        var source = default(FlatArray<RefType>);
+        var source = default(FlatArray<RecordStruct?>.Builder);
         var actual = source.IsNotEmpty;
 
         Assert.False(actual);
     }
 
     [Theory]
-    [InlineData(SomeString)]
-    [InlineData(null, EmptyString, UpperSomeString, SomeString, WhiteSpaceString)]
+    [InlineData(One)]
+    [InlineData(MinusFifteen, null, PlusFifteen)]
     public void IsNotEmpty_SourceIsNotDefault_ExpectFalse(
-        params string?[] sourceItems)
+        params int?[] sourceItems)
     {
-        var source = sourceItems.InitializeFlatArray();
+        var source = sourceItems.InitializeFlatArrayBuilder();
         var actual = source.IsNotEmpty;
 
         Assert.True(actual);
