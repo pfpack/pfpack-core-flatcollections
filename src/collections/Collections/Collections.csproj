@@ -32,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EarlyFuncPack.Collections.EqualityComparers" Version="0.4.1" />
     <PackageReference Include="EarlyFuncPack.Collections.FlatArray" Version="0.11.0" />
   </ItemGroup>
 
