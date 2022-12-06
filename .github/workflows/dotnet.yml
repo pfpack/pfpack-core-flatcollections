@@ -31,23 +31,6 @@ jobs:
     - name: Add Local Nuget Source
       run: dotnet nuget add source ~/nuget
 
-    # Collections.EqualityComparers
-
-    - name: Restore Collections.EqualityComparers
-      run: dotnet restore ./src/*/*/Collections.EqualityComparers.csproj
-
-    - name: Build Collections.EqualityComparers
-      run: dotnet build ./src/*/*/Collections.EqualityComparers.csproj --no-restore  -c Release
-
-    - name: Pack Collections.EqualityComparers
-      run: dotnet pack ./src/*/*/Collections.EqualityComparers.csproj --no-restore -o ~/nuget  -c Release
-
-    - name: Restore Collections.EqualityComparers.Tests
-      run: dotnet restore ./src/*/*/Collections.EqualityComparers.Tests.csproj
-
-    - name: Test Collections.EqualityComparers.Tests
-      run: dotnet test ./src/*/*/Collections.EqualityComparers.Tests.csproj --no-restore  -c Release
-
     # Collections.FlatArray
 
     - name: Restore Collections.FlatArray
