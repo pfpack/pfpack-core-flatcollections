@@ -3,7 +3,7 @@ using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 using static PrimeFuncPack.Collections.Tests.EqualityComparerTestSource;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 partial class FlatArrayEqualityComparerTest
 {

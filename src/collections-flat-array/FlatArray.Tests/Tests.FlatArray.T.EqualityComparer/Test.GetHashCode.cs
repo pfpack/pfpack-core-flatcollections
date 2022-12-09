@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using static PrimeFuncPack.Collections.Tests.EqualityComparerTestSource;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 partial class FlatArrayEqualityComparerTest
 {

@@ -4,7 +4,7 @@ using System.Text.Json;
 using Xunit;
 using static PrimeFuncPack.Collections.Tests.JsonSerializerTestSource;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 partial class FlatArrayJsonSerializerTest
 {

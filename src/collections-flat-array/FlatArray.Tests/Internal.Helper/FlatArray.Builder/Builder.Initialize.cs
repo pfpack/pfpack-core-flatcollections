@@ -1,6 +1,6 @@
 using System;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 partial class TestHelper
 {

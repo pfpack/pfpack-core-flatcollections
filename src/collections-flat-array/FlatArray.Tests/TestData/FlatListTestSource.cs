@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using static PrimeFuncPack.UnitTest.TestData;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 internal static class FlatListTestSource
 {

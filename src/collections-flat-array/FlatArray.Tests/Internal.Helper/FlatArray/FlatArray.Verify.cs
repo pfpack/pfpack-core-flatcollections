@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 partial class TestHelper
 {

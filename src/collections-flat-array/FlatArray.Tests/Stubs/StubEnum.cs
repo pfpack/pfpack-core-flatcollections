@@ -1,4 +1,4 @@
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 internal enum StubEnum
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace PrimeFuncPack.Collections.Tests;
+namespace PrimeFuncPack.Core.Tests;
 
 internal sealed record class StubItemJson
 {
