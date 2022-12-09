@@ -21,7 +21,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: |
+            6.0.x
+            7.0.x
 
     # Create Local NuGet Source
 
@@ -31,33 +33,33 @@ jobs:
     - name: Add Local Nuget Source
       run: dotnet nuget add source ~/nuget
 
-    # Collections.FlatArray
+    # FlatArray
 
-    - name: Restore Collections.FlatArray
-      run: dotnet restore ./src/*/*/Collections.FlatArray.csproj
+    - name: Restore FlatArray
+      run: dotnet restore ./src/*/*/FlatArray.csproj
 
-    - name: Build Collections.FlatArray
-      run: dotnet build ./src/*/*/Collections.FlatArray.csproj --no-restore  -c Release
+    - name: Build FlatArray
+      run: dotnet build ./src/*/*/FlatArray.csproj --no-restore  -c Release
 
-    - name: Pack Collections.FlatArray
-      run: dotnet pack ./src/*/*/Collections.FlatArray.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack FlatArray
+      run: dotnet pack ./src/*/*/FlatArray.csproj --no-restore -o ~/nuget  -c Release
 
-    - name: Restore Collections.FlatArray.Tests
-      run: dotnet restore ./src/*/*/Collections.FlatArray.Tests.csproj
+    - name: Restore FlatArray.Tests
+      run: dotnet restore ./src/*/*/FlatArray.Tests.csproj
 
-    - name: Test Collections.FlatArray.Tests
-      run: dotnet test ./src/*/*/Collections.FlatArray.Tests.csproj --no-restore  -c Release
+    - name: Test FlatArray.Tests
+      run: dotnet test ./src/*/*/FlatArray.Tests.csproj --no-restore  -c Release
 
-    # Collections
+    # FlatCollections
 
-    - name: Restore Collections
-      run: dotnet restore ./src/*/*/Collections.csproj
+    - name: Restore FlatCollections
+      run: dotnet restore ./src/*/*/FlatCollections.csproj
 
-    - name: Build Collections
-      run: dotnet build ./src/*/*/Collections.csproj --no-restore  -c Release
+    - name: Build FlatCollections
+      run: dotnet build ./src/*/*/FlatCollections.csproj --no-restore  -c Release
 
-    - name: Pack Collections
-      run: dotnet pack ./src/*/*/Collections.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack FlatCollections
+      run: dotnet pack ./src/*/*/FlatCollections.csproj --no-restore -o ~/nuget  -c Release
 
       # Push
 
