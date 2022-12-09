@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using Xunit;
-using static PrimeFuncPack.Collections.Tests.JsonSerializerTestSource;
+using static PrimeFuncPack.Core.Tests.JsonSerializerTestSource;
 
 namespace PrimeFuncPack.Core.Tests;
 

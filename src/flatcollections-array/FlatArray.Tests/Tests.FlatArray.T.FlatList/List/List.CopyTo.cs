@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
-using static PrimeFuncPack.Collections.Tests.FlatListTestSource;
+using static PrimeFuncPack.Core.Tests.FlatListTestSource;
 
 namespace PrimeFuncPack.Core.Tests;
 

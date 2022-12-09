@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-using static PrimeFuncPack.Collections.Tests.EqualityComparerTestSource;
+using static PrimeFuncPack.Core.Tests.EqualityComparerTestSource;
 
 namespace PrimeFuncPack.Core.Tests;
 
