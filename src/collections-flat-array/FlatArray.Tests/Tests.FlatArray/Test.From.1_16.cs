@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
