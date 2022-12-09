@@ -1,4 +1,4 @@
-﻿namespace System.Linq;
+﻿namespace System;
 
 public static partial class FlatArrayExtensions
 {
