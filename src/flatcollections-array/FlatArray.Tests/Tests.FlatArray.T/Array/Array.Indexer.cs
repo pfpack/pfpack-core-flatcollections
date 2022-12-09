@@ -11,12 +11,10 @@ partial class FlatArrayTest
     [InlineData(MinusFifteen)]
     [InlineData(Zero)]
     [InlineData(PlusFifteen)]
-    public void Indexer_SourceIsDefault_ExpectArgumentOutOfRangeException(int index)
+    public void Indexer_SourceIsDefault_ExpectIndexOutOfRangeException(int index)
     {
         var source = default(FlatArray<RefType>);
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(Test);
-
-        Assert.Equal("index", ex.ParamName);
+        var ex = Assert.Throws<IndexOutOfRangeException>(Test);
 
         void Test()
             =>
@@ -44,13 +42,11 @@ partial class FlatArrayTest
     [InlineData(1, 1, EmptyString, AnotherString)]
     [InlineData(5, 2, EmptyString, SomeString)]
     [InlineData(-1, 3, LowerSomeString, null, SomeString)]
-    public void Indexer_IndexIsOutOfRange_ExpectArgumentOutOfRangeException(
+    public void Indexer_IndexIsOutOfRange_ExpectIndexOutOfRangeException(
         int index, int sourceLength, params string?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatArray(sourceLength);
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(Test);
-
-        Assert.Equal("index", ex.ParamName);
+        var ex = Assert.Throws<IndexOutOfRangeException>(Test);
 
         void Test()
             =>

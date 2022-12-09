@@ -11,7 +11,7 @@ partial class FlatArrayBuilderTest
     [InlineData(-1)]
     [InlineData(0)]
     [InlineData(1)]
-    public void Indexer_SourceIsDefault_ExpectArgumentOutOfRangeException(int index)
+    public void Indexer_SourceIsDefault_ExpectIndexOutOfRangeException(int index)
     {
         var source = default(FlatArray<StructType>.Builder);
 
@@ -19,13 +19,12 @@ partial class FlatArrayBuilderTest
         {
             _ = source[index];
         }
-        catch (ArgumentOutOfRangeException ex)
+        catch (IndexOutOfRangeException)
         {
-            Assert.Equal("index", ex.ParamName);
             return;
         }
 
-        Assert.Fail("An expected ArgumentOutOfRangeException was not thrown");
+        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
     }
 
     [Theory]
@@ -49,7 +48,7 @@ partial class FlatArrayBuilderTest
     [InlineData(1, 1, AnotherString, SomeString)]
     [InlineData(5, 2, EmptyString, TabString)]
     [InlineData(-1, 3, LowerSomeString, null, SomeString)]
-    public void Indexer_IndexIsOutOfRange_ExpectArgumentOutOfRangeException(
+    public void Indexer_IndexIsOutOfRange_ExpectIndexOutOfRangeException(
         int index, int sourceLength, params string?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatArrayBuilder(sourceLength);
@@ -58,12 +57,11 @@ partial class FlatArrayBuilderTest
         {
             _ = source[index];
         }
-        catch (ArgumentOutOfRangeException ex)
+        catch (IndexOutOfRangeException)
         {
-            Assert.Equal("index", ex.ParamName);
             return;
         }
 
-        Assert.Fail("An expected ArgumentOutOfRangeException was not thrown");
+        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
     }
 }

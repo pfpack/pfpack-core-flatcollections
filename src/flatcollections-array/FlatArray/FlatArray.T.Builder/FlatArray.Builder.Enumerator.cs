@@ -47,7 +47,7 @@ partial struct FlatArray<T>
 
                     // The builder length may have changed since the last successful MoveNext
                     // Thus, throw IndexOutOfRangeException instead of InvalidOperationException
-                    throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
+                    throw InnerExceptionFactory.IndexOutOfRange(index, length: builder.length);
                 }
             }
         }

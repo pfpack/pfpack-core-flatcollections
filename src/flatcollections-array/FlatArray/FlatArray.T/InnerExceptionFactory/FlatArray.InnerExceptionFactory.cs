@@ -18,9 +18,9 @@ partial struct FlatArray<T>
             =>
             new(paramName, Invariant($"Capacity must be greater than or equal to the array length. Actual value was {actualValue}. Length was {length}."));
 
-        internal static ArgumentOutOfRangeException IndexOutOfRange(string paramName, int actualValue)
+        internal static IndexOutOfRangeException IndexOutOfRange(int actualValue, int length)
             =>
-            new(paramName, Invariant($"Index must be greater than or equal to zero and less than the array length. Actual value was {actualValue}."));
+            new(Invariant($"Index must be greater than or equal to zero and less than the array length. Actual value was {actualValue}. Length was {length}."));
 
         internal static InvalidOperationException EnumerationEitherNotStartedOrFinished()
             =>

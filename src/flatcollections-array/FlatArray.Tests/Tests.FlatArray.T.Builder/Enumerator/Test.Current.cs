@@ -8,7 +8,7 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayBuilderTest
 {
     [Fact]
-    public void Enumerator_Current_SourceIsDefault_ExpectArgumentOutOfRangeException()
+    public void Enumerator_Current_SourceIsDefault_ExpectIndexOutOfRangeException()
     {
         var source = default(FlatArray<RefType>.Builder.Enumerator);
         
@@ -16,12 +16,12 @@ partial class FlatArrayBuilderTest
         {
             _ = source.Current;
         }
-        catch (ArgumentOutOfRangeException)
+        catch (IndexOutOfRangeException)
         {
             return;
         }
 
-        Assert.Fail("An expected ArgumentOutOfRangeException was not thrown");
+        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
     }
 
     [Theory]
@@ -43,7 +43,7 @@ partial class FlatArrayBuilderTest
     [InlineData(1, 1, PlusFifteen)]
     [InlineData(3, 2, MinusFifteen, null, Zero, One, PlusFifteen)]
     [InlineData(-1, 2, MinusOne, PlusFifteen)]
-    public void Enumerator_Current_IndexIsNotInRange_ExpectArgumentOutOfRangeException(
+    public void Enumerator_Current_IndexIsNotInRange_ExpectIndexOutOfRangeException(
         int index, int length, params int?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatArrayBuilder(length).InitializeEnumerator(index);
@@ -52,11 +52,11 @@ partial class FlatArrayBuilderTest
         {
             _ = source.Current;
         }
-        catch (ArgumentOutOfRangeException)
+        catch (IndexOutOfRangeException)
         {
             return;
         }
 
-        Assert.Fail("An expected ArgumentOutOfRangeException was not thrown");
+        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
     }
 }

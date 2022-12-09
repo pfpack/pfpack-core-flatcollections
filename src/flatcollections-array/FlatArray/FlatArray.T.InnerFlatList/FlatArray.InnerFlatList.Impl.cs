@@ -22,7 +22,7 @@ partial struct FlatArray<T>
                     return items[index];
                 }
 
-                throw InnerExceptionFactory.IndexOutOfRange(nameof(index), index);
+                throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
             }
             set
             {
