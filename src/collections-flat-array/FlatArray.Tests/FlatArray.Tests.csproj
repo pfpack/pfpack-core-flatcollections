@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Collections.FlatArray\FlatArray.csproj" />
+    <ProjectReference Include="..\FlatArray\FlatArray.csproj" />
   </ItemGroup>
 
 </Project>
