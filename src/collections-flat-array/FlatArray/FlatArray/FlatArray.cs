@@ -1,4 +1,4 @@
-﻿namespace System.Collections.Generic;
+﻿namespace System;
 
 public static partial class FlatArray
 {

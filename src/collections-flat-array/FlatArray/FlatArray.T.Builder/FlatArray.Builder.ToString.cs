@@ -1,6 +1,6 @@
 ﻿using static System.FormattableString;
 
-namespace System.Collections.Generic;
+namespace System;
 
 partial struct FlatArray<T>
 {

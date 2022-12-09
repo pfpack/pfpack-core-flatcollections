@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace System.Collections.Generic;
+namespace System;
 
 internal sealed partial class FlatArrayJsonConverter<T> : JsonConverter<FlatArray<T>>
 {

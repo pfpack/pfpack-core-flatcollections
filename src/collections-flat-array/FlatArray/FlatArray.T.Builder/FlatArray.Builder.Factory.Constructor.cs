@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace System.Collections.Generic;
+namespace System;
 
 partial struct FlatArray<T>
 {

@@ -1,4 +1,4 @@
-namespace System.Collections.Generic;
+namespace System;
 
 partial class FlatArrayJsonConverter<T>
 {

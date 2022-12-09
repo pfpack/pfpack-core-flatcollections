@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace System.Collections.Generic;
+namespace System;
 
 partial struct FlatArray<T>
 {

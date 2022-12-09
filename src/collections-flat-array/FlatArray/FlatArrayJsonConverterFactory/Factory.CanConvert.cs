@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace System.Collections.Generic;
+namespace System;
 
 partial class FlatArrayJsonConverterFactory
 {

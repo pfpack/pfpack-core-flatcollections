@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace System.Collections.Generic;
+namespace System;
 
 partial class FlatArray
 {

@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json;
 
-namespace System.Collections.Generic;
+namespace System;
 
 partial class FlatArrayJsonConverter<T>
 {

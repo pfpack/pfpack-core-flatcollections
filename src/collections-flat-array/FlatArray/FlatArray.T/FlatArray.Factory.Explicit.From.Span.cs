@@ -1,4 +1,4 @@
-﻿namespace System.Collections.Generic;
+﻿namespace System;
 
 partial struct FlatArray<T>
 {
