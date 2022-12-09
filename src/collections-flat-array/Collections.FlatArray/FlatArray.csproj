@@ -9,15 +9,15 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/pfpack/pfpack-collections</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pfpack/pfpack-collections</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/pfpack/pfpack-core-flatcollections</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pfpack/pfpack-core-flatcollections</RepositoryUrl>
     <Company>pfpack</Company>
     <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
     <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
-    <Description>PrimeFuncPack Collections.FlatArray is a core library for .NET consisting of immutable FlatArray.</Description>
-    <RootNamespace>System.Collections.Generic</RootNamespace>
-    <AssemblyName>EarlyFuncPack.Collections.FlatArray</AssemblyName>
-    <Version>0.11.0</Version>
+    <Description>PrimeFuncPack Core.FlatArray is a core library for .NET consisting of immutable FlatArray targeted for use in functional programming.</Description>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>PrimeFuncPack.Core.FlatArray</AssemblyName>
+    <Version>1.0.0-rc.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +25,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="..\..\..\docs\collections-flat-array\README.md">
+    <None Include="..\..\..\docs\flatcollections-array\README.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

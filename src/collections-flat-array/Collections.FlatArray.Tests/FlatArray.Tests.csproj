@@ -9,8 +9,8 @@
     <IsPackable>false</IsPackable>
     <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
     <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
-    <RootNamespace>PrimeFuncPack.Collections.Tests</RootNamespace>
-    <AssemblyName>PrimeFuncPack.Collections.FlatArray.Tests</AssemblyName>
+    <RootNamespace>PrimeFuncPack.Core.Tests</RootNamespace>
+    <AssemblyName>PrimeFuncPack.Core.FlatArray.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Collections.FlatArray\Collections.FlatArray.csproj" />
+    <ProjectReference Include="..\Collections.FlatArray\FlatArray.csproj" />
   </ItemGroup>
 
 </Project>
