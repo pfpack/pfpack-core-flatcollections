@@ -1,10 +1,13 @@
-﻿namespace System;
+﻿using System.Runtime.CompilerServices;
+
+namespace System;
 
 partial struct FlatArray<T>
 {
     partial struct Builder
     {
         // TODO: Make public when dynamic builder is implemented
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Builder Empty()
             =>
             default;

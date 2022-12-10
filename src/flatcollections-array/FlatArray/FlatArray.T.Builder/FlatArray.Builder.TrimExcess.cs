@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -8,6 +9,11 @@ partial struct FlatArray<T>
     {
         // TODO: Make public when dynamic builder is implemented
         internal void TrimExcess()
+            =>
+            InnerTrimExcess();
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void InnerTrimExcess()
         {
             Debug.Assert(InnerIsValidState());
 
