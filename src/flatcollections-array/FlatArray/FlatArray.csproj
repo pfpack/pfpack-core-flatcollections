@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/pfpack/pfpack-core-flatcollections</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pfpack/pfpack-core-flatcollections</RepositoryUrl>
+    <Company>pfpack</Company>
+    <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
+    <Copyright>Copyright © 2022 Andrei Sergeev, Pavel Moskovoy</Copyright>
+    <Description>PrimeFuncPack Core.FlatArray is a core library for .NET consisting of immutable FlatArray targeted for use in functional programming.</Description>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>PrimeFuncPack.Core.FlatArray</AssemblyName>
+    <Version>1.0.0-preview.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\docs\flatcollections-array\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
