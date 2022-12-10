@@ -17,7 +17,7 @@
     <Description>PrimeFuncPack Core.FlatArray is a core library for .NET consisting of immutable FlatArray targeted for use in functional programming.</Description>
     <RootNamespace>System</RootNamespace>
     <AssemblyName>PrimeFuncPack.Core.FlatArray</AssemblyName>
-    <Version>1.0.0-preview.1</Version>
+    <Version>1.0.0-rc.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
