@@ -14,7 +14,7 @@ partial class FlatArrayTest
         var actual = source.MoveNext();
 
         Assert.False(actual);
-        source.VerifyInnerState(Array.Empty<RefType>(), 0);
+        source.VerifyInnerState(0, null, 0);
     }
 
     [Theory]
@@ -24,13 +24,13 @@ partial class FlatArrayTest
     public void Enumerator_MoveNext_IndexIsLessThanLengthMinusOne_ExpectTrueAndNextIndex(
         int index, params int?[] items)
     {
-        var coppiedItems = items.GetCopy();
+        var copiedItems = items.GetCopy();
 
-        var source = items.InitializeFlatArrayEnumerator(index);
+        var source = items.InitializeFlatArrayEnumerator(items.Length, index);
         var actual = source.MoveNext();
 
         Assert.True(actual);
-        source.VerifyInnerState(coppiedItems, index + 1);
+        source.VerifyInnerState(copiedItems.Length, copiedItems, index + 1);
     }
 
     [Theory]
@@ -40,12 +40,12 @@ partial class FlatArrayTest
     public void Enumerator_MoveNext_IndexIsEqualToLengthOrGreate_ExpectFalseAndIndexHasNotChanged(
         int index, params string?[] items)
     {
-        var coppied = items.GetCopy();
+        var copied = items.GetCopy();
 
-        var source = items.InitializeFlatArrayEnumerator(index);
+        var source = items.InitializeFlatArrayEnumerator(items.Length, index);
         var actual = source.MoveNext();
 
         Assert.False(actual);
-        source.VerifyInnerState(coppied, index);
+        source.VerifyInnerState(copied.Length, copied, index);
     }
 }

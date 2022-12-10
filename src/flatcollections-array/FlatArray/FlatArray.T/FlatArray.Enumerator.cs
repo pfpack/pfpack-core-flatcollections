@@ -1,20 +1,26 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
 partial struct FlatArray<T>
 {
-    public ref struct Enumerator
+    public struct Enumerator
     {
         private const int DefaultIndex = -1;
 
-        private readonly ReadOnlySpan<T> items;
+        private readonly int length;
+
+        private readonly T[] items;
 
         private int index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal Enumerator(ReadOnlySpan<T> items)
+        internal Enumerator(int length, T[] items)
         {
+            Debug.Assert(length >= 0 && length <= items.Length);
+
+            this.length = length;
             this.items = items;
             index = DefaultIndex;
         }
@@ -22,9 +28,9 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()
         {
-            if (index < items.Length)
+            if (index < length)
             {
-                if (++index < items.Length)
+                if (++index < length)
                 {
                     return true;
                 }
@@ -33,12 +39,18 @@ partial struct FlatArray<T>
             return false;
         }
 
-        public ref readonly T Current
+        public T Current
         {
-            // Delegate range check to the indexer for performance purposes
-            // IndexOutOfRangeException will be thrown instead of InvalidOperationException
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => ref items[index];
+            get
+            {
+                if (index >= 0 && index < length)
+                {
+                    return items[index];
+                }
+
+                throw InnerExceptionFactory.EnumerationEitherNotStartedOrFinished();
+            }
         }
     }
 }
