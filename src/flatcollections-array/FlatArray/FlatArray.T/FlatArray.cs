@@ -25,6 +25,15 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
         =>
         length == default;
 
+    /*
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool InnerIsValidState() // For only use in Debug.Assert
+        =>
+        length == default && items is null ||
+        length == default && items is not null && items.Length > 0 ||
+        length > 0 && items is not null && length <= items.Length;
+    */
+
     [MemberNotNullWhen(returnValue: true, nameof(items))]
     private bool InnerIsNotEmpty
         =>
