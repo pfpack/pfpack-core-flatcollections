@@ -6,7 +6,7 @@ partial struct FlatArray<T>
 {
     partial struct Builder
     {
-        public ref struct Enumerator
+        public struct Enumerator
         {
             private const int DefaultIndex = -1;
 
@@ -35,14 +35,14 @@ partial struct FlatArray<T>
                 return false;
             }
 
-            public ref T Current
+            public T Current
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
                     if (index >= 0 && index < builder.length)
                     {
-                        return ref builder.items![index];
+                        return builder.items![index];
                     }
 
                     // The builder length may have changed since the last successful MoveNext

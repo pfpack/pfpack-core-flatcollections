@@ -8,7 +8,7 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Fact]
-    public void Enumerator_Current_SourceIsDefault_ExpectIndexOutOfRangeException()
+    public void Enumerator_Current_SourceIsDefault_ExpectInvalidOperationException()
     {
         var source = default(FlatArray<StructType>.Enumerator);
         
@@ -16,12 +16,12 @@ partial class FlatArrayTest
         {
             _ = source.Current;
         }
-        catch (IndexOutOfRangeException)
+        catch (InvalidOperationException)
         {
             return;
         }
 
-        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
+        Assert.Fail("An expected InvalidOperationException was not thrown");
     }
 
     [Theory]
@@ -31,11 +31,11 @@ partial class FlatArrayTest
     public void Enumerator_Current_IndexIsInRange_ExpectItemByIndex(
         int index, params bool?[] sourceItems)
     {
-        var coppiedItems = sourceItems.GetCopy();
-        var source = sourceItems.InitializeFlatArrayEnumerator(index);
+        var copiedItems = sourceItems.GetCopy();
+        var source = sourceItems.InitializeFlatArrayEnumerator(sourceItems.Length, index);
 
         var actual = source.Current;
-        var expected = coppiedItems[index];
+        var expected = copiedItems[index];
 
         Assert.Equal(expected, actual);
     }
@@ -45,20 +45,20 @@ partial class FlatArrayTest
     [InlineData(1, SomeString)]
     [InlineData(5, AnotherString, EmptyString, null)]
     [InlineData(-1, TabString, SomeString)]
-    public void Enumerator_Current_IndexIsNotInRange_ExpectIndexOutOfRangeException(
+    public void Enumerator_Current_IndexIsNotInRange_ExpectInvalidOperationException(
         int index, params string?[] sourceItems)
     {
-        var source = sourceItems.InitializeFlatArrayEnumerator(index);
+        var source = sourceItems.InitializeFlatArrayEnumerator(sourceItems.Length, index);
 
         try
         {
             _ = source.Current;
         }
-        catch (IndexOutOfRangeException)
+        catch (InvalidOperationException)
         {
             return;
         }
 
-        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
+        Assert.Fail("An expected InvalidOperationException was not thrown");
     }
 }
