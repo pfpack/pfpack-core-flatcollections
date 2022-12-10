@@ -12,7 +12,13 @@ partial struct FlatArray<T>
                 return;
             }
 
-            this = default;
+            // Array.Clear implementation uses Span.Clear
+            // Thus, direct using Span should be more efficient
+
+            // Clear the items so that the GC can reclaim the references
+            InnerAsSpan().Clear();
+
+            length = default;
         }
     }
 }
