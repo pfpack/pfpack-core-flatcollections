@@ -6,7 +6,13 @@ partial struct FlatArray<T>
     {
         // TODO: Make public when dynamic builder is implemented
         internal void Clear()
-            =>
+        {
+            if (InnerIsEmpty)
+            {
+                return;
+            }
+
             this = default;
+        }
     }
 }

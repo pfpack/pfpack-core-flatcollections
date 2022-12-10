@@ -11,13 +11,9 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            var length = this.length;
-            var items = this.items;
-
-            // Clear the builder before moving the items to the result array
+            var copy = this;
             this = default;
-
-            return new(length, items);
+            return new(copy.length, copy.items);
         }
     }
 }
