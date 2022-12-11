@@ -13,16 +13,25 @@ partial struct FlatArray<T>
             new();
 
         // TODO: Make public when dynamic builder is implemented
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Builder Empty(int capacity)
+            =>
+            InternalEmpty(capacity, nameof(capacity));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Builder InternalEmpty(int capacity, string paramName)
         {
             if (capacity is not >= 0)
             {
-                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(nameof(capacity), capacity);
+                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(paramName, capacity);
             }
 
-            return capacity == default
-                ? new()
-                : new(default, new T[capacity]);
+            return InnerEmpty(capacity);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static Builder InnerEmpty(int capacity)
+            =>
+            capacity != default ? new(default, new T[capacity]) : new();
     }
 }
