@@ -5,7 +5,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Builder(T item)

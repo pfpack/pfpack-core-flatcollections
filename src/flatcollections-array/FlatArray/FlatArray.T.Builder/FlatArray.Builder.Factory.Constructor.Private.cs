@@ -5,7 +5,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
         // Initializes an instance in 'as is' mode without any processing and creation of a defensive copy
         //
@@ -20,6 +20,15 @@ partial struct FlatArray<T>
             Debug.Assert(items.Length != default);
 
             length = items.Length;
+            this.items = items;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Builder(int length, T[] items)
+        {
+            Debug.Assert(length > 0 && length <= items.Length);
+
+            this.length = length;
             this.items = items;
         }
     }

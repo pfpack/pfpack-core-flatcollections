@@ -4,13 +4,13 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
         // TODO: Make public when dynamic builder is implemented
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Builder Empty()
             =>
-            default;
+            new();
 
         // TODO: Make public when dynamic builder is implemented
         internal static Builder Empty(int capacity)
@@ -20,13 +20,9 @@ partial struct FlatArray<T>
                 throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(nameof(capacity), capacity);
             }
 
-            if (capacity == default)
-            {
-                return default;
-            }
-
-            // TODO: Implement dynamic builder
-            throw new NotImplementedException();
+            return capacity == default
+                ? new()
+                : new(default, new T[capacity]);
         }
     }
 }

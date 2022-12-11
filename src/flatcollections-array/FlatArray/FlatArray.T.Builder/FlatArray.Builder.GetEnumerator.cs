@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
         public Enumerator GetEnumerator()
             =>

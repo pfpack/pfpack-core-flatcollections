@@ -5,14 +5,22 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Builder()
+        {
+            length = default;
+            items = InnerEmptyArray.Value;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Builder([AllowNull] params T[] source)
         {
             if (source is null || source.Length == default)
             {
-                this = default;
+                length = default;
+                items = InnerEmptyArray.Value;
                 return;
             }
 

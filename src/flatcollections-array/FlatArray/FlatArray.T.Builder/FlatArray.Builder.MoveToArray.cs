@@ -4,7 +4,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
         public FlatArray<T> MoveToArray()
             =>

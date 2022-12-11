@@ -7,7 +7,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial struct Builder
+    partial class Builder
     {
         public static Builder From([AllowNull] params T[] source)
             =>
