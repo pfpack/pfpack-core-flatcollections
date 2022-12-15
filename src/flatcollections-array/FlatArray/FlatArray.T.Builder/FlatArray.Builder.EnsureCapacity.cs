@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace System;
+﻿namespace System;
 
 partial struct FlatArray<T>
 {
@@ -9,35 +7,24 @@ partial struct FlatArray<T>
         // TODO: Make public when dynamic builder is implemented
         internal int EnsureCapacity(int capacity)
         {
-            Debug.Assert(InnerIsValidState());
-
             if (capacity is not >= 0)
             {
-                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(nameof(capacity), capacity);
+                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(
+                    nameof(capacity), capacity);
             }
 
-            var copy = this;
+            // Copy the state to reduce the chance of multithreading side effects
 
-            if (capacity == default)
+            var items = this.items;
+
+            if (capacity <= items.Length)
             {
-                return copy.items is null ? default : copy.items.Length;
+                return items.Length;
             }
 
-            if (copy.items is null)
-            {
-                copy.items = new T[capacity];
-                this = copy;
-                return capacity;
-            }
-
-            if (copy.items.Length < capacity)
-            {
-                InnerArrayHelper.ExtendUnchecked(ref copy.items, capacity);
-                this = copy;
-                return capacity;
-            }
-
-            return copy.items.Length;
+            InnerArrayHelper.ExtendUnchecked(ref items, capacity);
+            this.items = items;
+            return capacity;
         }
     }
 }

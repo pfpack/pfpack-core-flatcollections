@@ -24,8 +24,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private FlatArray<T> InnerMoveToArray()
         {
-            // Copy the state at the beginning to reduce the chance
-            // of multithreading side effects
+            // Copy the state to reduce the chance of multithreading side effects
 
             var length = this.length;
             var items = this.items;
