@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -15,28 +14,16 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InnerTrimExcess()
         {
-            Debug.Assert(InnerIsValidState());
+            // Copy the state to reduce the chance of multithreading side effects
 
-            var copy = this;
+            var length = this.length;
+            var items = this.items;
 
-            if (copy.items is null)
+            if (length < items.Length)
             {
-                return;
+                InnerArrayHelper.TruncateUnchecked(ref items, length);
+                this.items = items;
             }
-
-            if (copy.length == default)
-            {
-                this = default;
-                return;
-            }
-
-            if (copy.length == copy.items.Length)
-            {
-                return;
-            }
-
-            InnerArrayHelper.TruncateUnchecked(ref copy.items, copy.length);
-            this = copy;
         }
     }
 }
