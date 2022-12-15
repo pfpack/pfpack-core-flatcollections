@@ -42,7 +42,7 @@ partial struct FlatArray<T>
                 {
                     if (index >= 0 && index < builder.length)
                     {
-                        return builder.items![index];
+                        return builder.items[index];
                     }
 
                     // The builder length may have changed since the last successful MoveNext

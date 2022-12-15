@@ -13,7 +13,7 @@ partial struct FlatArray<T>
             {
                 if (index >= 0 && index < length)
                 {
-                    return items![index];
+                    return items[index];
                 }
 
                 throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
@@ -23,7 +23,7 @@ partial struct FlatArray<T>
             {
                 if (index >= 0 && index < length)
                 {
-                    items![index] = value;
+                    items[index] = value;
                 }
 
                 throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
@@ -35,7 +35,7 @@ partial struct FlatArray<T>
         {
             if (index >= 0 && index < length)
             {
-                return ref items![index];
+                return ref items[index];
             }
 
             throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
