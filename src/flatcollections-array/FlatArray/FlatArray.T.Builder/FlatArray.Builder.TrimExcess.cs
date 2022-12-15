@@ -19,11 +19,13 @@ partial struct FlatArray<T>
             var length = this.length;
             var items = this.items;
 
-            if (length < items.Length)
+            if (length == items.Length)
             {
-                InnerArrayHelper.TruncateUnchecked(ref items, length);
-                this.items = items;
+                return;
             }
+
+            InnerArrayHelper.TruncateUnchecked(ref items, length);
+            this.items = items;
         }
     }
 }
