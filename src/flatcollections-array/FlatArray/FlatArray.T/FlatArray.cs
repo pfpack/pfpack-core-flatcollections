@@ -25,15 +25,6 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
         =>
         length == default;
 
-    /*
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool InnerIsValidState() // For only use in Debug.Assert
-        =>
-        length == default && items is null ||
-        length == default && items is not null && items.Length > 0 ||
-        length > 0 && items is not null && length <= items.Length;
-    */
-
     [MemberNotNullWhen(returnValue: true, nameof(items))]
     private bool InnerIsNotEmpty
         =>
@@ -51,11 +42,33 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()
-        =>
-        InnerIsNotEmpty ? new(items, 0, length) : ReadOnlySpan<T>.Empty;
+    {
+        if (length == default)
+        {
+            return ReadOnlySpan<T>.Empty;
+        }
+
+        if (length == items!.Length)
+        {
+            return new(items);
+        }
+
+        return new(items, 0, length);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlyMemory<T> InnerAsMemory()
-        =>
-        InnerIsNotEmpty ? new(items, 0, length) : ReadOnlyMemory<T>.Empty;
+    {
+        if (length == default)
+        {
+            return ReadOnlyMemory<T>.Empty;
+        }
+
+        if (length == items!.Length)
+        {
+            return new(items);
+        }
+
+        return new(items, 0, length);
+    }
 }

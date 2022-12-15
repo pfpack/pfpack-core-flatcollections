@@ -24,14 +24,21 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private FlatArray<T> InnerMoveToArray()
         {
-            if (InnerIsEmpty)
+            // Copy the state at the beginning to reduce the chance
+            // of multithreading side effects
+
+            var length = this.length;
+            var items = this.items;
+
+            if (length == default)
             {
                 return default;
             }
 
-            var copy = this;
-            this = default;
-            return new(copy.length, copy.items);
+            this.length = default;
+            this.items = InnerEmptyArray.Value;
+
+            return new(length, items);
         }
     }
 }

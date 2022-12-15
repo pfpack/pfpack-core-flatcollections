@@ -26,7 +26,18 @@ partial struct FlatArray<T>
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Span<T> InnerAsSpan()
-            =>
-            length != default ? new(items, 0, length) : Span<T>.Empty;
+        {
+            if (length == default)
+            {
+                return Span<T>.Empty;
+            }
+
+            if (length == items.Length)
+            {
+                return new(items);
+            }
+
+            return new(items, 0, length);
+        }
     }
 }

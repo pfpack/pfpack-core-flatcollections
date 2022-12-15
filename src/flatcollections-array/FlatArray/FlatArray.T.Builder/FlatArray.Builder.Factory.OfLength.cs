@@ -11,7 +11,7 @@ partial struct FlatArray<T>
                 throw InnerExceptionFactory.LengthOutOfRange(nameof(length), length);
             }
 
-            return length == default ? default : new(new T[length], default);
+            return new(length, capacity: length);
         }
 
         // TODO: Make public when dynamic builder is implemented
@@ -27,8 +27,7 @@ partial struct FlatArray<T>
                 throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToLength(nameof(capacity), capacity, length: length);
             }
 
-            // TODO: Implement dynamic builder
-            throw new NotImplementedException();
+            return new(length, capacity: capacity);
         }
     }
 }

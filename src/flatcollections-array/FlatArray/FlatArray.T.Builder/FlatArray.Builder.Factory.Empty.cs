@@ -26,12 +26,7 @@ partial struct FlatArray<T>
                 throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(paramName, capacity);
             }
 
-            return InnerEmpty(capacity);
+            return new(capacity);
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Builder InnerEmpty(int capacity)
-            =>
-            capacity != default ? new(default, new T[capacity]) : new();
     }
 }
