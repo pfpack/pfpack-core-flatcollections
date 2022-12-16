@@ -1,3 +1,5 @@
+#define TRIM_EXCESS_ON_DESERIALIZATION
+
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -36,12 +38,16 @@ partial struct FlatArray<T>
                         return default;
                     }
 
+#if TRIM_EXCESS_ON_DESERIALIZATION
                     if (actualCount < array.Length)
                     {
                         InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
                     }
 
                     return new(array, default);
+#else
+                    return new(actualCount, array);
+#endif
                 }
 
                 var item = itemConverter.Read(ref reader, InnerItemType.Value, options);
