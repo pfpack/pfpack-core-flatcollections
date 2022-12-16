@@ -25,11 +25,6 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
         =>
         length == default;
 
-    [MemberNotNullWhen(returnValue: true, nameof(items))]
-    private bool InnerIsNotEmpty
-        =>
-        length != default;
-
     [MemberNotNullWhen(returnValue: false, nameof(items))]
     private bool InnerIsEmpty
         =>
@@ -38,7 +33,7 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private T[] InnerItems()
         =>
-        InnerIsNotEmpty ? items : InnerEmptyArray.Value;
+        length != default ? items! : InnerEmptyArray.Value;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()
