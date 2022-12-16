@@ -11,7 +11,7 @@ partial struct FlatArray<T>
     {
         public static Builder From([AllowNull] params T[] source)
             =>
-            source is null ? default : InnerFromArray(source);
+            source is null ? new() : InnerFromArray(source);
 
         public static Builder From(FlatArray<T> source)
             =>
@@ -19,11 +19,11 @@ partial struct FlatArray<T>
 
         public static Builder From(FlatArray<T>? source)
             =>
-            source is null ? default : InnerFromFlatArray(source.Value);
+            source is null ? new() : InnerFromFlatArray(source.Value);
 
         public static Builder From([AllowNull] List<T> source)
             =>
-            source is null ? default : InnerFromList(source);
+            source is null ? new() : InnerFromList(source);
 
         public static Builder From(ImmutableArray<T> source)
             =>
@@ -31,17 +31,17 @@ partial struct FlatArray<T>
 
         public static Builder From(ImmutableArray<T>? source)
             =>
-            source is null ? default : InnerFromImmutableArray(source.Value);
+            source is null ? new() : InnerFromImmutableArray(source.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromArray(T[] source)
             =>
-            source.Length == default ? default : new(InnerArrayHelper.Clone(source), default);
+            source.Length == default ? new() : new(InnerArrayHelper.Clone(source), default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromFlatArray(FlatArray<T> source)
             =>
-            source.InnerIsNotEmpty ? new(InnerArrayHelper.Copy(source.items, source.length), default) : default;
+            source.InnerIsEmpty ? new() : new(InnerArrayHelper.Copy(source.items, source.length), default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromList(List<T> source)
@@ -49,7 +49,7 @@ partial struct FlatArray<T>
             var count = source.Count;
             if (count == default)
             {
-                return default;
+                return new();
             }
 
             var array = new T[count];
@@ -63,7 +63,7 @@ partial struct FlatArray<T>
         {
             if (source.IsDefaultOrEmpty)
             {
-                return default;
+                return new();
             }
 
             var array = new T[source.Length];

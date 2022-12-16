@@ -6,7 +6,7 @@ partial struct FlatArray<T>
     {
         public void Fill()
         {
-            if (InnerIsEmpty)
+            if (length == default)
             {
                 return;
             }
@@ -20,7 +20,7 @@ partial struct FlatArray<T>
 
         public void Fill(T value)
         {
-            if (InnerIsEmpty)
+            if (length == default)
             {
                 return;
             }
