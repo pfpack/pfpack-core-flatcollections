@@ -41,22 +41,22 @@ partial struct FlatArray<T>
             return new(length, items);
         }
 
-        // The caller MUST ensure the size is GREATER than zero
-        // and the capacity is NOT LESS than the size
+        // The caller MUST ensure the length is GREATER than zero
+        // and the capacity is NOT LESS than the length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool InnerIsHugeCapacity(int size, int capacity)
+        private static bool InnerIsHugeCapacity(int length, int capacity)
         {
-            Debug.Assert(size > 0);
-            Debug.Assert(capacity >= size);
+            Debug.Assert(length > 0);
+            Debug.Assert(capacity >= length);
 
-            int doubleSize = unchecked(size * 2);
+            int doubleLength = unchecked(length * 2);
 
-            if (doubleSize < 0) // handle the overflow case
+            if (doubleLength < 0) // handle the overflow case
             {
                 return false;
             }
 
-            return doubleSize <= capacity;
+            return doubleLength <= capacity;
         }
     }
 }

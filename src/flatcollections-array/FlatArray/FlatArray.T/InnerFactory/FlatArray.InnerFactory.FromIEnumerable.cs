@@ -50,15 +50,15 @@ partial struct FlatArray<T>
             return new(array, default);
         }
 
-        // The caller MUST ensure the size is GREATER than zero
-        // and the max capacity is NOT LESS than the size
+        // The caller MUST ensure the length is GREATER than zero
+        // and the max capacity is NOT LESS than the length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int InnerEstimateCapacity(int size, int maxCapacity)
+        private static int InnerEstimateCapacity(int length, int maxCapacity)
         {
-            Debug.Assert(size > 0);
-            Debug.Assert(maxCapacity >= size);
+            Debug.Assert(length > 0);
+            Debug.Assert(maxCapacity >= length);
 
-            int capacity = unchecked(size * 2);
+            int capacity = unchecked(length * 2);
 
             if (capacity < 0) // handle the overflow case
             {
