@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -23,17 +22,44 @@ partial struct FlatArray<T>
                 throw new JsonException("The last processed JSON token is not the start of an array.");
             }
 
-            var list = new List<T>();
+            const int DefaultCapacity = 4;
+
+            int actualCount = default;
+            var array = new T[DefaultCapacity];
 
             while (reader.Read())
             {
                 if (reader.TokenType is JsonTokenType.EndArray)
                 {
-                    return FlatArray<T>.From(list);
+                    if (actualCount == default)
+                    {
+                        return default;
+                    }
+
+                    if (actualCount < array.Length)
+                    {
+                        InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
+                    }
+
+                    return new(array, default);
                 }
 
                 var item = itemConverter.Read(ref reader, InnerItemType.Value, options);
-                list.Add(item!);
+
+                if (actualCount < array.Length)
+                {
+                    array[actualCount++] = item!;
+                }
+                else if (actualCount < Array.MaxLength)
+                {
+                    int newCapacity = InnerAllocHelper.EstimateCapacity(array.Length, Array.MaxLength);
+                    InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
+                    array[actualCount++] = item!;
+                }
+                else
+                {
+                    throw InnerExceptionFactory.SourceTooLarge();
+                }
             }
 
             throw new JsonException("Reading the JSON completed, but the end of the array was not found.");
