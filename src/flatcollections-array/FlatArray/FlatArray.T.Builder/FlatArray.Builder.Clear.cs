@@ -16,6 +16,8 @@ partial struct FlatArray<T>
             // Thus, direct using Span should be more efficient
 
             // Clear the items so that the GC can reclaim the references
+            // (clear only the items within the actual length;
+            // the rest is supposed to be already cleared)
             InnerAsSpan().Clear();
 
             length = default;
