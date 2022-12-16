@@ -11,12 +11,12 @@ partial struct FlatArray<T>
 
     public List<T> ToList()
     {
-        if (InnerIsEmpty)
+        if (length == default)
         {
             return new();
         }
 
-        if (length < items.Length)
+        if (length < items!.Length)
         {
             // The most efficient way to build a list for this case
 
@@ -35,12 +35,12 @@ partial struct FlatArray<T>
 
     public ImmutableArray<T> ToImmutableArray()
     {
-        if (InnerIsEmpty)
+        if (length == default)
         {
             return ImmutableArray<T>.Empty;
         }
 
-        if (length < items.Length)
+        if (length < items!.Length)
         {
             return ImmutableArray.Create(items, 0, length);
         }

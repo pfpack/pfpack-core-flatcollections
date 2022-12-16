@@ -37,6 +37,7 @@ partial struct FlatArray<T>
             this.length = default;
             this.items = InnerEmptyArray.Value;
 
+            // Call the inner constructor of FlatArray here
             return new(length, items);
         }
     }
