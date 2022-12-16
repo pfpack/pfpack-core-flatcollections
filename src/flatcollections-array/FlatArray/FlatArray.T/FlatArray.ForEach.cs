@@ -6,14 +6,14 @@ partial struct FlatArray<T>
 {
     public void ForEach(Action<T> action)
         =>
-        InternalForEach(action ?? throw new ArgumentNullException(nameof(action)));
+        InnerForEach(action ?? throw new ArgumentNullException(nameof(action)));
 
     public void ForEach(Action<int, T> action)
         =>
         InnerForEach(action ?? throw new ArgumentNullException(nameof(action)));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal void InternalForEach(Action<T> action)
+    private void InnerForEach(Action<T> action)
     {
         for (int i = 0; i < length; i++)
         {

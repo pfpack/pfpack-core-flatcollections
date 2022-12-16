@@ -17,7 +17,7 @@ partial class FlatArrayJsonConverterFactory
         var itemType = typeToConvert.GetGenericArguments()[0];
 
         var converter = (JsonConverter?)Activator.CreateInstance(
-            type: typeof(FlatArrayJsonConverter<>).MakeGenericType(itemType),
+            type: typeof(FlatArray<>.JsonConverter).MakeGenericType(itemType),
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
             args: new object?[] { options },
