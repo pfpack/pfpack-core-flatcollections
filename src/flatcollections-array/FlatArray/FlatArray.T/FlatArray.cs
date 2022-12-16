@@ -28,7 +28,7 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private T[] InnerItems()
         =>
-        length != default ? items! : InnerEmptyArray.Value;
+        length == default ? InnerEmptyArray.Value : items!;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<T> InnerAsSpan()
