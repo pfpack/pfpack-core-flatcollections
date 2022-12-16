@@ -11,9 +11,9 @@ partial class FlatArrayJsonConverter<T>
         Debug.Assert(options is not null);
 
         writer.WriteStartArray();
-
-        value.InternalForEach(item => itemConverter.Write(writer, item, options));
-
+        value.InternalForEach(InnerWriteItem);
         writer.WriteEndArray();
+
+        void InnerWriteItem(T item) => itemConverter.Write(writer, item, options);
     }
 }
