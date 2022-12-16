@@ -8,11 +8,6 @@ partial struct FlatArray<T>
     {
         // TODO: Make public when dynamic builder is implemented
         internal void TrimExcess()
-            =>
-            InnerTrimExcess();
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void InnerTrimExcess()
         {
             // Copy the state to reduce the chance of multithreading side effects
 
