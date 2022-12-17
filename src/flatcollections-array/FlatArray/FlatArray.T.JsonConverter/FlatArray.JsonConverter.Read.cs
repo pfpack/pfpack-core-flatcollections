@@ -19,7 +19,17 @@ partial struct FlatArray<T>
 
             if (reader.TokenType is not JsonTokenType.StartArray)
             {
-                throw new JsonException("The last processed JSON token is not the start of an array.");
+                throw InnerExceptionFactory.JsonTokenNotStartArray();
+            }
+
+            if (reader.Read() is not true)
+            {
+                throw InnerExceptionFactory.JsonReadCompletedNoEndArray();
+            }
+
+            if (reader.TokenType is JsonTokenType.EndArray)
+            {
+                return default;
             }
 
             const int DefaultCapacity = 4;
@@ -27,23 +37,8 @@ partial struct FlatArray<T>
             int actualCount = default;
             var array = new T[DefaultCapacity];
 
-            while (reader.Read())
+            do
             {
-                if (reader.TokenType is JsonTokenType.EndArray)
-                {
-                    if (actualCount == default)
-                    {
-                        return default;
-                    }
-
-                    if (actualCount < array.Length)
-                    {
-                        InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
-                    }
-
-                    return new(array, default);
-                }
-
                 var item = itemConverter.Read(ref reader, InnerItemType.Value, options);
 
                 if (actualCount < array.Length)
@@ -60,9 +55,20 @@ partial struct FlatArray<T>
                 {
                     throw InnerExceptionFactory.SourceTooLarge();
                 }
+
+                if (reader.Read() is not true)
+                {
+                    throw InnerExceptionFactory.JsonReadCompletedNoEndArray();
+                }
+            }
+            while (reader.TokenType is not JsonTokenType.EndArray);
+
+            if (actualCount < array.Length)
+            {
+                InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
             }
 
-            throw new JsonException("Reading the JSON completed, but the end of the array was not found.");
+            return new(array, default);
         }
     }
 }
