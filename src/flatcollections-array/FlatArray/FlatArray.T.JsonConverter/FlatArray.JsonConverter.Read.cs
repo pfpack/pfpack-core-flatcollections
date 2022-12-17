@@ -19,12 +19,12 @@ partial struct FlatArray<T>
 
             if (reader.TokenType is not JsonTokenType.StartArray)
             {
-                throw InnerExceptionFactory.JsonTokenNotStartArray();
+                throw InnerJsonExceptionFactory.JsonTokenNotStartArray();
             }
 
             if (reader.Read() is not true)
             {
-                throw InnerExceptionFactory.JsonReadCompletedNoEndArray();
+                throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
             }
 
             if (reader.TokenType is JsonTokenType.EndArray)
@@ -58,7 +58,7 @@ partial struct FlatArray<T>
 
                 if (reader.Read() is not true)
                 {
-                    throw InnerExceptionFactory.JsonReadCompletedNoEndArray();
+                    throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
                 }
             }
             while (reader.TokenType is not JsonTokenType.EndArray);

@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using static System.FormattableString;
+﻿using static System.FormattableString;
 
 namespace System;
 
@@ -34,13 +33,5 @@ partial struct FlatArray<T>
         internal static NotSupportedException NotSupportedOnReadOnlyArray()
             =>
             new("The operation is not supported on read-only array.");
-
-        internal static JsonException JsonTokenNotStartArray()
-            =>
-            new("The last processed JSON token is not the start of a JSON array.");
-
-        internal static JsonException JsonReadCompletedNoEndArray()
-            =>
-            new("Reading the JSON completed, but the end of the JSON array was not found.");
     }
 }
