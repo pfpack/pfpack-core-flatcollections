@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void GetLength_SourceIsDefault_ExpectDefault()
     {
-        var source = default(FlatArray<StructType?>.Builder);
+        var source = new FlatArray<StructType?>.Builder();
 
         var actual = source.Length;
         const int expected = default;

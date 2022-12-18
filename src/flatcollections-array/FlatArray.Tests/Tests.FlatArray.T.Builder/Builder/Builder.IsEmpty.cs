@@ -9,7 +9,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void IsEmpty_SourceIsDefault_ExpectTrue()
     {
-        var source = default(FlatArray<RecordType>.Builder);
+        var source = new FlatArray<RecordType>.Builder();
         var actual = source.IsEmpty;
 
         Assert.True(actual);

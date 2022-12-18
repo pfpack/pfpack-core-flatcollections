@@ -6,7 +6,7 @@ partial class TestHelper
 {
     internal static FlatArray<T>.Builder InitializeFlatArrayBuilder<T>(this T[] items, int? length = null)
     {
-        var source = default(FlatArray<T>.Builder);
+        var source = new FlatArray<T>.Builder();
         var type = typeof(FlatArray<T>.Builder);
 
         type.CreateSetter<BuilderFieldSetter<T, T[]>>("items").Invoke(source, items);

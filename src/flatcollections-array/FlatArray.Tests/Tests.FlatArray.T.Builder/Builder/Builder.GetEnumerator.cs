@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void GetEnumerator_SourceIsDefault_ExpectEnumeratorWithDefaultState()
     {
-        var source = default(FlatArray<StructType>.Builder);
+        var source = new FlatArray<StructType>.Builder();
         var actual = source.GetEnumerator();
 
         actual.VerifyInnerState(default, default, -1);

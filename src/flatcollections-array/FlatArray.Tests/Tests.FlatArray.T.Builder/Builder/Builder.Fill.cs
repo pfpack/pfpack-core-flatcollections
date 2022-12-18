@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void Fill_SourceIsDefault_ExpectDefaultState()
     {
-        var source = default(FlatArray<RefType>.Builder);
+        var source = new FlatArray<RefType>.Builder();
         source.Fill();
 
         source.VerifyInnerState(default, default);
@@ -31,7 +31,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void FillValue_SourceIsDefault_ExpectDefaultState()
     {
-        var source = default(FlatArray<StructType?>.Builder);
+        var source = new FlatArray<StructType?>.Builder();
         source.Fill(SomeTextStructType);
 
         source.VerifyInnerState(default, default);

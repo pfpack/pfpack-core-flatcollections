@@ -10,8 +10,8 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void EqualsWithOther_SourceIsDefaultAndOtherIsDefault_ExpectTrue()
     {
-        var source = default(FlatArray<string>.Builder);
-        var other = default(FlatArray<string>.Builder);
+        var source = new FlatArray<string>.Builder();
+        var other = new FlatArray<string>.Builder();
 
         var actual = source.Equals(other);
         Assert.True(actual);

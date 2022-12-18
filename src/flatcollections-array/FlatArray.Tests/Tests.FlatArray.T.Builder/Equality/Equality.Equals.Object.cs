@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void EqualsWithObject_SourceIsDefault_ExpectNotSupportedException()
     {
-        var source = default(FlatArray<StructType>.Builder);
+        var source = new FlatArray<StructType>.Builder();
 
         try
         {

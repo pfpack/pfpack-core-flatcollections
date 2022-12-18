@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void GetHashCode_SourceIsDefault_ExpectNotSupportedException()
     {
-        var source = default(FlatArray<RecordType>.Builder);
+        var source = new FlatArray<RecordType>.Builder();
 
         try
         {

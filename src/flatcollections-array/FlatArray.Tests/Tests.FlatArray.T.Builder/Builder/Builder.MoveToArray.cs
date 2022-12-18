@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void MoveToArray_SourceIsDefault_ExpectArrayStateIsDefault()
     {
-        var source = default(FlatArray<string>.Builder);
+        var source = new FlatArray<string>.Builder();
         var actual = source.MoveToArray();
 
         actual.VerifyInnerState(default, default);
@@ -19,7 +19,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void MoveToArray_SourceIsDefault_ExpectBuilderStateIsDefault()
     {
-        var source = default(FlatArray<RefType>.Builder);
+        var source = new FlatArray<RefType>.Builder();
         _ = source.MoveToArray();
 
         source.VerifyInnerState(default, default);

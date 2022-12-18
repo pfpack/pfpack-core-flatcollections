@@ -10,7 +10,7 @@ partial class FlatArrayBuilderTest
     [Fact]
     public void ToString_SourceIsDefault_ExpectStringContainsZeroAndTypeName()
     {
-        var source = default(FlatArray<RecordType>.Builder);
+        var source = new FlatArray<RecordType>.Builder();
         var actual = source.ToString();
 
         Assert.Contains("0", actual, StringComparison.InvariantCulture);

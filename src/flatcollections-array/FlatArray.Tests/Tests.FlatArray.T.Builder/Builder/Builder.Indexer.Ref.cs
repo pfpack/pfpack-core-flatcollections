@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
     [InlineData(1)]
     public void IndexerRef_SourceIsDefault_ExpectIndexOutOfRangeException(int index)
     {
-        var source = default(FlatArray<StructType>.Builder);
+        var source = new FlatArray<StructType>.Builder();
 
         try
         {
