@@ -10,11 +10,11 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Builder(T item)
         {
-            var items = new[] { item };
-            Debug.Assert(items.Length == 1);
+            length = 1;
+            items = new[] { item };
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 1);
+            Debug.Assert(items.Length == 1);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -22,15 +22,15 @@ partial struct FlatArray<T>
             T item0,
             T item1)
         {
-            var items = new[]
+            length = 2;
+            items = new[]
             {
                 item0,
                 item1
             };
-            Debug.Assert(items.Length == 2);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 2);
+            Debug.Assert(items.Length == 2);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -39,16 +39,16 @@ partial struct FlatArray<T>
             T item1,
             T item2)
         {
-            var items = new[]
+            length = 3;
+            items = new[]
             {
                 item0,
                 item1,
                 item2
             };
-            Debug.Assert(items.Length == 3);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 3);
+            Debug.Assert(items.Length == 3);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -58,17 +58,17 @@ partial struct FlatArray<T>
             T item2,
             T item3)
         {
-            var items = new[]
+            length = 4;
+            items = new[]
             {
                 item0,
                 item1,
                 item2,
                 item3
             };
-            Debug.Assert(items.Length == 4);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 4);
+            Debug.Assert(items.Length == 4);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -79,7 +79,8 @@ partial struct FlatArray<T>
             T item3,
             T item4)
         {
-            var items = new[]
+            length = 5;
+            items = new[]
             {
                 item0,
                 item1,
@@ -87,10 +88,9 @@ partial struct FlatArray<T>
                 item3,
                 item4
             };
-            Debug.Assert(items.Length == 5);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 5);
+            Debug.Assert(items.Length == 5);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -102,7 +102,8 @@ partial struct FlatArray<T>
             T item4,
             T item5)
         {
-            var items = new[]
+            length = 6;
+            items = new[]
             {
                 item0,
                 item1,
@@ -111,10 +112,9 @@ partial struct FlatArray<T>
                 item4,
                 item5
             };
-            Debug.Assert(items.Length == 6);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 6);
+            Debug.Assert(items.Length == 6);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -127,7 +127,8 @@ partial struct FlatArray<T>
             T item5,
             T item6)
         {
-            var items = new[]
+            length = 7;
+            items = new[]
             {
                 item0,
                 item1,
@@ -137,10 +138,9 @@ partial struct FlatArray<T>
                 item5,
                 item6
             };
-            Debug.Assert(items.Length == 7);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 7);
+            Debug.Assert(items.Length == 7);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -154,7 +154,8 @@ partial struct FlatArray<T>
             T item6,
             T item7)
         {
-            var items = new[]
+            length = 8;
+            items = new[]
             {
                 item0,
                 item1,
@@ -165,10 +166,9 @@ partial struct FlatArray<T>
                 item6,
                 item7
             };
-            Debug.Assert(items.Length == 8);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 8);
+            Debug.Assert(items.Length == 8);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -183,7 +183,8 @@ partial struct FlatArray<T>
             T item7,
             T item8)
         {
-            var items = new[]
+            length = 9;
+            items = new[]
             {
                 item0,
                 item1,
@@ -195,10 +196,9 @@ partial struct FlatArray<T>
                 item7,
                 item8
             };
-            Debug.Assert(items.Length == 9);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 9);
+            Debug.Assert(items.Length == 9);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -214,7 +214,8 @@ partial struct FlatArray<T>
             T item8,
             T item9)
         {
-            var items = new[]
+            length = 10;
+            items = new[]
             {
                 item0,
                 item1,
@@ -227,10 +228,9 @@ partial struct FlatArray<T>
                 item8,
                 item9
             };
-            Debug.Assert(items.Length == 10);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 10);
+            Debug.Assert(items.Length == 10);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -247,7 +247,8 @@ partial struct FlatArray<T>
             T item9,
             T item10)
         {
-            var items = new[]
+            length = 11;
+            items = new[]
             {
                 item0,
                 item1,
@@ -261,10 +262,9 @@ partial struct FlatArray<T>
                 item9,
                 item10
             };
-            Debug.Assert(items.Length == 11);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 11);
+            Debug.Assert(items.Length == 11);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -282,7 +282,8 @@ partial struct FlatArray<T>
             T item10,
             T item11)
         {
-            var items = new[]
+            length = 12;
+            items = new[]
             {
                 item0,
                 item1,
@@ -297,10 +298,9 @@ partial struct FlatArray<T>
                 item10,
                 item11
             };
-            Debug.Assert(items.Length == 12);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 12);
+            Debug.Assert(items.Length == 12);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -319,7 +319,8 @@ partial struct FlatArray<T>
             T item11,
             T item12)
         {
-            var items = new[]
+            length = 13;
+            items = new[]
             {
                 item0,
                 item1,
@@ -335,10 +336,9 @@ partial struct FlatArray<T>
                 item11,
                 item12
             };
-            Debug.Assert(items.Length == 13);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 13);
+            Debug.Assert(items.Length == 13);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -358,7 +358,8 @@ partial struct FlatArray<T>
             T item12,
             T item13)
         {
-            var items = new[]
+            length = 14;
+            items = new[]
             {
                 item0,
                 item1,
@@ -375,10 +376,9 @@ partial struct FlatArray<T>
                 item12,
                 item13
             };
-            Debug.Assert(items.Length == 14);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 14);
+            Debug.Assert(items.Length == 14);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -399,7 +399,8 @@ partial struct FlatArray<T>
             T item13,
             T item14)
         {
-            var items = new[]
+            length = 15;
+            items = new[]
             {
                 item0,
                 item1,
@@ -417,10 +418,9 @@ partial struct FlatArray<T>
                 item13,
                 item14
             };
-            Debug.Assert(items.Length == 15);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 15);
+            Debug.Assert(items.Length == 15);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -442,7 +442,8 @@ partial struct FlatArray<T>
             T item14,
             T item15)
         {
-            var items = new[]
+            length = 16;
+            items = new[]
             {
                 item0,
                 item1,
@@ -461,10 +462,9 @@ partial struct FlatArray<T>
                 item14,
                 item15
             };
-            Debug.Assert(items.Length == 16);
 
-            length = items.Length;
-            this.items = items;
+            Debug.Assert(length == 16);
+            Debug.Assert(items.Length == 16);
         }
     }
 }
