@@ -5,6 +5,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
+    // TODO: Rename 'item' to 'item0' in v2.0
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public FlatArray(T item)
     {
