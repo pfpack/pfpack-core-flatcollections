@@ -8,10 +8,10 @@ partial struct FlatArray<T>
     partial class Builder
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Builder(T item)
+        public Builder(T item0)
         {
             length = 1;
-            items = new[] { item };
+            items = new[] { item0 };
 
             Debug.Assert(length == 1);
             Debug.Assert(items.Length == 1);
