@@ -32,31 +32,13 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            if (trimExcess && length != items.Length || InnerIsHugeCapacity(length, items.Length))
+            if (trimExcess && length != items.Length || InnerAllocHelper.IsHugeCapacity(length, items.Length))
             {
                 InnerArrayHelper.TruncateUnchecked(ref items, length);
             }
 
             // Call the inner constructor of FlatArray here
             return new(length, items);
-        }
-
-        // The caller MUST ensure the length is GREATER than zero
-        // and the capacity is NOT LESS than the length
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool InnerIsHugeCapacity(int length, int capacity)
-        {
-            Debug.Assert(length > 0);
-            Debug.Assert(capacity >= length);
-
-            int doubleLength = unchecked(length * 2);
-
-            if (doubleLength < 0) // handle the overflow case
-            {
-                return false;
-            }
-
-            return doubleLength <= capacity;
         }
     }
 }
