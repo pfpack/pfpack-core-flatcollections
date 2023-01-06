@@ -28,10 +28,7 @@ partial struct FlatArray<T>
         static List<T> InnerCopyToList(T[] items, int length)
         {
             List<T> result = new(capacity: length);
-            for (int i = 0; i < length; i++)
-            {
-                result.Add(items[i]);
-            }
+            for (int i = 0; i < length; i++) { result.Add(items[i]); }
             return result;
         }
     }
