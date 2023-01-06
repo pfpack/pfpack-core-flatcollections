@@ -23,12 +23,17 @@ partial struct FlatArray<T>
 
         // The most efficient way to build a list for this case:
 
-        List<T> result = new(capacity: length);
-        for (int i = 0; i < length; i++)
+        return InnerCopyToList(items, length);
+
+        static List<T> InnerCopyToList(T[] items, int length)
         {
-            result.Add(items[i]);
+            List<T> result = new(capacity: length);
+            for (int i = 0; i < length; i++)
+            {
+                result.Add(items[i]);
+            }
+            return result;
         }
-        return result;
     }
 
     public ImmutableArray<T> ToImmutableArray()
