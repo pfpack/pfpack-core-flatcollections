@@ -16,21 +16,19 @@ partial struct FlatArray<T>
             return new();
         }
 
-        if (length < items!.Length)
+        if (length == items!.Length)
         {
-            // The most efficient way to build a list for this case
-
-            List<T> result = new(capacity: length);
-
-            for (int i = 0; i < length; i++)
-            {
-                result.Add(items[i]);
-            }
-
-            return result;
+            return new(items);
         }
 
-        return new(items);
+        // The most efficient way to build a list for this case:
+
+        List<T> result = new(capacity: length);
+        for (int i = 0; i < length; i++)
+        {
+            result.Add(items[i]);
+        }
+        return result;
     }
 
     public ImmutableArray<T> ToImmutableArray()
@@ -40,11 +38,11 @@ partial struct FlatArray<T>
             return ImmutableArray<T>.Empty;
         }
 
-        if (length < items!.Length)
+        if (length == items!.Length)
         {
-            return ImmutableArray.Create(items, 0, length);
+            return ImmutableArray.Create(items);
         }
 
-        return ImmutableArray.Create(items);
+        return ImmutableArray.Create(items, 0, length);
     }
 }
