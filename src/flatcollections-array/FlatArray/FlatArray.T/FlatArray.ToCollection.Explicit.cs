@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -25,6 +26,7 @@ partial struct FlatArray<T>
 
         return InnerCopyToList(items, length);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static List<T> InnerCopyToList(T[] items, int length)
         {
             List<T> result = new(capacity: length);
