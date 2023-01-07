@@ -32,10 +32,8 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            const int DefaultCapacity = 4;
-
             int actualCount = default;
-            var array = new T[DefaultCapacity];
+            var array = new T[InnerAllocHelper.DefaultNonZeroCapacity];
 
             do
             {

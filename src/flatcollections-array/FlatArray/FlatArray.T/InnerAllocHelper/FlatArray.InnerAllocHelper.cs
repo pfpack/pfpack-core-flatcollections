@@ -7,6 +7,13 @@ partial struct FlatArray<T>
 {
     private static class InnerAllocHelper
     {
+        // Default capacity for cases where capacity must be greater than zero
+        internal const int DefaultNonZeroCapacity = 4;
+
+        internal static int EnsureNonZeroCapacity(int capacity)
+            =>
+            capacity > 0 ? capacity : DefaultNonZeroCapacity;
+
         // The caller MUST ensure the length is GREATER than zero
         // and the max capacity is NOT LESS than the length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
