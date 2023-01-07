@@ -18,7 +18,7 @@ partial struct FlatArray<T>
             }
 
             int actualCount = default;
-            var array = new T[InnerAllocHelper.EnsureNonZeroCapacity(estimatedCapacity)];
+            var array = new T[InnerAllocHelper.EnsurePositiveCapacity(estimatedCapacity)];
 
             do
             {
