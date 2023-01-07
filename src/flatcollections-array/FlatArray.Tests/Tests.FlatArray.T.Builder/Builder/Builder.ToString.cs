@@ -13,8 +13,8 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<RecordType>.Builder();
         var actual = source.ToString();
 
-        Assert.Contains("0", actual, StringComparison.InvariantCulture);
-        Assert.Contains("RecordType", actual, StringComparison.InvariantCulture);
+        const string expected = "FlatArray<RecordType>[0]";
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -30,7 +30,7 @@ partial class FlatArrayBuilderTest
         var source = sourceItems.InitializeFlatArrayBuilder(length);
         var actual = source.ToString();
 
-        Assert.Contains(length.ToString(), actual, StringComparison.InvariantCulture);
-        Assert.Contains("String", actual, StringComparison.InvariantCulture);
+        const string expected = "FlatArray<String>[3]";
+        Assert.Equal(expected, actual);
     }
 }

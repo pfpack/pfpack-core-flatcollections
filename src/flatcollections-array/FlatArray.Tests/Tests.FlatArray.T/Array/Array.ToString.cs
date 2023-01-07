@@ -13,8 +13,8 @@ partial class FlatArrayTest
         var source = default(FlatArray<StructType>);
         var actual = source.ToString();
 
-        Assert.Contains("0", actual, StringComparison.InvariantCulture);
-        Assert.Contains("StructType", actual, StringComparison.InvariantCulture);
+        const string expected = "FlatArray<StructType>[0]";
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -30,7 +30,7 @@ partial class FlatArrayTest
         var source = innerItems.InitializeFlatArray(innerLength);
         var actual = source.ToString();
 
-        Assert.Contains(innerLength.ToString(), actual, StringComparison.InvariantCulture);
-        Assert.Contains("Int32", actual, StringComparison.InvariantCulture);
+        const string expected = "FlatArray<Int32>[4]";
+        Assert.Equal(expected, actual);
     }
 }
