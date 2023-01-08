@@ -15,16 +15,7 @@ partial class FlatArrayBuilderTest
     {
         var source = new FlatArray<StructType>.Builder();
 
-        try
-        {
-            _ = source.ItemRef(index);
-        }
-        catch (IndexOutOfRangeException)
-        {
-            return;
-        }
-
-        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
+        _ = Assert.Throws<IndexOutOfRangeException>(() => _ = source.ItemRef(index));
     }
 
     [Theory]
@@ -52,16 +43,7 @@ partial class FlatArrayBuilderTest
         int index, int sourceLength, params string?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatArrayBuilder(sourceLength);
-        
-        try
-        {
-            _ = source.ItemRef(index);
-        }
-        catch (IndexOutOfRangeException)
-        {
-            return;
-        }
 
-        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
+        _ = Assert.Throws<IndexOutOfRangeException>(() => _ = source.ItemRef(index));
     }
 }

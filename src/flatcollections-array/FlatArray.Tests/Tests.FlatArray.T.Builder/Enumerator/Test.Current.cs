@@ -11,17 +11,8 @@ partial class FlatArrayBuilderTest
     public void Enumerator_Current_SourceIsDefault_ExpectIndexOutOfRangeException()
     {
         var source = default(FlatArray<RefType>.Builder.Enumerator);
-        
-        try
-        {
-            _ = source.Current;
-        }
-        catch (IndexOutOfRangeException)
-        {
-            return;
-        }
 
-        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
+        _ = Assert.Throws<IndexOutOfRangeException>(() => _ = source.Current);
     }
 
     [Theory]
@@ -48,15 +39,6 @@ partial class FlatArrayBuilderTest
     {
         var source = sourceItems.InitializeFlatArrayBuilder(length).InitializeEnumerator(index);
 
-        try
-        {
-            _ = source.Current;
-        }
-        catch (IndexOutOfRangeException)
-        {
-            return;
-        }
-
-        Assert.Fail("An expected IndexOutOfRangeException was not thrown");
+        _ = Assert.Throws<IndexOutOfRangeException>(() => _ = source.Current);
     }
 }
