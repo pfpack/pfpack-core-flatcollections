@@ -23,7 +23,7 @@ partial struct FlatArray<T>
         {
             if (capacity is not >= 0)
             {
-                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(paramName, capacity);
+                throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(paramName, capacity);
             }
 
             return new(capacity);

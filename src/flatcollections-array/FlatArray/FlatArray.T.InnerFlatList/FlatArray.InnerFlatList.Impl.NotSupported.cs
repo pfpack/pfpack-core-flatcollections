@@ -10,26 +10,26 @@ partial struct FlatArray<T>
         [DoesNotReturn]
         void ICollection<T>.Add(T item)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         void IList<T>.Insert(int index, T item)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         bool ICollection<T>.Remove(T item)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         void IList<T>.RemoveAt(int index)
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
 
         [DoesNotReturn]
         void ICollection<T>.Clear()
             =>
-            throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+            throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
     }
 }

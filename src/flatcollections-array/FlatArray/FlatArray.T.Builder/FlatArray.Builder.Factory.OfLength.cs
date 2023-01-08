@@ -15,7 +15,7 @@ partial struct FlatArray<T>
         {
             if (length is not >= 0)
             {
-                throw InnerExceptionFactory.LengthOutOfRange(nameof(length), length);
+                throw InnerBuilderExceptionFactory.LengthOutOfRange(nameof(length), length);
             }
 
             return new(length, capacity: length);

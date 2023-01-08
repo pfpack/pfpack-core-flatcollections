@@ -26,7 +26,7 @@ partial struct FlatArray<T>
             }
             set
             {
-                throw InnerExceptionFactory.NotSupportedOnReadOnlyArray();
+                throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
             }
         }
 

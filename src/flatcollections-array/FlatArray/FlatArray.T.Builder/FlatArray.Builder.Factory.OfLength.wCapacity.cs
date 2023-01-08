@@ -17,12 +17,12 @@ partial struct FlatArray<T>
         {
             if (length is not >= 0)
             {
-                throw InnerExceptionFactory.LengthOutOfRange(lengthParamName, length);
+                throw InnerBuilderExceptionFactory.LengthOutOfRange(lengthParamName, length);
             }
 
             if (capacity >= length is not true)
             {
-                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToLength(capacityParamName, capacity, length);
+                throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToLength(capacityParamName, capacity, length);
             }
 
             return new(length, capacity: capacity);
