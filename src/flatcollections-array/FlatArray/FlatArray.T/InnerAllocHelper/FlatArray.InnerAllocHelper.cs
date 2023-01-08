@@ -47,7 +47,7 @@ partial struct FlatArray<T>
             Debug.Assert(length > 0);
             Debug.Assert(length <= capacity);
 
-            // Double length within the capacity means a huge capacity
+            // Double length within the capacity means the capacity is a huge capacity
 
             int doubleLength = length << 1; // unchecked(length * 2);
 
