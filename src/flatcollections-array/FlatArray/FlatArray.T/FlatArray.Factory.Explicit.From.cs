@@ -44,10 +44,6 @@ partial struct FlatArray<T>
             =>
             InnerFactory.FromList(list),
 
-            FlatArray<T> flatArray
-            =>
-            InnerFactory.FromFlatArray(flatArray),
-
             ImmutableArray<T> immutableArray
             =>
             InnerFactory.FromImmutableArray(immutableArray),
