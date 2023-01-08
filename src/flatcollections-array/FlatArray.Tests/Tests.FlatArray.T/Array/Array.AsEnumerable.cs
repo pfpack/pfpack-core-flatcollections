@@ -8,19 +8,19 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Fact]
-    public void AsEnumerable_SourceIsDefault_ExpectInnerFlatListZeroLengthState()
+    public void AsEnumerable_SourceIsDefault_ExpectFlatListZeroLengthState()
     {
         var source = default(FlatArray<StructType?>);
         var actual = source.AsEnumerable();
 
-        actual.VerifyInnerFlatListState(Array.Empty<StructType?>(), 0);
+        actual.VerifyFlatListState(Array.Empty<StructType?>(), 0);
     }
 
     [Theory]
     [InlineData(1, SomeString)]
     [InlineData(2, AnotherString, null, EmptyString, SomeString, TabString)]
     [InlineData(5, SomeString, EmptyString, LowerAnotherString, AnotherString, UpperSomeString)]
-    public void AsEnumerable_SourceIsNotDefault_ExpectInnerFlatListCorrectLengthState(
+    public void AsEnumerable_SourceIsNotDefault_ExpectFlatListCorrectLengthState(
         int length, params string?[] items)
     {
         var coppied = items.GetCopy();
@@ -28,6 +28,6 @@ partial class FlatArrayTest
         var source = items.InitializeFlatArray(length);
         var actual = source.AsEnumerable();
 
-        actual.VerifyInnerFlatListState(coppied, length);
+        actual.VerifyFlatListState(coppied, length);
     }
 }

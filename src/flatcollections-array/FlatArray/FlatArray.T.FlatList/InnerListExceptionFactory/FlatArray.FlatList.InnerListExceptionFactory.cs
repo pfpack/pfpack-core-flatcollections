@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    partial class InnerFlatList
+    partial class FlatList
     {
         private static class InnerListExceptionFactory
         {

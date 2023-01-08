@@ -7,9 +7,9 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial class InnerFlatList
+    partial class FlatList
     {
-        private sealed class InnerEnumerator : IEnumerator<T>
+        private sealed class Enumerator : IEnumerator<T>
         {
             private const int DefaultIndex = -1;
 
@@ -20,7 +20,7 @@ partial struct FlatArray<T>
             private int index;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal InnerEnumerator(int length, T[] items)
+            internal Enumerator(int length, T[] items)
             {
                 Debug.Assert(length >= 0 && length <= items.Length);
 

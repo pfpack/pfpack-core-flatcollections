@@ -6,7 +6,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial class InnerFlatList
+    partial class FlatList
     {
         public bool IsReadOnly => true;
 
@@ -45,7 +45,7 @@ partial struct FlatArray<T>
 
         public IEnumerator<T> GetEnumerator()
             =>
-            new InnerEnumerator(length, items);
+            new Enumerator(length, items);
 
         IEnumerator IEnumerable.GetEnumerator()
             =>

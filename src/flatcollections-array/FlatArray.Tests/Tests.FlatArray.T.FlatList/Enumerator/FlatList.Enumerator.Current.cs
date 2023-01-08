@@ -10,7 +10,7 @@ partial class FlatArrayFlatListTest
     [InlineData(0, 1, SomeString)]
     [InlineData(1, 2, LowerSomeString, AnotherString, SomeString)]
     [InlineData(3, 5, "One", "Two", null, "Four", "Five")]
-    public void InnerEnumerator_Current_IndexIsInRange_ExpectItemByIndex(
+    public void Enumerator_Current_IndexIsInRange_ExpectItemByIndex(
         int index, int sourceLength, params string?[] sourceItems)
     {
         var coppied = sourceItems.GetCopy();
@@ -28,7 +28,7 @@ partial class FlatArrayFlatListTest
     [InlineData(1, 1, PlusFifteen, MinusFifteen)]
     [InlineData(3, 2, null, MinusFifteen, Zero)]
     [InlineData(-1, 3, MinusOne, One, PlusFifteen)]
-    public void InnerEnumerator_Current_IndexIsNotInRange_ExpectInvalidOperationException(
+    public void Enumerator_Current_IndexIsNotInRange_ExpectInvalidOperationException(
         int index, int sourceLength, params int?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatListEnumerator(sourceLength, index);

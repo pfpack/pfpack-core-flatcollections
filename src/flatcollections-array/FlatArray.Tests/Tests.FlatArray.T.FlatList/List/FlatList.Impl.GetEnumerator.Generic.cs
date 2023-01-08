@@ -8,23 +8,23 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayFlatListTest
 {
     [Fact]
-    public void GetEnumeratorGeneric_SourceIsEmpty_ExpectTypeIsInnerEnumeratorCorrectState()
+    public void GetEnumeratorGeneric_SourceIsEmpty_ExpectTypeIsEnumeratorCorrectState()
     {
         var source = TestHelper.CreateEmptyFlatList<RecordType>();
         var actual = source.GetEnumerator();
 
-        actual.VerifyInnerFlatListEnumeratorState(Array.Empty<RecordType>(), 0, -1);
+        actual.VerifyFlatListEnumeratorState(Array.Empty<RecordType>(), 0, -1);
     }
 
     [Theory]
     [InlineData(1, EmptyString)]
     [InlineData(2, SomeString, AnotherString, TabString, EmptyString)]
-    public void GetEnumeratorGeneric_SourceIsNotEmpty_ExpectInnerEnumeratorCorrectState(
+    public void GetEnumeratorGeneric_SourceIsNotEmpty_ExpectEnumeratorCorrectState(
         int length, params string?[] items)
     {
         var source = items.InitializeFlatList(length);
         var actual = source.GetEnumerator();
 
-        actual.VerifyInnerFlatListEnumeratorState(items, length, -1);
+        actual.VerifyFlatListEnumeratorState(items, length, -1);
     }
 }

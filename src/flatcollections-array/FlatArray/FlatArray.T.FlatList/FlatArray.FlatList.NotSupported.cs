@@ -5,7 +5,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial class InnerFlatList
+    partial class FlatList
     {
         [DoesNotReturn]
         void ICollection<T>.Add(T item)

@@ -5,11 +5,11 @@ namespace PrimeFuncPack.Core.Tests;
 
 partial class TestHelper
 {
-    internal static void VerifyInnerFlatListEnumeratorState<T>(
+    internal static void VerifyFlatListEnumeratorState<T>(
         this IEnumerator<T> actual, T[] expectedItems, int expectedLength, int expectedIndex)
     {
         var actualTypeName = actual.GetType().Name;
-        const string expectedTypeName = "InnerEnumerator";
+        const string expectedTypeName = "Enumerator";
 
         Assert.Equal(expectedTypeName, actualTypeName);
 
