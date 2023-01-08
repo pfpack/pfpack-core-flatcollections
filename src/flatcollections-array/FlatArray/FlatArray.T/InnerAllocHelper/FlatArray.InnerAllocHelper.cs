@@ -32,7 +32,7 @@ partial struct FlatArray<T>
             Debug.Assert(length > 0);
             Debug.Assert(length <= maxCapacity);
 
-            int doubleLength = unchecked(length * 2);
+            int doubleLength = length << 1; // unchecked(length * 2);
 
             return unchecked((uint)doubleLength) <= unchecked((uint)maxCapacity)
                 ? doubleLength
@@ -49,7 +49,7 @@ partial struct FlatArray<T>
 
             // Double length within the capacity means a huge capacity
 
-            int doubleLength = unchecked(length * 2);
+            int doubleLength = length << 1; // unchecked(length * 2);
 
             return unchecked((uint)doubleLength) <= unchecked((uint)capacity);
         }
