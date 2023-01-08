@@ -32,11 +32,8 @@ partial struct FlatArray<T>
             Debug.Assert(length > 0);
             Debug.Assert(length <= maxCapacity);
 
-            int doubleLength = length << 1; // unchecked(length * 2);
-
-            return unchecked((uint)doubleLength) <= unchecked((uint)maxCapacity)
-                ? doubleLength
-                : maxCapacity;
+            int doubleLength = InnerDoubleLength(length);
+            return InnerIsLengthWithinCapacity(doubleLength, maxCapacity) ? doubleLength : maxCapacity;
         }
 
         // The caller MUST ensure the length is GREATER than zero,
@@ -47,11 +44,18 @@ partial struct FlatArray<T>
             Debug.Assert(length > 0);
             Debug.Assert(length <= capacity);
 
-            // Double length within the capacity means the capacity is a huge capacity
-
-            int doubleLength = length << 1; // unchecked(length * 2);
-
-            return unchecked((uint)doubleLength) <= unchecked((uint)capacity);
+            int doubleLength = InnerDoubleLength(length);
+            return InnerIsLengthWithinCapacity(doubleLength, capacity);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int InnerDoubleLength(int length)
+            =>
+            length << 1; // unchecked(length * 2);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool InnerIsLengthWithinCapacity(int length, int capacity)
+            =>
+            unchecked((uint)length) <= unchecked((uint)capacity);
     }
 }
