@@ -6,17 +6,17 @@ partial struct FlatArray<T>
 {
     partial class Builder
     {
-        public FlatArray<T> MoveToArray()
+        public FlatArray<T> MoveToFlatArray()
             =>
-            InnerMoveToArray(false);
+            InnerMoveToFlatArray(false);
 
         // TODO: Make public when dynamic builder is implemented
-        internal FlatArray<T> MoveToArray(bool trimExcess)
+        internal FlatArray<T> MoveToFlatArray(bool trimExcess)
             =>
-            InnerMoveToArray(trimExcess);
+            InnerMoveToFlatArray(trimExcess);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private FlatArray<T> InnerMoveToArray(bool trimExcess)
+        private FlatArray<T> InnerMoveToFlatArray(bool trimExcess)
         {
             // Copy the state to reduce the chance of multithreading side effects
 
