@@ -11,22 +11,22 @@ partial struct FlatArray<T>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                if (index >= 0 && index < length)
+                if (InnerAllocHelper.IsIndexInRange(index, length))
                 {
                     return items[index];
                 }
 
-                throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
+                throw InnerExceptionFactory.IndexOutOfRange(index, length);
             }
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                if (index >= 0 && index < length)
+                if (InnerAllocHelper.IsIndexInRange(index, length))
                 {
                     items[index] = value;
                 }
 
-                throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
+                throw InnerExceptionFactory.IndexOutOfRange(index, length);
             }
         }
 
@@ -35,12 +35,12 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ref readonly T ItemRef(int index)
         {
-            if (index >= 0 && index < length)
+            if (InnerAllocHelper.IsIndexInRange(index, length))
             {
                 return ref items[index];
             }
 
-            throw InnerExceptionFactory.IndexOutOfRange(index, length: length);
+            throw InnerExceptionFactory.IndexOutOfRange(index, length);
         }
     }
 }

@@ -7,6 +7,15 @@ partial struct FlatArray<T>
 {
     private static class InnerAllocHelper
     {
+        // The caller MUST ensure the length is GREATER than or EQUAL to zero
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool IsIndexInRange(int index, int length)
+        {
+            Debug.Assert(length >= 0);
+
+            return unchecked((uint)index) < unchecked((uint)length);
+        }
+
         // Default capacity for cases where capacity must be greater than zero
         internal const int DefaultPositiveCapacity = 4;
 

@@ -9,8 +9,7 @@ partial struct FlatArray<T>
         {
             if (capacity is not >= 0)
             {
-                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(
-                    nameof(capacity), capacity);
+                throw InnerExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(nameof(capacity), capacity);
             }
 
             // Copy the state to reduce the chance of multithreading side effects

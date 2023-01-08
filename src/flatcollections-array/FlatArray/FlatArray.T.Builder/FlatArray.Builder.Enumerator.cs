@@ -40,14 +40,14 @@ partial struct FlatArray<T>
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
                 {
-                    if (index >= 0 && index < builder.length)
+                    if (InnerAllocHelper.IsIndexInRange(index, builder.length))
                     {
                         return builder.items[index];
                     }
 
                     // The builder length may have changed since the last successful MoveNext
                     // Thus, throw IndexOutOfRangeException instead of InvalidOperationException
-                    throw InnerExceptionFactory.IndexOutOfRange(index, length: builder.length);
+                    throw InnerExceptionFactory.IndexOutOfRange(index, builder.length);
                 }
             }
         }
