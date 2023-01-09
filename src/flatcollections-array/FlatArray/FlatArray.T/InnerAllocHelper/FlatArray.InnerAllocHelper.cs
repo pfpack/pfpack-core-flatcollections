@@ -24,16 +24,16 @@ partial struct FlatArray<T>
             =>
             capacity > 0 ? capacity : DefaultPositiveCapacity;
 
-        // The caller MUST ensure the length is GREATER than zero,
-        // and the length is LESS than or EQUAL to the max capacity
+        // The caller MUST ensure the capacity is GREATER than zero,
+        // and the capacity is LESS than or EQUAL to the max capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int EstimateCapacity(int length, int maxCapacity)
+        internal static int IncreaseCapacity(int capacity, int maxCapacity)
         {
-            Debug.Assert(length > 0);
-            Debug.Assert(length <= maxCapacity);
+            Debug.Assert(capacity > 0);
+            Debug.Assert(capacity <= maxCapacity);
 
-            int doubleLength = InnerDoubleLength(length);
-            return InnerIsLengthWithinCapacity(doubleLength, maxCapacity) ? doubleLength : maxCapacity;
+            int newCapacity = InnerDouble(capacity);
+            return InnerIsWithinCapacity(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
         // The caller MUST ensure the length is GREATER than zero,
@@ -44,18 +44,18 @@ partial struct FlatArray<T>
             Debug.Assert(length > 0);
             Debug.Assert(length <= capacity);
 
-            int doubleLength = InnerDoubleLength(length);
-            return InnerIsLengthWithinCapacity(doubleLength, capacity);
+            int doubleLength = InnerDouble(length);
+            return InnerIsWithinCapacity(doubleLength, capacity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int InnerDoubleLength(int length)
+        private static int InnerDouble(int value)
             =>
-            length << 1; // unchecked(length * 2);
+            value << 1; // unchecked(value * 2);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool InnerIsLengthWithinCapacity(int length, int capacity)
+        private static bool InnerIsWithinCapacity(int value, int capacity)
             =>
-            unchecked((uint)length) <= unchecked((uint)capacity);
+            unchecked((uint)value) <= unchecked((uint)capacity);
     }
 }

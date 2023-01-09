@@ -16,8 +16,8 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            int actualCount = default;
             var array = new T[count];
+            int actualCount = 0;
 
             do
             {

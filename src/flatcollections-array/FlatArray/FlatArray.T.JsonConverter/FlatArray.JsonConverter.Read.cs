@@ -32,8 +32,8 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            int actualCount = default;
             var array = new T[InnerAllocHelper.DefaultPositiveCapacity];
+            int actualCount = 0;
 
             do
             {
@@ -43,9 +43,9 @@ partial struct FlatArray<T>
                 {
                     array[actualCount++] = item!;
                 }
-                else if (actualCount < Array.MaxLength)
+                else if (array.Length < Array.MaxLength)
                 {
-                    int newCapacity = InnerAllocHelper.EstimateCapacity(array.Length, Array.MaxLength);
+                    int newCapacity = InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength);
                     InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
                     array[actualCount++] = item!;
                 }
