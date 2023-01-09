@@ -37,22 +37,16 @@ partial struct FlatArray<T>
 
             do
             {
-                var item = itemConverter.Read(ref reader, InnerItemType.Value, options);
+                if (actualCount == array.Length)
+                {
+                    int newCapacity = array.Length < Array.MaxLength
+                        ? InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength)
+                        : throw InnerExceptionFactory.SourceTooLarge();
 
-                if (actualCount < array.Length)
-                {
-                    array[actualCount++] = item!;
-                }
-                else if (array.Length < Array.MaxLength)
-                {
-                    int newCapacity = InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength);
                     InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
-                    array[actualCount++] = item!;
                 }
-                else
-                {
-                    throw InnerExceptionFactory.SourceTooLarge();
-                }
+
+                array[actualCount++] = itemConverter.Read(ref reader, InnerItemType.Value, options)!;
 
                 if (reader.Read() is not true)
                 {
