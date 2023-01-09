@@ -17,9 +17,10 @@ partial struct FlatArray<T>
             }
 
             var array = new T[count];
-            int actualCount = 0;
+            array[0] = source[0];
+            int actualCount = 1;
 
-            do
+            while (actualCount < (count = source.Count))
             {
                 if (actualCount < array.Length)
                 {
@@ -30,8 +31,8 @@ partial struct FlatArray<T>
                     InnerArrayHelper.ExtendUnchecked(ref array, count);
                     array[actualCount] = source[actualCount];
                 }
+                actualCount++;
             }
-            while (++actualCount < (count = source.Count));
 
             if (actualCount < array.Length)
             {
