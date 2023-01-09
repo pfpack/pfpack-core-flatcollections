@@ -22,15 +22,12 @@ partial struct FlatArray<T>
 
             while (actualCount < (count = source.Count))
             {
-                if (actualCount < array.Length)
-                {
-                    array[actualCount] = source[actualCount];
-                }
-                else
+                if (actualCount == array.Length)
                 {
                     InnerArrayHelper.ExtendUnchecked(ref array, count);
-                    array[actualCount] = source[actualCount];
                 }
+
+                array[actualCount] = source[actualCount];
                 actualCount++;
             }
 

@@ -23,22 +23,16 @@ partial struct FlatArray<T>
 
             while (enumerator.MoveNext())
             {
-                if (actualCount < array.Length)
+                if (actualCount == array.Length)
                 {
-                    array[actualCount++] = enumerator.Current;
-                    continue;
-                }
+                    int newCapacity = array.Length < Array.MaxLength
+                        ? InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength)
+                        : throw InnerExceptionFactory.SourceTooLarge();
 
-                if (array.Length < Array.MaxLength)
-                {
-                    int newCapacity = InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength);
                     InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
-
-                    array[actualCount++] = enumerator.Current;
-                    continue;
                 }
 
-                throw InnerExceptionFactory.SourceTooLarge();
+                array[actualCount++] = enumerator.Current;
             }
 
             if (actualCount < array.Length)
