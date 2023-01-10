@@ -22,12 +22,7 @@ partial struct FlatArray<T>
                 throw InnerJsonExceptionFactory.JsonTokenNotStartArray();
             }
 
-            if (reader.Read() is not true)
-            {
-                throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
-            }
-
-            if (reader.TokenType is JsonTokenType.EndArray)
+            if (InnerReadNextToken(ref reader) is JsonTokenType.EndArray)
             {
                 return default;
             }
@@ -47,13 +42,8 @@ partial struct FlatArray<T>
                 }
 
                 array[actualCount++] = itemConverter.Read(ref reader, InnerItemType.Value, options)!;
-
-                if (reader.Read() is not true)
-                {
-                    throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
-                }
             }
-            while (reader.TokenType is not JsonTokenType.EndArray);
+            while (InnerReadNextToken(ref reader) is not JsonTokenType.EndArray);
 
             if (actualCount < array.Length)
             {
@@ -62,5 +52,9 @@ partial struct FlatArray<T>
 
             return new(array, default);
         }
+
+        private static JsonTokenType InnerReadNextToken(ref Utf8JsonReader reader)
+            =>
+            reader.Read() ? reader.TokenType : throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
     }
 }
