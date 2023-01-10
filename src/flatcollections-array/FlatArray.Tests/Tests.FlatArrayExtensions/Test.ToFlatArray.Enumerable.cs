@@ -115,7 +115,7 @@ partial class FlatArrayExtensionsTest
             MinusFifteenIdNullNameRecord, ZeroIdNullNameRecord, MinusFifteenIdSomeStringNameRecord, PlusFifteenIdSomeStringNameRecord
         };
 
-        var source = new StubCollection<RecordType>(sourceItems);
+        var source = new StubReadOnlyList<RecordType>(sourceItems);
         var actual = source.ToFlatArray();
 
         var expectedItems = new[]

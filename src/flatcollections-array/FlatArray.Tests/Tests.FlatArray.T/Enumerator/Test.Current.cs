@@ -11,17 +11,8 @@ partial class FlatArrayTest
     public void Enumerator_Current_SourceIsDefault_ExpectInvalidOperationException()
     {
         var source = default(FlatArray<StructType>.Enumerator);
-        
-        try
-        {
-            _ = source.Current;
-        }
-        catch (InvalidOperationException)
-        {
-            return;
-        }
 
-        Assert.Fail("An expected InvalidOperationException was not thrown");
+        _ = Assert.Throws<InvalidOperationException>(() => _ = source.Current);
     }
 
     [Theory]
@@ -50,15 +41,6 @@ partial class FlatArrayTest
     {
         var source = sourceItems.InitializeFlatArrayEnumerator(sourceItems.Length, index);
 
-        try
-        {
-            _ = source.Current;
-        }
-        catch (InvalidOperationException)
-        {
-            return;
-        }
-
-        Assert.Fail("An expected InvalidOperationException was not thrown");
+        _ = Assert.Throws<InvalidOperationException>(() => _ = source.Current);
     }
 }

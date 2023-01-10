@@ -17,29 +17,19 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            const int DefaultCapacity = 4;
+            var array = new T[InnerAllocHelper.EnsurePositiveCapacity(estimatedCapacity)];
+            array[0] = enumerator.Current;
+            int actualCount = 1;
 
-            int actualCount = default;
-            var array = new T[estimatedCapacity > 0 ? estimatedCapacity : DefaultCapacity];
-
-            do
+            while (enumerator.MoveNext())
             {
-                if (actualCount < array.Length)
+                if (actualCount == array.Length)
                 {
-                    array[actualCount++] = enumerator.Current;
+                    InnerBufferHelper.GrowBuffer(ref array);
                 }
-                else if (actualCount < Array.MaxLength)
-                {
-                    int newCapacity = InnerAllocHelper.EstimateCapacity(array.Length, Array.MaxLength);
-                    InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
-                    array[actualCount++] = enumerator.Current;
-                }
-                else
-                {
-                    throw InnerExceptionFactory.SourceTooLarge();
-                }
+
+                array[actualCount++] = enumerator.Current;
             }
-            while (enumerator.MoveNext());
 
             if (actualCount < array.Length)
             {

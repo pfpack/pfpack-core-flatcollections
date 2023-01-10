@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace System;
@@ -22,46 +23,24 @@ partial struct FlatArray<T>
                 throw InnerJsonExceptionFactory.JsonTokenNotStartArray();
             }
 
-            if (reader.Read() is not true)
-            {
-                throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
-            }
-
-            if (reader.TokenType is JsonTokenType.EndArray)
+            if (InnerReadNextToken(ref reader) is JsonTokenType.EndArray)
             {
                 return default;
             }
 
-            const int DefaultCapacity = 4;
+            var array = new T[InnerAllocHelper.DefaultPositiveCapacity];
+            array[0] = InnerReadItem(ref reader, options);
+            int actualCount = 1;
 
-            int actualCount = default;
-            var array = new T[DefaultCapacity];
-
-            do
+            while (InnerReadNextToken(ref reader) is not JsonTokenType.EndArray)
             {
-                var item = itemConverter.Read(ref reader, InnerItemType.Value, options);
-
-                if (actualCount < array.Length)
+                if (actualCount == array.Length)
                 {
-                    array[actualCount++] = item!;
-                }
-                else if (actualCount < Array.MaxLength)
-                {
-                    int newCapacity = InnerAllocHelper.EstimateCapacity(array.Length, Array.MaxLength);
-                    InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
-                    array[actualCount++] = item!;
-                }
-                else
-                {
-                    throw InnerExceptionFactory.SourceTooLarge();
+                    InnerBufferHelper.GrowBuffer(ref array);
                 }
 
-                if (reader.Read() is not true)
-                {
-                    throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
-                }
+                array[actualCount++] = InnerReadItem(ref reader, options);
             }
-            while (reader.TokenType is not JsonTokenType.EndArray);
 
             if (actualCount < array.Length)
             {
@@ -70,5 +49,15 @@ partial struct FlatArray<T>
 
             return new(array, default);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static JsonTokenType InnerReadNextToken(ref Utf8JsonReader reader)
+            =>
+            reader.Read() ? reader.TokenType : throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private T InnerReadItem(ref Utf8JsonReader reader, JsonSerializerOptions options)
+            =>
+            itemConverter.Read(ref reader, InnerItemType.Value, options)!;
     }
 }

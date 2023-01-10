@@ -6,19 +6,13 @@ partial class TestHelper
 {
     internal static FlatArray<T>.Enumerator InitializeFlatArrayEnumerator<T>(this T[] items, int length, int index)
     {
-        var source = default(FlatArray<T>.Enumerator);
-        var type = typeof(FlatArray<T>.Enumerator);
+        // Use a boxed default enumerator instance to modify its inner state next
+        object enumerator = default(FlatArray<T>.Enumerator);
 
-        type.CreateSetter<EnumeratorLengthSetter<T>>("length").Invoke(source, length);
-        type.CreateSetter<EnumeratorItemsSetter<T>>("items").Invoke(source, items);
-        type.CreateSetter<EnumeratorIndexSetter<T>>("index").Invoke(source, index);
+        enumerator.SetFieldValue("length", length);
+        enumerator.SetFieldValue("items", items);
+        enumerator.SetFieldValue("index", index);
 
-        return source;
+        return (FlatArray<T>.Enumerator)enumerator;
     }
-
-    private delegate void EnumeratorLengthSetter<T>(in FlatArray<T>.Enumerator source, int length);
-
-    private delegate void EnumeratorItemsSetter<T>(in FlatArray<T>.Enumerator source, T[] items);
-
-    private delegate void EnumeratorIndexSetter<T>(in FlatArray<T>.Enumerator source, int index);
 }

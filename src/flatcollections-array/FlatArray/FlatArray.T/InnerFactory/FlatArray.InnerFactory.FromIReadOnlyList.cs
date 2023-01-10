@@ -16,22 +16,20 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            int actualCount = default;
             var array = new T[count];
+            array[0] = source[0];
+            int actualCount = 1;
 
-            do
+            while (actualCount < (count = source.Count))
             {
-                if (actualCount < array.Length)
-                {
-                    array[actualCount] = source[actualCount];
-                }
-                else
+                if (actualCount == array.Length)
                 {
                     InnerArrayHelper.ExtendUnchecked(ref array, count);
-                    array[actualCount] = source[actualCount];
                 }
+
+                array[actualCount] = source[actualCount];
+                actualCount++;
             }
-            while (++actualCount < (count = source.Count));
 
             if (actualCount < array.Length)
             {
