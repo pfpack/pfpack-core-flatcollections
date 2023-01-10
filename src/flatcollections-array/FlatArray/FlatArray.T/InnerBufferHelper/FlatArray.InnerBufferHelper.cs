@@ -11,8 +11,8 @@ partial struct FlatArray<T>
         {
             int newCapacity = array.Length < Array.MaxLength
                 ? InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength)
-                : throw InnerExceptionFactory.SourceTooLarge();
-                //: array.Length + 1; // Delegate throwing an exception to CLR
+                : unchecked(array.Length + 1); // Delegate throwing an exception to the runtime
+                                               // when a new array is being allocated
 
             InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
         }
