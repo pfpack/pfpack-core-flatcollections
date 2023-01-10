@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace System;
@@ -49,10 +50,12 @@ partial struct FlatArray<T>
             return new(array, default);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static JsonTokenType InnerReadNextToken(ref Utf8JsonReader reader)
             =>
             reader.Read() ? reader.TokenType : throw InnerJsonExceptionFactory.JsonReadCompletedNoEndArray();
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private T InnerReadItem(ref Utf8JsonReader reader, JsonSerializerOptions options)
             =>
             itemConverter.Read(ref reader, InnerItemType.Value, options)!;
