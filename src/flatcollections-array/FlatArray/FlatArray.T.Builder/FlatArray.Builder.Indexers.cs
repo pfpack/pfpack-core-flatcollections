@@ -24,6 +24,7 @@ partial struct FlatArray<T>
                 if (InnerAllocHelper.IsIndexInRange(index, length))
                 {
                     items[index] = value;
+                    return;
                 }
 
                 throw InnerExceptionFactory.IndexOutOfRange(index, length);
