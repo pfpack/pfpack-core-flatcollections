@@ -22,13 +22,13 @@ partial class FlatArrayBuilderTest
     public void Enumerator_MoveNext_IndexIsLessThanLengthMinusOne_ExpectTrueAndNextIndex(
         int index, int length, params string?[] items)
     {
-        var coppiedItems = items.GetCopy();
+        var copied = items.GetCopy();
 
         var source = items.InitializeFlatArrayBuilder(length).InitializeEnumerator(index);
         var actual = source.MoveNext();
 
         Assert.True(actual);
-        source.VerifyInnerState(coppiedItems, length, index + 1);
+        source.VerifyInnerState(length, copied, index + 1);
     }
 
     [Theory]
@@ -37,12 +37,12 @@ partial class FlatArrayBuilderTest
     public void Enumerator_MoveNext_IndexIsEqualToLengthOrGreate_ExpectFalseAndIndexHasNotChanged(
         int index, int length, params bool?[] items)
     {
-        var coppied = items.GetCopy();
+        var copied = items.GetCopy();
 
         var source = items.InitializeFlatArrayBuilder(length).InitializeEnumerator(index);
         var actual = source.MoveNext();
 
         Assert.False(actual);
-        source.VerifyInnerState(coppied, length, index);
+        source.VerifyInnerState(length, copied, index);
     }
 }

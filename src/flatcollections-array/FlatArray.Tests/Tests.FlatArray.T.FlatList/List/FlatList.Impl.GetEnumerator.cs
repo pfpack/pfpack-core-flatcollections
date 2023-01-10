@@ -15,7 +15,7 @@ partial class FlatArrayFlatListTest
         var actual = source.GetEnumerator();
         var actualEnumerator = Assert.IsAssignableFrom<IEnumerator<decimal?>>(actual);
 
-        actualEnumerator.VerifyFlatListEnumeratorState(Array.Empty<decimal?>(), 0, -1);
+        actualEnumerator.VerifyFlatListEnumeratorState(0, Array.Empty<decimal?>(), -1);
     }
 
     [Theory]
@@ -29,6 +29,6 @@ partial class FlatArrayFlatListTest
         var actual = source.GetEnumerator();
         var actualEnumerator = Assert.IsAssignableFrom<IEnumerator<bool?>>(actual);
 
-        actualEnumerator.VerifyFlatListEnumeratorState(items, length, -1);
+        actualEnumerator.VerifyFlatListEnumeratorState(length, items, -1);
     }
 }

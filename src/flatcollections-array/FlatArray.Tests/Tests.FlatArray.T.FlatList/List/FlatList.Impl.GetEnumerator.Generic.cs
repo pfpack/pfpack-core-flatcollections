@@ -13,7 +13,7 @@ partial class FlatArrayFlatListTest
         var source = TestHelper.CreateEmptyFlatList<RecordType>();
         var actual = source.GetEnumerator();
 
-        actual.VerifyFlatListEnumeratorState(Array.Empty<RecordType>(), 0, -1);
+        actual.VerifyFlatListEnumeratorState(0, Array.Empty<RecordType>(), -1);
     }
 
     [Theory]
@@ -25,6 +25,6 @@ partial class FlatArrayFlatListTest
         var source = items.InitializeFlatList(length);
         var actual = source.GetEnumerator();
 
-        actual.VerifyFlatListEnumeratorState(items, length, -1);
+        actual.VerifyFlatListEnumeratorState(length, items, -1);
     }
 }

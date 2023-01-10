@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<StructType>.Builder();
         var actual = source.GetEnumerator();
 
-        actual.VerifyInnerState(Array.Empty<StructType>(), default, -1);
+        actual.VerifyInnerState(default, Array.Empty<StructType>(), -1);
     }
 
     [Theory]
@@ -22,11 +22,11 @@ partial class FlatArrayBuilderTest
     public void GetEnumerator_SourceIsNotDefault_ExpectEnumeratorWithCorrectState(
         int length, params string?[] items)
     {
-        var coppied = items.GetCopy();
+        var copied = items.GetCopy();
 
         var source = items.InitializeFlatArrayBuilder(length);
         var actual = source.GetEnumerator();
 
-        actual.VerifyInnerState(coppied, length, -1);
+        actual.VerifyInnerState(length, copied, -1);
     }
 }

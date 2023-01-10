@@ -6,18 +6,17 @@ namespace PrimeFuncPack.Core.Tests;
 partial class TestHelper
 {
     internal static void VerifyFlatListEnumeratorState<T>(
-        this IEnumerator<T> actual, T[] expectedItems, int expectedLength, int expectedIndex)
+        this IEnumerator<T> actual, int expectedLength, T[] expectedItems, int expectedIndex)
     {
-        var actualTypeName = actual.GetType().Name;
         const string expectedTypeName = "Enumerator";
-
+        var actualTypeName = actual.GetType().Name;
         Assert.Equal(expectedTypeName, actualTypeName);
-
-        var actualItems = actual.GetFieldValue<T[]?>("items");
-        Assert.Equal(expectedItems, actualItems);
 
         var actualLength = actual.GetStructFieldValue<int>("length");
         Assert.StrictEqual(expectedLength, actualLength);
+
+        var actualItems = actual.GetFieldValue<T[]>("items");
+        Assert.Equal(expectedItems, actualItems);
 
         var actualIndex = actual.GetStructFieldValue<int>("index");
         Assert.StrictEqual(expectedIndex, actualIndex);

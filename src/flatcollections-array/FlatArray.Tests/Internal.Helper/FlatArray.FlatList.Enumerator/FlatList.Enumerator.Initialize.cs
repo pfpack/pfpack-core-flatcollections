@@ -6,12 +6,12 @@ partial class TestHelper
 {
     internal static IEnumerator<T> InitializeFlatListEnumerator<T>(this T[] items, int length, int index)
     {
-        var flatListEnumerator = items.InitializeFlatList(length).GetEnumerator();
+        var enumerator = items.InitializeFlatList(length).GetEnumerator();
 
-        flatListEnumerator.SetFieldValue("items", items);
-        flatListEnumerator.SetFieldValue("length", length);
-        flatListEnumerator.SetFieldValue("index", index);
+        enumerator.SetFieldValue("length", length);
+        enumerator.SetFieldValue("items", items);
+        enumerator.SetFieldValue("index", index);
 
-        return flatListEnumerator;
+        return enumerator;
     }
 }

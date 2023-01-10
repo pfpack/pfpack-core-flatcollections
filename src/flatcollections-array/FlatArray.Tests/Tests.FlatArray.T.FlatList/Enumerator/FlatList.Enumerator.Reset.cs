@@ -14,6 +14,6 @@ partial class FlatArrayFlatListTest
         source.Reset();
 
         var expectedItems = new[] { MinusFifteenIdRefType, null, PlusFifteenIdRefType };
-        source.VerifyFlatListEnumeratorState(expectedItems, 2, -1);
+        source.VerifyFlatListEnumeratorState(2, expectedItems, -1);
     }
 }

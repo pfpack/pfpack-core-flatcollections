@@ -15,6 +15,6 @@ partial class FlatArrayFlatListTest
         source.Dispose();
 
         var expectedItems = new RecordStruct?[] { SomeTextRecordStruct, AnotherTextRecordStruct, null, UpperSomeTextRecordStruct };
-        source.VerifyFlatListEnumeratorState(expectedItems, 3, 1);
+        source.VerifyFlatListEnumeratorState(3, expectedItems, 1);
     }
 }
