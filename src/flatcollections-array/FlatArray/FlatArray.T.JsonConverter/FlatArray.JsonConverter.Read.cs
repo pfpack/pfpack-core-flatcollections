@@ -28,9 +28,10 @@ partial struct FlatArray<T>
             }
 
             var array = new T[InnerAllocHelper.DefaultPositiveCapacity];
-            int actualCount = 0;
+            array[0] = InnerReadItem(ref reader, options);
+            int actualCount = 1;
 
-            do
+            while (InnerReadNextToken(ref reader) is not JsonTokenType.EndArray)
             {
                 if (actualCount == array.Length)
                 {
@@ -43,7 +44,6 @@ partial struct FlatArray<T>
 
                 array[actualCount++] = InnerReadItem(ref reader, options);
             }
-            while (InnerReadNextToken(ref reader) is not JsonTokenType.EndArray);
 
             if (actualCount < array.Length)
             {
