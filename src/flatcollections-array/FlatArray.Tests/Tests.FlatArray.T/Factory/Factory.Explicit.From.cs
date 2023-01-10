@@ -325,7 +325,7 @@ partial class FlatArrayTest
             SomeTextRecordStruct, AnotherTextRecordStruct, UpperAnotherTextRecordStruct
         };
 
-        var source = new StubCollection<RecordStruct>(sourceItems);
+        var source = new StubReadOnlyList<RecordStruct>(sourceItems);
         var actual = FlatArray<RecordStruct>.From(source);
 
         var expectedItems = new[]
