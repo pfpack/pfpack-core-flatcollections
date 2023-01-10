@@ -13,9 +13,5 @@ partial struct FlatArray<T>
         internal static InvalidOperationException EnumerationEitherNotStartedOrFinished()
             =>
             new("Enumeration has either not started or has already finished.");
-
-        internal static OutOfMemoryException SourceTooLarge()
-            =>
-            new("The source is too large to allocate.");
     }
 }
