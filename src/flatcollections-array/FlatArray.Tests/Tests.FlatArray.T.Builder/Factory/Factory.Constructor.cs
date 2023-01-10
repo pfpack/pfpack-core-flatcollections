@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
         RecordType[]? source = null;
         var actual = new FlatArray<RecordType>.Builder(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordType>(), default);
     }
 
     [Fact]
@@ -22,7 +22,7 @@ partial class FlatArrayBuilderTest
         var source = Array.Empty<RecordStruct?>();
         var actual = new FlatArray<RecordStruct?>.Builder(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordStruct?>(), default);
     }
 
     [Theory]

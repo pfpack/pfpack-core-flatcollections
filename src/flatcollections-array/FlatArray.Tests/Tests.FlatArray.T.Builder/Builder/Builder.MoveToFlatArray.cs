@@ -22,7 +22,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<RefType>.Builder();
         _ = source.MoveToFlatArray();
 
-        source.VerifyInnerState(default, default);
+        source.VerifyInnerState(Array.Empty<RefType>(), default);
     }
 
     [Fact]
@@ -45,6 +45,6 @@ partial class FlatArrayBuilderTest
         var source = new[] { MinusFifteen, Zero, PlusFifteen, int.MaxValue, One }.InitializeFlatArrayBuilder();
         _ = source.MoveToFlatArray();
 
-        source.VerifyInnerState(default, default);
+        source.VerifyInnerState(Array.Empty<int>(), default);
     }
 }

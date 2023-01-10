@@ -13,7 +13,7 @@ partial class FlatArrayBuilderStaticTest
         var source = default(ReadOnlySpan<RefType>);
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RefType>(), default);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ partial class FlatArrayBuilderStaticTest
         var source = default(Span<StructType?>);
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<StructType?>(), default);
     }
 
     [Fact]

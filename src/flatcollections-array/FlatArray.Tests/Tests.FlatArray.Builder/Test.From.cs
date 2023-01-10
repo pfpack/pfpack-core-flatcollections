@@ -15,7 +15,7 @@ partial class FlatArrayBuilderStaticTest
         RecordType?[]? source = null;
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordType?>(), default);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ partial class FlatArrayBuilderStaticTest
         var source = Array.Empty<RecordStruct?>();
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordStruct?>(), default);
     }
 
     [Theory]
@@ -58,7 +58,7 @@ partial class FlatArrayBuilderStaticTest
         var source = default(FlatArray<RecordType>);
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordType>(), default);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ partial class FlatArrayBuilderStaticTest
         var source = default(FlatArray<object>?);
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<object>(), default);
     }
 
     [Fact]
@@ -87,7 +87,7 @@ partial class FlatArrayBuilderStaticTest
         FlatArray<RecordType?>? source = default(FlatArray<RecordType?>);
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordType?>(), default);
     }
 
     [Fact]
@@ -107,7 +107,7 @@ partial class FlatArrayBuilderStaticTest
         List<byte?>? source = null;
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<byte?>(), default);
     }
 
     [Fact]
@@ -116,7 +116,7 @@ partial class FlatArrayBuilderStaticTest
         var source = new List<RecordType>();
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordType>(), default);
     }
 
     [Fact]
@@ -165,7 +165,7 @@ partial class FlatArrayBuilderStaticTest
         var source = default(ImmutableArray<RecordStruct?>);
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordStruct?>(), default);
     }
 
     [Theory]
@@ -188,7 +188,7 @@ partial class FlatArrayBuilderStaticTest
         ImmutableArray<RefType?>? source = null;
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RefType?>(), default);
     }
 
     [Fact]
@@ -197,7 +197,7 @@ partial class FlatArrayBuilderStaticTest
         ImmutableArray<StructType>? source = new ImmutableArray<StructType>();;
         var actual = FlatArray.Builder.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<StructType>(), default);
     }
 
     [Theory]

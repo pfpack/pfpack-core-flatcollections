@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<StructType>.Builder();
         var actual = source.GetEnumerator();
 
-        actual.VerifyInnerState(default, default, -1);
+        actual.VerifyInnerState(Array.Empty<StructType>(), default, -1);
     }
 
     [Theory]

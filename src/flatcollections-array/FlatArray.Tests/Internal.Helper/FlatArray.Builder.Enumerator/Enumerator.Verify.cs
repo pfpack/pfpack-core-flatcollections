@@ -6,7 +6,7 @@ namespace PrimeFuncPack.Core.Tests;
 partial class TestHelper
 {
     internal static void VerifyInnerState<T>(
-        this FlatArray<T>.Builder.Enumerator actual, T[]? expectedBuilderItems, int expectedBuilderLength, int expectedIndex)
+        this FlatArray<T>.Builder.Enumerator actual, T[] expectedBuilderItems, int expectedBuilderLength, int expectedIndex)
     {
         var type = typeof(FlatArray<T>.Builder.Enumerator);
 

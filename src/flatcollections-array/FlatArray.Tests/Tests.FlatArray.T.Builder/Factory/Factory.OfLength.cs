@@ -24,7 +24,7 @@ partial class FlatArrayBuilderTest
     public void OfLength_LengthIsZero_ExpectDefaultState()
     {
         var actual = FlatArray<RecordType?>.Builder.OfLength(0);
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState(Array.Empty<RecordType?>(), default);
     }
 
     [Theory]

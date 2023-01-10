@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<RefType>.Builder();
         source.Fill();
 
-        source.VerifyInnerState(default, default);
+        source.VerifyInnerState(Array.Empty<RefType>(), default);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<StructType?>.Builder();
         source.Fill(SomeTextStructType);
 
-        source.VerifyInnerState(default, default);
+        source.VerifyInnerState(Array.Empty<StructType?>(), default);
     }
 
     [Fact]
