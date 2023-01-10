@@ -8,11 +8,11 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayBuilderTest
 {
     [Fact]
-    public void Enumerator_Current_SourceIsDefault_ExpectIndexOutOfRangeException()
+    public void Enumerator_Current_SourceIsDefault_ExpectNullReferenceException()
     {
         var source = default(FlatArray<RefType>.Builder.Enumerator);
 
-        _ = Assert.Throws<IndexOutOfRangeException>(() => _ = source.Current);
+        _ = Assert.Throws<NullReferenceException>(() => _ = source.Current);
     }
 
     [Theory]
