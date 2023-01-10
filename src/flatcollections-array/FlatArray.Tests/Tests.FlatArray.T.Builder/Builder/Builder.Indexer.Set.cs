@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -26,16 +27,16 @@ partial class FlatArrayBuilderTest
     public void Indexer_Set_IndexIsInRange_ExpectItemIsFromSourceItemsByIndex(
         int index, int sourceLength, params string?[] sourceItems)
     {
-        const string newValue = "a_new_value";
+        const string newValue = "a_new_value_to_set";
+
+        // Build the expected from the source before modifying the source
+        var expectedItems = sourceItems.ToArray();
+        expectedItems[index] = newValue;
 
         var source = sourceItems.InitializeFlatArrayBuilder(sourceLength);
-
         source[index] = newValue;
 
-        var actual = source[index];
-        var expected = newValue;
-
-        Assert.Equal(expected, actual);
+        source.VerifyInnerState(expectedItems, sourceLength);
     }
 
     [Theory]
