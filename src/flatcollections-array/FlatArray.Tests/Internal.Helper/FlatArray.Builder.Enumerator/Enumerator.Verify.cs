@@ -8,16 +8,11 @@ partial class TestHelper
     internal static void VerifyInnerState<T>(
         this FlatArray<T>.Builder.Enumerator actual, int expectedBuilderLength, T[] expectedBuilderItems, int expectedIndex)
     {
-        var type = typeof(FlatArray<T>.Builder.Enumerator);
-
-        var actualBuilder = type.CreateGetter<BuilderEnumeratorBuilderGetter<T>>("builder").Invoke(actual);
+        var actualBuilder = actual.GetFieldValue<FlatArray<T>.Builder>("builder");
+        Assert.NotNull(actualBuilder);
         actualBuilder.VerifyInnerState(expectedBuilderItems, expectedBuilderLength);
 
-        var actualIndex = type.CreateGetter<BuilderEnumeratorIndexGetter<T>>("index").Invoke(actual);
+        var actualIndex = actual.GetStructFieldValue<int>("index");
         Assert.StrictEqual(expectedIndex, actualIndex);
     }
-
-    private delegate FlatArray<T>.Builder BuilderEnumeratorBuilderGetter<T>(in FlatArray<T>.Builder.Enumerator source);
-
-    private delegate int BuilderEnumeratorIndexGetter<T>(in FlatArray<T>.Builder.Enumerator source);
 }
