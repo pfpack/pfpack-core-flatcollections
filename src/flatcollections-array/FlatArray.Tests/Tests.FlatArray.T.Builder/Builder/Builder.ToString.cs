@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<RecordType>.Builder();
         var actual = source.ToString();
 
-        const string expected = "FlatArray<RecordType>[0]";
+        const string expected = "FlatArray<RecordType>.Builder[0]";
         Assert.Equal(expected, actual);
     }
 
@@ -30,7 +30,7 @@ partial class FlatArrayBuilderTest
         var source = sourceItems.InitializeFlatArrayBuilder(length);
         var actual = source.ToString();
 
-        const string expected = "FlatArray<String>[3]";
+        const string expected = "FlatArray<String>.Builder[3]";
         Assert.Equal(expected, actual);
     }
 }

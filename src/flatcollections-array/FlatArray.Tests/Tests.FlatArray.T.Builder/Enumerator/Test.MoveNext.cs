@@ -8,13 +8,11 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayBuilderTest
 {
     [Fact]
-    public void Enumerator_MoveNext_SourceIsDefault_ExpectFalseAndDefaultState()
+    public void Enumerator_MoveNext_SourceIsDefault_ExpectNullReferenceException()
     {
         var source = default(FlatArray<RefType>.Builder.Enumerator);
-        var actual = source.MoveNext();
 
-        Assert.False(actual);
-        source.VerifyInnerState(default, default, default);
+        _ = Assert.Throws<NullReferenceException>(() => _ = source.MoveNext());
     }
 
     [Theory]
