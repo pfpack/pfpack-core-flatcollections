@@ -6,14 +6,11 @@ partial class TestHelper
 {
     internal static FlatArray<T>.Builder InitializeFlatArrayBuilder<T>(this T[] items, int? length = null)
     {
-        var source = new FlatArray<T>.Builder();
-        var type = typeof(FlatArray<T>.Builder);
+        var builder = new FlatArray<T>.Builder();
 
-        type.CreateSetter<BuilderFieldSetter<T, T[]>>("items").Invoke(source, items);
-        type.CreateSetter<BuilderFieldSetter<T, int>>("length").Invoke(source, length ?? items.Length);
+        builder.SetFieldValue("length", length ?? items.Length);
+        builder.SetFieldValue("items", items);
 
-        return source;
+        return builder;
     }
-
-    private delegate void BuilderFieldSetter<T, TValue>(in FlatArray<T>.Builder source, TValue value);
 }
