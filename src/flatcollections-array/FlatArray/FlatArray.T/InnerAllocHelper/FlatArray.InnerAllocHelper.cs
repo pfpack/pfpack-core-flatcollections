@@ -24,25 +24,21 @@ partial struct FlatArray<T>
             =>
             capacity > 0 ? capacity : DefaultPositiveCapacity;
 
-        // The caller MUST ensure the capacity is GREATER than zero,
-        // and the capacity is LESS than or EQUAL to the max capacity
+        // The caller MUST ensure the capacity is GREATER than zero and LESS than the max capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int IncreaseCapacity(int capacity, int maxCapacity)
+        internal static int EnlargeCapacity(int capacity, int maxCapacity)
         {
-            Debug.Assert(capacity > 0);
-            Debug.Assert(capacity <= maxCapacity);
+            Debug.Assert(capacity > 0 && capacity < maxCapacity);
 
             int newCapacity = InnerDouble(capacity);
             return InnerIsWithinCapacity(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
-        // The caller MUST ensure the length is GREATER than zero,
-        // and the length is LESS than or EQUAL to the capacity
+        // The caller MUST ensure the length is GREATER than zero and LESS than or EQUAL to the capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool IsHugeCapacity(int length, int capacity)
         {
-            Debug.Assert(length > 0);
-            Debug.Assert(length <= capacity);
+            Debug.Assert(length > 0 && length <= capacity);
 
             int doubleLength = InnerDouble(length);
             return InnerIsWithinCapacity(doubleLength, capacity);
