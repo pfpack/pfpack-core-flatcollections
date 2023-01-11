@@ -26,7 +26,7 @@ partial struct FlatArray<T>
 
         // The caller MUST ensure the capacity is GREATER than zero and LESS than the max capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int IncreaseCapacity(int capacity, int maxCapacity)
+        internal static int EnlargeCapacity(int capacity, int maxCapacity)
         {
             Debug.Assert(capacity > 0 && capacity < maxCapacity);
 

@@ -36,7 +36,7 @@ partial struct FlatArray<T>
             {
                 if (actualCount == array.Length)
                 {
-                    InnerBufferHelper.GrowBuffer(ref array);
+                    InnerBufferHelper.EnlargeBuffer(ref array);
                 }
 
                 array[actualCount++] = InnerReadItem(ref reader, options);

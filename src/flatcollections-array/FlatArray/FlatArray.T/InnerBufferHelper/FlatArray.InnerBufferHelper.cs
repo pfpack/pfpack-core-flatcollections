@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using static System.FormattableString;
 
 namespace System;
 
@@ -6,16 +8,34 @@ partial struct FlatArray<T>
 {
     internal static class InnerBufferHelper
     {
+        // The caller MUST ensure the array length is GREATER than zero
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void GrowBuffer(ref T[] array)
+        internal static void EnlargeBuffer(ref T[] array)
         {
-            int newCapacity = array.Length < Array.MaxLength
-                ? InnerAllocHelper.IncreaseCapacity(array.Length, Array.MaxLength)
-                : checked(array.Length + 1); // Delegate throwing an exception to the runtime
-                                             // when either a new array is being allocated
-                                             // or a new capacity is being computed
+            Debug.Assert(array.Length > 0);
 
-            InnerArrayHelper.ExtendUnchecked(ref array, newCapacity);
+            int newLength = InnerEnlargeLength(array.Length);
+            InnerArrayHelper.ExtendUnchecked(ref array, newLength);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int InnerEnlargeLength(int length)
+        {
+            Debug.Assert(length > 0);
+
+            if (length < Array.MaxLength)
+            {
+                return InnerAllocHelper.EnlargeCapacity(length, Array.MaxLength);
+            }
+
+            if (length == int.MaxValue)
+            {
+                throw new InvalidOperationException(
+                    Invariant($"The buffer has the maximum size ({int.MaxValue}) and cannot be enlarged."));
+            }
+
+            // Delegate throwing OutOfMemoryException to the runtime when a new array is being allocated
+            return length + 1;
         }
     }
 }
