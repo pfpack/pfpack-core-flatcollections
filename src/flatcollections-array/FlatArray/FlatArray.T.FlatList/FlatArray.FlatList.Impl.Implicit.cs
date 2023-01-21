@@ -12,7 +12,7 @@ partial struct FlatArray<T>
         public T this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => InnerItem(index); // Delegate range check to InnerItem
+            get => InnerItemChecked(index);
         }
 
         public int IndexOf(T item)

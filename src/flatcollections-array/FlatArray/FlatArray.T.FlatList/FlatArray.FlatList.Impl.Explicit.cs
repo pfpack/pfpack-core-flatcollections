@@ -13,7 +13,7 @@ partial struct FlatArray<T>
         T IList<T>.this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => InnerItem(index); // Delegate range check to InnerItem
+            get => InnerItemChecked(index);
             set => throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
         }
 
