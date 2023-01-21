@@ -17,11 +17,11 @@ partial struct FlatArray<T>
 
         public int IndexOf(T item)
             =>
-            InnerIndexOf(item);
+            length != default ? InnerIndexOf(item) : -1;
 
         public bool Contains(T item)
             =>
-            InnerIndexOf(item) >= 0;
+            length != default && InnerIndexOf(item) >= 0;
 
         public void CopyTo(T[] array, int arrayIndex)
             =>
