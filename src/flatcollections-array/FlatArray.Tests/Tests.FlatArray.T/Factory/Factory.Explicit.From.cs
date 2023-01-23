@@ -238,6 +238,7 @@ partial class FlatArrayTest
     }
 
     [Theory]
+    //[InlineData(null)]
     [InlineData(AnotherString)]
     [InlineData("01")]
     [InlineData("01", "02")]
