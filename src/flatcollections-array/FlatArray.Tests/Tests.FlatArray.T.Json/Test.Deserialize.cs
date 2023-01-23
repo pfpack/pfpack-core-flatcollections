@@ -91,8 +91,9 @@ partial class FlatArrayJsonSerializerTest
     }
 
     [Theory]
-    //[InlineData(null)]
     [InlineData(AnotherString)]
+    [InlineData(null, AnotherString)]
+    [InlineData(AnotherString, null)]
     [InlineData("01")]
     [InlineData("01", "02")]
     [InlineData("01", "02", "03")]

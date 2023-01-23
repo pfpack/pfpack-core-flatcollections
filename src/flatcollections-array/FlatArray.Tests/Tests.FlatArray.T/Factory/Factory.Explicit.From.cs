@@ -238,8 +238,9 @@ partial class FlatArrayTest
     }
 
     [Theory]
-    //[InlineData(null)]
     [InlineData(AnotherString)]
+    [InlineData(null, AnotherString)]
+    [InlineData(AnotherString, null)]
     [InlineData("01")]
     [InlineData("01", "02")]
     [InlineData("01", "02", "03")]
@@ -254,16 +255,16 @@ partial class FlatArrayTest
     [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16")]
     [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17")]
     public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
-        params string[] sourceItems)
+        params string?[] sourceItems)
     {
         var copied = sourceItems.GetCopy();
 
         var source = GetSource();
-        var actual = FlatArray<string>.From(source);
+        var actual = FlatArray<string?>.From(source);
 
         actual.VerifyInnerState(copied, copied.Length);
 
-        IEnumerable<string> GetSource()
+        IEnumerable<string?> GetSource()
         {
             foreach (var item in sourceItems)
             {
