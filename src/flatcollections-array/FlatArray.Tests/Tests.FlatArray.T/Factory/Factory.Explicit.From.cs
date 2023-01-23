@@ -239,7 +239,19 @@ partial class FlatArrayTest
 
     [Theory]
     [InlineData(AnotherString)]
+    [InlineData("01")]
+    [InlineData("01", "02")]
+    [InlineData("01", "02", "03")]
+    [InlineData("01", "02", "03", "04")]
+    [InlineData("01", "02", "03", "04", "05")]
+    [InlineData("01", "02", "03", "04", "05", "06")]
+    [InlineData("01", "02", "03", "04", "05", "06", "07")]
+    [InlineData("01", "02", "03", "04", "05", "06", "07", "08")]
+    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09")]
     [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")]
+    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15")]
+    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16")]
+    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17")]
     public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
         params string[] sourceItems)
     {
