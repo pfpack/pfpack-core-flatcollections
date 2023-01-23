@@ -39,7 +39,7 @@ partial class FlatArrayBuilderTest
     }
 
     [Fact]
-    public void ConstructFromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void ConstructFromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { PlusFifteenIdRefType, ZeroIdRefType };
         var actual = new FlatArray<RefType>.Builder(sourceArray);

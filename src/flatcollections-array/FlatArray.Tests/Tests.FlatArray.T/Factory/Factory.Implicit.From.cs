@@ -38,7 +38,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitFromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void ImplicitFromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { MinusOne, PlusFifteen, MinusFifteen };
         FlatArray<int> actual = sourceArray;
@@ -84,7 +84,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitFromList_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void ImplicitFromList_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<byte?>
         {

@@ -39,7 +39,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void ToFlatArray_ThanModifySourceList_ExpectInnerStateHasNotChanged()
+    public void ToFlatArray_ThenModifySourceList_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<object?> { SomeString, null, MinusFifteenIdRefType, Zero };
         var actual = sourceList.ToFlatArray();

@@ -59,7 +59,7 @@ partial class FlatArrayBuilderTest
     }
 
     [Fact]
-    public void FromSpan_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromSpan_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var source = new[] { SomeString, null, EmptyString, UpperSomeString, AnotherString }.AsSpan();
         var actual = FlatArray<string?>.Builder.From(source);

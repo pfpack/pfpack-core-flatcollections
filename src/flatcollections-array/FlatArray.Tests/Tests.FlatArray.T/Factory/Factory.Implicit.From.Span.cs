@@ -43,7 +43,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitFromSpan_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void ImplicitFromSpan_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[] { 1, 71, -289, 55, 91 };
         var source = sourceItems.AsSpan();

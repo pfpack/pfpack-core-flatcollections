@@ -42,7 +42,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void FromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { "One", "Two", "Three" };
         var actual = FlatArray<string>.From(sourceArray);
@@ -143,7 +143,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void FromList_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromList_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<RecordType>
         {
@@ -288,7 +288,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void FromCollection_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromCollection_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<StructType>
         {
