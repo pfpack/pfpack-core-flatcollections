@@ -255,12 +255,12 @@ partial class FlatArrayTest
     public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
         params string[] sourceItems)
     {
-        var coppied = sourceItems.GetCopy();
+        var copied = sourceItems.GetCopy();
 
         var source = GetSource();
         var actual = FlatArray<string>.From(source);
 
-        actual.VerifyInnerState(coppied, coppied.Length);
+        actual.VerifyInnerState(copied, copied.Length);
 
         IEnumerable<string> GetSource()
         {
