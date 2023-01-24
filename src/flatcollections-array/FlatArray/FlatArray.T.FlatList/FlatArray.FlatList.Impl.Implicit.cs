@@ -12,16 +12,16 @@ partial struct FlatArray<T>
         public T this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => InnerItem(index); // Delegate range check to InnerItem
+            get => InnerItemChecked(index);
         }
 
         public int IndexOf(T item)
             =>
-            InnerIndexOf(item);
+            length != default ? InnerIndexOf(item) : -1;
 
         public bool Contains(T item)
             =>
-            InnerIndexOf(item) >= 0;
+            length != default && InnerIndexOf(item) >= 0;
 
         public void CopyTo(T[] array, int arrayIndex)
             =>

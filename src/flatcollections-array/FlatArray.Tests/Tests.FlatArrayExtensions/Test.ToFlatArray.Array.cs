@@ -37,7 +37,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void ToFlatArray_ThanModifySourceArray_ExpectInnerStateHasNotChanged()
+    public void ToFlatArray_ThenModifySourceArray_ExpectInnerStateHasNotChanged()
     {
         var source = new[] { default, SomeTextStructType };
         var actual = source.ToFlatArray();

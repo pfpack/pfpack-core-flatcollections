@@ -49,7 +49,7 @@ partial class FlatArrayBuilderStaticTest
     }
 
     [Fact]
-    public void FromSpan_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromSpan_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[]
         {

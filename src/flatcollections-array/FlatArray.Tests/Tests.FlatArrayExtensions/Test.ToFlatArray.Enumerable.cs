@@ -78,7 +78,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void ToFlatArray_ThanModifySourceCollection_ExpectInnerStateHasNotChanged()
+    public void ToFlatArray_ThenModifySourceCollection_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<RefType>
         {

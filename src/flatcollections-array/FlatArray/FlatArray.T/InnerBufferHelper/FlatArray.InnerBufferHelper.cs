@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using static System.FormattableString;
 
 namespace System;
 
@@ -28,14 +27,13 @@ partial struct FlatArray<T>
                 return InnerAllocHelper.EnlargeCapacity(length, Array.MaxLength);
             }
 
-            if (length == int.MaxValue)
+            if (length != int.MaxValue)
             {
-                throw new InvalidOperationException(
-                    Invariant($"The buffer has the maximum size ({int.MaxValue}) and cannot be enlarged."));
+                // Delegate throwing OutOfMemoryException to the runtime when a new array is being allocated
+                return length + 1;
             }
 
-            // Delegate throwing OutOfMemoryException to the runtime when a new array is being allocated
-            return length + 1;
+            throw new InvalidOperationException("The buffer has the maximum size and cannot be enlarged.");
         }
     }
 }

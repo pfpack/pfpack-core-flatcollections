@@ -39,7 +39,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ConstructFromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void ConstructFromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { MinusFifteen, Zero, int.MaxValue };
         var actual = new FlatArray<int>(sourceArray);

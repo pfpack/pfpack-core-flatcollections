@@ -28,7 +28,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void ToFlatArray_ThanModifySourceSpan_ExpectInnerStateHasNotChanged()
+    public void ToFlatArray_ThenModifySourceSpan_ExpectInnerStateHasNotChanged()
     {
         var source = new int?[] { MinusFifteen, Zero, One, null, MinusOne, PlusFifteen }.AsSpan();
         var actual = source.ToFlatArray();

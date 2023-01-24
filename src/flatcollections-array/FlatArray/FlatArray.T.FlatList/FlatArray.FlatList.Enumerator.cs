@@ -59,9 +59,9 @@ partial struct FlatArray<T>
 
             object IEnumerator.Current => Current!;
 
-            public void Reset() => index = DefaultIndex;
+            void IEnumerator.Reset() => index = DefaultIndex;
 
-            public void Dispose() { }
+            void IDisposable.Dispose() { }
         }
     }
 }

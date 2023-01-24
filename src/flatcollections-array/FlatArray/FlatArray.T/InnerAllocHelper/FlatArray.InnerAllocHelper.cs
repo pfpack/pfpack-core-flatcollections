@@ -30,7 +30,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(capacity > 0 && capacity < maxCapacity);
 
-            int newCapacity = InnerDouble(capacity);
+            int newCapacity = InnerDoubleUnchecked(capacity);
             return InnerIsWithinCapacity(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
@@ -40,12 +40,12 @@ partial struct FlatArray<T>
         {
             Debug.Assert(length > 0 && length <= capacity);
 
-            int doubleLength = InnerDouble(length);
+            int doubleLength = InnerDoubleUnchecked(length);
             return InnerIsWithinCapacity(doubleLength, capacity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int InnerDouble(int value)
+        private static int InnerDoubleUnchecked(int value)
             =>
             value << 1; // unchecked(value * 2);
 

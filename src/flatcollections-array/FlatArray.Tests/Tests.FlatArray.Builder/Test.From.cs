@@ -41,7 +41,7 @@ partial class FlatArrayBuilderStaticTest
     }
 
     [Fact]
-    public void FromArray_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromArray_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceArray = new[] { "One", "Two", "Three" };
         var actual = FlatArray.Builder.From(sourceArray);
@@ -139,7 +139,7 @@ partial class FlatArrayBuilderStaticTest
     }
 
     [Fact]
-    public void FromList_ThanModifySource_ExpectInnerStateHasNotChanged()
+    public void FromList_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<RecordType>
         {

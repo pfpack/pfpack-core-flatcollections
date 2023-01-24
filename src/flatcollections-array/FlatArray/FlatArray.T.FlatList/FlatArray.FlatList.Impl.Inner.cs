@@ -8,7 +8,7 @@ partial struct FlatArray<T>
     partial class FlatList
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T InnerItem(int index)
+        private T InnerItemChecked(int index)
         {
             if (InnerAllocHelper.IsIndexInRange(index, length))
             {
