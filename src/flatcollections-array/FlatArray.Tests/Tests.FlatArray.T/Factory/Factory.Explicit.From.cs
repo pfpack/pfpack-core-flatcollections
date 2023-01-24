@@ -242,6 +242,7 @@ partial class FlatArrayTest
     [InlineData(null, AnotherString)]
     [InlineData(AnotherString, null)]
     [InlineData(null, null)]
+    // Test cases for testing doubling the buffer
     [InlineData("01")]
     [InlineData("01", "02")]
     [InlineData("01", "02", "03")]
