@@ -69,9 +69,9 @@ partial class FlatArrayTest
         var source = mapper.Keys.ToArray().InitializeFlatArray(4);
 
         var actual = source.Filter(Predicate);
-        var expectedItems = new[] { Zero, MinusOne, default, default };
+        var expectedItems = new[] { Zero, MinusOne };
 
-        actual.VerifyInnerState(expectedItems, 2);
+        actual.VerifyTruncatedState(expectedItems);
 
         bool Predicate(int item)
             =>

@@ -72,7 +72,7 @@ partial class FlatArrayTest
         var actual = source.FlatMap(Map);
         var expectedItems = new decimal?[] { decimal.MinusOne, null, null, decimal.One };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyTruncatedState(expectedItems);
 
         FlatArray<decimal?> Map(string sourceValue, int index)
         {

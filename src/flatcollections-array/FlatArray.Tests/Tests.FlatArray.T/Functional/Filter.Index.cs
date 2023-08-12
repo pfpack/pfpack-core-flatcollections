@@ -71,9 +71,9 @@ partial class FlatArrayTest
         var source = mapper.Keys.ToArray().InitializeFlatArray(sourceItems.Length);
 
         var actual = source.Filter(Predicate);
-        var expectedItems = new[] { EmptyString, UpperAnotherString, WhiteSpaceString, default!, default! };
+        var expectedItems = new[] { EmptyString, UpperAnotherString, WhiteSpaceString };
 
-        actual.VerifyInnerState(expectedItems, 3);
+        actual.VerifyTruncatedState(expectedItems);
 
         bool Predicate(string item, int index)
         {

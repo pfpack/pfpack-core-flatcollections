@@ -56,7 +56,7 @@ partial class FlatArrayTest
         var actual = source.Map(Map);
         var expectedItems = new[] { SomeString, null };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyTruncatedState(expectedItems);
 
         string? Map(RefType sourceValue, int index)
         {

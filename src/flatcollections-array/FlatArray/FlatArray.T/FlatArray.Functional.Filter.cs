@@ -11,7 +11,9 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var resultItems = new T[length];
+        var startLength = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
+
+        var resultItems = new T[startLength];
         var resultLength = 0;
 
         for (int i = 0; i < length; i++)
@@ -21,6 +23,11 @@ partial struct FlatArray<T>
             if (predicate.Invoke(item) is false)
             {
                 continue;
+            }
+
+            if (resultLength == resultItems.Length)
+            {
+                InnerBufferHelper.EnlargeBuffer(ref resultItems);
             }
 
             resultItems[resultLength] = item;
@@ -44,7 +51,9 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var resultItems = new T[length];
+        var startLength = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
+
+        var resultItems = new T[startLength];
         var resultLength = 0;
 
         for (int i = 0; i < length; i++)
@@ -54,6 +63,11 @@ partial struct FlatArray<T>
             if (predicate.Invoke(item, i) is false)
             {
                 continue;
+            }
+
+            if (resultLength == resultItems.Length)
+            {
+                InnerBufferHelper.EnlargeBuffer(ref resultItems);
             }
 
             resultItems[resultLength] = item;

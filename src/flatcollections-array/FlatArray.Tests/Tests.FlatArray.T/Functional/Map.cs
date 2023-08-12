@@ -55,7 +55,7 @@ partial class FlatArrayTest
         var actual = source.Map(Map);
         var expectedItems = new[] { PlusFifteenIdLowerSomeStringNameRecord, ZeroIdNullNameRecord };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyTruncatedState(expectedItems);
 
         RecordType Map(string sourceValue)
             =>

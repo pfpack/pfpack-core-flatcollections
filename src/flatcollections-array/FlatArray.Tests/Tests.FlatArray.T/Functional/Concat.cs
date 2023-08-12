@@ -25,9 +25,9 @@ partial class FlatArrayTest
         var other = new int?[] { null, PlusFifteen, Zero, One }.InitializeFlatArray(3);
 
         var actual = source.Concat(other);
-        var expectedItems = new int?[] { null, PlusFifteen, Zero, One };
+        var expectedItems = new int?[] { null, PlusFifteen, Zero };
 
-        actual.VerifyInnerState(expectedItems, 3);
+        actual.VerifyTruncatedState(expectedItems);
     }
 
     [Fact]
@@ -37,9 +37,9 @@ partial class FlatArrayTest
         var other = default(FlatArray<string?>);
 
         var actual = source.Concat(other);
-        var expectedItems = new[] { SomeString, null, AnotherString };
+        var expectedItems = new[] { SomeString, null };
 
-        actual.VerifyInnerState(expectedItems, 2);
+        actual.VerifyTruncatedState(expectedItems);
     }
 
     [Fact]
@@ -74,6 +74,6 @@ partial class FlatArrayTest
             PlusFifteenIdSomeStringNameRecord
         };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyTruncatedState(expectedItems);
     }
 }

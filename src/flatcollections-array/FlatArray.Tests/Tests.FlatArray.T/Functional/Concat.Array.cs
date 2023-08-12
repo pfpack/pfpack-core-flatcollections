@@ -40,7 +40,7 @@ partial class FlatArrayTest
         var actual = source.Concat(other);
         var expectedItems = new[] { MinusFifteenIdNullNameRecord, PlusFifteenIdLowerSomeStringNameRecord };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyTruncatedState(expectedItems);
     }
 
     [Fact]
@@ -50,9 +50,9 @@ partial class FlatArrayTest
         var other = (string?[]?)null;
 
         var actual = source.Concat(other);
-        var expectedItems = new[] { AnotherString, UpperSomeString, WhiteSpaceString, null };
+        var expectedItems = new[] { AnotherString, UpperSomeString };
 
-        actual.VerifyInnerState(expectedItems, 2);
+        actual.VerifyTruncatedState(expectedItems);
     }
 
     [Fact]
@@ -75,11 +75,10 @@ partial class FlatArrayTest
         {
             SomeTextRecordStruct,
             AnotherTextRecordStruct,
-            null,
-            UpperAnotherTextRecordStruct
+            null
         };
 
-        actual.VerifyInnerState(expectedItems, 3);
+        actual.VerifyTruncatedState(expectedItems);
     }
 
     [Fact]
@@ -107,6 +106,6 @@ partial class FlatArrayTest
             int.MinValue
         };
 
-        actual.VerifyInnerState(expectedItems, expectedItems.Length);
+        actual.VerifyTruncatedState(expectedItems);
     }
 }
