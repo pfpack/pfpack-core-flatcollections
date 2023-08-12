@@ -6,9 +6,9 @@ partial struct FlatArray<T>
 {
     public FlatArray<TResult> FlatMap<TResult>(Func<T, FlatArray<TResult>> map)
     {
-        ArgumentNullException.ThrowIfNull(map);
+        _ = map ?? throw new ArgumentNullException(nameof(map));
 
-        if (IsEmpty)
+        if (length == default)
         {
             return default;
         }
@@ -30,7 +30,7 @@ partial struct FlatArray<T>
             }
         }
 
-        if (resultList.Count is 0)
+        if (resultList.Count  == default)
         {
             return default;
         }
@@ -40,9 +40,9 @@ partial struct FlatArray<T>
 
     public FlatArray<TResult> FlatMap<TResult>(Func<T, int, FlatArray<TResult>> map)
     {
-        ArgumentNullException.ThrowIfNull(map);
+        _ = map ?? throw new ArgumentNullException(nameof(map));
 
-        if (IsEmpty)
+        if (length == default)
         {
             return default;
         }
@@ -64,7 +64,7 @@ partial struct FlatArray<T>
             }
         }
 
-        if (resultList.Count is 0)
+        if (resultList.Count == default)
         {
             return default;
         }

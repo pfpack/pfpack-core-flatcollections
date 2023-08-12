@@ -4,9 +4,9 @@ partial struct FlatArray<T>
 {
     public FlatArray<TResult> Map<TResult>(Func<T, TResult> map)
     {
-        ArgumentNullException.ThrowIfNull(map);
+        _ = map ?? throw new ArgumentNullException(nameof(map));
 
-        if (IsEmpty)
+        if (length == default)
         {
             return default;
         }
@@ -23,9 +23,9 @@ partial struct FlatArray<T>
 
     public FlatArray<TResult> Map<TResult>(Func<T, int, TResult> map)
     {
-        ArgumentNullException.ThrowIfNull(map);
+        _ = map ?? throw new ArgumentNullException(nameof(map));
 
-        if (IsEmpty)
+        if (length == default)
         {
             return default;
         }

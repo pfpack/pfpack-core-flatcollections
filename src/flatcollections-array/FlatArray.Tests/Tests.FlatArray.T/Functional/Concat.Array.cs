@@ -13,7 +13,7 @@ partial class FlatArrayTest
     public static void ConcatWithArray_SourceIsEmptyAndOtherIsNull_ExpectEmpty()
     {
         var source = default(FlatArray<decimal?>);
-        var other = (decimal?[])null!;
+        var other = (decimal?[]?)null;
 
         var actual = source.Concat(other);
 
@@ -47,7 +47,7 @@ partial class FlatArrayTest
     public static void ConcatWithArray_OtherIsNullAndSourceIsNotEmpty_ExpectSource()
     {
         var source = new[] { AnotherString, UpperSomeString, WhiteSpaceString, null }.InitializeFlatArray(2);
-        var other = (string?[])null!;
+        var other = (string?[]?)null;
 
         var actual = source.Concat(other);
         var expectedItems = new[] { AnotherString, UpperSomeString, WhiteSpaceString, null };

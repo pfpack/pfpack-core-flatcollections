@@ -4,9 +4,9 @@ partial struct FlatArray<T>
 {
     public FlatArray<T> Filter(Predicate<T> predicate)
     {
-        ArgumentNullException.ThrowIfNull(predicate);
+        _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
 
-        if (IsEmpty)
+        if (length == default)
         {
             return default;
         }
@@ -27,7 +27,7 @@ partial struct FlatArray<T>
             resultLength++;
         }
 
-        if (resultLength is 0)
+        if (resultLength == default)
         {
             return default;
         }
@@ -37,9 +37,9 @@ partial struct FlatArray<T>
 
     public FlatArray<T> Filter(Func<T, int, bool> predicate)
     {
-        ArgumentNullException.ThrowIfNull(predicate);
+        _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
 
-        if (IsEmpty)
+        if (length == default)
         {
             return default;
         }
@@ -60,7 +60,7 @@ partial struct FlatArray<T>
             resultLength++;
         }
 
-        if (resultLength is 0)
+        if (resultLength == default)
         {
             return default;
         }
