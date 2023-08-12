@@ -50,8 +50,8 @@ partial class FlatArrayTest
             [ZeroIdRefType] = AnotherString
         };
 
-        var sourceItems = mapper.Keys.ToArray();
-        var source = sourceItems.InitializeFlatArray(mapper.Keys.Count - 1);
+        var sourceItems = new[] { MinusFifteenIdRefType, PlusFifteenIdRefType };
+        var source = mapper.Keys.ToArray().InitializeFlatArray(sourceItems.Length);
 
         var actual = source.Map(Map);
         var expectedItems = new[] { SomeString, null };
