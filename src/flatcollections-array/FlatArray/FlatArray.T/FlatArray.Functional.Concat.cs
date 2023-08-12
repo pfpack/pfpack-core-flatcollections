@@ -29,8 +29,7 @@ partial struct FlatArray<T>
 
         if (length == default)
         {
-            var otherClone = InnerArrayHelper.Clone(other);
-            return new(otherClone, default);
+            return new(InnerArrayHelper.Clone(other), default);
         }
 
         var resultItems = InnerArrayHelper.Concat(items!, length, other, other.Length);

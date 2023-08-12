@@ -30,12 +30,7 @@ partial struct FlatArray<T>
             }
         }
 
-        if (resultList.Count  == default)
-        {
-            return default;
-        }
-
-        return new(resultList.ToArray(), default);
+        return FlatArray<TResult>.InnerFactory.FromList(resultList);
     }
 
     public FlatArray<TResult> FlatMap<TResult>(Func<T, int, FlatArray<TResult>> map)
@@ -64,11 +59,6 @@ partial struct FlatArray<T>
             }
         }
 
-        if (resultList.Count == default)
-        {
-            return default;
-        }
-
-        return new(resultList.ToArray(), default);
+        return FlatArray<TResult>.InnerFactory.FromList(resultList);
     }
 }
