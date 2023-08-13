@@ -30,9 +30,9 @@ partial class FlatArrayBuilderTest
     [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems_CaseSource))]
     public void MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems(
         int length,
-        RefType[] sourceItems,
-        RefType[] expectedItems)
+        RefType[] sourceItems)
     {
+        var expectedItems = sourceItems.GetCopy();
         var source = sourceItems.InitializeFlatArrayBuilder(length);
         var actual = source.MoveToFlatArray();
         actual.VerifyInnerState(expectedItems, length);
@@ -52,14 +52,12 @@ partial class FlatArrayBuilderTest
         yield return new object[]
         {
             3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType },
             new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
         };
         yield return new object[]
         {
             3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null },
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null }
         };
     }
 }

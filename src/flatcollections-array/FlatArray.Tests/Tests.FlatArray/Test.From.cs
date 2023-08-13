@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using PrimeFuncPack.Core.Tests.TestData;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -237,17 +238,14 @@ partial class FlatArrayStaticTest
     }
 
     [Theory]
-    [InlineData(SomeString)]
-    [InlineData("01", "02", "03", "04", "05", "06", null, "08", "09", "10", "11", "12")]
-    public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
-        params string?[] sourceItems)
+    [MemberData(nameof(ReadingCollectionsTestSource.EnumerateStringNonEmptyCases), MemberType = typeof(ReadingCollectionsTestSource))]
+    public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateCorrespondsToSource(
+        string?[] sourceItems, string?[] expectedItems)
     {
-        var coppied = sourceItems.GetCopy();
-
         var source = GetSource();
         var actual = FlatArray.From(source);
 
-        actual.VerifyInnerState(coppied, coppied.Length);
+        actual.VerifyInnerState(expectedItems, sourceItems.Length);
 
         IEnumerable<string?> GetSource()
         {
