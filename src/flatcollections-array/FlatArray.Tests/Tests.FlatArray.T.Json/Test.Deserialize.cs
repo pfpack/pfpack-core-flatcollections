@@ -1,8 +1,8 @@
+using PrimeFuncPack.Core.Tests.TestData;
 using System;
 using System.Text.Json;
 using Xunit;
 using static PrimeFuncPack.Core.Tests.JsonSerializerTestSource;
-using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
@@ -13,7 +13,7 @@ partial class FlatArrayJsonSerializerTest
     public void Deserialize_SourceIsNullJsonValue_ExpectDefaultState(
         JsonSerializerOptions? options)
     {
-        var source = "null";
+        const string source = "null";
         var actual = JsonSerializer.Deserialize<FlatArray<StubItemJson>>(source, options);
 
         actual.VerifyInnerState(default, default);
@@ -24,10 +24,9 @@ partial class FlatArrayJsonSerializerTest
     public void Deserialize_SourceArrayIsEmpty_ExpectDefaultState(
         JsonSerializerOptions? options)
     {
-        var sourceArray = Array.Empty<StubItemJson?>();
-        var source = JsonSerializer.Serialize(sourceArray, options);
-
+        const string source = "[]";
         var actual = JsonSerializer.Deserialize<FlatArray<StubItemJson?>>(source, options);
+
         actual.VerifyInnerState(default, default);
     }
 
@@ -91,32 +90,24 @@ partial class FlatArrayJsonSerializerTest
     }
 
     [Theory]
-    [InlineData(AnotherString)]
-    [InlineData(null, AnotherString)]
-    [InlineData(AnotherString, null)]
-    [InlineData(null, null)]
-    // Test cases for testing doubling the buffer
-    [InlineData("01")]
-    [InlineData("01", "02")]
-    [InlineData("01", "02", "03")]
-    [InlineData("01", "02", "03", "04")]
-    [InlineData("01", "02", "03", "04", "05")]
-    [InlineData("01", "02", "03", "04", "05", "06")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17")]
-    public void Deserialize_SourceArrayIsNotEmpty_ExpectInnerItemsAreEqualToSourceArrayItems(
-        params string?[] sourceItems)
+    [MemberData(nameof(ReadingCollectionsTestSource.EnumerateStringNonEmptyCases), MemberType = typeof(ReadingCollectionsTestSource))]
+    public void Deserialize_SourceArrayIsNotEmpty_Strings_ExpectInnerStateCorrespondsToSource(
+        string?[] sourceItems, string?[] expectedItems)
     {
-        var copied = sourceItems.GetCopy();
-
         var source = JsonSerializer.Serialize(sourceItems);
         var actual = JsonSerializer.Deserialize<FlatArray<string?>>(source);
 
-        actual.VerifyInnerState(copied, copied.Length);
+        actual.VerifyInnerState(expectedItems, sourceItems.Length);
+    }
+
+    [Theory]
+    [MemberData(nameof(ReadingCollectionsTestSource.EnumerateInt32NullableNonEmptyCases), MemberType = typeof(ReadingCollectionsTestSource))]
+    public void Deserialize_SourceArrayIsNotEmpty_Int32Nullable_ExpectInnerStateCorrespondsToSource(
+        int?[] sourceItems, int?[] expectedItems)
+    {
+        var source = JsonSerializer.Serialize(sourceItems);
+        var actual = JsonSerializer.Deserialize<FlatArray<int?>>(source);
+
+        actual.VerifyInnerState(expectedItems, sourceItems.Length);
     }
 }

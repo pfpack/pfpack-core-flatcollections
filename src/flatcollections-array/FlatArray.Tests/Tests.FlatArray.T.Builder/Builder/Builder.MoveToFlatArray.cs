@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -25,17 +26,26 @@ partial class FlatArrayBuilderTest
         source.VerifyInnerState(Array.Empty<RefType>(), default);
     }
 
-    [Fact]
-    public void MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreBuilderItems()
+    [Theory]
+    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState_CaseSource))]
+    public void MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState(
+        int length,
+        RefType[] sourceItems)
     {
-        const int length = 3;
-
-        var sourceItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, ZeroIdRefType };
         var source = sourceItems.InitializeFlatArrayBuilder(length);
-
         var actual = source.MoveToFlatArray();
-        var expectedItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, ZeroIdRefType };
+        actual.VerifyInnerState_TheSameAssert(sourceItems, length);
+    }
 
+    [Theory]
+    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState_CaseSource))]
+    public void MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState(
+        int length,
+        RefType[] sourceItems,
+        RefType[] expectedItems)
+    {
+        var source = sourceItems.InitializeFlatArrayBuilder(length);
+        var actual = source.MoveToFlatArray();
         actual.VerifyInnerState(expectedItems, length);
     }
 
@@ -46,5 +56,63 @@ partial class FlatArrayBuilderTest
         _ = source.MoveToFlatArray();
 
         source.VerifyInnerState(Array.Empty<int>(), default);
+    }
+
+    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState_CaseSource()
+    {
+        yield return new object[]
+        {
+            2,
+            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType }
+        };
+        yield return new object[]
+        {
+            2,
+            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType, null }
+        };
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+        };
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null }
+        };
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null, null }
+        };
+    }
+
+
+    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState_CaseSource()
+    {
+        yield return new object[]
+        {
+            2,
+            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType, null, null },
+            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType }
+        };
+        yield return new object[]
+        {
+            2,
+            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType, null, null, null },
+            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType }
+        };
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null, null, null },
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+        };
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null, null, null, null },
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+        };
     }
 }
