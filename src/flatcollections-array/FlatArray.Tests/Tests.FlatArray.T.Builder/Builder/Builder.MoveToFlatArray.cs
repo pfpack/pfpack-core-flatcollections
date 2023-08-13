@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -25,17 +26,15 @@ partial class FlatArrayBuilderTest
         source.VerifyInnerState(Array.Empty<RefType>(), default);
     }
 
-    [Fact]
-    public void MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreBuilderItems()
+    [Theory]
+    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems_CaseSource))]
+    public void MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems(
+        int length,
+        RefType[] sourceItems,
+        RefType[] expectedItems)
     {
-        const int length = 3;
-
-        var sourceItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null };
         var source = sourceItems.InitializeFlatArrayBuilder(length);
-
         var actual = source.MoveToFlatArray();
-        var expectedItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType };
-
         actual.VerifyInnerState(expectedItems, length);
     }
 
@@ -46,5 +45,21 @@ partial class FlatArrayBuilderTest
         _ = source.MoveToFlatArray();
 
         source.VerifyInnerState(Array.Empty<int>(), default);
+    }
+
+    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems_CaseSource()
+    {
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType },
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+        };
+        yield return new object[]
+        {
+            3,
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null },
+            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+        };
     }
 }
