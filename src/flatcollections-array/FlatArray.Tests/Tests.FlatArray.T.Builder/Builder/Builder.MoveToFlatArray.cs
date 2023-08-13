@@ -27,8 +27,8 @@ partial class FlatArrayBuilderTest
     }
 
     [Theory]
-    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems_CaseSource))]
-    public void MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems(
+    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreBuilderItems_CaseSource))]
+    public void MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreBuilderItems(
         int length,
         RefType[] sourceItems)
     {
@@ -47,7 +47,7 @@ partial class FlatArrayBuilderTest
         source.VerifyInnerState(Array.Empty<int>(), default);
     }
 
-    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreEffectiveBuilderItems_CaseSource()
+    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_ExpectArrayItemsAreBuilderItems_CaseSource()
     {
         yield return new object[]
         {
