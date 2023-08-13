@@ -24,7 +24,7 @@ partial class TestHelper
         Assert.Equal(expectedItems, effectiveItems);
 
         var effectiveRest = new ReadOnlySpan<T>(actualItems, actualLength, actualItems.Length - effectiveItems.Length).ToArray();
-        var actualRestIsDefault = effectiveRest.All(item => EqualityComparer<T>.Default.Equals(item, default));
-        Assert.True(actualRestIsDefault);
+        var effectiveRestIsDefault = effectiveRest.All(item => EqualityComparer<T>.Default.Equals(item, default));
+        Assert.True(effectiveRestIsDefault);
     }
 }
