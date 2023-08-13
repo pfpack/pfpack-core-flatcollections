@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PrimeFuncPack.Core.Tests.TestData;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -28,19 +29,16 @@ partial class FlatArrayExtensionsTest
     }
 
     [Theory]
-    [InlineData(PlusFifteen)]
-    [InlineData(27, null, 34, -18, 191)]
-    public void ToFlatArray_FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
-        params int?[] sourceItems)
+    [MemberData(nameof(ReadingCollectionsTestSource.EnumerateStringNonEmptyCases), MemberType = typeof(ReadingCollectionsTestSource))]
+    public void ToFlatArray_FromEnumerable_SourceIsNotEmpty_ExpectInnerStateCorrespondsToSource(
+        string?[] sourceItems, string?[] expectedItems)
     {
-        var coppied = sourceItems.GetCopy();
-
         var source = GetSource();
         var actual = source.ToFlatArray();
 
-        actual.VerifyInnerState(coppied, coppied.Length);
+        actual.VerifyInnerState(expectedItems, sourceItems.Length);
 
-        IEnumerable<int?> GetSource()
+        IEnumerable<string?> GetSource()
         {
             foreach (var item in sourceItems)
             {

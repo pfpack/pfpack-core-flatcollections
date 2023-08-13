@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using PrimeFuncPack.Core.Tests.TestData;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -238,33 +239,14 @@ partial class FlatArrayTest
     }
 
     [Theory]
-    [InlineData(AnotherString)]
-    [InlineData(null, AnotherString)]
-    [InlineData(AnotherString, null)]
-    [InlineData(null, null)]
-    // Test cases for testing doubling the buffer
-    [InlineData("01")]
-    [InlineData("01", "02")]
-    [InlineData("01", "02", "03")]
-    [InlineData("01", "02", "03", "04")]
-    [InlineData("01", "02", "03", "04", "05")]
-    [InlineData("01", "02", "03", "04", "05", "06")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16")]
-    [InlineData("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17")]
-    public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateAreSourceItems(
-        params string?[] sourceItems)
+    [MemberData(nameof(ReadingCollectionsTestSource.EnumerateStringNonEmptyCases), MemberType = typeof(ReadingCollectionsTestSource))]
+    public void FromEnumerable_SourceIsNotEmpty_ExpectInnerStateCorrespondsToSource(
+        string?[] sourceItems, string?[] expectedItems)
     {
-        var copied = sourceItems.GetCopy();
-
         var source = GetSource();
         var actual = FlatArray<string?>.From(source);
 
-        actual.VerifyInnerState(copied, copied.Length);
+        actual.VerifyInnerState(expectedItems, sourceItems.Length);
 
         IEnumerable<string?> GetSource()
         {

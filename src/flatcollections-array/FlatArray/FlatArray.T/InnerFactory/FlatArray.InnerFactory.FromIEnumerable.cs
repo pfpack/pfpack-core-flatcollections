@@ -31,12 +31,7 @@ partial struct FlatArray<T>
                 array[actualCount++] = enumerator.Current;
             }
 
-            if (actualCount < array.Length)
-            {
-                InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
-            }
-
-            return new(array, default);
+            return new(actualCount, array);
         }
     }
 }

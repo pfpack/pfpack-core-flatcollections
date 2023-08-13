@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace System;
+﻿namespace System;
 
 partial struct FlatArray<T>
 {
@@ -14,7 +12,7 @@ partial struct FlatArray<T>
             var length = this.length;
             var items = this.items;
 
-            if (length == items.Length)
+            if (items.Length == length)
             {
                 return;
             }
