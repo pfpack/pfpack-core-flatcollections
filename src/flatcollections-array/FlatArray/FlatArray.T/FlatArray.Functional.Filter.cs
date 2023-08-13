@@ -16,22 +16,21 @@ partial struct FlatArray<T>
         var resultItems = new T[initialCapacity];
         var resultLength = 0;
 
-        for (int i = 0; i < length; i++)
-        {
-            var item = items![i];
-
-            if (predicate.Invoke(item) is false)
+        InternalForEach(
+            item =>
             {
-                continue;
-            }
+                if (predicate.Invoke(item) is false)
+                {
+                    return;
+                }
 
-            if (resultLength == resultItems.Length)
-            {
-                InnerBufferHelper.EnlargeBuffer(ref resultItems);
-            }
+                if (resultLength == resultItems.Length)
+                {
+                    InnerBufferHelper.EnlargeBuffer(ref resultItems);
+                }
 
-            resultItems[resultLength++] = item;
-        }
+                resultItems[resultLength++] = item;
+            });
 
         if (resultLength == default)
         {
@@ -55,22 +54,21 @@ partial struct FlatArray<T>
         var resultItems = new T[initialCapacity];
         var resultLength = 0;
 
-        for (int i = 0; i < length; i++)
-        {
-            var item = items![i];
-
-            if (predicate.Invoke(item, i) is false)
+        InternalForEach(
+            (i, item) =>
             {
-                continue;
-            }
+                if (predicate.Invoke(item, i) is false)
+                {
+                    return;
+                }
 
-            if (resultLength == resultItems.Length)
-            {
-                InnerBufferHelper.EnlargeBuffer(ref resultItems);
-            }
+                if (resultLength == resultItems.Length)
+                {
+                    InnerBufferHelper.EnlargeBuffer(ref resultItems);
+                }
 
-            resultItems[resultLength++] = item;
-        }
+                resultItems[resultLength++] = item;
+            });
 
         if (resultLength == default)
         {

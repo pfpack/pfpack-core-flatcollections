@@ -15,20 +15,18 @@ partial struct FlatArray<T>
 
         var resultList = new List<TResult>();
 
-        for (int i = 0; i < length; i++)
-        {
-            var resultArray = map.Invoke(items![i]);
-
-            if (resultArray.IsEmpty)
+        InternalForEach(
+            item =>
             {
-                continue;
-            }
+                var resultArray = map.Invoke(item);
 
-            for (var j = 0; j < resultArray.length; j++)
-            {
-                resultList.Add(resultArray.items![j]);
-            }
-        }
+                if (resultArray.length == default)
+                {
+                    return;
+                }
+
+                resultList.AddRange(new ArraySegment<TResult>(resultArray.items!, 0, resultArray.length));
+            });
 
         return FlatArray<TResult>.InnerFactory.FromList(resultList);
     }
@@ -44,20 +42,18 @@ partial struct FlatArray<T>
 
         var resultList = new List<TResult>();
 
-        for (int i = 0; i < length; i++)
-        {
-            var resultArray = map.Invoke(items![i], i);
-
-            if (resultArray.IsEmpty)
+        InternalForEach(
+            (i, item) =>
             {
-                continue;
-            }
+                var resultArray = map.Invoke(item, i);
 
-            for (var j = 0; j < resultArray.length; j++)
-            {
-                resultList.Add(resultArray.items![j]);
-            }
-        }
+                if (resultArray.length == default)
+                {
+                    return;
+                }
+
+                resultList.AddRange(new ArraySegment<TResult>(resultArray.items!, 0, resultArray.length));
+            });
 
         return FlatArray<TResult>.InnerFactory.FromList(resultList);
     }

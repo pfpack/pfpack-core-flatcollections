@@ -13,10 +13,8 @@ partial struct FlatArray<T>
 
         var resultItems = new TResult[length];
 
-        for (int i = 0; i < length; i++)
-        {
-            resultItems[i] = map.Invoke(items![i]);
-        }
+        InternalForEach(
+            (i, item) => resultItems[i] = map.Invoke(item));
 
         return new(resultItems, default);
     }
@@ -32,10 +30,8 @@ partial struct FlatArray<T>
 
         var resultItems = new TResult[length];
 
-        for (int i = 0; i < length; i++)
-        {
-            resultItems[i] = map.Invoke(items![i], i);
-        }
+        InternalForEach(
+            (i, item) => resultItems[i] = map.Invoke(item, i));
 
         return new(resultItems, default);
     }
