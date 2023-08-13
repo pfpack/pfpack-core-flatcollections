@@ -16,7 +16,7 @@ partial class FlatArrayTest
         bool isSourceDefault)
     {
         var source = isSourceDefault ? default : new[] { SomeString, LowerSomeString }.InitializeFlatArray();
-        Predicate<string> predicate = null!;
+        Func<string, bool> predicate = null!;
 
         var ex = Assert.Throws<ArgumentNullException>(Test);
         Assert.Equal("predicate", ex.ParamName);

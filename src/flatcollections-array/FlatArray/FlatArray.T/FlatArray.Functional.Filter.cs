@@ -2,7 +2,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    public FlatArray<T> Filter(Predicate<T> predicate)
+    public FlatArray<T> Filter(Func<T, bool> predicate)
     {
         _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
 
@@ -11,9 +11,9 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var startLength = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
+        var initialCapacity = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
 
-        var resultItems = new T[startLength];
+        var resultItems = new T[initialCapacity];
         var resultLength = 0;
 
         for (int i = 0; i < length; i++)
@@ -30,8 +30,7 @@ partial struct FlatArray<T>
                 InnerBufferHelper.EnlargeBuffer(ref resultItems);
             }
 
-            resultItems[resultLength] = item;
-            resultLength++;
+            resultItems[resultLength++] = item;
         }
 
         if (resultLength == default)
@@ -51,9 +50,9 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var startLength = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
+        var initialCapacity = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
 
-        var resultItems = new T[startLength];
+        var resultItems = new T[initialCapacity];
         var resultLength = 0;
 
         for (int i = 0; i < length; i++)
@@ -70,8 +69,7 @@ partial struct FlatArray<T>
                 InnerBufferHelper.EnlargeBuffer(ref resultItems);
             }
 
-            resultItems[resultLength] = item;
-            resultLength++;
+            resultItems[resultLength++] = item;
         }
 
         if (resultLength == default)
