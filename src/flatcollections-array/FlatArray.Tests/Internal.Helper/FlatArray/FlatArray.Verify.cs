@@ -13,22 +13,18 @@ partial class TestHelper
         Assert.StrictEqual(expectedLength, actualLength);
 
         var actualItems = actual.GetFieldValue<T[]?>("items");
-        var effectiveItems = actualItems is null
-            ? null
-            : new ReadOnlySpan<T>(actualItems, 0, actualLength).ToArray();
 
+        if (actualItems is null)
+        {
+            Assert.Equal(expectedItems, actualItems);
+            return;
+        }
+
+        var effectiveItems = new ReadOnlySpan<T>(actualItems, 0, actualLength).ToArray();
         Assert.Equal(expectedItems, effectiveItems);
 
-        if (actualItems is not null)
-        {
-            var effectiveRest = new ReadOnlySpan<T>(
-                actualItems,
-                actualLength,
-                actualItems.Length - effectiveItems!.Length)
-                .ToArray();
-
-            var actualRestIsDefault = effectiveRest.All(item => EqualityComparer<T>.Default.Equals(item, default));
-            Assert.True(actualRestIsDefault);
-        }
+        var effectiveRest = new ReadOnlySpan<T>(actualItems, actualLength, actualItems.Length - effectiveItems.Length).ToArray();
+        var actualRestIsDefault = effectiveRest.All(item => EqualityComparer<T>.Default.Equals(item, default));
+        Assert.True(actualRestIsDefault);
     }
 }
