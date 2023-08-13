@@ -42,12 +42,7 @@ partial struct FlatArray<T>
                 array[actualCount++] = InnerReadItem(ref reader, options);
             }
 
-            if (actualCount < array.Length)
-            {
-                InnerArrayHelper.TruncateUnchecked(ref array, actualCount);
-            }
-
-            return new(array, default);
+            return new(actualCount, array);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

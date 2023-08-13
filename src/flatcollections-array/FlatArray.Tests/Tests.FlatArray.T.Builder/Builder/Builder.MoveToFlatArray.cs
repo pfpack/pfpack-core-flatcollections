@@ -30,11 +30,11 @@ partial class FlatArrayBuilderTest
     {
         const int length = 3;
 
-        var sourceItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, ZeroIdRefType };
+        var sourceItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null };
         var source = sourceItems.InitializeFlatArrayBuilder(length);
 
         var actual = source.MoveToFlatArray();
-        var expectedItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, ZeroIdRefType };
+        var expectedItems = new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType };
 
         actual.VerifyInnerState(expectedItems, length);
     }
