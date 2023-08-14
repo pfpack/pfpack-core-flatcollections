@@ -16,13 +16,20 @@ partial struct FlatArray<T>
             return unchecked((uint)index) < unchecked((uint)length);
         }
 
-        // Default capacity for cases where capacity must be greater than zero
         internal const int DefaultPositiveCapacity = 4;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int EnsurePositiveCapacity(int capacity)
             =>
             capacity > 0 ? capacity : DefaultPositiveCapacity;
+
+        // The caller MUST ensure the capacity is GREATER than or EQUAL to zero
+        internal static int EnsureCapacityWithinDefaultPositive(int capacity)
+        {
+            Debug.Assert(capacity >= 0);
+
+            return InnerIsWithinCapacity(capacity, DefaultPositiveCapacity) ? capacity : DefaultPositiveCapacity;
+        }
 
         // The caller MUST ensure the capacity is GREATER than zero and LESS than the max capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -39,6 +46,11 @@ partial struct FlatArray<T>
         internal static bool IsHugeCapacity(int length, int capacity)
         {
             Debug.Assert(length > 0 && length <= capacity);
+
+            if (InnerIsWithinCapacity(capacity, DefaultPositiveCapacity))
+            {
+                return false;
+            }
 
             int doubleLength = InnerDoubleUnchecked(length);
             return InnerIsWithinCapacity(doubleLength, capacity);
