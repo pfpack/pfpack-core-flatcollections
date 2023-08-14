@@ -47,7 +47,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(length > 0 && length <= capacity);
 
-            if (capacity <= DefaultPositiveCapacity)
+            if (InnerIsWithinCapacity(capacity, DefaultPositiveCapacity))
             {
                 return false;
             }
