@@ -30,7 +30,7 @@ partial class FlatArrayBuilderTest
     [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState_CaseSource))]
     public void MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState(
         int length,
-        RefType[] sourceItems)
+        int?[] sourceItems)
     {
         var source = sourceItems.InitializeFlatArrayBuilder(length);
         var actual = source.MoveToFlatArray();
@@ -41,8 +41,8 @@ partial class FlatArrayBuilderTest
     [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState_CaseSource))]
     public void MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState(
         int length,
-        RefType[] sourceItems,
-        RefType[] expectedItems)
+        int?[] sourceItems,
+        int?[] expectedItems)
     {
         var source = sourceItems.InitializeFlatArrayBuilder(length);
         var actual = source.MoveToFlatArray();
@@ -62,57 +62,131 @@ partial class FlatArrayBuilderTest
     {
         yield return new object[]
         {
-            2,
-            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType }
+            1,
+            new int?[] { 0 }
         };
+        yield return new object[]
+        {
+            1,
+            new int?[] { 0, null }
+        };
+        yield return new object[]
+        {
+            1,
+            new int?[] { 0, null, null }
+        };
+        yield return new object[]
+        {
+            1,
+            new int?[] { 0, null, null, null }
+        };
+
         yield return new object[]
         {
             2,
-            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType, null }
+            new int?[] { 0, 1 }
+        };
+        yield return new object[]
+        {
+            2,
+            new int?[] { 0, 1, null }
+        };
+        yield return new object[]
+        {
+            2,
+            new int?[] { 0, 1, null, null }
+        };
+
+        yield return new object[]
+        {
+            3,
+            new int?[] { 0, 1, 2 }
         };
         yield return new object[]
         {
             3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+            new int?[] { 0, 1, 2, null }
         };
         yield return new object[]
         {
             3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null }
+            new int?[] { 0, 1, 2, null, null }
+        };
+
+        yield return new object[]
+        {
+            4,
+            new int?[] { 0, 1, 2, 3 }
         };
         yield return new object[]
         {
-            3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null, null }
+            4,
+            new int?[] { 0, 1, 2, 3, null }
+        };
+        yield return new object[]
+        {
+            4,
+            new int?[] { 0, 1, 2, 3, null, null }
+        };
+        yield return new object[]
+        {
+            4,
+            new int?[] { 0, 1, 2, 3, null, null, null }
         };
     }
-
 
     public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState_CaseSource()
     {
         yield return new object[]
         {
+            1,
+            new int?[] { 0, null, null, null, null },
+            new int?[] { 0 }
+        };
+        yield return new object[]
+        {
+            1,
+            new int?[] { 0, null, null, null, null, null },
+            new int?[] { 0 }
+        };
+
+        yield return new object[]
+        {
             2,
-            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType, null, null },
-            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType }
+            new int?[] { 0, 1, null, null, null },
+            new int?[] { 0, 1 }
         };
         yield return new object[]
         {
             2,
-            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType, null, null, null },
-            new[] { PlusFifteenIdRefType, MinusFifteenIdRefType }
+            new int?[] { 0, 1, null, null, null, null },
+            new int?[] { 0, 1 }
+        };
+
+        yield return new object[]
+        {
+            3,
+            new int?[] { 0, 1, 2, null, null, null },
+            new int?[] { 0, 1, 2 }
         };
         yield return new object[]
         {
             3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null, null, null },
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+            new int?[] { 0, 1, 2, null, null, null, null },
+            new int?[] { 0, 1, 2 }
+        };
+
+        yield return new object[]
+        {
+            4,
+            new int?[] { 0, 1, 2, 3, null, null, null, null },
+            new int?[] { 0, 1, 2, 3 }
         };
         yield return new object[]
         {
-            3,
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType, null, null, null, null },
-            new[] { PlusFifteenIdRefType, null, MinusFifteenIdRefType }
+            4,
+            new int?[] { 0, 1, 2, 3, null, null, null, null, null },
+            new int?[] { 0, 1, 2, 3 }
         };
     }
 }

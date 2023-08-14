@@ -11,7 +11,7 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var initialCapacity = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
+        var initialCapacity = InnerAllocHelper.EnsureCapacityWithinDefaultPositive(length);
 
         var resultItems = new T[initialCapacity];
         var resultLength = 0;
@@ -49,7 +49,7 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var initialCapacity = length < InnerAllocHelper.DefaultPositiveCapacity ? length : InnerAllocHelper.DefaultPositiveCapacity;
+        var initialCapacity = InnerAllocHelper.EnsureCapacityWithinDefaultPositive(length);
 
         var resultItems = new T[initialCapacity];
         var resultLength = 0;
