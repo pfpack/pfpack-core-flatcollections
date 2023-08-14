@@ -16,21 +16,22 @@ partial struct FlatArray<T>
         var resultItems = new T[initialCapacity];
         var resultLength = 0;
 
-        InternalForEach(
-            item =>
+        var counter = 0;
+        do
+        {
+            if (predicate.Invoke(items![counter]) is false)
             {
-                if (predicate.Invoke(item) is false)
-                {
-                    return;
-                }
+                continue;
+            }
 
-                if (resultLength == resultItems.Length)
-                {
-                    InnerBufferHelper.EnlargeBuffer(ref resultItems);
-                }
+            if (resultLength == resultItems.Length)
+            {
+                InnerBufferHelper.EnlargeBuffer(ref resultItems);
+            }
 
-                resultItems[resultLength++] = item;
-            });
+            resultItems[resultLength++] = items![counter];
+        }
+        while (++counter < resultItems.Length);
 
         if (resultLength == default)
         {
@@ -54,21 +55,22 @@ partial struct FlatArray<T>
         var resultItems = new T[initialCapacity];
         var resultLength = 0;
 
-        InternalForEach(
-            (i, item) =>
+        var counter = 0;
+        do
+        {
+            if (predicate.Invoke(items![counter], counter) is false)
             {
-                if (predicate.Invoke(item, i) is false)
-                {
-                    return;
-                }
+                continue;
+            }
 
-                if (resultLength == resultItems.Length)
-                {
-                    InnerBufferHelper.EnlargeBuffer(ref resultItems);
-                }
+            if (resultLength == resultItems.Length)
+            {
+                InnerBufferHelper.EnlargeBuffer(ref resultItems);
+            }
 
-                resultItems[resultLength++] = item;
-            });
+            resultItems[resultLength++] = items![counter];
+        }
+        while (++counter < resultItems.Length);
 
         if (resultLength == default)
         {
