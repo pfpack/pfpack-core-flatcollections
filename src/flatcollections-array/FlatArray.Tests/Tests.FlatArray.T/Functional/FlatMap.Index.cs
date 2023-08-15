@@ -60,7 +60,7 @@ partial class FlatArrayTest
         var mapper = new Dictionary<string, FlatArray<decimal?>>
         {
             [SomeString] = default,
-            [AnotherString] = new decimal?[] { decimal.MinusOne, null, null }.InitializeFlatArray(2),
+            [AnotherString] = new decimal?[] { decimal.MinusOne, null, decimal.MaxValue }.InitializeFlatArray(2),
             [WhiteSpaceString] = new decimal?[] { null }.InitializeFlatArray(),
             [UpperSomeString] = new decimal?[] { decimal.One }.InitializeFlatArray(),
             [LowerSomeString] = new decimal?[] { decimal.MinusOne }.InitializeFlatArray()
