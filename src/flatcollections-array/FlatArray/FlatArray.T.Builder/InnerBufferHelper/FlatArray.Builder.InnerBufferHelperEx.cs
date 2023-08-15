@@ -27,7 +27,8 @@ partial struct FlatArray<T>
 
                 if (newCapacity < 0)
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(
+                        "The required capacity exceeds the maximum size and the buffer cannot be enlarged.");
                 }
 
                 if (newCapacity < array.Length)
