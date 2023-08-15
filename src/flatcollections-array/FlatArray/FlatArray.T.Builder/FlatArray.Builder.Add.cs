@@ -12,7 +12,7 @@ partial struct FlatArray<T>
                 InnerBufferHelper.EnlargeBuffer(ref items);
             }
 
-            items[length++ - 1] = item;
+            items[length++] = item;
             return this;
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -7,12 +6,9 @@ partial struct FlatArray<T>
 {
     internal static class InnerBufferHelper
     {
-        // The caller MUST ensure the array length is GREATER than zero
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void EnlargeBuffer(ref T[] array)
         {
-            Debug.Assert(array.Length > 0);
-
             int newLength = InnerEnlargeLength(array.Length);
             Array.Resize(ref array, newLength);
         }
@@ -20,7 +16,10 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int InnerEnlargeLength(int length)
         {
-            Debug.Assert(length > 0);
+            if (length == default)
+            {
+                return InnerAllocHelper.DefaultPositiveCapacity;
+            }
 
             if (length < Array.MaxLength)
             {
