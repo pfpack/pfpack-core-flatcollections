@@ -4,7 +4,7 @@ partial struct FlatArray<T>
 {
     partial class Builder
     {
-        // TODO: Make public when dynamic builder is implemented
+        // TODO: Add the tests and make public
         internal int EnsureCapacity(int capacity)
         {
             if (capacity is not >= 0)
@@ -21,7 +21,7 @@ partial struct FlatArray<T>
                 return items.Length;
             }
 
-            InnerArrayHelper.ExtendUnchecked(ref items, capacity);
+            Array.Resize(ref items, capacity);
             this.items = items;
             return capacity;
         }

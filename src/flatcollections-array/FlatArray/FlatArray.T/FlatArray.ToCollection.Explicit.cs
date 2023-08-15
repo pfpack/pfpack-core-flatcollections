@@ -9,7 +9,7 @@ partial struct FlatArray<T>
 {
     public T[] ToArray()
         =>
-        length == default ? InnerEmptyArray.OuterValue : InnerArrayHelper.Copy(items!, length);
+        length == default ? Array.Empty<T>() : InnerArrayHelper.Copy(items!, length);
 
     public List<T> ToList()
     {

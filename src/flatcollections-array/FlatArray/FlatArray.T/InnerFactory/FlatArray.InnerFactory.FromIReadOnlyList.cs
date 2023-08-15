@@ -18,13 +18,13 @@ partial struct FlatArray<T>
 
             var array = new T[count];
             array[0] = source[0];
-            int actualCount = 1;
+            var actualCount = 1;
 
             while (actualCount < (count = source.Count))
             {
                 if (actualCount == array.Length)
                 {
-                    InnerArrayHelper.ExtendUnchecked(ref array, count);
+                    Array.Resize(ref array, count);
                 }
 
                 array[actualCount] = source[actualCount];

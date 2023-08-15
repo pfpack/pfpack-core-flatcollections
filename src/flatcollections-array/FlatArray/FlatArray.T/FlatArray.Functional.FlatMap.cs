@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace System;
 
 partial struct FlatArray<T>
@@ -13,23 +11,17 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var resultList = new List<TResult>();
+        var resultBuilder = new FlatArray<TResult>.Builder();
 
         var counter = 0;
         do
         {
-            var resultArray = map.Invoke(items![counter]);
-
-            if (resultArray.length == default)
-            {
-                continue;
-            }
-
-            resultList.AddRange(new ArraySegment<TResult>(resultArray.items!, 0, resultArray.length));
+            var slice = map.Invoke(items![counter]);
+            _ = resultBuilder.AddRange(slice);
         }
         while (++counter < length);
 
-        return FlatArray<TResult>.InnerFactory.FromList(resultList);
+        return resultBuilder.MoveToFlatArray();
     }
 
     public FlatArray<TResult> FlatMap<TResult>(Func<T, int, FlatArray<TResult>> map)
@@ -41,22 +33,16 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var resultList = new List<TResult>();
+        var resultBuilder = new FlatArray<TResult>.Builder();
 
         var counter = 0;
         do
         {
-            var resultArray = map.Invoke(items![counter], counter);
-
-            if (resultArray.length == default)
-            {
-                continue;
-            }
-
-            resultList.AddRange(new ArraySegment<TResult>(resultArray.items!, 0, resultArray.length));
+            var slice = map.Invoke(items![counter], counter);
+            _ = resultBuilder.AddRange(slice);
         }
         while (++counter < length);
 
-        return FlatArray<TResult>.InnerFactory.FromList(resultList);
+        return resultBuilder.MoveToFlatArray();
     }
 }

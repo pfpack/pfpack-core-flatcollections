@@ -6,7 +6,7 @@ partial struct FlatArray<T>
 {
     partial class Builder
     {
-        // TODO: Make public when dynamic builder is implemented
+        // TODO: Add the tests and make public
         internal static Builder OfLength(int length, int capacity)
             =>
             InternalOfLength(length, capacity, nameof(length), nameof(capacity));

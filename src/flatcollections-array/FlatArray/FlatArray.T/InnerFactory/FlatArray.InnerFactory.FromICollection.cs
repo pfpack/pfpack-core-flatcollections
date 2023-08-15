@@ -21,7 +21,7 @@ partial struct FlatArray<T>
 
             // Create a defensive copy for an arbitrary ICollection implementation
             // that is not as trusted as List or ImmutableArray
-            var arrayCopy = InnerArrayHelper.Clone(array);
+            var arrayCopy = InnerArrayHelper.Copy(array);
 
             return new(arrayCopy, default);
         }
