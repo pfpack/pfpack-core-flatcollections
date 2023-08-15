@@ -13,7 +13,12 @@ partial struct FlatArray<T>
             Debug.Assert(options is not null);
 
             writer.WriteStartArray();
-            value.InternalForEach(item => itemConverter.Write(writer, item, options));
+
+            for (int i = 0; i < value.length; i++)
+            {
+                itemConverter.Write(writer, value.items![i], options);
+            }
+
             writer.WriteEndArray();
         }
     }
