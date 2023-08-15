@@ -7,6 +7,8 @@ partial struct FlatArray<T>
 {
     private static class InnerAllocHelper
     {
+        internal const int DefaultPositiveCapacity = 4;
+
         // The caller MUST ensure the length is GREATER than or EQUAL to zero
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool IsIndexInRange(int index, int length)
@@ -16,7 +18,10 @@ partial struct FlatArray<T>
             return unchecked((uint)index) < unchecked((uint)length);
         }
 
-        internal const int DefaultPositiveCapacity = 4;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool IsWithinCapacity(int value, int capacity)
+            =>
+            unchecked((uint)value) <= unchecked((uint)capacity);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int EnsurePositiveCapacity(int capacity)
@@ -28,7 +33,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(capacity >= 0);
 
-            return InnerIsWithinCapacity(capacity, DefaultPositiveCapacity) ? capacity : DefaultPositiveCapacity;
+            return IsWithinCapacity(capacity, DefaultPositiveCapacity) ? capacity : DefaultPositiveCapacity;
         }
 
         // The caller MUST ensure the capacity is GREATER than zero and LESS than the max capacity
@@ -38,7 +43,7 @@ partial struct FlatArray<T>
             Debug.Assert(capacity > 0 && capacity < maxCapacity);
 
             int newCapacity = InnerDoubleUnchecked(capacity);
-            return InnerIsWithinCapacity(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
+            return IsWithinCapacity(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
         // The caller MUST ensure the length is GREATER than zero and LESS than or EQUAL to the capacity
@@ -47,23 +52,18 @@ partial struct FlatArray<T>
         {
             Debug.Assert(length > 0 && length <= capacity);
 
-            if (InnerIsWithinCapacity(capacity, DefaultPositiveCapacity))
+            if (IsWithinCapacity(capacity, DefaultPositiveCapacity))
             {
                 return false;
             }
 
             int doubleLength = InnerDoubleUnchecked(length);
-            return InnerIsWithinCapacity(doubleLength, capacity);
+            return IsWithinCapacity(doubleLength, capacity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int InnerDoubleUnchecked(int value)
             =>
             value << 1; // unchecked(value * 2);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool InnerIsWithinCapacity(int value, int capacity)
-            =>
-            unchecked((uint)value) <= unchecked((uint)capacity);
     }
 }

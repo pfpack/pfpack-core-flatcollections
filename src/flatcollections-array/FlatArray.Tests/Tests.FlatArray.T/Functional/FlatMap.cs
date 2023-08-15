@@ -61,7 +61,7 @@ partial class FlatArrayTest
         {
             [MinusFifteen] = new RecordType?[] { MinusFifteenIdSomeStringNameRecord }.InitializeFlatArray(),
             [One] = default,
-            [int.MaxValue] = new RecordType?[] { PlusFifteenIdSomeStringNameRecord, null, ZeroIdNullNameRecord }.InitializeFlatArray(2),
+            [int.MaxValue] = new RecordType?[] { PlusFifteenIdSomeStringNameRecord, null, null }.InitializeFlatArray(2),
             [PlusFifteen] = new RecordType?[] { MinusFifteenIdNullNameRecord }.InitializeFlatArray()
         };
 

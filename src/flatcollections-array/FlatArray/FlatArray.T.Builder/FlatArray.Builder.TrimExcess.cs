@@ -4,7 +4,7 @@ partial struct FlatArray<T>
 {
     partial class Builder
     {
-        // TODO: Make public when dynamic builder is implemented
+        // TODO: Add the tests and make public
         internal void TrimExcess()
         {
             // Copy the state to reduce the chance of multithreading side effects
@@ -17,7 +17,7 @@ partial struct FlatArray<T>
                 return;
             }
 
-            InnerArrayHelper.TruncateUnchecked(ref items, length);
+            Array.Resize(ref items, length);
             this.items = items;
         }
     }

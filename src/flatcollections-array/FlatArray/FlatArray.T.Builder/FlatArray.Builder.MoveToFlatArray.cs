@@ -10,7 +10,7 @@ partial struct FlatArray<T>
             =>
             InnerMoveToFlatArray(false);
 
-        // TODO: Make public when dynamic builder is implemented
+        // TODO: Add the tests and make public
         internal FlatArray<T> MoveToFlatArray(bool trimExcess)
             =>
             InnerMoveToFlatArray(trimExcess);
@@ -33,7 +33,7 @@ partial struct FlatArray<T>
 
             if (trimExcess && length != items.Length || InnerAllocHelper.IsHugeCapacity(length, items.Length))
             {
-                InnerArrayHelper.TruncateUnchecked(ref items, length);
+                Array.Resize(ref items, length);
             }
 
             // Call the inner constructor of FlatArray here

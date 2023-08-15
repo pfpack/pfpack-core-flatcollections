@@ -19,7 +19,7 @@ partial struct FlatArray<T>
         var counter = 0;
         do
         {
-            if (predicate.Invoke(items![counter]) is false)
+            if (predicate.Invoke(items![counter]) is not true)
             {
                 continue;
             }
@@ -58,7 +58,7 @@ partial struct FlatArray<T>
         var counter = 0;
         do
         {
-            if (predicate.Invoke(items![counter], counter) is false)
+            if (predicate.Invoke(items![counter], counter) is not true)
             {
                 continue;
             }

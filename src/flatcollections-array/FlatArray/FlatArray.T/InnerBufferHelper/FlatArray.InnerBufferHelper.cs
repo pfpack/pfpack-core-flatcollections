@@ -14,7 +14,7 @@ partial struct FlatArray<T>
             Debug.Assert(array.Length > 0);
 
             int newLength = InnerEnlargeLength(array.Length);
-            InnerArrayHelper.ExtendUnchecked(ref array, newLength);
+            Array.Resize(ref array, newLength);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

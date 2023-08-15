@@ -8,7 +8,7 @@ partial struct FlatArray<T>
     private static class InnerArrayHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static T[] Clone(T[] source)
+        internal static T[] Copy(T[] source)
         {
             var dest = new T[source.Length];
             Array.Copy(source, dest, source.Length);
@@ -36,28 +36,6 @@ partial struct FlatArray<T>
             Array.Copy(array1, result, length1);
             Array.Copy(array2, 0, result, length1, length2);
             return result;
-        }
-
-        // The caller MUST ensure the new length is GREATER than the source length
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void ExtendUnchecked(ref T[] array, int newLength)
-        {
-            Debug.Assert(newLength > array.Length);
-
-            var newArray = new T[newLength];
-            Array.Copy(array, newArray, array.Length);
-            array = newArray;
-        }
-
-        // The caller MUST ensure the new length is LESS than the source length
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void TruncateUnchecked(ref T[] array, int newLength)
-        {
-            Debug.Assert(newLength >= 0 && newLength < array.Length);
-
-            var newArray = new T[newLength];
-            Array.Copy(array, newArray, newArray.Length);
-            array = newArray;
         }
     }
 }

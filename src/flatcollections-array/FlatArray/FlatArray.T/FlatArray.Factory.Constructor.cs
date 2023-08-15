@@ -15,6 +15,6 @@ partial struct FlatArray<T>
         }
 
         length = source.Length;
-        items = InnerArrayHelper.Clone(source);
+        items = InnerArrayHelper.Copy(source);
     }
 }

@@ -19,6 +19,10 @@ partial struct FlatArray<T>
             internal static ArgumentOutOfRangeException CapacityOutOfRange_MustBeGreaterThanOrEqualToLength(string paramName, int actualValue, int length)
                 =>
                 new(paramName, Invariant($"Capacity must be greater than or equal to the array length. Actual value was {actualValue}. Length was {length}."));
+
+            internal static IndexOutOfRangeException LengthOutOfArrayLength(int actualValue, int length)
+                =>
+                new(Invariant($"Length must be within the array length. Actual value was {actualValue}. Array length was {length}."));
         }
     }
 }

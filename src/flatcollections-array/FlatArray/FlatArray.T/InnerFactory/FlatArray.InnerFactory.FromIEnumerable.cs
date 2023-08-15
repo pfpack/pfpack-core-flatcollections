@@ -21,7 +21,7 @@ partial struct FlatArray<T>
 
             var array = new T[initialCapacity];
             array[0] = enumerator.Current;
-            int actualCount = 1;
+            var actualCount = 1;
 
             while (enumerator.MoveNext())
             {

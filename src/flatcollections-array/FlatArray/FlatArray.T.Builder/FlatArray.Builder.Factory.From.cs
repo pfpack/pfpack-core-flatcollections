@@ -36,7 +36,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromArray(T[] source)
             =>
-            source.Length == default ? new() : new(InnerArrayHelper.Clone(source), default);
+            source.Length == default ? new() : new(InnerArrayHelper.Copy(source), default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromFlatArray(FlatArray<T> source)
