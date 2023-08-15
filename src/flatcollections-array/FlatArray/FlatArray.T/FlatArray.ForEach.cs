@@ -12,6 +12,8 @@ partial struct FlatArray<T>
         }
     }
 
+    // TODO: When there is a huge number of breaking changes in a major update,
+    // consider changing Action<int, T> to Action<T, int> to correspond the convention
     public void ForEach(Action<int, T> action)
     {
         _ = action ?? throw new ArgumentNullException(nameof(action));
