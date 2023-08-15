@@ -26,7 +26,7 @@ partial struct FlatArray<T>
 
             if (InnerAllocHelper.IsWithinCapacity(length, actualLength) is not true)
             {
-                throw InnerBuilderExceptionFactory.LengthOutOfArrayLength(length, actualLength);
+                throw InnerBuilderExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, actualLength);
             }
 
             if (items is null || items.Length == default)
