@@ -5,14 +5,15 @@ partial struct FlatArray<T>
     partial class Builder
     {
         // TODO: Add the tests and make public
-        internal void TrimExcess()
+        internal Builder TrimExcess()
         {
             if (length == items.Length)
             {
-                return;
+                return this;
             }
 
             Array.Resize(ref items, length);
+            return this;
         }
     }
 }
