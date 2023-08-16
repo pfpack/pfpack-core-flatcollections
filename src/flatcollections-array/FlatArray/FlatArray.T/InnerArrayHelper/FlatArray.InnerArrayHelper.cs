@@ -15,6 +15,7 @@ partial struct FlatArray<T>
             return dest;
         }
 
+        // The caller MUST ensure the length is within the source length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T[] Copy(T[] source, int length)
         {
