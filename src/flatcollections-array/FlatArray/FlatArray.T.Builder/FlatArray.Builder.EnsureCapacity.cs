@@ -12,18 +12,12 @@ partial struct FlatArray<T>
                 throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(nameof(capacity), capacity);
             }
 
-            // Copy the state to reduce the chance of multithreading side effects
-
-            var items = this.items;
-
-            if (capacity <= items.Length)
+            if (items.Length < capacity)
             {
-                return items.Length;
+                Array.Resize(ref items, capacity);
             }
 
-            Array.Resize(ref items, capacity);
-            this.items = items;
-            return capacity;
+            return items.Length;
         }
     }
 }
