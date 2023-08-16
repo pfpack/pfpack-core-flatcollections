@@ -7,7 +7,7 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal void TrimExcess()
         {
-            if (items.Length == length)
+            if (length == items.Length)
             {
                 return;
             }
