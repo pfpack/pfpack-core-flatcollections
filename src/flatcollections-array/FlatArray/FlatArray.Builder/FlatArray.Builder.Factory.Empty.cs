@@ -16,6 +16,6 @@ partial class FlatArray
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static FlatArray<T>.Builder Empty<T>(int capacity)
             =>
-            FlatArray<T>.Builder.InternalEmptyChecked(capacity, nameof(capacity));
+            FlatArray<T>.Builder.InternalEmptyChecked(capacity);
     }
 }

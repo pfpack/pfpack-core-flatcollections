@@ -8,10 +8,11 @@ partial struct FlatArray<T>
     {
         public static Builder OfLength(int length)
             =>
-            InternalOfLengthChecked(length, nameof(length));
+            InternalOfLengthChecked(length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Builder InternalOfLengthChecked(int length, string paramName)
+        internal static Builder InternalOfLengthChecked(
+            int length, [CallerArgumentExpression(nameof(length))] string paramName = "")
         {
             if (length is not >= 0)
             {
