@@ -18,8 +18,6 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private FlatArray<T> InnerMoveToFlatArray(bool trimExcess)
         {
-            // Copy the state to reduce the chance of multithreading side effects
-
             var length = this.length;
             var items = this.items;
 
@@ -36,7 +34,6 @@ partial struct FlatArray<T>
                 Array.Resize(ref items, length);
             }
 
-            // Call the inner constructor of FlatArray here
             return new(length, items);
         }
     }
