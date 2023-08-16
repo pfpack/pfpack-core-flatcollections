@@ -8,17 +8,17 @@ partial struct FlatArray<T>
     {
         public static Builder OfLength(int length)
             =>
-            InternalOfLength(length, nameof(length));
+            InternalOfLengthChecked(length, nameof(length));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Builder InternalOfLength(int length, string paramName)
+        internal static Builder InternalOfLengthChecked(int length, string paramName)
         {
             if (length is not >= 0)
             {
                 throw InnerBuilderExceptionFactory.LengthOutOfRange(paramName, length);
             }
 
-            return new(length, capacity: length);
+            return new(length: length, default);
         }
     }
 }

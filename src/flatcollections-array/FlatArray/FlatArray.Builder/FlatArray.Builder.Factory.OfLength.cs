@@ -6,6 +6,6 @@ partial class FlatArray
     {
         public static FlatArray<T>.Builder OfLength<T>(int length)
             =>
-            FlatArray<T>.Builder.InternalOfLength(length, nameof(length));
+            FlatArray<T>.Builder.InternalOfLengthChecked(length, nameof(length));
     }
 }
