@@ -11,11 +11,7 @@ partial struct FlatArray<T>
                 return;
             }
 
-            // Array.Clear uses SpanHelpers but also contains code that handles the non-standard arrays
-            // Thus, Span should be more efficient for the standard arrays
-
             var span = InnerAsSpan();
-
             span.Clear(); // Fills the items by their default values
         }
 
@@ -26,11 +22,7 @@ partial struct FlatArray<T>
                 return;
             }
 
-            // Array.Fill uses Span but also contains code that handles the non-standard arrays
-            // Thus, Span should be more efficient for the standard arrays
-
             var span = InnerAsSpan();
-
             span.Fill(value);
         }
     }
