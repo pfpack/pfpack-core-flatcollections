@@ -31,8 +31,8 @@ partial struct FlatArray<T>
             Debug.Assert(length2 >= 0 && length2 <= array2.Length);
 
             var result = new T[length1 + length2];
-            Array.Copy(array1, result, length1);
-            Array.Copy(array2, 0, result, length1, length2);
+            new ReadOnlySpan<T>(array1, 0, length1).CopyTo(new Span<T>(result, 0, length1));
+            new ReadOnlySpan<T>(array2, 0, length2).CopyTo(new Span<T>(result, length1, length2));
             return result;
         }
     }
