@@ -42,8 +42,7 @@ partial struct FlatArray<T>
         private void InnerAddRange(T[] items, int length)
         {
             InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
-            var span = new Span<T>(this.items, this.length, length);
-            new ReadOnlySpan<T>(items).CopyTo(span);
+            new ReadOnlySpan<T>(items).CopyTo(new Span<T>(this.items, this.length, length));
             this.length += length;
         }
     }
