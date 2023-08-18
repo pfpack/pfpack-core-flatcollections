@@ -7,23 +7,20 @@ partial struct FlatArray<T>
 {
     private static class InnerArrayHelper
     {
+        // Note: ReadOnlySpan<T>.ToArray() returns Array.Empty<T>() if empty
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T[] Copy(T[] source)
-        {
-            var dest = new T[source.Length];
-            Array.Copy(source, dest, source.Length);
-            return dest;
-        }
+            =>
+            new ReadOnlySpan<T>(source).ToArray();
 
+        // Note: ReadOnlySpan<T>.ToArray() returns Array.Empty<T>() if empty
         // The caller MUST ensure the length is within the source length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T[] Copy(T[] source, int length)
         {
             Debug.Assert(length >= 0 && length <= source.Length);
 
-            var dest = new T[length];
-            Array.Copy(source, dest, length);
-            return dest;
+            return new ReadOnlySpan<T>(source, 0, length).ToArray();
         }
 
         // The caller MUST ensure the lengths are within the arrays actual lengths
