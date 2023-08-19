@@ -19,9 +19,9 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool IsWithinCapacity(int value, int capacity)
+        internal static bool IsWithinLength(int value, int length)
             =>
-            unchecked((uint)value) <= unchecked((uint)capacity);
+            InnerIsWithin(value, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int EnsurePositiveCapacity(int capacity)
@@ -33,7 +33,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(capacity >= 0);
 
-            return IsWithinCapacity(capacity, DefaultPositiveCapacity) ? capacity : DefaultPositiveCapacity;
+            return InnerIsWithin(capacity, DefaultPositiveCapacity) ? capacity : DefaultPositiveCapacity;
         }
 
         // The caller MUST ensure the capacity is GREATER than zero and LESS than the max capacity
@@ -43,7 +43,7 @@ partial struct FlatArray<T>
             Debug.Assert(capacity > 0 && capacity < maxCapacity);
 
             int newCapacity = InnerDoubleUnchecked(capacity);
-            return IsWithinCapacity(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
+            return InnerIsWithin(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
         // The caller MUST ensure the length is GREATER than zero and LESS than or EQUAL to the capacity
@@ -52,18 +52,23 @@ partial struct FlatArray<T>
         {
             Debug.Assert(length > 0 && length <= capacity);
 
-            if (IsWithinCapacity(capacity, DefaultPositiveCapacity))
+            if (InnerIsWithin(capacity, DefaultPositiveCapacity))
             {
                 return false;
             }
 
             int doubleLength = InnerDoubleUnchecked(length);
-            return IsWithinCapacity(doubleLength, capacity);
+            return InnerIsWithin(doubleLength, capacity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int InnerDoubleUnchecked(int value)
             =>
             value << 1; // unchecked(value * 2);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool InnerIsWithin(int value, int threshold)
+            =>
+            unchecked((uint)value) <= unchecked((uint)threshold);
     }
 }

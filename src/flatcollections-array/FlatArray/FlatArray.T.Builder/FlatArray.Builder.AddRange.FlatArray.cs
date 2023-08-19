@@ -19,7 +19,7 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal Builder AddRange(FlatArray<T> items, int length)
         {
-            if (InnerAllocHelper.IsWithinCapacity(length, items.length) is not true)
+            if (InnerAllocHelper.IsWithinLength(length, items.length) is not true)
             {
                 throw InnerBuilderExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, items.length);
             }
