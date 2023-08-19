@@ -12,7 +12,7 @@ partial struct FlatArray<T>
                 return this;
             }
 
-            InnerAddRange(items);
+            InnerAddRange(items.items!);
             return this;
         }
 
