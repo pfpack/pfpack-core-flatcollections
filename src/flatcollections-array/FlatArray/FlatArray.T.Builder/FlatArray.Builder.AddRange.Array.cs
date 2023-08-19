@@ -15,7 +15,7 @@ partial struct FlatArray<T>
                 return this;
             }
 
-            InnerAddRange(items, items.Length);
+            InnerAddRange(items);
             return this;
         }
 
@@ -36,6 +36,14 @@ partial struct FlatArray<T>
 
             InnerAddRange(items, length);
             return this;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void InnerAddRange(T[] items)
+        {
+            InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, length, items.Length);
+            new ReadOnlySpan<T>(items).CopyTo(new Span<T>(this.items, length, items.Length));
+            length += items.Length;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
