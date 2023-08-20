@@ -21,8 +21,6 @@ partial struct FlatArray<T>
         // Initializes an instance without the length range check
         // The caller MUST ensure the length is GREATER than or EQUAL to zero
         //
-        // Note: The unused arg is intended to separate this from the capacity based one
-        //
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Builder(int length, int _)
         {
@@ -37,8 +35,6 @@ partial struct FlatArray<T>
         // Since the invariant of the Builder implies an empty instance with the default capacity
         // contains the singleton underlying array,
         // the caller MUST ensure the length is GREATER than zero
-        //
-        // Note: The unused arg is intended to separate this from the public one
         //
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Builder(T[] items, int _)
