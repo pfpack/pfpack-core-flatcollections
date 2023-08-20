@@ -22,7 +22,7 @@ partial struct FlatArray<T>
         internal static Builder InternalEmptyChecked(
             int capacity, [CallerArgumentExpression(nameof(capacity))] string paramName = "")
         {
-            if (capacity < 0)
+            if (capacity is not >= 0)
             {
                 throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(paramName, capacity);
             }

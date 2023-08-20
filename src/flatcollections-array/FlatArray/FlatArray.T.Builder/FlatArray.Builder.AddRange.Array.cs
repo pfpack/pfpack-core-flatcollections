@@ -27,7 +27,7 @@ partial struct FlatArray<T>
 
             if (InnerAllocHelper.IsWithin(length, actualLength) is not true)
             {
-                throw InnerBuilderExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, actualLength);
+                throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, actualLength);
             }
 
             if (items is null || items.Length == default)
@@ -42,7 +42,8 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InnerAddRange(T[] items, int length)
         {
-            Debug.Assert(length >= 0 && length <= items.Length);
+            Debug.Assert(items.Length != default);
+            Debug.Assert(length > 0 && length <= items.Length);
 
             InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
             var sourceSpan = length == items.Length

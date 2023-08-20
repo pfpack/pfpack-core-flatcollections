@@ -6,30 +6,6 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    public static FlatArray<T> From([AllowNull] params T[] source)
-        =>
-        source is null ? default : InnerFactory.FromArray(source);
-
-    public static FlatArray<T> From(FlatArray<T> source)
-        =>
-        InnerFactory.FromFlatArray(source);
-
-    public static FlatArray<T> From(FlatArray<T>? source)
-        =>
-        source is null ? default : InnerFactory.FromFlatArray(source.Value);
-
-    public static FlatArray<T> From([AllowNull] List<T> source)
-        =>
-        source is null ? default : InnerFactory.FromList(source);
-
-    public static FlatArray<T> From(ImmutableArray<T> source)
-        =>
-        InnerFactory.FromImmutableArray(source);
-
-    public static FlatArray<T> From(ImmutableArray<T>? source)
-        =>
-        source is null ? default : InnerFactory.FromImmutableArray(source.Value);
-
     public static FlatArray<T> From([AllowNull] IEnumerable<T> source)
         =>
         source switch

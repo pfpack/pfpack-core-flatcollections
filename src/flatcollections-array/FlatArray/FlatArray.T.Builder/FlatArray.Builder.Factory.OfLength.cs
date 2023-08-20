@@ -14,7 +14,7 @@ partial struct FlatArray<T>
         internal static Builder InternalOfLengthChecked(
             int length, [CallerArgumentExpression(nameof(length))] string paramName = "")
         {
-            if (length < 0)
+            if (length is not >= 0)
             {
                 throw InnerBuilderExceptionFactory.LengthOutOfRange(paramName, length);
             }
