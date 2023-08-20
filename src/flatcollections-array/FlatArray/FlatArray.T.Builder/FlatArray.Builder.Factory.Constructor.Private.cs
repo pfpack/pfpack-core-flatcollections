@@ -9,6 +9,7 @@ partial struct FlatArray<T>
     {
         // Initializes an instance without the capacity range check
         // The caller MUST ensure the capacity is GREATER than or EQUAL to zero
+        //
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Builder(int capacity)
         {
