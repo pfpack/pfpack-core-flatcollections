@@ -8,17 +8,20 @@ partial struct FlatArray<T>
     private static class InnerArrayHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static T[] Copy(T[] source)
+        internal static T[] Copy(T[] array)
             =>
-            new ReadOnlySpan<T>(source).ToArray();
+            new ReadOnlySpan<T>(array).ToArray();
 
         // The caller MUST ensure the length is within the source length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static T[] Copy(T[] source, int length)
+        internal static T[] Copy(T[] array, int length)
         {
-            Debug.Assert(length >= 0 && length <= source.Length);
+            Debug.Assert(length >= 0 && length <= array.Length);
 
-            return new ReadOnlySpan<T>(source, 0, length).ToArray();
+            var sourceSpan = length == array.Length
+                ? new ReadOnlySpan<T>(array)
+                : new ReadOnlySpan<T>(array, 0, length);
+            return sourceSpan.ToArray();
         }
 
         // The caller MUST ensure the lengths are within the arrays actual lengths
@@ -28,9 +31,17 @@ partial struct FlatArray<T>
             Debug.Assert(length1 >= 0 && length1 <= array1.Length);
             Debug.Assert(length2 >= 0 && length2 <= array2.Length);
 
+            var sourceSpan1 = length1 == array1.Length
+                ? new ReadOnlySpan<T>(array1)
+                : new ReadOnlySpan<T>(array1, 0, length1);
+
+            var sourceSpan2 = length2 == array2.Length
+                ? new ReadOnlySpan<T>(array2)
+                : new ReadOnlySpan<T>(array2, 0, length2);
+
             var result = new T[length1 + length2];
-            new ReadOnlySpan<T>(array1, 0, length1).CopyTo(new Span<T>(result, 0, length1));
-            new ReadOnlySpan<T>(array2, 0, length2).CopyTo(new Span<T>(result, length1, length2));
+            sourceSpan1.CopyTo(new Span<T>(result, 0, length1));
+            sourceSpan2.CopyTo(new Span<T>(result, length1, length2));
             return result;
         }
     }

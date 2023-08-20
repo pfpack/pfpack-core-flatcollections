@@ -34,7 +34,7 @@ partial struct FlatArray<T>
 
             if (length == items.Length)
             {
-                return new(items); // avoid redundant checks
+                return new(items);
             }
 
             return new(items, 0, length);
