@@ -37,7 +37,7 @@ partial struct FlatArray<T>
 
     // Initializes an instance in the completely raw mode
     //
-    // The caller MUST ensure the parameters values accord with the FlatArray invariant
+    // The caller MUST ensure the parameter values accord with the FlatArray invariant
     //
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private FlatArray(int length, T[]? items, int _)
