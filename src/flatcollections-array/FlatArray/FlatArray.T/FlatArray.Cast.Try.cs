@@ -1,4 +1,6 @@
-﻿namespace System;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System;
 
 partial struct FlatArray<T>
 {
@@ -17,6 +19,7 @@ partial struct FlatArray<T>
 
     // TODO: Add the tests and make public
     [Obsolete("This method is not intended for use. Call TryCast instead.", error: true)]
+    [DoesNotReturn]
     internal FlatArray<TOther>? As<TOther>() where TOther : class?
         =>
         throw new NotImplementedException();
