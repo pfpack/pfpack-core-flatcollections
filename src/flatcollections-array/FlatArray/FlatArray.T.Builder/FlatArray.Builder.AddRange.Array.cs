@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace System;
@@ -49,6 +50,8 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InnerAddRange(T[] items, int length)
         {
+            Debug.Assert(length >= 0 && length <= items.Length);
+
             InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
             new ReadOnlySpan<T>(items, 0, length).CopyTo(new Span<T>(this.items, this.length, length));
             this.length += length;
