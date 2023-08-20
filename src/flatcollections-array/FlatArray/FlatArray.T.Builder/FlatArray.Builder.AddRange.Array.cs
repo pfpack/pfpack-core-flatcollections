@@ -16,7 +16,6 @@ partial struct FlatArray<T>
             }
 
             InnerAddRange(items);
-
             return this;
         }
 
@@ -36,7 +35,6 @@ partial struct FlatArray<T>
             }
 
             InnerAddRange(items, length);
-
             return this;
         }
 
