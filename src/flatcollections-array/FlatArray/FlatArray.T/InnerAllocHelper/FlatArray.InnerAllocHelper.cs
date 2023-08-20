@@ -24,6 +24,11 @@ partial struct FlatArray<T>
             unchecked((uint)value) <= unchecked((uint)threshold);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool IsWithin(int start, int length, int threshold)
+            =>
+            (ulong)unchecked((uint)start) + unchecked((uint)length) <= unchecked((uint)threshold);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int EnsurePositiveCapacity(int capacity)
             =>
             capacity > 0 ? capacity : DefaultPositiveCapacity;
