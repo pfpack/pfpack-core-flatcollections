@@ -57,28 +57,58 @@ partial class FlatArrayTest
     [Fact]
     public static void FlatMapWithIndex_SourceIsNotDefault_ExpectMappedValues()
     {
-        var mapper = new Dictionary<string, FlatArray<decimal?>>
+        var mapper = new Dictionary<int, FlatArray<decimal?>>
         {
-            [SomeString] = default,
-            [AnotherString] = new decimal?[] { decimal.MinusOne, null, decimal.MaxValue }.InitializeFlatArray(2),
-            [WhiteSpaceString] = new decimal?[] { null }.InitializeFlatArray(),
-            [UpperSomeString] = new decimal?[] { decimal.One }.InitializeFlatArray(),
-            [LowerSomeString] = new decimal?[] { decimal.MinusOne }.InitializeFlatArray()
+            [-1] = new decimal?[] { 8, 4, 2, 1 }.InitializeFlatArray(),
+            [0] = default,
+            [1] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }.InitializeFlatArray(),
+            [2] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }.InitializeFlatArray(),
+            [3] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 }.InitializeFlatArray(),
+            [4] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 }.InitializeFlatArray(),
+            [5] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }.InitializeFlatArray(),
+            [6] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }.InitializeFlatArray(),
+            [7] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }.InitializeFlatArray(),
+            [8] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9 }.InitializeFlatArray(),
+            [9] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8 }.InitializeFlatArray(),
+            [10] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7 }.InitializeFlatArray(),
+            [11] = new decimal?[] { null, 1, 2, 3, 4, 5, 6 }.InitializeFlatArray(),
+            [12] = new decimal?[] { null, 1, 2, 3, 4, 5 }.InitializeFlatArray(),
+            [13] = new decimal?[] { null, 1, 2, 3, 4 }.InitializeFlatArray(),
+            [14] = new decimal?[] { null, 1, 2, 3 }.InitializeFlatArray(),
+            [15] = new decimal?[] { null, 1, 2 }.InitializeFlatArray(),
+            [16] = new decimal?[] { null, 1 }.InitializeFlatArray(),
+            [17] = default,
         };
 
-        var sourceItems = new[] { SomeString, AnotherString, WhiteSpaceString, UpperSomeString };
-        var source = mapper.Keys.ToArray().InitializeFlatArray(sourceItems.Length);
+        var source = mapper.Keys.ToArray().InitializeFlatArray();
 
         var actual = source.FlatMap(Map);
-        var expectedItems = new decimal?[] { decimal.MinusOne, null, null, decimal.One };
+        var expectedItems = new decimal?[]
+        {
+            8, 4, 2, 1,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+            null, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+            null, 1, 2, 3, 4, 5, 6, 7, 8,
+            null, 1, 2, 3, 4, 5, 6, 7,
+            null, 1, 2, 3, 4, 5, 6,
+            null, 1, 2, 3, 4, 5,
+            null, 1, 2, 3, 4,
+            null, 1, 2, 3,
+            null, 1, 2,
+            null, 1
+        };
 
         actual.VerifyTruncatedState(expectedItems);
 
-        FlatArray<decimal?> Map(string sourceValue, int index)
-        {
-            Assert.Equal(sourceItems[index], sourceValue);
-            return mapper[sourceValue];
-        }
+        FlatArray<decimal?> Map(int sourceValue)
+            =>
+            mapper[sourceValue];
     }
 
     public static IEnumerable<object[]> FlatMapWithIndex_SourceIsNotDefaultAndAllMapResultAreDefault_ExpectDefault_CaseSource()
