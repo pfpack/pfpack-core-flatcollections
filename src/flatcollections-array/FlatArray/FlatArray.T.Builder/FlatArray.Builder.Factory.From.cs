@@ -41,7 +41,6 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromFlatArray(FlatArray<T> source)
             =>
-            // Work with the inner state of FlatArray here
             source.length == default ? new() : new(InnerArrayHelper.Copy(source.items!, source.length), default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

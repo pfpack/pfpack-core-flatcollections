@@ -13,11 +13,11 @@ partial struct FlatArray<T>
             source.length == default ? default : new(InnerArrayHelper.Copy(source.items!, source.length), default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromFlatArray(FlatArray<T> source, int length)
+        internal static FlatArray<T> FromFlatArray(FlatArray<T> source, int start, int length)
         {
-            Debug.Assert(length >= 0 && length <= source.length);
+            Debug.Assert(InnerAllocHelper.IsSegmentWithin(start, length, source.length));
 
-            return length == default ? default : new(InnerArrayHelper.Copy(source.items!, length), default);
+            return length == default ? default : new(InnerArrayHelper.CopySegment(source.items!, start, length), default);
         }
     }
 }

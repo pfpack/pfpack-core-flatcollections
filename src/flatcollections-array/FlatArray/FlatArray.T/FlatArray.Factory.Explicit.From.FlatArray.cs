@@ -27,6 +27,6 @@ partial struct FlatArray<T>
             throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, source.length);
         }
 
-        return InnerFactory.FromFlatArray(source, length);
+        return InnerFactory.FromFlatArray(source, start, length);
     }
 }

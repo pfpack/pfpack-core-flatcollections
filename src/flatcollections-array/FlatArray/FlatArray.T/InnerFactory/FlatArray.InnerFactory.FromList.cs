@@ -24,9 +24,9 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromList(List<T> source, int length)
+        internal static FlatArray<T> FromList(List<T> source, int start, int length)
         {
-            Debug.Assert(length >= 0 && length <= source.Count);
+            Debug.Assert(InnerAllocHelper.IsSegmentWithin(start, length, source.Count));
 
             if (length == default)
             {
@@ -34,7 +34,7 @@ partial struct FlatArray<T>
             }
 
             var array = new T[length];
-            source.CopyTo(0, array, 0, length);
+            source.CopyTo(start, array, 0, length);
 
             return new(array, default);
         }

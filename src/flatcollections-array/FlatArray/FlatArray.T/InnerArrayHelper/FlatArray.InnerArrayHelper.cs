@@ -12,7 +12,7 @@ partial struct FlatArray<T>
             =>
             new ReadOnlySpan<T>(array).ToArray();
 
-        // The caller MUST ensure the length is within the source length
+        // The caller MUST ensure the length is within the array length
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T[] Copy(T[] array, int length)
         {
@@ -21,6 +21,18 @@ partial struct FlatArray<T>
             var sourceSpan = length == array.Length
                 ? new ReadOnlySpan<T>(array)
                 : new ReadOnlySpan<T>(array, 0, length);
+            return sourceSpan.ToArray();
+        }
+
+        // The caller MUST ensure the segment is within the array
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static T[] CopySegment(T[] array, int start, int length)
+        {
+            Debug.Assert(InnerAllocHelper.IsSegmentWithin(start, length, array.Length));
+
+            var sourceSpan = start == default && length == array.Length
+                ? new ReadOnlySpan<T>(array)
+                : new ReadOnlySpan<T>(array, start, length);
             return sourceSpan.ToArray();
         }
 
