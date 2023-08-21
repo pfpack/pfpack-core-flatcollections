@@ -7,7 +7,7 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal int EnsureCapacity(int capacity)
         {
-            if (capacity < 0)
+            if (capacity is not >= 0)
             {
                 throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(nameof(capacity), capacity);
             }
