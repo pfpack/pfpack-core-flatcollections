@@ -59,7 +59,7 @@ partial class FlatArrayTest
     {
         var mapper = new Dictionary<int, FlatArray<decimal?>>
         {
-            [-1] = new decimal?[] { 8, 4, 2, 1 }.InitializeFlatArray(),
+            [-1] = new decimal?[] { 8, 4, 2, 1 }.InitializeFlatArray(3),
             [0] = default,
             [1] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }.InitializeFlatArray(),
             [2] = new decimal?[] { null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }.InitializeFlatArray(),
@@ -76,7 +76,7 @@ partial class FlatArrayTest
             [13] = new decimal?[] { null, 1, 2, 3, 4 }.InitializeFlatArray(),
             [14] = new decimal?[] { null, 1, 2, 3 }.InitializeFlatArray(),
             [15] = new decimal?[] { null, 1, 2 }.InitializeFlatArray(),
-            [16] = new decimal?[] { null, 1 }.InitializeFlatArray(),
+            [16] = new decimal?[] { null, 1 }.InitializeFlatArray(1),
             [17] = default,
         };
 
@@ -85,7 +85,7 @@ partial class FlatArrayTest
         var actual = source.FlatMap(Map);
         var expectedItems = new decimal?[]
         {
-            8, 4, 2, 1,
+            8, 4, 2,
             null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
             null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
             null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
@@ -101,7 +101,7 @@ partial class FlatArrayTest
             null, 1, 2, 3, 4,
             null, 1, 2, 3,
             null, 1, 2,
-            null, 1
+            null
         };
 
         actual.VerifyTruncatedState(expectedItems);

@@ -62,7 +62,7 @@ partial class FlatArrayTest
             [-1] = default,
             [0] = new long[] { 0 }.InitializeFlatArray(),
             [1] = default,
-            [2] = new long[] { 0, 1 }.InitializeFlatArray(),
+            [2] = new long[] { 0, 1 }.InitializeFlatArray(0),
             [3] = new long[] { 0, 1, 2 }.InitializeFlatArray(),
             [4] = new long[] { 0, 1, 2, 3 }.InitializeFlatArray(),
             [5] = new long[] { 0, 1, 2, 3, 4 }.InitializeFlatArray(),
@@ -75,9 +75,9 @@ partial class FlatArrayTest
             [12] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }.InitializeFlatArray(),
             [13] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }.InitializeFlatArray(),
             [14] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 }.InitializeFlatArray(),
-            [15] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, }.InitializeFlatArray(),
+            [15] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, }.InitializeFlatArray(10),
             [16] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, }.InitializeFlatArray(),
-            [17] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }.InitializeFlatArray()
+            [17] = new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }.InitializeFlatArray(16)
         };
 
         var source = mapper.Keys.ToArray().InitializeFlatArray();
@@ -86,7 +86,6 @@ partial class FlatArrayTest
         var expectedItems = new long[]
         {
             0,
-            0, 1,
             0, 1, 2,
             0, 1, 2, 3,
             0, 1, 2, 3, 4,
@@ -99,9 +98,9 @@ partial class FlatArrayTest
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
         };
 
         actual.VerifyTruncatedState(expectedItems);
