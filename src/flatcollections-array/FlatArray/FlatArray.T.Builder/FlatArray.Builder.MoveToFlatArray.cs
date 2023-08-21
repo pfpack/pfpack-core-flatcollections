@@ -7,19 +7,7 @@ partial struct FlatArray<T>
     partial class Builder
     {
         public FlatArray<T> MoveToFlatArray()
-            =>
-            InnerMoveToFlatArray(false);
-
-        // TODO: Add the tests and make public
-        internal FlatArray<T> MoveToFlatArray(bool trimExcess)
-            =>
-            InnerMoveToFlatArray(trimExcess);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private FlatArray<T> InnerMoveToFlatArray(bool trimExcess)
         {
-            // Copy the state to reduce the chance of multithreading side effects
-
             var length = this.length;
             var items = this.items;
 
@@ -31,12 +19,11 @@ partial struct FlatArray<T>
                 return default;
             }
 
-            if (trimExcess && length != items.Length || InnerAllocHelper.IsHugeCapacity(length, items.Length))
+            if (InnerAllocHelper.IsHugeCapacity(length, items.Length))
             {
                 Array.Resize(ref items, length);
             }
 
-            // Call the inner constructor of FlatArray here
             return new(length, items);
         }
     }

@@ -16,17 +16,18 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Builder Empty(int capacity)
             =>
-            InternalEmpty(capacity, nameof(capacity));
+            InternalEmptyChecked(capacity);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Builder InternalEmpty(int capacity, string paramName)
+        internal static Builder InternalEmptyChecked(
+            int capacity, [CallerArgumentExpression(nameof(capacity))] string paramName = "")
         {
             if (capacity is not >= 0)
             {
                 throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToZero(paramName, capacity);
             }
 
-            return new(capacity);
+            return new(capacity: capacity);
         }
     }
 }

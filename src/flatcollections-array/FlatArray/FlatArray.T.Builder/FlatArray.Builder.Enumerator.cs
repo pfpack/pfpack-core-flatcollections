@@ -38,7 +38,9 @@ partial struct FlatArray<T>
             public T Current
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#pragma warning disable IDE0251 // Make member 'readonly'
                 get
+#pragma warning restore IDE0251 // Make member 'readonly'
                 {
                     if (InnerAllocHelper.IsIndexInRange(index, builder.length))
                     {

@@ -25,7 +25,7 @@ partial struct FlatArray<T>
 
         public void CopyTo(T[] array, int arrayIndex)
             =>
-            InnerCopyTo(array, arrayIndex); // Delegate null and range checks to InnerCopyTo
+            InnerCopyToChecked(array, arrayIndex);
 
         public IEnumerator<T> GetEnumerator()
             =>

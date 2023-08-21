@@ -7,7 +7,7 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal Builder Add(T item)
         {
-            if (items.Length == length)
+            if (length == items.Length)
             {
                 InnerBufferHelper.EnlargeBuffer(ref items);
             }

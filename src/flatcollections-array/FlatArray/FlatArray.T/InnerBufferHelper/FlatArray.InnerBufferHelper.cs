@@ -4,7 +4,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    internal static class InnerBufferHelper
+    private static class InnerBufferHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void EnlargeBuffer(ref T[] array)

@@ -39,7 +39,7 @@ partial struct FlatArray<T>
             return false;
         }
 
-        public T Current
+        public readonly T Current
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get

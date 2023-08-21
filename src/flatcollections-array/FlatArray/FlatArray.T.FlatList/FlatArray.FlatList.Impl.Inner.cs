@@ -24,7 +24,7 @@ partial struct FlatArray<T>
             Array.IndexOf(items, item, 0, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void InnerCopyTo(T[] array, int arrayIndex)
+        private void InnerCopyToChecked(T[] array, int arrayIndex)
             =>
             Array.Copy(items, 0, array, arrayIndex, length); // Delegate null and range checks to Array.Copy
 

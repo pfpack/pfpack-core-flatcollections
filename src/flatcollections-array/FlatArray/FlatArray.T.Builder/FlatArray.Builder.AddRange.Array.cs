@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace System;
@@ -22,11 +23,11 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal Builder AddRange([AllowNull] T[] items, int length)
         {
-            var actualLength = items?.Length ?? default;
+            var itemsLength = items?.Length ?? default;
 
-            if (InnerAllocHelper.IsWithinCapacity(length, actualLength) is not true)
+            if (InnerAllocHelper.IsWithin(length, itemsLength) is not true)
             {
-                throw InnerBuilderExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, actualLength);
+                throw InnerExceptionFactory.StartSegmentIsNotWithinArray(nameof(length), length, itemsLength);
             }
 
             if (items is null || items.Length == default)
@@ -41,8 +42,14 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InnerAddRange(T[] items, int length)
         {
+            Debug.Assert(items.Length != default);
+            Debug.Assert(length > 0 && length <= items.Length);
+
             InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
-            Array.Copy(items, 0, this.items, this.length, length);
+            var sourceSpan = length == items.Length
+                ? new ReadOnlySpan<T>(items)
+                : new ReadOnlySpan<T>(items, 0, length);
+            sourceSpan.CopyTo(new Span<T>(this.items, this.length, length));
             this.length += length;
         }
     }
