@@ -21,19 +21,19 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal Builder AddRange(FlatArray<T> items, int length)
             =>
-            InternalAddRangeChecked(items, length);
+            InnerAddRangeChecked(items, length);
 
         // TODO: Add the tests and make public
         internal Builder AddRange(FlatArray<T>? items, int length)
             =>
-            InternalAddRangeChecked(items.GetValueOrDefault(), length);
+            InnerAddRangeChecked(items.GetValueOrDefault(), length);
 
-        internal Builder InternalAddRangeChecked(
+        private Builder InnerAddRangeChecked(
             FlatArray<T> items, int length, [CallerArgumentExpression(nameof(length))] string lengthParamName = "")
         {
             if (InnerAllocHelper.IsWithin(length, items.length) is not true)
             {
-                throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(lengthParamName, length, items.length);
+                throw InnerExceptionFactory.StartSegmentIsNotWithinArray(lengthParamName, length, items.length);
             }
 
             if (items.length == default)

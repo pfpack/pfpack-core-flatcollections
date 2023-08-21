@@ -9,26 +9,26 @@ partial struct FlatArray<T>
         InnerFactory.FromImmutableArray(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From(ImmutableArray<T> source, int length)
+    internal static FlatArray<T> From(ImmutableArray<T> source, int start, int length)
         =>
-        InternalFromImmutableArrayChecked(source, length);
+        InternalFromImmutableArrayChecked(source, start, length);
 
     public static FlatArray<T> From(ImmutableArray<T>? source)
         =>
         InnerFactory.FromImmutableArray(source.GetValueOrDefault());
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From(ImmutableArray<T>? source, int length)
+    internal static FlatArray<T> From(ImmutableArray<T>? source, int start, int length)
         =>
-        InternalFromImmutableArrayChecked(source.GetValueOrDefault(), length);
+        InternalFromImmutableArrayChecked(source.GetValueOrDefault(), start, length);
 
-    internal static FlatArray<T> InternalFromImmutableArrayChecked(ImmutableArray<T> source, int length)
+    internal static FlatArray<T> InternalFromImmutableArrayChecked(ImmutableArray<T> source, int start, int length)
     {
-        var actualLength = source.IsDefault ? default : source.Length;
+        var sourceLength = source.IsDefault ? default : source.Length;
 
-        if (InnerAllocHelper.IsWithin(length, actualLength) is not true)
+        if (InnerAllocHelper.IsSegmentWithin(start, length, sourceLength) is not true)
         {
-            throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, actualLength);
+            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
         }
 
         return InnerFactory.FromImmutableArray(source, length);

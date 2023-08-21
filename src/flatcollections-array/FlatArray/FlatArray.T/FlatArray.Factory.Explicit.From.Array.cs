@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -10,18 +9,17 @@ partial struct FlatArray<T>
         source is null ? default : InnerFactory.FromArray(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From([AllowNull] T[] source, int length)
+    internal static FlatArray<T> From([AllowNull] T[] source, int start, int length)
         =>
-        InternalFromArrayChecked(source, length);
+        InternalFromArrayChecked(source, start, length);
 
-    internal static FlatArray<T> InternalFromArrayChecked(
-        [AllowNull] T[] source, int length, [CallerArgumentExpression(nameof(length))] string lengthParamName = "")
+    internal static FlatArray<T> InternalFromArrayChecked([AllowNull] T[] source, int start, int length)
     {
-        var actualLength = source?.Length ?? default;
+        var sourceLength = source?.Length ?? default;
 
-        if (InnerAllocHelper.IsWithin(length, actualLength) is not true)
+        if (InnerAllocHelper.IsSegmentWithin(start, length, sourceLength) is not true)
         {
-            throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(lengthParamName, length, actualLength);
+            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
         }
 
         return source is null ? default : InnerFactory.FromArray(source, length);

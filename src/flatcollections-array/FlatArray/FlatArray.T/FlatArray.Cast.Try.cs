@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace System;
+﻿namespace System;
 
 partial struct FlatArray<T>
 {
     // TODO: Add the tests and make public
-    internal FlatArray<TOther>? TryCast<TOther>() where TOther : class?
+    internal FlatArray<TOther>? TryCast<TOther>() where TOther : class? // 'As' cast
     {
         if (InnerItems() is not TOther[] otherItems)
         {
@@ -16,11 +14,4 @@ partial struct FlatArray<T>
 
         return new(length, otherItemsNormalized, default);
     }
-
-    // TODO: Add the tests and make public
-    [Obsolete("This method is not intended for use. Call TryCast instead.", error: true)]
-    [DoesNotReturn]
-    internal FlatArray<TOther>? As<TOther>() where TOther : class?
-        =>
-        throw new NotImplementedException();
 }

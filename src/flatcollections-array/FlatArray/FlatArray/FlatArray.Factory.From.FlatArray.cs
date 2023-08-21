@@ -7,16 +7,16 @@ partial class FlatArray
         FlatArray<T>.From(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From<T>(FlatArray<T> source, int length)
+    internal static FlatArray<T> From<T>(FlatArray<T> source, int start, int length)
         =>
-        FlatArray<T>.InternalFromFlatArrayChecked(source, length);
+        FlatArray<T>.InternalFromFlatArrayChecked(source, start, length);
 
     public static FlatArray<T> From<T>(FlatArray<T>? source)
         =>
         FlatArray<T>.From(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From<T>(FlatArray<T>? source, int length)
+    internal static FlatArray<T> From<T>(FlatArray<T>? source, int start, int length)
         =>
-        FlatArray<T>.InternalFromFlatArrayChecked(source.GetValueOrDefault(), length);
+        FlatArray<T>.InternalFromFlatArrayChecked(source.GetValueOrDefault(), start, length);
 }

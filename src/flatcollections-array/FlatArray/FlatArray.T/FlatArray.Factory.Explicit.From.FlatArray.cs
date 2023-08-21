@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace System;
+﻿namespace System;
 
 partial struct FlatArray<T>
 {
@@ -9,25 +7,24 @@ partial struct FlatArray<T>
         InnerFactory.FromFlatArray(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From(FlatArray<T> source, int length)
+    internal static FlatArray<T> From(FlatArray<T> source, int start, int length)
         =>
-        InternalFromFlatArrayChecked(source, length);
+        InternalFromFlatArrayChecked(source, start, length);
 
     public static FlatArray<T> From(FlatArray<T>? source)
         =>
         InnerFactory.FromFlatArray(source.GetValueOrDefault());
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From(FlatArray<T>? source, int length)
+    internal static FlatArray<T> From(FlatArray<T>? source, int start, int length)
         =>
-        InternalFromFlatArrayChecked(source.GetValueOrDefault(), length);
+        InternalFromFlatArrayChecked(source.GetValueOrDefault(), start, length);
 
-    internal static FlatArray<T> InternalFromFlatArrayChecked(
-        FlatArray<T> source, int length, [CallerArgumentExpression(nameof(length))] string lengthParamName = "")
+    internal static FlatArray<T> InternalFromFlatArrayChecked(FlatArray<T> source, int start, int length)
     {
-        if (InnerAllocHelper.IsWithin(length, source.length) is not true)
+        if (InnerAllocHelper.IsSegmentWithin(start, length, source.length) is not true)
         {
-            throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(lengthParamName, length, source.length);
+            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, source.length);
         }
 
         return InnerFactory.FromFlatArray(source, length);

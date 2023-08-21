@@ -23,11 +23,11 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal Builder AddRange([AllowNull] T[] items, int length)
         {
-            var actualLength = items?.Length ?? default;
+            var itemsLength = items?.Length ?? default;
 
-            if (InnerAllocHelper.IsWithin(length, actualLength) is not true)
+            if (InnerAllocHelper.IsWithin(length, itemsLength) is not true)
             {
-                throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(nameof(length), length, actualLength);
+                throw InnerExceptionFactory.StartSegmentIsNotWithinArray(nameof(length), length, itemsLength);
             }
 
             if (items is null || items.Length == default)

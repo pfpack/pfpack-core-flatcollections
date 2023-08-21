@@ -24,7 +24,7 @@ partial struct FlatArray<T>
             unchecked((uint)value) <= unchecked((uint)threshold);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool IsWithin(int start, int length, int threshold)
+        internal static bool IsSegmentWithin(int start, int length, int threshold)
             =>
             (ulong)unchecked((uint)start) + unchecked((uint)length) <= unchecked((uint)threshold);
 

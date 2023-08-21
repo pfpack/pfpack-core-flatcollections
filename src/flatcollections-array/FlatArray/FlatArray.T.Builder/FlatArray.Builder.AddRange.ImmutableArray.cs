@@ -23,21 +23,21 @@ partial struct FlatArray<T>
         // TODO: Add the tests and make public
         internal Builder AddRange(ImmutableArray<T> items, int length)
             =>
-            InternalAddRangeChecked(items, length);
+            InnerAddRangeChecked(items, length);
 
         // TODO: Add the tests and make public
         internal Builder AddRange(ImmutableArray<T>? items, int length)
             =>
-            InternalAddRangeChecked(items.GetValueOrDefault(), length);
+            InnerAddRangeChecked(items.GetValueOrDefault(), length);
 
-        internal Builder InternalAddRangeChecked(
+        private Builder InnerAddRangeChecked(
             ImmutableArray<T> items, int length, [CallerArgumentExpression(nameof(length))] string lengthParamName = "")
         {
-            var actualLength = items.IsDefault ? default : items.Length;
+            var itemsLength = items.IsDefault ? default : items.Length;
 
-            if (InnerAllocHelper.IsWithin(length, actualLength) is not true)
+            if (InnerAllocHelper.IsWithin(length, itemsLength) is not true)
             {
-                throw InnerExceptionFactory.StartSegmentLengthOutOfArrayLength(lengthParamName, length, actualLength);
+                throw InnerExceptionFactory.StartSegmentIsNotWithinArray(lengthParamName, length, itemsLength);
             }
 
             if (items.IsDefaultOrEmpty)

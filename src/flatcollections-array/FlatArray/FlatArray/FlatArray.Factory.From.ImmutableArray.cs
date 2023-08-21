@@ -9,16 +9,16 @@ partial class FlatArray
         FlatArray<T>.From(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From<T>(ImmutableArray<T> source, int length)
+    internal static FlatArray<T> From<T>(ImmutableArray<T> source, int start, int length)
         =>
-        FlatArray<T>.InternalFromImmutableArrayChecked(source, length);
+        FlatArray<T>.InternalFromImmutableArrayChecked(source, start, length);
 
     public static FlatArray<T> From<T>(ImmutableArray<T>? source)
         =>
         FlatArray<T>.From(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From<T>(ImmutableArray<T>? source, int length)
+    internal static FlatArray<T> From<T>(ImmutableArray<T>? source, int start, int length)
         =>
-        FlatArray<T>.InternalFromImmutableArrayChecked(source.GetValueOrDefault(), length);
+        FlatArray<T>.InternalFromImmutableArrayChecked(source.GetValueOrDefault(), start, length);
 }
