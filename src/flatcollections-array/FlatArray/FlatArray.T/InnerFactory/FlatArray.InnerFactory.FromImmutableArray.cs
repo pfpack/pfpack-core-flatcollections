@@ -27,7 +27,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(InnerAllocHelper.IsSegmentWithin(start, length, source.IsDefault ? default : source.Length));
 
-            if (source.IsDefaultOrEmpty)
+            if (length == default)
             {
                 return default;
             }
