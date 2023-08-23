@@ -11,7 +11,7 @@ partial struct FlatArray<T>
 
             set
             {
-                if (InnerAllocHelper.IsWithin(length, value) is not true)
+                if (value >= length is not true)
                 {
                     throw InnerBuilderExceptionFactory.CapacityOutOfRange_MustBeGreaterThanOrEqualToLength(value, length);
                 }
