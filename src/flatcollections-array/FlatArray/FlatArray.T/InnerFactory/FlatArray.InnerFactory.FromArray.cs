@@ -15,7 +15,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static FlatArray<T> FromArray(T[] source, int start, int length)
         {
-            Debug.Assert(InnerAllocHelper.IsSegmentWithin(start, length, source.Length));
+            Debug.Assert(InnerAllocHelper.IsSegmentWithinLength(start, length, source.Length));
 
             return length == default ? default : new(InnerArrayHelper.CopySegment(source, start, length), default);
         }

@@ -17,7 +17,7 @@ partial struct FlatArray<T>
     {
         var sourceLength = source?.Length ?? default;
 
-        if (InnerAllocHelper.IsSegmentWithin(start, length, sourceLength) is not true)
+        if (InnerAllocHelper.IsSegmentWithinLength(start, length, sourceLength) is not true)
         {
             throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
         }

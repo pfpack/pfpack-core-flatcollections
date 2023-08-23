@@ -9,7 +9,6 @@ partial struct FlatArray<T>
     {
         internal const int DefaultPositiveCapacity = 4;
 
-        // The caller MUST ensure the length is GREATER than or EQUAL to zero
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool IsIndexInRange(int index, int length)
         {
@@ -19,19 +18,36 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool IsWithin(int value, int threshold)
-            =>
-            unchecked((uint)value) <= unchecked((uint)threshold);
+        internal static bool IsWithinLength(int value, int length)
+        {
+            Debug.Assert(value >= 0);
+            Debug.Assert(length >= 0);
+
+            return IsWithin(value, length);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool IsSegmentWithin(int start, int length, int threshold)
+        internal static bool IsSegmentWithinLength(int segmentStart, int segmentLength, int length)
+        {
+            Debug.Assert(segmentStart >= 0);
+            Debug.Assert(segmentLength >= 0);
+            Debug.Assert(length >= 0);
+
+            return (ulong)unchecked((uint)segmentStart) + unchecked((uint)segmentLength) <= unchecked((uint)length);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool IsWithinCapacity(int value, int capacity)
             =>
-            (ulong)unchecked((uint)start) + unchecked((uint)length) <= unchecked((uint)threshold);
+            IsWithin(value, capacity);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int EnsurePositiveCapacity(int capacity)
-            =>
-            capacity > 0 ? capacity : DefaultPositiveCapacity;
+        {
+            Debug.Assert(capacity >= 0);
+
+            return capacity > 0 ? capacity : DefaultPositiveCapacity;
+        }
 
         // The caller MUST ensure the capacity is GREATER than or EQUAL to zero
         internal static int EnsureCapacityWithinDefaultPositive(int capacity)
@@ -47,7 +63,7 @@ partial struct FlatArray<T>
         {
             Debug.Assert(capacity > 0 && capacity < maxCapacity);
 
-            int newCapacity = InnerDoubleUnchecked(capacity);
+            int newCapacity = DoubleUnchecked(capacity);
             return IsWithin(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
@@ -62,13 +78,18 @@ partial struct FlatArray<T>
                 return false;
             }
 
-            int doubleLength = InnerDoubleUnchecked(length);
+            int doubleLength = DoubleUnchecked(length);
             return IsWithin(doubleLength, capacity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int InnerDoubleUnchecked(int value)
+        internal static int DoubleUnchecked(int value)
             =>
             value << 1; // unchecked(value * 2);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsWithin(int value, int threshold)
+            =>
+            unchecked((uint)value) <= unchecked((uint)threshold);
     }
 }

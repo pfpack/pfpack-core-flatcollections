@@ -22,7 +22,7 @@ partial struct FlatArray<T>
 
     internal static FlatArray<T> InternalFromFlatArrayChecked(FlatArray<T> source, int start, int length)
     {
-        if (InnerAllocHelper.IsSegmentWithin(start, length, source.length) is not true)
+        if (InnerAllocHelper.IsSegmentWithinLength(start, length, source.length) is not true)
         {
             throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, source.length);
         }

@@ -26,7 +26,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static FlatArray<T> FromList(List<T> source, int start, int length)
         {
-            Debug.Assert(InnerAllocHelper.IsSegmentWithin(start, length, source.Count));
+            Debug.Assert(InnerAllocHelper.IsSegmentWithinLength(start, length, source.Count));
 
             if (length == default)
             {
