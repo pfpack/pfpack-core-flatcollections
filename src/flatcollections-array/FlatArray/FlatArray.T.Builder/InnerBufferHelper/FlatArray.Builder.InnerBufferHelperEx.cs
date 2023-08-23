@@ -9,7 +9,6 @@ partial struct FlatArray<T>
     {
         private static class InnerBufferHelperEx
         {
-            // The caller MUST ensure the length and the length increase are GREATER than zero
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static void EnsureBufferCapacity(
                 ref T[] array,
@@ -20,8 +19,8 @@ partial struct FlatArray<T>
                 Debug.Assert(lengthIncrease >= 0);
 
                 int newLength = unchecked(length + lengthIncrease);
-                int doubleLength = length << 1; // unchecked(length * 2);
-                int newCapacity = unchecked((uint)newLength) > unchecked((uint)doubleLength)
+                int doubleLength = InnerAllocHelper.DoubleUnchecked(length);
+                int newCapacity = InnerAllocHelper.IsWithinCapacityUnchecked(doubleLength, newLength)
                     ? newLength
                     : doubleLength;
 

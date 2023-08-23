@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -9,28 +10,28 @@ partial struct FlatArray<T>
     partial class Builder
     {
         // TODO: Add the tests and make public
-        internal Builder AddRange([AllowNull] params T[] items)
+        internal Builder AddRange([AllowNull] List<T> items)
         {
-            if (items is null || items.Length == default)
+            if (items is null || items.Count == default)
             {
                 return this;
             }
 
-            InnerAddRange(items, items.Length);
+            InnerAddRange(items, items.Count);
             return this;
         }
 
         // TODO: Add the tests and make public
-        internal Builder AddRange([AllowNull] T[] items, int length)
+        internal Builder AddRange([AllowNull] List<T> items, int length)
         {
-            var itemsLength = items?.Length ?? default;
+            var itemsLength = items?.Count ?? default;
 
             if (InnerAllocHelper.IsWithinLength(length, itemsLength) is not true)
             {
                 throw InnerExceptionFactory.StartSegmentIsNotWithinArray(nameof(length), length, itemsLength);
             }
 
-            if (items is null || items.Length == default)
+            if (items is null || items.Count == default)
             {
                 return this;
             }
@@ -40,16 +41,13 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void InnerAddRange(T[] items, int length)
+        private void InnerAddRange(List<T> items, int length)
         {
-            Debug.Assert(items.Length != default);
-            Debug.Assert(length > 0 && length <= items.Length);
+            Debug.Assert(items.Count != default);
+            Debug.Assert(length > 0 && length <= items.Count);
 
             InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
-            var sourceSpan = length == items.Length
-                ? new ReadOnlySpan<T>(items)
-                : new ReadOnlySpan<T>(items, 0, length);
-            sourceSpan.CopyTo(new Span<T>(this.items, this.length, length));
+            items.CopyTo(0, this.items, this.length, length);
             this.length += length;
         }
     }

@@ -31,7 +31,7 @@ partial struct FlatArray<T>
         private Builder InnerAddRangeChecked(
             FlatArray<T> items, int length, [CallerArgumentExpression(nameof(length))] string lengthParamName = "")
         {
-            if (InnerAllocHelper.IsWithin(length, items.length) is not true)
+            if (InnerAllocHelper.IsWithinLength(length, items.length) is not true)
             {
                 throw InnerExceptionFactory.StartSegmentIsNotWithinArray(lengthParamName, length, items.length);
             }
