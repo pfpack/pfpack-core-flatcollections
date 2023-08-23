@@ -20,7 +20,7 @@ partial struct FlatArray<T>
 
                 int newLength = unchecked(length + lengthIncrease);
                 int doubleLength = InnerAllocHelper.DoubleUnchecked(length);
-                int newCapacity = InnerAllocHelper.IsWithinCapacity(doubleLength, newLength)
+                int newCapacity = InnerAllocHelper.IsWithinCapacityUnchecked(doubleLength, newLength)
                     ? newLength
                     : doubleLength;
 
