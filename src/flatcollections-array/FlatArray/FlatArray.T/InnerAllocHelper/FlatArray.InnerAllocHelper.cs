@@ -49,7 +49,6 @@ partial struct FlatArray<T>
             return capacity > 0 ? capacity : DefaultPositiveCapacity;
         }
 
-        // The caller MUST ensure the capacity is GREATER than or EQUAL to zero
         internal static int EnsureCapacityWithinDefaultPositive(int capacity)
         {
             Debug.Assert(capacity >= 0);
@@ -57,7 +56,6 @@ partial struct FlatArray<T>
             return IsWithin(capacity, DefaultPositiveCapacity) ? capacity : DefaultPositiveCapacity;
         }
 
-        // The caller MUST ensure the capacity is GREATER than zero and LESS than the max capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int EnlargeCapacity(int capacity, int maxCapacity)
         {
@@ -67,7 +65,6 @@ partial struct FlatArray<T>
             return IsWithin(newCapacity, maxCapacity) ? newCapacity : maxCapacity;
         }
 
-        // The caller MUST ensure the length is GREATER than zero and LESS than or EQUAL to the capacity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool IsHugeCapacity(int length, int capacity)
         {

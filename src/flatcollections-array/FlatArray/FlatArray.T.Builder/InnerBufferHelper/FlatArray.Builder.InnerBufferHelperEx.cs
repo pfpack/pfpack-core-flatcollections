@@ -9,7 +9,6 @@ partial struct FlatArray<T>
     {
         private static class InnerBufferHelperEx
         {
-            // The caller MUST ensure the length and the length increase are GREATER than zero
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static void EnsureBufferCapacity(
                 ref T[] array,
