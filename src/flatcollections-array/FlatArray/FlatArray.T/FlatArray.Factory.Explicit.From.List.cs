@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -14,6 +15,7 @@ partial struct FlatArray<T>
         =>
         InternalFromListChecked(source, start, length);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static FlatArray<T> InternalFromListChecked([AllowNull] List<T> source, int start, int length)
     {
         var sourceLength = source?.Count ?? default;

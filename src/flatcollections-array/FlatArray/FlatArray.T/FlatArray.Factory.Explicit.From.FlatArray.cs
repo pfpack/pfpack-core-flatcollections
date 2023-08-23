@@ -1,4 +1,6 @@
-﻿namespace System;
+﻿using System.Runtime.CompilerServices;
+
+namespace System;
 
 partial struct FlatArray<T>
 {
@@ -20,6 +22,7 @@ partial struct FlatArray<T>
         =>
         InternalFromFlatArrayChecked(source.GetValueOrDefault(), start, length);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static FlatArray<T> InternalFromFlatArrayChecked(FlatArray<T> source, int start, int length)
     {
         if (InnerAllocHelper.IsSegmentWithinLength(start, length, source.length) is not true)

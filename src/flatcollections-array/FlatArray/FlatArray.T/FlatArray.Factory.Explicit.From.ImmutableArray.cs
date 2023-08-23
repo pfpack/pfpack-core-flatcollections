@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -22,6 +23,7 @@ partial struct FlatArray<T>
         =>
         InternalFromImmutableArrayChecked(source.GetValueOrDefault(), start, length);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static FlatArray<T> InternalFromImmutableArrayChecked(ImmutableArray<T> source, int start, int length)
     {
         var sourceLength = source.IsDefault ? default : source.Length;
