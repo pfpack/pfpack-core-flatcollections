@@ -18,10 +18,23 @@ partial struct FlatArray<T>
         items = InnerArrayHelper.Copy(source);
     }
 
-
     // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal FlatArray(ReadOnlySpan<T> source)
+    {
+        if (source.IsEmpty)
+        {
+            this = default;
+            return;
+        }
+
+        length = source.Length;
+        items = source.ToArray();
+    }
+
+    // TODO: Add the tests and make public
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal FlatArray(Span<T> source)
     {
         if (source.IsEmpty)
         {
