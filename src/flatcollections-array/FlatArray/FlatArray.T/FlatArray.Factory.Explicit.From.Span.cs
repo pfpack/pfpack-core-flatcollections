@@ -4,9 +4,9 @@ partial struct FlatArray<T>
 {
     public static FlatArray<T> From(ReadOnlySpan<T> source)
         =>
-        source.IsEmpty ? default : new(source.ToArray(), default);
+        new(source);
 
     public static FlatArray<T> From(Span<T> source)
         =>
-        source.IsEmpty ? default : new(source.ToArray(), default);
+        new(source);
 }
