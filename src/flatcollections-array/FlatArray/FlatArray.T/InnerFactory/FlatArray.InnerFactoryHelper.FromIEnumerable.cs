@@ -5,7 +5,7 @@ namespace System;
 
 partial struct FlatArray<T>
 {
-    partial class InnerFactory
+    partial class InnerFactoryHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static FlatArray<T> FromIEnumerable(IEnumerable<T> source, int estimatedCapacity = default)

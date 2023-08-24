@@ -2,7 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    private static partial class InnerFactory
+    private static partial class InnerFactoryHelper
     {
     }
 }
