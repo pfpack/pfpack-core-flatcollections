@@ -8,7 +8,7 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Fact]
-    public void AsSpan_SourceIsDefault_ExpectDefault()
+    public void AsSpanExplicit_SourceIsDefault_ExpectDefault()
     {
         var source = default(FlatArray<RefType?>);
 
@@ -19,7 +19,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void AsSpan_SourceIsNotDefault_ExpectSourceItems()
+    public void AsSpanExplicit_SourceIsNotDefault_ExpectSourceItems()
     {
         var sourceItems = new[]
         {
@@ -35,7 +35,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void AsSpan_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void AsSpanExplicit_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {

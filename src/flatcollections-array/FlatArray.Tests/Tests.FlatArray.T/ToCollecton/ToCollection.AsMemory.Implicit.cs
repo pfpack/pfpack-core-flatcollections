@@ -8,18 +8,18 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Fact]
-    public void AsMemory_SourceIsDefault_ExpectDefault()
+    public void AsMemoryImplicit_SourceIsDefault_ExpectDefault()
     {
         var source = default(FlatArray<StructType>);
 
-        var actual = source.AsMemory();
+        ReadOnlyMemory<StructType> actual = source;
         var expected = default(ReadOnlyMemory<StructType>);
 
         Assert.StrictEqual(expected, actual);
     }
 
     [Fact]
-    public void AsMemory_SourceIsNotDefault_ExpectSourceItems()
+    public void AsMemoryImplicit_SourceIsNotDefault_ExpectSourceItems()
     {
         var sourceItems = new[]
         {
@@ -28,14 +28,14 @@ partial class FlatArrayTest
 
         var source = sourceItems.InitializeFlatArray();
 
-        var actual = source.AsMemory();
+        ReadOnlyMemory<RefType?> actual = source;
         var expected = sourceItems.AsMemory();
 
         Assert.StrictEqual(expected, actual);
     }
 
     [Fact]
-    public void AsMemory_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
+    public void AsMemoryImplicit_InnerLengthIsLessThanItemsLength_ExpectLengthIsEqualToInnerLength()
     {
         var sourceItems = new[]
         {
@@ -45,7 +45,7 @@ partial class FlatArrayTest
         const int innerLength = 3;
         var source = sourceItems.InitializeFlatArray(innerLength);
 
-        var actual = source.AsMemory();
+        ReadOnlyMemory<string?> actual = source;
         var expected = new Memory<string?>(sourceItems, 0, innerLength);
 
         Assert.StrictEqual(expected, actual);
