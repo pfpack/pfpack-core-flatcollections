@@ -200,7 +200,7 @@ partial class FlatArrayTest
     [Fact]
     public void FromNullableImmutableArray_SourceIsDefault_ExpectInnerStateIsDefault()
     {
-        ImmutableArray<RefType?>? source = new ImmutableArray<RefType?>();;
+        ImmutableArray<RefType?>? source = new ImmutableArray<RefType?>();
         var actual = FlatArray<RefType?>.From(source);
 
         actual.VerifyInnerState(default, default);
@@ -214,7 +214,7 @@ partial class FlatArrayTest
     {
         var coppied = sourceItems.GetCopy();
 
-        var source = sourceItems.ToImmutableArray();
+        ImmutableArray<int?>? source = sourceItems.ToImmutableArray();
         var actual = FlatArray<int?>.From(source);
 
         actual.VerifyInnerState(coppied, coppied.Length);

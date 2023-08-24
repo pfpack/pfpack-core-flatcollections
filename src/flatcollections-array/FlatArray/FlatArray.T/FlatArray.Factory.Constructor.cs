@@ -19,9 +19,8 @@ partial struct FlatArray<T>
         items = InnerArrayHelper.Copy(source);
     }
 
-    // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal FlatArray(FlatArray<T> source)
+    public FlatArray(FlatArray<T> source)
     {
         if (source.length == default)
         {
@@ -33,9 +32,8 @@ partial struct FlatArray<T>
         items = InnerArrayHelper.Copy(source.items!, source.length);
     }
 
-    // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal FlatArray(FlatArray<T>? source)
+    public FlatArray(FlatArray<T>? source)
     {
         var sourceValue = source.GetValueOrDefault();
 
@@ -49,9 +47,8 @@ partial struct FlatArray<T>
         items = InnerArrayHelper.Copy(sourceValue.items!, sourceValue.length);
     }
 
-    // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal FlatArray(ImmutableArray<T> source)
+    public FlatArray(ImmutableArray<T> source)
     {
         if (source.IsDefaultOrEmpty)
         {
@@ -66,9 +63,8 @@ partial struct FlatArray<T>
         this.items = items;
     }
 
-    // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal FlatArray(ImmutableArray<T>? source)
+    public FlatArray(ImmutableArray<T>? source)
     {
         var sourceValue = source.GetValueOrDefault();
 
