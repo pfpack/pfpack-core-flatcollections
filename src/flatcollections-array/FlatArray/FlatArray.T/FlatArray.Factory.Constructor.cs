@@ -81,9 +81,8 @@ partial struct FlatArray<T>
         this.items = items;
     }
 
-    // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal FlatArray(ReadOnlySpan<T> source)
+    public FlatArray(ReadOnlySpan<T> source)
     {
         if (source.IsEmpty)
         {
@@ -95,9 +94,8 @@ partial struct FlatArray<T>
         items = source.ToArray();
     }
 
-    // TODO: Add the tests and make public
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal FlatArray(Span<T> source)
+    public FlatArray(Span<T> source)
     {
         if (source.IsEmpty)
         {
