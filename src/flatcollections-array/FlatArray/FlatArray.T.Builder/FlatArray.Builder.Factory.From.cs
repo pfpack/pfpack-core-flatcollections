@@ -47,13 +47,14 @@ partial struct FlatArray<T>
         private static Builder InnerFromList(List<T> source)
         {
             var count = source.Count;
+
             if (count == default)
             {
                 return new();
             }
 
             var array = new T[count];
-            source.CopyTo(array, 0);
+            source.CopyTo(array);
 
             return new(array, default);
         }
@@ -67,7 +68,7 @@ partial struct FlatArray<T>
             }
 
             var array = new T[source.Length];
-            source.CopyTo(array, 0);
+            source.CopyTo(array);
 
             return new(array, default);
         }
