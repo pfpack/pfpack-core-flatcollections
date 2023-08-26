@@ -11,7 +11,7 @@ partial struct FlatArray<T>
     {
         public static Builder From([AllowNull] params T[] source)
             =>
-            source is null ? new() : InnerFromArray(source);
+            new(source);
 
         public static Builder From(FlatArray<T> source)
             =>
@@ -32,11 +32,6 @@ partial struct FlatArray<T>
         public static Builder From(ImmutableArray<T>? source)
             =>
             source is null ? new() : InnerFromImmutableArray(source.Value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Builder InnerFromArray(T[] source)
-            =>
-            source.Length == default ? new() : new(InnerArrayHelper.Copy(source), default);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Builder InnerFromFlatArray(FlatArray<T> source)
