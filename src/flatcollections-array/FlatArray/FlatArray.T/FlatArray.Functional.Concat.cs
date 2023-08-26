@@ -8,7 +8,7 @@ partial struct FlatArray<T>
     {
         if (other.length == default)
         {
-            return this;
+            return length == default ? default : this;
         }
 
         if (length == default)
@@ -24,7 +24,7 @@ partial struct FlatArray<T>
     {
         if (other is null || other.Length == default)
         {
-            return this;
+            return length == default ? default : this;
         }
 
         if (length == default)
