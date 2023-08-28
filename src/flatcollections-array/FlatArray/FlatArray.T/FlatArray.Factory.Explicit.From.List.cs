@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -7,22 +8,32 @@ partial struct FlatArray<T>
 {
     public static FlatArray<T> From([AllowNull] List<T> source)
         =>
-        source is null ? default : InnerFactory.FromList(source);
+        source is null ? default : InnerFactoryHelper.FromICollectionTrusted(source);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From([AllowNull] List<T> source, int start, int length)
-        =>
-        InternalFromListChecked(source, start, length);
-
-    internal static FlatArray<T> InternalFromListChecked([AllowNull] List<T> source, int start, int length)
     {
-        var sourceLength = source?.Count ?? default;
+        InnerValidateRange();
 
-        if (InnerAllocHelper.IsSegmentWithinLength(start, length, sourceLength) is not true)
+        if (source is null || length == default)
         {
-            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
+            return default;
         }
 
-        return source is null ? default : InnerFactory.FromList(source, start, length);
+        var array = new T[length];
+        source.CopyTo(start, array, 0, length);
+
+        return new(array, default);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        void InnerValidateRange()
+        {
+            var sourceLength = source?.Count ?? default;
+            if (InnerAllocHelper.IsSegmentWithinLength(start, length, sourceLength))
+            {
+                return;
+            }
+            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
+        }
     }
 }

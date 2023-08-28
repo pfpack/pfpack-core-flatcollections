@@ -10,7 +10,7 @@ partial class FlatArray
     {
         public static FlatArray<T>.Builder From<T>([AllowNull] params T[] source)
             =>
-            FlatArray<T>.Builder.From(source);
+            new(source);
 
         public static FlatArray<T>.Builder From<T>(FlatArray<T> source)
             =>

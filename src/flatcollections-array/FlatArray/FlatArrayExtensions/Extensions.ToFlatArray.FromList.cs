@@ -3,14 +3,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System;
 
-partial class FlatArray
+partial class FlatArrayExtensions
 {
-    public static FlatArray<T> From<T>([AllowNull] List<T> source)
+    public static FlatArray<T> ToFlatArray<T>([AllowNull] this List<T> source)
         =>
         FlatArray<T>.From(source);
 
     // TODO: Add the tests and make public
-    internal static FlatArray<T> From<T>([AllowNull] List<T> source, int start, int length)
+    internal static FlatArray<T> ToFlatArray<T>([AllowNull] this List<T> source, int start, int length)
         =>
         FlatArray<T>.From(source, start, length);
 }

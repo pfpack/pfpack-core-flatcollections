@@ -1,32 +1,39 @@
-﻿namespace System;
+﻿using System.Runtime.CompilerServices;
+
+namespace System;
 
 partial struct FlatArray<T>
 {
     public static FlatArray<T> From(FlatArray<T> source)
         =>
-        InnerFactory.FromFlatArray(source);
+        new(source);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(FlatArray<T> source, int start, int length)
-        =>
-        InternalFromFlatArrayChecked(source, start, length);
+    {
+        InnerValidateRange();
+
+        return length == default
+            ? default
+            : new(InnerArrayHelper.CopySegment(source.items!, start, length), default);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        void InnerValidateRange()
+        {
+            if (InnerAllocHelper.IsSegmentWithinLength(start, length, source.length))
+            {
+                return;
+            }
+            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, source.length);
+        }
+    }
 
     public static FlatArray<T> From(FlatArray<T>? source)
         =>
-        InnerFactory.FromFlatArray(source.GetValueOrDefault());
+        new(source);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(FlatArray<T>? source, int start, int length)
         =>
-        InternalFromFlatArrayChecked(source.GetValueOrDefault(), start, length);
-
-    internal static FlatArray<T> InternalFromFlatArrayChecked(FlatArray<T> source, int start, int length)
-    {
-        if (InnerAllocHelper.IsSegmentWithinLength(start, length, source.length) is not true)
-        {
-            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, source.length);
-        }
-
-        return InnerFactory.FromFlatArray(source, start, length);
-    }
+        From(source.GetValueOrDefault(), start, length);
 }

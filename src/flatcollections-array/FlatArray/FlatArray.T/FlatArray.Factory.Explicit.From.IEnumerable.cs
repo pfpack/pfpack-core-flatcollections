@@ -12,31 +12,35 @@ partial struct FlatArray<T>
         {
             null => default,
 
-            T[] array
+            T[] items
             =>
-            InnerFactory.FromArray(array),
+            items.Length == default ? default : new(InnerArrayHelper.Copy(items), default),
 
-            List<T> list
+            List<T> items
             =>
-            InnerFactory.FromList(list),
+            InnerFactoryHelper.FromICollectionTrusted(items),
 
-            ImmutableArray<T> immutableArray
+            FlatList items
             =>
-            InnerFactory.FromImmutableArray(immutableArray),
+            InnerFactoryHelper.FromICollectionTrusted(items),
 
-            ICollection<T> coll
+            ImmutableArray<T> items
             =>
-            InnerFactory.FromICollection(coll),
+            new(items),
 
-            IReadOnlyList<T> list
+            ICollection<T> items
             =>
-            InnerFactory.FromIReadOnlyList(list),
+            InnerFactoryHelper.FromICollection(items),
 
-            IReadOnlyCollection<T> coll
+            IReadOnlyList<T> items
             =>
-            InnerFactory.FromIEnumerable(coll, coll.Count),
+            InnerFactoryHelper.FromIReadOnlyList(items),
+
+            IReadOnlyCollection<T> items
+            =>
+            InnerFactoryHelper.FromIEnumerable(items, items.Count),
 
             _ =>
-            InnerFactory.FromIEnumerable(source)
+            InnerFactoryHelper.FromIEnumerable(source)
         };
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -6,31 +7,41 @@ partial struct FlatArray<T>
 {
     public static FlatArray<T> From(ImmutableArray<T> source)
         =>
-        InnerFactory.FromImmutableArray(source);
+        new(source);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(ImmutableArray<T> source, int start, int length)
-        =>
-        InternalFromImmutableArrayChecked(source, start, length);
+    {
+        InnerValidateRange();
+
+        if (length == default)
+        {
+            return default;
+        }
+
+        var array = new T[length];
+        source.CopyTo(start, array, 0, length);
+
+        return new(array, default);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        void InnerValidateRange()
+        {
+            var sourceLength = source.IsDefault ? default : source.Length;
+            if (InnerAllocHelper.IsSegmentWithinLength(start, length, sourceLength))
+            {
+                return;
+            }
+            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
+        }
+    }
 
     public static FlatArray<T> From(ImmutableArray<T>? source)
         =>
-        InnerFactory.FromImmutableArray(source.GetValueOrDefault());
+        new(source);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(ImmutableArray<T>? source, int start, int length)
         =>
-        InternalFromImmutableArrayChecked(source.GetValueOrDefault(), start, length);
-
-    internal static FlatArray<T> InternalFromImmutableArrayChecked(ImmutableArray<T> source, int start, int length)
-    {
-        var sourceLength = source.IsDefault ? default : source.Length;
-
-        if (InnerAllocHelper.IsSegmentWithinLength(start, length, sourceLength) is not true)
-        {
-            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
-        }
-
-        return InnerFactory.FromImmutableArray(source, start, length);
-    }
+        From(source.GetValueOrDefault(), start, length);
 }
