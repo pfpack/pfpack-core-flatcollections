@@ -52,14 +52,12 @@ partial struct FlatArray<T>
             {
                 if (arrayIndex is not >= 0)
                 {
-                    throw new ArgumentOutOfRangeException(
-                        arrayIndexParamName, arrayIndex, "Array index must be greater than or equal to zero.");
+                    throw InnerListExceptionFactory.CopyTo_ArrayIndexLessThanZero(arrayIndexParamName, arrayIndex);
                 }
 
                 if (InnerAllocHelper.IsSegmentWithinBounds(arrayIndex, length, array.Length) is not true)
                 {
-                    throw new ArgumentException(
-                        "The number of elements in the source array must be less than or equal to the available space from the array index to the end of the destination array.");
+                    throw InnerListExceptionFactory.CopyTo_SourceOutsideDestBounds(length, arrayIndex, array.Length);
                 }
             }
         }
