@@ -35,14 +35,13 @@ partial struct FlatArray<T>
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array is null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
+            _ = array ?? throw new ArgumentNullException(nameof(array));
+
             if (arrayIndex is not >= 0)
             {
                 throw InnerListExceptionFactory.CopyTo_ArrayIndexLessThanZero(nameof(arrayIndex), arrayIndex);
             }
+
             if (InnerAllocHelper.IsSegmentWithinBounds(arrayIndex, length, array.Length) is not true)
             {
                 throw InnerListExceptionFactory.CopyTo_SourceOutsideDestBounds(length, arrayIndex, array.Length);

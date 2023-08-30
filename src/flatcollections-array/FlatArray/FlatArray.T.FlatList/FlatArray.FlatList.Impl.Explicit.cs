@@ -16,6 +16,7 @@ partial struct FlatArray<T>
             get => this[index];
             set => throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
         }
+
         IEnumerator IEnumerable.GetEnumerator()
             =>
             GetEnumerator();
