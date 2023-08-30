@@ -7,6 +7,8 @@ partial struct FlatArray<T>
 {
     private sealed partial class FlatList : IList<T>, IReadOnlyList<T>
     {
+        private const int MinusOne = -1;
+
         private readonly int length;
 
         private readonly T[] items;
