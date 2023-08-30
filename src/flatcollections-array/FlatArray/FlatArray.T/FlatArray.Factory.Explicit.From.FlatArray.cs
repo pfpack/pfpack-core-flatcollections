@@ -20,11 +20,11 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void InnerValidateRange()
         {
-            if (InnerAllocHelper.IsSegmentWithinLength(start, length, source.length))
+            if (InnerAllocHelper.IsSegmentWithinBounds(start, length, source.length))
             {
                 return;
             }
-            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, source.length);
+            throw InnerExceptionFactory.SegmentOutsideBounds(start, length, source.length);
         }
     }
 

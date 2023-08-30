@@ -26,7 +26,7 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T[] CopySegment(T[] array, int start, int length)
         {
-            Debug.Assert(InnerAllocHelper.IsSegmentWithinLength(start, length, array.Length));
+            Debug.Assert(InnerAllocHelper.IsSegmentWithinBounds(start, length, array.Length));
 
             var sourceSpan = start == default && length == array.Length
                 ? new ReadOnlySpan<T>(array)

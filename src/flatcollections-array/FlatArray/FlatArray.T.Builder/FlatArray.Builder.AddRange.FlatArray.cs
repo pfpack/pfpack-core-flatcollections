@@ -33,7 +33,7 @@ partial struct FlatArray<T>
         {
             if (InnerAllocHelper.IsWithinLength(length, items.length) is not true)
             {
-                throw InnerExceptionFactory.StartSegmentIsNotWithinArray(lengthParamName, length, items.length);
+                throw InnerExceptionFactory.StartSegmentOutsideBounds(lengthParamName, length, items.length);
             }
 
             if (items.length == default)

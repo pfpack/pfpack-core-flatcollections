@@ -27,9 +27,8 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool IsSegmentWithinLength(int segmentStart, int segmentLength, int length)
+        internal static bool IsSegmentWithinBounds(int segmentStart, int segmentLength, int length)
         {
-            Debug.Assert(segmentStart >= 0);
             Debug.Assert(segmentLength >= 0);
             Debug.Assert(length >= 0);
 

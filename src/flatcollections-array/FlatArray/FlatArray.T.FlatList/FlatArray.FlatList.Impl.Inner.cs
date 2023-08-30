@@ -56,7 +56,7 @@ partial struct FlatArray<T>
                         arrayIndexParamName, arrayIndex, "Array index must be greater than or equal to zero.");
                 }
 
-                if (InnerAllocHelper.IsSegmentWithinLength(arrayIndex, length, array.Length) is not true)
+                if (InnerAllocHelper.IsSegmentWithinBounds(arrayIndex, length, array.Length) is not true)
                 {
                     throw new ArgumentException(
                         "The number of elements in the source array must be less than or equal to the available space from the array index to the end of the destination array.");
