@@ -13,12 +13,11 @@ partial struct FlatArray<T>
         T IList<T>.this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => InnerItemChecked(index);
+            get => this[index];
             set => throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
             =>
-            InnerGetEnumerator();
+            GetEnumerator();
     }
 }
