@@ -18,19 +18,19 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool IsWithinLength(int value, int length)
-        {
-            Debug.Assert(length >= 0);
-
-            return InnerIsWithinUnchecked(value, length);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool IsSegmentWithinBounds(int segmentStart, int segmentLength, int length)
         {
             Debug.Assert(length >= 0);
 
             return (ulong)unchecked((uint)segmentStart) + unchecked((uint)segmentLength) <= unchecked((uint)length);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool IsStartSegmentWithinBounds(int segmentLength, int length)
+        {
+            Debug.Assert(length >= 0);
+
+            return InnerIsWithinUnchecked(segmentLength, length);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

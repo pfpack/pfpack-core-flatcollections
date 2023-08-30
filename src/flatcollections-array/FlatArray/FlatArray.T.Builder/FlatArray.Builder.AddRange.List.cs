@@ -26,7 +26,7 @@ partial struct FlatArray<T>
         {
             var itemsLength = items?.Count ?? default;
 
-            if (InnerAllocHelper.IsWithinLength(length, itemsLength) is not true)
+            if (InnerAllocHelper.IsStartSegmentWithinBounds(length, itemsLength) is not true)
             {
                 throw InnerExceptionFactory.StartSegmentOutsideBounds(nameof(length), length, itemsLength);
             }
