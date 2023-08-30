@@ -7,7 +7,7 @@ partial struct FlatArray<T>
 {
     partial class FlatList
     {
-        private const int MinusOne = -1;
+        private const int NotFoundIndex = -1;
 
         public int Count => length;
 
@@ -27,11 +27,11 @@ partial struct FlatArray<T>
 
         public int IndexOf(T item)
             =>
-            length != default ? InnerIndexOf(item) : MinusOne;
+            length != default ? InnerIndexOf(item) : NotFoundIndex;
 
         public bool Contains(T item)
             =>
-            length != default && InnerIndexOf(item) != MinusOne;
+            length != default && InnerIndexOf(item) != NotFoundIndex;
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -72,7 +72,7 @@ partial struct FlatArray<T>
         private int InnerIndexOf(T item)
         {
             var result = Array.IndexOf(items, item, 0, length);
-            return result >= 0 ? result : MinusOne;
+            return result >= 0 ? result : NotFoundIndex;
         }
     }
 }
