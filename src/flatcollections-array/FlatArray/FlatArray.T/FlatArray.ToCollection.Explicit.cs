@@ -28,13 +28,13 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static List<T> InnerToList(T[] items, int length)
         {
-            // Passing ArraySegment to the constructor leads to the same efficient behavior
+            // Passing FlatList (or ArraySegment) to the constructor leads to the same efficient behavior
             // like in the case of 'new(items)' above, i.e., to calling ICollection<T>.CopyTo
             // and then to calling efficient Array.Copy
             //
             // Thus, it should be the most efficient way to build a list in this case
-
-            var effectiveItems = new ArraySegment<T>(items, 0, length);
+            //
+            var effectiveItems = new FlatList(length, items);
             return new(effectiveItems);
         }
     }
@@ -66,7 +66,7 @@ partial struct FlatArray<T>
             //
             // But we need to copy the whole array within its effective length
             // Thus, using the Builder might be more efficient in this case
-
+            //
             var builder = ImmutableArray.CreateBuilder<T>(initialCapacity: length);
             builder.AddRange(items, length);
 

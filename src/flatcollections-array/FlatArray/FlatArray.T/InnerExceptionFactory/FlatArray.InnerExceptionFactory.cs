@@ -6,13 +6,13 @@ partial struct FlatArray<T>
 {
     private static class InnerExceptionFactory
     {
-        internal static ArgumentOutOfRangeException StartSegmentIsNotWithinArray(string paramName, int segmentLength, int arrayLength)
+        internal static ArgumentOutOfRangeException StartSegmentOutsideBounds(string paramName, int segmentLength, int arrayLength)
             =>
-            new(paramName, Invariant($"Start segment length must be within the array length. Start segment length was {segmentLength}. Array length was {arrayLength}."));
+            new(paramName, Invariant($"Start segment must be within the array bounds. Start segment length was {segmentLength}. Array length was {arrayLength}."));
 
-        internal static ArgumentOutOfRangeException SegmentIsNotWithinArray(int segmentStart, int segmentLength, int arrayLength)
+        internal static ArgumentOutOfRangeException SegmentOutsideBounds(int segmentStart, int segmentLength, int arrayLength)
             =>
-            new(null, Invariant($"Segment must be within array. Segment start was {segmentStart}. Segment length was {segmentLength}. Array length was {arrayLength}."));
+            new(null, Invariant($"Segment must be within the array bounds. Segment start was {segmentStart}. Segment length was {segmentLength}. Array length was {arrayLength}."));
 
         internal static IndexOutOfRangeException IndexOutOfRange(int index, int length)
             =>

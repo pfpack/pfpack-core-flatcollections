@@ -22,11 +22,11 @@ partial struct FlatArray<T>
         void InnerValidateRange()
         {
             var sourceLength = source?.Length ?? default;
-            if (InnerAllocHelper.IsSegmentWithinLength(start, length, sourceLength))
+            if (InnerAllocHelper.IsSegmentWithinBounds(start, length, sourceLength))
             {
                 return;
             }
-            throw InnerExceptionFactory.SegmentIsNotWithinArray(start, length, sourceLength);
+            throw InnerExceptionFactory.SegmentOutsideBounds(start, length, sourceLength);
         }
     }
 }
