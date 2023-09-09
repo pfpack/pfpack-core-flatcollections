@@ -9,6 +9,7 @@ internal static class FlatListTestSource
         =>
         new[]
         {
+            // Inner array length equals to the list length
             new object[]
             {
                 new[]
@@ -78,6 +79,97 @@ internal static class FlatListTestSource
                 {
                     PlusFifteenIdLowerSomeStringNameRecord
                 }.InitializeFlatList(),
+                new[]
+                {
+                    ZeroIdNullNameRecord,
+                    MinusFifteenIdNullNameRecord,
+                    PlusFifteenIdSomeStringNameRecord,
+                    PlusFifteenIdLowerSomeStringNameRecord
+                },
+                1,
+                new[]
+                {
+                    ZeroIdNullNameRecord,
+                    PlusFifteenIdLowerSomeStringNameRecord,
+                    PlusFifteenIdSomeStringNameRecord,
+                    PlusFifteenIdLowerSomeStringNameRecord
+                }
+            },
+
+            // Inner array length is greater than the list length
+            new object[]
+            {
+                new[]
+                {
+                    MinusFifteenIdNullNameRecord,
+                    ZeroIdNullNameRecord,
+                    null
+                }
+                .InitializeFlatList(2),
+                new[]
+                {
+                    null,
+                    PlusFifteenIdSomeStringNameRecord
+                },
+                0,
+                new[]
+                {
+                    MinusFifteenIdNullNameRecord,
+                    ZeroIdNullNameRecord
+                }
+            },
+            new object[]
+            {
+                new[]
+                {
+                    PlusFifteenIdLowerSomeStringNameRecord,
+                    null
+                }
+                .InitializeFlatList(1),
+                new[]
+                {
+                    MinusFifteenIdNullNameRecord,
+                    PlusFifteenIdSomeStringNameRecord
+                },
+                0,
+                new[]
+                {
+                    PlusFifteenIdLowerSomeStringNameRecord,
+                    PlusFifteenIdSomeStringNameRecord
+                }
+            },
+            new object[]
+            {
+                new[]
+                {
+                    null,
+                    ZeroIdNullNameRecord,
+                    MinusFifteenIdSomeStringNameRecord,
+                    PlusFifteenIdSomeStringNameRecord
+                }.InitializeFlatList(3),
+                new[]
+                {
+                    PlusFifteenIdSomeStringNameRecord,
+                    MinusFifteenIdNullNameRecord,
+                    null,
+                    new()
+                },
+                1,
+                new[]
+                {
+                    PlusFifteenIdSomeStringNameRecord,
+                    null,
+                    ZeroIdNullNameRecord,
+                    MinusFifteenIdSomeStringNameRecord
+                }
+            },
+            new object[]
+            {
+                new[]
+                {
+                    PlusFifteenIdLowerSomeStringNameRecord,
+                    MinusFifteenIdNullNameRecord
+                }.InitializeFlatList(1),
                 new[]
                 {
                     ZeroIdNullNameRecord,
