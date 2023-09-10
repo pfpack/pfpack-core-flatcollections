@@ -127,7 +127,7 @@ partial class FlatArrayExtensionsTest
     [Fact]
     public void ToFlatArray_SourceIsEmptyReadOnlyCollection_ExpectInnerStateIsDefault()
     {
-        var sourceItems = Array.Empty<StructType>();
+        var sourceItems = new List<StructType>();
         var source = new StubReadOnlyCollection<StructType>(sourceItems);
 
         var actual = source.ToFlatArray();
@@ -137,7 +137,7 @@ partial class FlatArrayExtensionsTest
     [Fact]
     public void ToFlatArray_SourceIsNotEmptyReadOnlyCollection_ExpectInnerStateAreSourceItems()
     {
-        var sourceItems = new[]
+        var sourceItems = new List<string?>
         {
             EmptyString, SomeString, null, UpperAnotherString, AnotherString
         };

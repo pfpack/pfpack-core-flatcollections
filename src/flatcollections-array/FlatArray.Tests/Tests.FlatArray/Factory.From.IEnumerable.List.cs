@@ -6,30 +6,21 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayStaticTest
 {
     [Fact]
-    public void FromList_SourceIsNull_ExpectInnerStateIsDefault()
+    public void FromIEnumerable_List_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        List<DateOnly>? source = null;
-        var actual = FlatArray<DateOnly>.From(source);
-
-        actual.VerifyInnerState(default, default);
-    }
-
-    [Fact]
-    public void FromList_SourceIsEmpty_ExpectInnerStateIsDefault()
-    {
-        var source = new List<RefType>();
+        IEnumerable<RefType> source = new List<RefType>();
         var actual = FlatArray<RefType>.From(source);
 
         actual.VerifyInnerState(default, default);
     }
 
     [Fact]
-    public void FromList_SourceIsNotEmpty_ExpectInnerStateAreSourceItems()
+    public void FromIEnumerable_List_SourceIsNotEmpty_ExpectInnerStateAreSourceItems()
     {
-        var source = new List<RecordStruct?>
+        IEnumerable<RecordStruct?> source = new List<RecordStruct?>
         {
             SomeTextRecordStruct, null, AnotherTextRecordStruct
         };
@@ -46,14 +37,14 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void FromList_ThenModifySource_ExpectInnerStateHasNotChanged()
+    public void FromIEnumerable_List_ThenModifySource_ExpectInnerStateHasNotChanged()
     {
         var sourceList = new List<RecordType>
         {
             MinusFifteenIdSomeStringNameRecord, ZeroIdNullNameRecord, PlusFifteenIdSomeStringNameRecord
         };
 
-        var actual = FlatArray<RecordType>.From(sourceList);
+        var actual = FlatArray<RecordType>.From((IEnumerable<RecordType>)sourceList);
 
         sourceList[0] = PlusFifteenIdLowerSomeStringNameRecord;
         sourceList.RemoveAt(1);

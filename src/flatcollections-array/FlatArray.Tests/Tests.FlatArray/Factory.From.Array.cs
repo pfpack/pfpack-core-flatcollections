@@ -5,7 +5,7 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayStaticTest
 {
     [Fact]
     public void FromArray_SourceIsNull_ExpectInnerStateIsDefault()

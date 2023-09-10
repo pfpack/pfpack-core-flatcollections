@@ -25,5 +25,5 @@ internal sealed class StubReadOnlyList<T> : IReadOnlyList<T>
 
     IEnumerator IEnumerable.GetEnumerator()
         =>
-        ((IEnumerable)source).GetEnumerator();
+        GetEnumerator();
 }

@@ -7,7 +7,7 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayStaticTest
 {
     [Fact]
     public void FromIEnumerable_ICollection_SourceIsEmpty_ExpectInnerStateIsDefault()
