@@ -7,13 +7,13 @@ partial class TestHelper
 {
     internal static IList<T> InitializeFlatList<T>(this T[] items, int? length = null)
         =>
-        (IList<T>)items.InnerInitializeFlatList(length);
+        (IList<T>)items.InitializeFlatListAsEnumerable(length);
 
     internal static IReadOnlyList<T> InitializeFlatListAsReadOnly<T>(this T[] items, int? length = null)
         =>
-        (IReadOnlyList<T>)items.InnerInitializeFlatList(length);
+        (IReadOnlyList<T>)items.InitializeFlatListAsEnumerable(length);
 
-    private static IEnumerable<T> InnerInitializeFlatList<T>(this T[] items, int? length = null)
+    internal static IEnumerable<T> InitializeFlatListAsEnumerable<T>(this T[] items, int? length = null)
     {
         var source = default(FlatArray<T>).AsEnumerable();
 

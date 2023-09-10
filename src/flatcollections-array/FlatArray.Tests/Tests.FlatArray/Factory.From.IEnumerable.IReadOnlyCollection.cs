@@ -6,7 +6,7 @@ using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
-partial class FlatArrayTest
+partial class FlatArrayStaticTest
 {
     [Fact]
     public void FromIEnumerable_IReadOnlyCollection_SourceIsEmpty_ExpectInnerStateIsDefault()

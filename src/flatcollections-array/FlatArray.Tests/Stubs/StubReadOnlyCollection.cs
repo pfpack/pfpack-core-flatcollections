@@ -7,7 +7,7 @@ internal sealed class StubReadOnlyCollection<T> : IReadOnlyCollection<T>
 {
     private readonly IReadOnlyCollection<T> source;
 
-    internal StubReadOnlyCollection(T[] source)
+    internal StubReadOnlyCollection(List<T> source)
         =>
         this.source = source;
 
@@ -21,5 +21,5 @@ internal sealed class StubReadOnlyCollection<T> : IReadOnlyCollection<T>
 
     IEnumerator IEnumerable.GetEnumerator()
         =>
-        ((IEnumerable)source).GetEnumerator();
+        GetEnumerator();
 }

@@ -35,15 +35,15 @@ internal sealed class StubCollection<T> : ICollection<T>
         =>
         sourceCollection.CopyTo(array, arrayIndex);
 
-    public IEnumerator<T> GetEnumerator()
-        =>
-        sourceCollection.GetEnumerator();
-
     public bool Remove(T item)
         =>
         sourceCollection.Remove(item);
 
+    public IEnumerator<T> GetEnumerator()
+        =>
+        sourceCollection.GetEnumerator();
+
     IEnumerator IEnumerable.GetEnumerator()
         =>
-        ((IEnumerable)sourceCollection).GetEnumerator();
+        GetEnumerator();
 }
