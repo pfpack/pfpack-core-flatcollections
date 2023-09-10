@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -31,10 +29,10 @@ partial class FlatArrayTest
     public void ImplicitFromArray_SourceIsNotEmpty_ExpectInnerStateIsSourceArray(
         params string?[] source)
     {
-        var coppied = source.GetCopy();
+        var copied = source.GetCopy();
         FlatArray<string?> actual = source;
 
-        actual.VerifyInnerState(coppied, coppied.Length);
+        actual.VerifyInnerState(copied, copied.Length);
     }
 
     [Fact]
