@@ -9,6 +9,10 @@ partial struct FlatArray<T>
         =>
         new(source);
 
+    public static FlatArray<T> From(ImmutableArray<T>? source)
+        =>
+        new(source);
+
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(ImmutableArray<T> source, int start, int length)
     {
@@ -35,10 +39,6 @@ partial struct FlatArray<T>
             throw InnerExceptionFactory.SegmentOutsideBounds(start, length, sourceLength);
         }
     }
-
-    public static FlatArray<T> From(ImmutableArray<T>? source)
-        =>
-        new(source);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(ImmutableArray<T>? source, int start, int length)
