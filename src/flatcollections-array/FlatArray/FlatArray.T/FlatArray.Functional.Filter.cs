@@ -31,7 +31,7 @@ partial struct FlatArray<T>
 
             resultItems[resultLength++] = items![counter];
         }
-        while (++counter < resultItems.Length);
+        while (++counter < length);
 
         if (resultLength == default)
         {
@@ -70,7 +70,7 @@ partial struct FlatArray<T>
 
             resultItems[resultLength++] = items![counter];
         }
-        while (++counter < resultItems.Length);
+        while (++counter < length);
 
         if (resultLength == default)
         {

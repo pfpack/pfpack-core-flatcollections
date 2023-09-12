@@ -64,14 +64,28 @@ partial class FlatArrayTest
             { UpperAnotherString, true },
             { WhiteSpaceString, true },
             { AnotherString, false },
-            { TabString, true }
+            { TabString, true },
+            { LowerAnotherString, true },
+            { LowerSomeString, false },
+            { MixedWhiteSpacesString, true }
         };
 
-        var sourceItems = new[] { EmptyString, SomeString, UpperAnotherString, WhiteSpaceString, AnotherString };
+        var sourceItems = new[]
+        {
+            EmptyString,
+            SomeString,
+            UpperAnotherString,
+            WhiteSpaceString,
+            AnotherString,
+            TabString,
+            LowerAnotherString,
+            LowerSomeString
+        };
+
         var source = mapper.Keys.ToArray().InitializeFlatArray(sourceItems.Length);
 
         var actual = source.Filter(Predicate);
-        var expectedItems = new[] { EmptyString, UpperAnotherString, WhiteSpaceString };
+        var expectedItems = new[] { EmptyString, UpperAnotherString, WhiteSpaceString, TabString, LowerAnotherString };
 
         actual.VerifyTruncatedState(expectedItems);
 

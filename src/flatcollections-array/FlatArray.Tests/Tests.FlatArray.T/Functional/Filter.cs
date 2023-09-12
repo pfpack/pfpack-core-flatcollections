@@ -63,13 +63,16 @@ partial class FlatArrayTest
             { Zero, true },
             { MinusOne, true },
             { One, false },
+            { int.MinValue, true },
+            { 75, true },
+            { int.MaxValue, false },
             { PlusFifteen, true }
         };
 
-        var source = mapper.Keys.ToArray().InitializeFlatArray(4);
+        var source = mapper.Keys.ToArray().InitializeFlatArray(mapper.Count);
 
         var actual = source.Filter(Predicate);
-        var expectedItems = new[] { Zero, MinusOne };
+        var expectedItems = new[] { Zero, MinusOne, int.MinValue, 75, PlusFifteen };
 
         actual.VerifyTruncatedState(expectedItems);
 
