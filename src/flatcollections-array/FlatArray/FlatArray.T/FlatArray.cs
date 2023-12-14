@@ -34,7 +34,9 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
     {
         if (length == default)
         {
+#pragma warning disable IDE0301 // Simplify collection initialization
             return ReadOnlySpan<T>.Empty;
+#pragma warning restore IDE0301 // Simplify collection initialization
         }
 
         if (length == items!.Length)
