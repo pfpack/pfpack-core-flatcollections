@@ -1,18 +1,19 @@
 using System.Collections.Generic;
+using PrimeFuncPack.UnitTest;
+using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
 internal static class FlatListTestSource
 {
-    public static IEnumerable<object[]> GetRecordTypeCopyToInRangeTestData()
+    public static TheoryData<IList<RecordType?>, RecordType?[], int, RecordType?[]> RecordTypeCopyToInRangeTestData
         =>
-        new[]
+        new()
         {
             // Inner array length equals to the list length
-            new object[]
             {
-                new[]
+                new RecordType?[]
                 {
                     MinusFifteenIdNullNameRecord,
                     ZeroIdNullNameRecord
@@ -30,9 +31,8 @@ internal static class FlatListTestSource
                     ZeroIdNullNameRecord
                 }
             },
-            new object[]
             {
-                new[]
+                new RecordType?[]
                 {
                     PlusFifteenIdLowerSomeStringNameRecord
                 }
@@ -49,7 +49,6 @@ internal static class FlatListTestSource
                     PlusFifteenIdSomeStringNameRecord
                 }
             },
-            new object[]
             {
                 new[]
                 {
@@ -73,9 +72,8 @@ internal static class FlatListTestSource
                     MinusFifteenIdSomeStringNameRecord
                 }
             },
-            new object[]
             {
-                new[]
+                new RecordType?[]
                 {
                     PlusFifteenIdLowerSomeStringNameRecord
                 }.InitializeFlatList(),
@@ -97,7 +95,6 @@ internal static class FlatListTestSource
             },
 
             // Inner array length is greater than the list length
-            new object[]
             {
                 new[]
                 {
@@ -118,7 +115,6 @@ internal static class FlatListTestSource
                     ZeroIdNullNameRecord
                 }
             },
-            new object[]
             {
                 new[]
                 {
@@ -138,7 +134,6 @@ internal static class FlatListTestSource
                     PlusFifteenIdSomeStringNameRecord
                 }
             },
-            new object[]
             {
                 new[]
                 {
@@ -163,9 +158,8 @@ internal static class FlatListTestSource
                     MinusFifteenIdSomeStringNameRecord
                 }
             },
-            new object[]
             {
-                new[]
+                new RecordType?[]
                 {
                     PlusFifteenIdLowerSomeStringNameRecord,
                     MinusFifteenIdNullNameRecord

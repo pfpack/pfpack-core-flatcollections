@@ -1,190 +1,148 @@
 using System;
 using System.Collections.Generic;
+using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
 internal static class EqualityComparerTestSource
 {
-    public static IEnumerable<object[]> GetInt32ItemHashCodeTestData()
+    public static TheoryData<FlatArray<int>.EqualityComparer, FlatArray<int>, int> Int32ItemHashCodeTestData
     {
-        yield return new object[]
+        get
         {
-            FlatArray<int>.EqualityComparer.Default,
-            default(FlatArray<int>),
-            new HashCode().ToHashCode()
-        };
+            var data = new TheoryData<FlatArray<int>.EqualityComparer, FlatArray<int>, int>
+            {
+                {
+                    FlatArray<int>.EqualityComparer.Default,
+                    default,
+                    new HashCode().ToHashCode()
+                },
+                {
+                    FlatArray<int>.EqualityComparer.Create(),
+                    default,
+                    new HashCode().ToHashCode()
+                },
+                {
+                    FlatArray<int>.EqualityComparer.Create(null),
+                    default,
+                    new HashCode().ToHashCode()
+                }
+            };
 
-        yield return new object[]
-        {
-            FlatArray<int>.EqualityComparer.Create(),
-            default(FlatArray<int>),
-            new HashCode().ToHashCode()
-        };
+            var array = new[] { One, MinusFifteen, Zero, PlusFifteen }.InitializeFlatArray(3);
 
-        yield return new object[]
-        {
-            FlatArray<int>.EqualityComparer.Create(null),
-            default(FlatArray<int>),
-            new HashCode().ToHashCode()
-        };
+            var defaultItemComparer = EqualityComparer<int>.Default;
+            var builder = new HashCode();
 
-        var array = new[] { One, MinusFifteen, Zero, PlusFifteen }.InitializeFlatArray(3);
+            builder.Add(defaultItemComparer.GetHashCode(One));
+            builder.Add(defaultItemComparer.GetHashCode(MinusFifteen));
+            builder.Add(defaultItemComparer.GetHashCode(Zero));
 
-        var defaultItemComparer = EqualityComparer<int>.Default;
-        var builder = new HashCode();
+            var expectedHashCode = builder.ToHashCode();
 
-        builder.Add(defaultItemComparer.GetHashCode(One));
-        builder.Add(defaultItemComparer.GetHashCode(MinusFifteen));
-        builder.Add(defaultItemComparer.GetHashCode(Zero));
+            data.Add(FlatArray<int>.EqualityComparer.Default, array, expectedHashCode);
+            data.Add(FlatArray<int>.EqualityComparer.Create(), array, expectedHashCode);
+            data.Add(FlatArray<int>.EqualityComparer.Create(null), array, expectedHashCode);
 
-        var expectedHashCode = builder.ToHashCode();
-
-        yield return new object[]
-        {
-            FlatArray<int>.EqualityComparer.Default,
-            array,
-            expectedHashCode
-        };
-
-        yield return new object[]
-        {
-            FlatArray<int>.EqualityComparer.Create(),
-            array,
-            expectedHashCode
-        };
-
-        yield return new object[]
-        {
-            FlatArray<int>.EqualityComparer.Create(null),
-            array,
-            expectedHashCode
-        };
+            return data;
+        }
     }
 
-    public static IEnumerable<object[]> GetStringItemHashCodeTestData()
+    public static TheoryData<FlatArray<string?>.EqualityComparer, FlatArray<string?>, int> StringItemHashCodeTestData
     {
-        yield return new object[]
+        get
         {
-            FlatArray<string?>.EqualityComparer.Default,
-            default(FlatArray<string?>),
-            new HashCode().ToHashCode()
-        };
+            var data = new TheoryData<FlatArray<string?>.EqualityComparer, FlatArray<string?>, int>
+            {
+                {
+                    FlatArray<string?>.EqualityComparer.Default,
+                    default,
+                    new HashCode().ToHashCode()
+                },
+                {
+                    FlatArray<string?>.EqualityComparer.Create(),
+                    default,
+                    new HashCode().ToHashCode()
+                },
+                {
+                    FlatArray<string?>.EqualityComparer.Create(null),
+                    default,
+                    new HashCode().ToHashCode()
+                },
+                {
+                    FlatArray<string?>.EqualityComparer.Create(StringComparer.InvariantCultureIgnoreCase),
+                    default,
+                    new HashCode().ToHashCode()
+                }
+            };
 
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Create(),
-            default(FlatArray<string?>),
-            new HashCode().ToHashCode()
-        };
+            var firstArray = new[] { SomeString, null, EmptyString, WhiteSpaceString, TabString, AnotherString }.InitializeFlatArray(4);
 
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Create(null),
-            default(FlatArray<string?>),
-            new HashCode().ToHashCode()
-        };
+            var defaultItemComparer = EqualityComparer<string?>.Default;
+            var firstBuilder = new HashCode();
 
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Create(StringComparer.InvariantCultureIgnoreCase),
-            default(FlatArray<string?>),
-            new HashCode().ToHashCode()
-        };
+            firstBuilder.Add(defaultItemComparer.GetHashCode(SomeString));
+            firstBuilder.Add(0);
+            firstBuilder.Add(defaultItemComparer.GetHashCode(EmptyString));
+            firstBuilder.Add(defaultItemComparer.GetHashCode(WhiteSpaceString));
 
-        var firstArray = new[] { SomeString, null, EmptyString, WhiteSpaceString, TabString, AnotherString }.InitializeFlatArray(4);
+            var firstExpectedHashCode = firstBuilder.ToHashCode();
 
-        var defaultItemComparer = EqualityComparer<string?>.Default;
-        var firstBuilder = new HashCode();
+            data.Add(FlatArray<string?>.EqualityComparer.Default, firstArray, firstExpectedHashCode);
+            data.Add(FlatArray<string?>.EqualityComparer.Create(), firstArray, firstExpectedHashCode);
+            data.Add(FlatArray<string?>.EqualityComparer.Create(null), firstArray, firstExpectedHashCode);
 
-        firstBuilder.Add(defaultItemComparer.GetHashCode(SomeString));
-        firstBuilder.Add(0);
-        firstBuilder.Add(defaultItemComparer.GetHashCode(EmptyString));
-        firstBuilder.Add(defaultItemComparer.GetHashCode(WhiteSpaceString));
+            var secondArray = new[] { AnotherString, SomeString, null, LowerAnotherString }.InitializeFlatArray(3);
 
-        var firstExpectedHashCode = firstBuilder.ToHashCode();
+            var secondItemComparer = StringComparer.InvariantCultureIgnoreCase;
+            var secondBuilder = new HashCode();
 
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Default,
-            firstArray,
-            firstExpectedHashCode
-        };
+            secondBuilder.Add(secondItemComparer.GetHashCode(AnotherString));
+            secondBuilder.Add(secondItemComparer.GetHashCode(SomeString));
+            secondBuilder.Add(0);
 
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Create(),
-            firstArray,
-            firstExpectedHashCode
-        };
+            var secondExpectedHashCode = secondBuilder.ToHashCode();
+            data.Add(FlatArray<string?>.EqualityComparer.Create(secondItemComparer), secondArray, secondExpectedHashCode);
 
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Create(null),
-            firstArray,
-            firstExpectedHashCode
-        };
-
-        var secondArray = new[] { AnotherString, SomeString, null, LowerAnotherString }.InitializeFlatArray(3);
-
-        var secondItemComparer = StringComparer.InvariantCultureIgnoreCase;
-        var secondBuilder = new HashCode();
-
-        secondBuilder.Add(secondItemComparer.GetHashCode(AnotherString));
-        secondBuilder.Add(secondItemComparer.GetHashCode(SomeString));
-        secondBuilder.Add(0);
-
-        var secondExpectedHashCode = secondBuilder.ToHashCode();
-
-        yield return new object[]
-        {
-            FlatArray<string?>.EqualityComparer.Create(secondItemComparer),
-            secondArray,
-            secondExpectedHashCode
-        };
+            return data;
+        }
     }
 
-    public static IEnumerable<object[]> GetInt32DefaultEqualityComparerTestData()
+    public static TheoryData<FlatArray<int>.EqualityComparer> Int32DefaultEqualityComparerTestData
         =>
-        new[]
+        new()
         {
-            new object[]
             {
                 FlatArray<int>.EqualityComparer.Default
             },
-            new object[]
             {
                 FlatArray<int>.EqualityComparer.Create()
             },
-            new object[]
             {
                 FlatArray<int>.EqualityComparer.Create(null)
             }
         };
 
-    public static IEnumerable<object[]> GetStringDefaultEqualityComparerTestData()
+    public static TheoryData<FlatArray<string?>.EqualityComparer> StringDefaultEqualityComparerTestData
         =>
-        new[]
+        new()
         {
-            new object[]
             {
                 FlatArray<string?>.EqualityComparer.Default
             },
-            new object[]
             {
                 FlatArray<string?>.EqualityComparer.Create()
             },
-            new object[]
             {
                 FlatArray<string?>.EqualityComparer.Create(null)
             }
         };
 
-    public static IEnumerable<object[]> GetIgnoreCaseStringEqualityComparerTestData()
+    public static TheoryData<FlatArray<string?>.EqualityComparer> IgnoreCaseStringEqualityComparerTestData
         =>
-        new[]
+        new()
         {
-            new object[]
             {
                 FlatArray<string?>.EqualityComparer.Create(StringComparer.InvariantCultureIgnoreCase)
             }

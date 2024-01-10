@@ -1,32 +1,27 @@
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Xunit;
 
 namespace PrimeFuncPack.Core.Tests;
 
 internal static class JsonSerializerTestSource
 {
-    public static IEnumerable<object?[]> GetJsonSerializerOptionsTestData()
+    public static TheoryData<JsonSerializerOptions?> JsonSerializerOptionsTestData
         =>
-        new[]
+        new()
         {
-            new object?[]
             {
                 null
             },
-            new object?[]
             {
                 new JsonSerializerOptions()
             },
-            new object?[]
             {
                 new JsonSerializerOptions(JsonSerializerDefaults.General)
             },
-            new object?[]
             {
                 new JsonSerializerOptions(JsonSerializerDefaults.Web)
             },
-            new object?[]
             {
                 new JsonSerializerOptions
                 {
