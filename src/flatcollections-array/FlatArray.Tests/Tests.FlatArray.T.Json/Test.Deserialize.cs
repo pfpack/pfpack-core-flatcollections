@@ -9,7 +9,7 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayJsonSerializerTest
 {
     [Theory]
-    [MemberData(nameof(GetJsonSerializerOptionsTestData), MemberType = typeof(JsonSerializerTestSource))]
+    [MemberData(nameof(JsonSerializerOptionsTestData), MemberType = typeof(JsonSerializerTestSource))]
     public void Deserialize_SourceIsNullJsonValue_ExpectDefaultState(
         JsonSerializerOptions? options)
     {
@@ -20,7 +20,7 @@ partial class FlatArrayJsonSerializerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetJsonSerializerOptionsTestData), MemberType = typeof(JsonSerializerTestSource))]
+    [MemberData(nameof(JsonSerializerOptionsTestData), MemberType = typeof(JsonSerializerTestSource))]
     public void Deserialize_SourceArrayIsEmpty_ExpectDefaultState(
         JsonSerializerOptions? options)
     {
@@ -31,7 +31,7 @@ partial class FlatArrayJsonSerializerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetJsonSerializerOptionsTestData), MemberType = typeof(JsonSerializerTestSource))]
+    [MemberData(nameof(JsonSerializerOptionsTestData), MemberType = typeof(JsonSerializerTestSource))]
     public void Deserialize_SourceArrayIsNotEmpty_OptionsCases_ExpectInnerItemsAreEqualToSourceArrayItems(
         JsonSerializerOptions? options)
     {

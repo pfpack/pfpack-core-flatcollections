@@ -83,7 +83,7 @@ partial class FlatArrayFlatListTest
     }
 
     [Theory]
-    [MemberData(nameof(GetRecordTypeCopyToInRangeTestData), MemberType = typeof(FlatListTestSource))]
+    [MemberData(nameof(RecordTypeCopyToInRangeTestData), MemberType = typeof(FlatListTestSource))]
     public void CopyTo_SourceIsNotEmptyAndArrayIndexIsInRange_ExpectCorrectArray(
         IList<RecordType?> source, RecordType?[] array, int arrayIndex, RecordType?[] expected)
     {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -23,11 +22,11 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<RefType>.Builder();
         _ = source.MoveToFlatArray();
 
-        source.VerifyInnerState(Array.Empty<RefType>(), default);
+        source.VerifyInnerState([], default);
     }
 
     [Theory]
-    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState_CaseSource))]
+    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderStateSource))]
     public void MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState(
         int length,
         int?[] sourceItems)
@@ -38,7 +37,7 @@ partial class FlatArrayBuilderTest
     }
 
     [Theory]
-    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState_CaseSource))]
+    [MemberData(nameof(MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderStateSource))]
     public void MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState(
         int length,
         int?[] sourceItems,
@@ -55,138 +54,114 @@ partial class FlatArrayBuilderTest
         var source = new[] { MinusFifteen, Zero, PlusFifteen, int.MaxValue, One }.InitializeFlatArrayBuilder();
         _ = source.MoveToFlatArray();
 
-        source.VerifyInnerState(Array.Empty<int>(), default);
+        source.VerifyInnerState([], default);
     }
 
-    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderState_CaseSource()
-    {
-        yield return new object[]
+    public static TheoryData<int, int?[]> MoveToFlatArray_SourceIsNotDefault_ExpectInnerStateTheSameAsBuilderStateSource
+        =>
+        new()
         {
-            1,
-            new int?[] { 0 }
-        };
-        yield return new object[]
-        {
-            1,
-            new int?[] { 0, null }
-        };
-        yield return new object[]
-        {
-            1,
-            new int?[] { 0, null, null }
-        };
-        yield return new object[]
-        {
-            1,
-            new int?[] { 0, null, null, null }
-        };
-
-        yield return new object[]
-        {
-            2,
-            new int?[] { 0, 1 }
-        };
-        yield return new object[]
-        {
-            2,
-            new int?[] { 0, 1, null }
-        };
-        yield return new object[]
-        {
-            2,
-            new int?[] { 0, 1, null, null }
-        };
-
-        yield return new object[]
-        {
-            3,
-            new int?[] { 0, 1, 2 }
-        };
-        yield return new object[]
-        {
-            3,
-            new int?[] { 0, 1, 2, null }
-        };
-        yield return new object[]
-        {
-            3,
-            new int?[] { 0, 1, 2, null, null }
-        };
-
-        yield return new object[]
-        {
-            4,
-            new int?[] { 0, 1, 2, 3 }
-        };
-        yield return new object[]
-        {
-            4,
-            new int?[] { 0, 1, 2, 3, null }
-        };
-        yield return new object[]
-        {
-            4,
-            new int?[] { 0, 1, 2, 3, null, null }
-        };
-        yield return new object[]
-        {
-            4,
-            new int?[] { 0, 1, 2, 3, null, null, null }
-        };
-    }
-
-    public static IEnumerable<object[]> MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderState_CaseSource()
-    {
-        yield return new object[]
-        {
-            1,
-            new int?[] { 0, null, null, null, null },
-            new int?[] { 0 }
-        };
-        yield return new object[]
-        {
-            1,
-            new int?[] { 0, null, null, null, null, null },
-            new int?[] { 0 }
+            {
+                1,
+                [ 0 ]
+            },
+            {
+                1,
+                [ 0, null ]
+            },
+            {
+                1,
+                [ 0, null, null ]
+            },
+            {
+                1,
+                [ 0, null, null, null ]
+            },
+            {
+                2,
+                [ 0, 1 ]
+            },
+            {
+                2,
+                [ 0, 1, null ]
+            },
+            {
+                2,
+                [ 0, 1, null, null ]
+            },
+            {
+                3,
+                [ 0, 1, 2 ]
+            },
+            {
+                3,
+                [ 0, 1, 2, null ]
+            },
+            {
+                3,
+                [ 0, 1, 2, null, null ]
+            },
+            {
+                4,
+                [ 0, 1, 2, 3 ]
+            },
+            {
+                4,
+                [ 0, 1, 2, 3, null ]
+            },
+            {
+                4,
+                [ 0, 1, 2, 3, null, null ]
+            },
+            {
+                4,
+                [ 0, 1, 2, 3, null, null, null ]
+            }
         };
 
-        yield return new object[]
+    public static TheoryData<int, int?[], int?[]> MoveToFlatArray_SourceIsNotDefault_WithHugeCapacity_ExpectInnerStateCorrespondToBuilderStateSource
+        =>
+        new()
         {
-            2,
-            new int?[] { 0, 1, null, null, null },
-            new int?[] { 0, 1 }
+            {
+                1,
+                [ 0, null, null, null, null ],
+                [ 0 ]
+            },
+            {
+                1,
+                [ 0, null, null, null, null, null ],
+                [ 0 ]
+            },
+            {
+                2,
+                [ 0, 1, null, null, null ],
+                [ 0, 1 ]
+            },
+            {
+                2,
+                [ 0, 1, null, null, null, null ],
+                [ 0, 1 ]
+            },
+            {
+                3,
+                [ 0, 1, 2, null, null, null ],
+                [ 0, 1, 2 ]
+            },
+            {
+                3,
+                [ 0, 1, 2, null, null, null, null ],
+                [ 0, 1, 2 ]
+            },
+            {
+                4,
+                [ 0, 1, 2, 3, null, null, null, null ],
+                [ 0, 1, 2, 3 ]
+            },
+            {
+                4,
+                [ 0, 1, 2, 3, null, null, null, null, null ],
+                [ 0, 1, 2, 3 ]
+            }
         };
-        yield return new object[]
-        {
-            2,
-            new int?[] { 0, 1, null, null, null, null },
-            new int?[] { 0, 1 }
-        };
-
-        yield return new object[]
-        {
-            3,
-            new int?[] { 0, 1, 2, null, null, null },
-            new int?[] { 0, 1, 2 }
-        };
-        yield return new object[]
-        {
-            3,
-            new int?[] { 0, 1, 2, null, null, null, null },
-            new int?[] { 0, 1, 2 }
-        };
-
-        yield return new object[]
-        {
-            4,
-            new int?[] { 0, 1, 2, 3, null, null, null, null },
-            new int?[] { 0, 1, 2, 3 }
-        };
-        yield return new object[]
-        {
-            4,
-            new int?[] { 0, 1, 2, 3, null, null, null, null, null },
-            new int?[] { 0, 1, 2, 3 }
-        };
-    }
 }
