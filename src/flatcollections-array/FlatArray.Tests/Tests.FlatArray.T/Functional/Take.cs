@@ -63,6 +63,6 @@ partial class FlatArrayTest
                 new string?[] { AnotherString, MixedWhiteSpacesString, EmptyString, null, SomeString }.InitializeFlatArray(4),
                 2,
                 [ AnotherString, MixedWhiteSpacesString ]
-            },
+            }
         };
 }
