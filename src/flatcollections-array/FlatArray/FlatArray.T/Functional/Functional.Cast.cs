@@ -20,6 +20,7 @@ partial struct FlatArray<T>
         var counter = 0;
         do
         {
+            // Unsafe item cast: InvalidCastException is expected
             resultItems[counter] = (TResult)(object)items![counter]!;
         }
         while (++counter < resultItems.Length);
