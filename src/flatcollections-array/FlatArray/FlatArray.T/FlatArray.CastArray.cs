@@ -3,7 +3,7 @@
 partial struct FlatArray<T>
 {
     // TODO: Add the tests and make public
-    internal FlatArray<TOther> CastArray<TOther>() where TOther : class?
+    internal FlatArray<TOther> CastArray<TOther>()
     {
         // Unsafe array cast: InvalidCastException is expected
 

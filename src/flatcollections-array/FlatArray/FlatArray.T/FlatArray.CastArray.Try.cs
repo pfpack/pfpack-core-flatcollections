@@ -3,7 +3,7 @@
 partial struct FlatArray<T>
 {
     // TODO: Add the tests and make public
-    internal FlatArray<TOther>? TryCastArray<TOther>() where TOther : class?
+    internal FlatArray<TOther>? TryCastArray<TOther>()
     {
         // Safe array cast: 'as' cast
 
