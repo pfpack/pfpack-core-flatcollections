@@ -2,8 +2,7 @@
 
 partial struct FlatArray<T>
 {
-    // TODO: Add the tests and make public
-    internal FlatArray<TResult>? TryCastArray<TResult>()
+    public FlatArray<TResult>? TryCastArray<TResult>()
     {
         // Safe array cast: 'as' cast
 
