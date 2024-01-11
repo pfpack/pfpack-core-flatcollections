@@ -31,7 +31,7 @@ partial class TestHelper
         var actualItems = actual.GetFieldValue<T[]?>("items");
         if (actualItems is null)
         {
-            Assert.Equal(expectedItems, actualItems);
+            Assert.Null(expectedItems);
             return;
         }
 
