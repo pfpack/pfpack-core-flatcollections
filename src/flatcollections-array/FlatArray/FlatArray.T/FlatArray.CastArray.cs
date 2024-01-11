@@ -3,14 +3,14 @@
 partial struct FlatArray<T>
 {
     // TODO: Add the tests and make public
-    internal FlatArray<TOther> CastArray<TOther>()
+    internal FlatArray<TResult> CastArray<TResult>()
     {
         // Unsafe array cast: InvalidCastException is expected
 
-        var otherItems = (TOther[])(object)InnerItems();
+        var resultItems = (TResult[])(object)InnerItems();
 
-        var otherItemsNormalized = items is null ? null : otherItems;
+        var resultItemsNormalized = items is null ? null : resultItems;
 
-        return new(length, otherItemsNormalized, default);
+        return new(length, resultItemsNormalized, default);
     }
 }
