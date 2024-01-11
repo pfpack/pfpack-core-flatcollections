@@ -34,19 +34,4 @@ partial struct FlatArray<T>
         this.length = length;
         this.items = items;
     }
-
-    // Initializes an instance in the completely raw mode
-    //
-    // The caller MUST ensure the parameter values accord with the FlatArray invariant
-    //
-    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-    //private FlatArray(int length, T[]? items, int _)
-    //{
-    //    Debug.Assert(
-    //        length == default && items is null ||
-    //        items is not null && length > 0 && length <= items.Length);
-
-    //    this.length = length;
-    //    this.items = items;
-    //}
 }
