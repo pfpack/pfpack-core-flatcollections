@@ -12,8 +12,6 @@ partial struct FlatArray<T>
             return null;
         }
 
-        var resultItemsNormalized = items is null ? null : resultItems;
-
-        return new(length, resultItemsNormalized, default);
+        return new(length, items is null ? null : resultItems, default);
     }
 }

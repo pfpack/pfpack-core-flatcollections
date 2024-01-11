@@ -29,7 +29,7 @@ partial class TestHelper
         Assert.StrictEqual(expectedItems?.Length ?? default, actualLength);
 
         var actualItems = actual.GetFieldValue<T[]?>("items");
-        if (actualItems is null || actualItems.Length == actualLength)
+        if (actualItems is null)
         {
             Assert.Equal(expectedItems, actualItems);
             return;
