@@ -5,7 +5,7 @@ partial struct FlatArray<T>
     // TODO: Add the tests and make public
     internal FlatArray<TOther>? TryCastArray<TOther>() where TOther : class?
     {
-        // Safe 'as' cast
+        // Safe array cast: 'as' cast
 
         if (InnerItems() is not TOther[] otherItems)
         {

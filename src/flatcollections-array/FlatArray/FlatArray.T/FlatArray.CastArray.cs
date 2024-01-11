@@ -5,7 +5,7 @@ partial struct FlatArray<T>
     // TODO: Add the tests and make public
     internal FlatArray<TOther> CastArray<TOther>() where TOther : class?
     {
-        // Unsafe cast: System.InvalidCastException is expected
+        // Unsafe array cast: InvalidCastException is expected
 
         var otherItems = (TOther[])(object)InnerItems();
 
