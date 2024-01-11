@@ -2,8 +2,8 @@
 
 partial struct FlatArray<T>
 {
-    public static FlatArray<T> CastUp<TDerived>(FlatArray<TDerived> items)
+    public static FlatArray<T> CastUp<TDerived>(FlatArray<TDerived> array)
         where TDerived : class?, T
         =>
-        new(items.length, items.items, default);
+        array.length == default ? default : new(array.length, array.items!);
 }
