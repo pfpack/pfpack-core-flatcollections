@@ -3,8 +3,10 @@
 partial struct FlatArray<T>
 {
     // TODO: Add the tests and make public
-    internal FlatArray<TOther>? TryCast<TOther>() where TOther : class? // 'As' cast
+    internal FlatArray<TOther>? TryCastArray<TOther>() where TOther : class?
     {
+        // Safe 'as' cast
+
         if (InnerItems() is not TOther[] otherItems)
         {
             return null;

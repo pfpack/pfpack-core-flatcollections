@@ -3,8 +3,10 @@
 partial struct FlatArray<T>
 {
     // TODO: Add the tests and make public
-    internal FlatArray<TOther> Cast<TOther>() where TOther : class?
+    internal FlatArray<TOther> CastArray<TOther>() where TOther : class?
     {
+        // Unsafe cast: System.InvalidCastException is expected
+
         var otherItems = (TOther[])(object)InnerItems();
 
         var otherItemsNormalized = items is null ? null : otherItems;
