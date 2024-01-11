@@ -111,75 +111,60 @@ partial class FlatArrayTest
             mapper[sourceValue];
     }
 
-    public static IEnumerable<object[]> FlatMapWithIndex_SourceIsNotDefaultAndAllMapResultAreDefault_ExpectDefault_CaseSource()
-    {
-        yield return new object[]
+    public static TheoryData<int[]> FlatMapWithIndex_SourceIsNotDefaultAndAllMapResultAreDefault_ExpectDefault_CaseSource
+        =>
+        new()
         {
-            new[] { 0  }
+            {
+                [ 0 ]
+            },
+            {
+                [ 0, 1 ]
+            },
+            {
+                [ 0, 1, 2 ]
+            },
+            {
+                [ 0, 1, 2, 3 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+            },
+            {
+                [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+            }
         };
-        yield return new object[]
-        {
-            new[] { 0, 1  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15  }
-        };
-        yield return new object[]
-        {
-            new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16  }
-        };
-    }
 }

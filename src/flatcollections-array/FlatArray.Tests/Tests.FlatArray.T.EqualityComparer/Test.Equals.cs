@@ -8,8 +8,8 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayEqualityComparerTest
 {
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
-    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(StringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(IgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftIsDefaultAndRightIsDefault_ExpectTrue(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -21,7 +21,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(Int32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftIsDefaultAndRightIsNotDefault_ExpectFalse(
         FlatArray<int>.EqualityComparer source)
     {
@@ -33,8 +33,8 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
-    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(StringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(IgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftIsNotDefaultAndRightIsDefault_ExpectFalse(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -46,7 +46,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(Int32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftLengthIsNotEqualToRightLength_ExpectFalse(
         FlatArray<int>.EqualityComparer source)
     {
@@ -60,7 +60,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(StringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_ComparerIsDefault_LeftItemsAreEqualToRightItems_ExpectTrue(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -72,7 +72,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetIgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(IgnoreCaseStringEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_ComparerIsIgnoreCaseComparer_LeftItemsAreEqualWithoutCaseToRightItems_ExpectTrue(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -84,7 +84,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetStringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(StringDefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void Equals_LeftItemsAreNotEqualToRightItems_ExpectFalse(
         FlatArray<string?>.EqualityComparer source)
     {
@@ -96,7 +96,7 @@ partial class FlatArrayEqualityComparerTest
     }
 
     [Theory]
-    [MemberData(nameof(GetInt32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
+    [MemberData(nameof(Int32DefaultEqualityComparerTestData), MemberType = typeof(EqualityComparerTestSource))]
     public void DefaultItemComparer_Equals_LeftItemsOrderAreNotSameAsRightItemsOrder_ExpectFalse(
         FlatArray<int>.EqualityComparer source)
     {
