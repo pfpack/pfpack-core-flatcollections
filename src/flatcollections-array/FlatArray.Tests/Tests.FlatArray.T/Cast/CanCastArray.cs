@@ -50,14 +50,14 @@ partial class FlatArrayTest
     };
 
     [Theory]
-    [MemberData(nameof(CanCastArray_ValueType_TypeIncompatible_ExpectTrue_CaseSource))]
+    [MemberData(nameof(CanCastArray_ValueType_TypeIncompatible_ExpectFalse_CaseSource))]
     public void CanCastArray_ValueType_TypeIncompatible_ExpectFalse(FlatArray<byte> source)
     {
         var actual = source.CanCastArray<ushort>();
         Assert.False(actual);
     }
 
-    public static TheoryData<FlatArray<byte>> CanCastArray_ValueType_TypeIncompatible_ExpectTrue_CaseSource => new()
+    public static TheoryData<FlatArray<byte>> CanCastArray_ValueType_TypeIncompatible_ExpectFalse_CaseSource => new()
     {
         {
             default
@@ -121,14 +121,14 @@ partial class FlatArrayTest
     };
 
     [Theory]
-    [MemberData(nameof(CanCastArray_RefType_TypeIncompatible_ExpectTrue_CaseSource))]
+    [MemberData(nameof(CanCastArray_RefType_TypeIncompatible_ExpectFalse_CaseSource))]
     public void CanCastArray_RefType_TypeIncompatible_ExpectFalse(FlatArray<object> source)
     {
         var actual = source.CanCastArray<string>();
         Assert.False(actual);
     }
 
-    public static TheoryData<FlatArray<object>> CanCastArray_RefType_TypeIncompatible_ExpectTrue_CaseSource => new()
+    public static TheoryData<FlatArray<object>> CanCastArray_RefType_TypeIncompatible_ExpectFalse_CaseSource => new()
     {
         {
             default
