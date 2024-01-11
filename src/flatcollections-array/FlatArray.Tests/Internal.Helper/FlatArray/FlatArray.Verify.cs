@@ -23,15 +23,15 @@ partial class TestHelper
         Assert.Same(expectedItems, actualItems);
     }
 
-    internal static void VerifyTruncatedState<T>(this FlatArray<T> actual, params T[] expectedItems)
+    internal static void VerifyTruncatedState<T>(this FlatArray<T> actual, params T[]? expectedItems)
     {
         var actualLength = actual.GetStructFieldValue<int>("length");
-        Assert.StrictEqual(expectedItems.Length, actualLength);
+        Assert.StrictEqual(expectedItems?.Length ?? default, actualLength);
 
         var actualItems = actual.GetFieldValue<T[]?>("items");
-        if (actualItems is null || actualItems.Length == actualLength)
+        if (actualItems is null)
         {
-            Assert.Equal(expectedItems, actualItems);
+            Assert.Null(expectedItems);
             return;
         }
 
