@@ -18,13 +18,13 @@ partial class FlatArrayTest
     public static TheoryData<FlatArray<byte>> CanCastArray_ValueType_TypeTheSame_ExpectTrue_CaseSource => new()
     {
         {
-            default
+            Array.Empty<byte>().InitializeFlatArray()
         },
         {
-            new FlatArray<byte>(1)
+            new byte[] { 1 }.InitializeFlatArray()
         },
         {
-            new FlatArray<byte>(1, 2)
+            new byte[] { 1, 2 }.InitializeFlatArray()
         }
     };
 
@@ -39,13 +39,13 @@ partial class FlatArrayTest
     public static TheoryData<FlatArray<byte>> CanCastArray_ValueType_TypeCompatible_ExpectTrue_CaseSource => new()
     {
         {
-            default
+            Array.Empty<byte>().InitializeFlatArray()
         },
         {
-            new FlatArray<byte>(1)
+            new byte[] { 1 }.InitializeFlatArray()
         },
         {
-            new FlatArray<byte>(1, 2)
+            new byte[] { 1, 2 }.InitializeFlatArray()
         }
     };
 
@@ -60,13 +60,13 @@ partial class FlatArrayTest
     public static TheoryData<FlatArray<byte>> CanCastArray_ValueType_TypeIncompatible_ExpectFalse_CaseSource => new()
     {
         {
-            default
+            Array.Empty<byte>().InitializeFlatArray()
         },
         {
-            new FlatArray<byte>(1)
+            new byte[] { 1 }.InitializeFlatArray()
         },
         {
-            new FlatArray<byte>(1, 2)
+            new byte[] { 1, 2 }.InitializeFlatArray()
         }
     };
 
@@ -83,16 +83,16 @@ partial class FlatArrayTest
     public static TheoryData<FlatArray<string>> CanCastArray_RefType_TypeTheSame_ExpectTrue_CaseSource => new()
     {
         {
-            default
+            Array.Empty<string>().InitializeFlatArray()
         },
         {
-            new FlatArray<string>("1")
+            new[] { "1" }.InitializeFlatArray()
         },
         {
-            new FlatArray<string>("1", "2")
+            new[] { "1", "2" }.InitializeFlatArray()
         },
         {
-            new FlatArray<string>(null!, "1", "2")
+            new[] { null!, "1", "2" }.InitializeFlatArray()
         }
     };
 
@@ -107,16 +107,16 @@ partial class FlatArrayTest
     public static TheoryData<FlatArray<string>> CanCastArray_RefType_TypeCompatible_ExpectTrue_CaseSource => new()
     {
         {
-            default
+            Array.Empty<string>().InitializeFlatArray()
         },
         {
-            new FlatArray<string>("1")
+            new[] { "1" }.InitializeFlatArray()
         },
         {
-            new FlatArray<string>("1", "2")
+            new[] { "1", "2" }.InitializeFlatArray()
         },
         {
-            new FlatArray<string>(null!, "1", "2")
+            new[] { null!, "1", "2" }.InitializeFlatArray()
         }
     };
 
@@ -131,16 +131,16 @@ partial class FlatArrayTest
     public static TheoryData<FlatArray<object>> CanCastArray_RefType_TypeIncompatible_ExpectFalse_CaseSource => new()
     {
         {
-            default
+            Array.Empty<object>().InitializeFlatArray()
         },
         {
-            new FlatArray<object>(new object())
+            new[] { new object() }.InitializeFlatArray()
         },
         {
-            new FlatArray<object>(new object(), new object())
+            new[] { new object(), new object() }.InitializeFlatArray()
         },
         {
-            new FlatArray<object>(null!, new object(), new object())
+            new[] { null!, new object(), new object() }.InitializeFlatArray()
         }
     };
 }
