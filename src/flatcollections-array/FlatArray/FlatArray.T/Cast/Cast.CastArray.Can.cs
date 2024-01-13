@@ -4,5 +4,5 @@ partial struct FlatArray<T>
 {
     public bool CanCastArray<TResult>()
         =>
-        InnerItems() is TResult[];
+        InnerItems is TResult[];
 }

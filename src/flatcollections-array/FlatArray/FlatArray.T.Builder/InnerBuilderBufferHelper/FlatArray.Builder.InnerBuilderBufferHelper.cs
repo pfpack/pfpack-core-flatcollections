@@ -7,7 +7,7 @@ partial struct FlatArray<T>
 {
     partial class Builder
     {
-        private static class InnerBufferHelperEx
+        private static class InnerBuilderBufferHelper
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static void EnsureBufferCapacity(

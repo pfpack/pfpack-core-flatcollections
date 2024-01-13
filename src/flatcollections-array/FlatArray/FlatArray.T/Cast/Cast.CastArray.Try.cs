@@ -5,7 +5,7 @@ partial struct FlatArray<T>
     public FlatArray<TResult>? TryCastArray<TResult>()
     {
         // Safe array cast: 'as' cast
-        if (InnerItems() is not TResult[] resultItems)
+        if (InnerItems is not TResult[] resultItems)
         {
             return null;
         }

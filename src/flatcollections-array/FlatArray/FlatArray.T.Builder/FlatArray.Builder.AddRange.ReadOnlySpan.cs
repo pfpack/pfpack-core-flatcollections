@@ -12,7 +12,7 @@ partial struct FlatArray<T>
                 return this;
             }
 
-            InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, length, items.Length);
+            InnerBuilderBufferHelper.EnsureBufferCapacity(ref this.items, length, items.Length);
             items.CopyTo(new Span<T>(this.items, length, items.Length));
             length += items.Length;
 
