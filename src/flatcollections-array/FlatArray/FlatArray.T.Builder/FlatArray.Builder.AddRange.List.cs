@@ -46,7 +46,7 @@ partial struct FlatArray<T>
             Debug.Assert(items.Count != default);
             Debug.Assert(length > 0 && length <= items.Count);
 
-            InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
+            InnerBuilderBufferHelper.EnsureBufferCapacity(ref this.items, this.length, length);
             items.CopyTo(0, this.items, this.length, length);
             this.length += length;
         }

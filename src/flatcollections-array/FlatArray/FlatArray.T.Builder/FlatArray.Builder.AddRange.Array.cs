@@ -45,7 +45,7 @@ partial struct FlatArray<T>
             Debug.Assert(items.Length != default);
             Debug.Assert(length > 0 && length <= items.Length);
 
-            InnerBufferHelperEx.EnsureBufferCapacity(ref this.items, this.length, length);
+            InnerBuilderBufferHelper.EnsureBufferCapacity(ref this.items, this.length, length);
             var sourceSpan = length == items.Length
                 ? new ReadOnlySpan<T>(items)
                 : new ReadOnlySpan<T>(items, 0, length);
