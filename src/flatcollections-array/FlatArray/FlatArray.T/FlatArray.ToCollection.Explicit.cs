@@ -57,29 +57,10 @@ partial struct FlatArray<T>
             return ImmutableArray.Create(items);
         }
 
-        return InnerToImmutableArray(length, items);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static ImmutableArray<T> InnerToImmutableArray(int length, T[] items)
-        {
-            //return ImmutableArray.Create(items, 0, length);
-
-            // Simple ImmutableArray.Create(items, start, length) assigns the array items in a cycle
-            // While Builder.AddRange uses Array.Copy like the ImmutableArray.Create(items) above
-            //
-            // Likely, Create(items, start, length) has this behavior for performance purposes
-            // since in general it is intended for copying small array segments
-            //
-            // But we need to copy the whole array within its effective length
-            // Thus, using the Builder might be more efficient in this case
-            //
-            var builder = ImmutableArray.CreateBuilder<T>(initialCapacity: length);
-            builder.AddRange(items, length);
-
-            // Call MoveToImmutable instead of ToImmutable to avoid creating redundant defensive copy
-            // We've ensured Builder.Count equals Builder.Capacity to avoid throwing the exception
-            Debug.Assert(builder.Count == builder.Capacity);
-            return builder.MoveToImmutable();
-        }
+#if NET7_0_OR_GREATER
+        return ImmutableArray.Create(new ReadOnlySpan<T>(items, 0, length));
+#else
+        return ImmutableArray.Create(items, 0, length);
+#endif
     }
 }
