@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -27,20 +25,9 @@ partial struct FlatArray<T>
             return new(items);
         }
 
-        return InnerToList(length, items);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static List<T> InnerToList(int length, T[] items)
-        {
-            // Passing FlatList (or ArraySegment) to the constructor leads to the same efficient behavior
-            // like in the case of 'new(items)' above, i.e., to calling ICollection<T>.CopyTo
-            // and then to calling efficient Array.Copy
-            //
-            // Thus, it should be the most efficient way to build a list in this case
-            //
-            var effectiveItems = new FlatList(length, items);
-            return new(effectiveItems);
-        }
+        // Pass FlatList to use effective collection copying
+        // (ArraySegment also applicable)
+        return new(new FlatList(length, items));
     }
 
     public ImmutableArray<T> ToImmutableArray()
@@ -54,7 +41,11 @@ partial struct FlatArray<T>
 
         if (length == items!.Length)
         {
+#if NET7_0_OR_GREATER
+            return ImmutableArray.Create(new ReadOnlySpan<T>(items));
+#else
             return ImmutableArray.Create(items);
+#endif
         }
 
 #if NET7_0_OR_GREATER
