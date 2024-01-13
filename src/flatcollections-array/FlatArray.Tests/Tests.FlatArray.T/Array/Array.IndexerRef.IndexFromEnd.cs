@@ -10,7 +10,6 @@ partial class FlatArrayTest
     [Theory]
     [InlineData(Zero)]
     [InlineData(One)]
-    [InlineData(2)]
     [InlineData(PlusFifteen)]
     public void IndexerRef_IndexFromEnd_SourceIsDefault_ExpectIndexOutOfRangeException(int indexFromEnd)
     {
@@ -47,7 +46,10 @@ partial class FlatArrayTest
 
     [Theory]
     [InlineData(0, 1, SomeString)]
+    [InlineData(2, 1, SomeString)]
     [InlineData(0, 1, EmptyString, AnotherString)]
+    [InlineData(2, 1, EmptyString, AnotherString)]
+    [InlineData(0, 3, LowerSomeString, null, SomeString)]
     [InlineData(4, 3, LowerSomeString, null, SomeString)]
     public void IndexerRef_IndexFromEnd_IndexIsOutOfRange_ExpectIndexOutOfRangeException(
         int indexFromEnd, int sourceLength, params string?[] sourceItems)
