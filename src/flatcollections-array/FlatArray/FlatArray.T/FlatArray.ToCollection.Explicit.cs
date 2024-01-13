@@ -27,10 +27,10 @@ partial struct FlatArray<T>
             return new(items);
         }
 
-        return InnerToList(items, length);
+        return InnerToList(length, items);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static List<T> InnerToList(T[] items, int length)
+        static List<T> InnerToList(int length, T[] items)
         {
             // Passing FlatList (or ArraySegment) to the constructor leads to the same efficient behavior
             // like in the case of 'new(items)' above, i.e., to calling ICollection<T>.CopyTo
@@ -57,10 +57,10 @@ partial struct FlatArray<T>
             return ImmutableArray.Create(items);
         }
 
-        return InnerToImmutable(items, length);
+        return InnerToImmutableArray(length, items);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static ImmutableArray<T> InnerToImmutable(T[] items, int length)
+        static ImmutableArray<T> InnerToImmutableArray(int length, T[] items)
         {
             //return ImmutableArray.Create(items, 0, length);
 
