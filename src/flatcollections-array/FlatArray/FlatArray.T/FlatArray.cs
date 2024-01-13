@@ -15,6 +15,12 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
 
     private readonly T[]? items;
 
+    private T[] InnerItems
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => length == default ? InnerEmptyArray.Value : items!;
+    }
+
     public int Length
         =>
         length;
@@ -26,9 +32,4 @@ public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
     public bool IsEmpty
         =>
         length == default;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private T[] InnerItems()
-        =>
-        length == default ? InnerEmptyArray.Value : items!;
 }

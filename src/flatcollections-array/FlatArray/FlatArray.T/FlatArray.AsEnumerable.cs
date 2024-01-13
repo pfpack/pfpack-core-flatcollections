@@ -6,5 +6,5 @@ partial struct FlatArray<T>
 {
     public IEnumerable<T> AsEnumerable()
         =>
-        new FlatList(length, InnerItems());
+        new FlatList(length, InnerItems);
 }
