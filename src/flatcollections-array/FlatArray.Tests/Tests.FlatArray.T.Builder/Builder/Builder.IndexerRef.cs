@@ -8,9 +8,11 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayBuilderTest
 {
     [Theory]
+    [InlineData(MinusFifteen)]
     [InlineData(-1)]
     [InlineData(0)]
     [InlineData(1)]
+    [InlineData(PlusFifteen)]
     public void IndexerRef_SourceIsDefault_ExpectIndexOutOfRangeException(int index)
     {
         var source = new FlatArray<StructType>.Builder();
@@ -19,10 +21,16 @@ partial class FlatArrayBuilderTest
     }
 
     [Theory]
-    [InlineData(0, 1, TabString)]
+    [InlineData(0, 1, EmptyString)]
+    [InlineData(0, 2, AnotherString, SomeString, LowerSomeString)]
     [InlineData(1, 2, AnotherString, SomeString, LowerSomeString)]
-    [InlineData(2, 3, AnotherString, AnotherString, null, SomeString)]
-    [InlineData(3, 4, "Zero", "One", "Two", "Three")]
+    [InlineData(0, 3, SomeString, AnotherString, null, LowerSomeString)]
+    [InlineData(1, 3, SomeString, AnotherString, null, LowerSomeString)]
+    [InlineData(2, 3, SomeString, AnotherString, null, LowerSomeString)]
+    [InlineData(0, 4, null, "One", "Two", "Three")]
+    [InlineData(1, 4, null, "One", "Two", "Three")]
+    [InlineData(2, 4, null, "One", "Two", "Three")]
+    [InlineData(3, 4, null, "One", "Two", "Three")]
     public void IndexerRef_IndexIsInRange_ExpectItemIsFromSourceItemsByIndex(
         int index, int sourceLength, params string?[] sourceItems)
     {

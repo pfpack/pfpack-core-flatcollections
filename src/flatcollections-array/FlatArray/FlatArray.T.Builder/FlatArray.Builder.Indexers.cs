@@ -45,9 +45,8 @@ partial struct FlatArray<T>
             throw InnerExceptionFactory.IndexOutOfRange(index, length);
         }
 
-        // TODO: Add the tests and make public
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ref readonly T ItemRef(Index index)
+        public ref readonly T ItemRef(Index index)
             =>
             ref ItemRef(index.GetOffset(length));
     }
