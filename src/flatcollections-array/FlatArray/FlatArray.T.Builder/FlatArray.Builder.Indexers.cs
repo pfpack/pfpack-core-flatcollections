@@ -31,8 +31,9 @@ partial struct FlatArray<T>
             }
         }
 
-        // ItemRef is implemented readonly to prevent modification of FlatArray instances
+        // ItemRef are implemented readonly to prevent modification of FlatArray instances
         // initialized by calling 'MoveTo' on the Builder
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ref readonly T ItemRef(int index)
         {
@@ -43,5 +44,10 @@ partial struct FlatArray<T>
 
             throw InnerExceptionFactory.IndexOutOfRange(index, length);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ref readonly T ItemRef(Index index)
+            =>
+            ref ItemRef(index.GetOffset(length));
     }
 }
