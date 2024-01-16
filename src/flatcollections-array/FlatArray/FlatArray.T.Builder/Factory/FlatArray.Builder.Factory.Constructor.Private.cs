@@ -15,7 +15,6 @@ partial struct FlatArray<T>
         {
             Debug.Assert(capacity >= 0);
 
-            length = default;
             items = capacity == default ? InnerEmptyArray.Value : new T[capacity];
         }
 

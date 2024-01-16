@@ -10,7 +10,6 @@ partial struct FlatArray<T>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Builder()
         {
-            length = default;
             items = InnerEmptyArray.Value;
         }
 
@@ -19,7 +18,6 @@ partial struct FlatArray<T>
         {
             if (source is null || source.Length == default)
             {
-                length = default;
                 items = InnerEmptyArray.Value;
                 return;
             }
