@@ -57,7 +57,11 @@ partial struct FlatArray<T>
         }
 
         var items = new T[source.Length];
+#if NET7_0_OR_GREATER
+        source.CopyTo(new Span<T>(items));
+#else
         source.CopyTo(items);
+#endif
 
         length = source.Length;
         this.items = items;
@@ -75,7 +79,11 @@ partial struct FlatArray<T>
         }
 
         var items = new T[sourceValue.Length];
+#if NET7_0_OR_GREATER
+        sourceValue.CopyTo(new Span<T>(items));
+#else
         sourceValue.CopyTo(items);
+#endif
 
         length = sourceValue.Length;
         this.items = items;
