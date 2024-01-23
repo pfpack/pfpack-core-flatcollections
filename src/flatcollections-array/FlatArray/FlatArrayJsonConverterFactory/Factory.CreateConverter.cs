@@ -20,7 +20,7 @@ partial class FlatArrayJsonConverterFactory
             type: typeof(FlatArray<>.JsonConverter).MakeGenericType(itemType),
             bindingAttr: BindingFlags.Instance | BindingFlags.Public,
             binder: null,
-            args: new object?[] { options },
+            args: [options],
             culture: null);
 
         Debug.Assert(converter is not null);
