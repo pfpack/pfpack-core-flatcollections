@@ -36,6 +36,11 @@ partial struct FlatArray<T>
         var effectiveEnd = end < length ? end : length - 1;
         var effectiveLength = effectiveEnd - effectiveStart + 1;
 
+        if (effectiveLength == default)
+        {
+            return default;
+        }
+
         return effectiveStart == default
             ? new(effectiveLength, items!)
             : new(InnerArrayHelper.CopySegment(items!, effectiveStart, effectiveLength), default);
