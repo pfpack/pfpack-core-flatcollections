@@ -20,6 +20,7 @@ partial struct FlatArray<T>
             ReadOnlySpan<T> sourceSpan = length == array.Length
                 ? new(array)
                 : new(array, 0, length);
+
             return sourceSpan.ToArray();
         }
 
@@ -31,6 +32,7 @@ partial struct FlatArray<T>
             ReadOnlySpan<T> sourceSpan = start == default && length == array.Length
                 ? new(array)
                 : new(array, start, length);
+
             return sourceSpan.ToArray();
         }
 
