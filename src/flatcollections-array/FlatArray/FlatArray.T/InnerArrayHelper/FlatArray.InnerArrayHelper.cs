@@ -48,7 +48,7 @@ partial struct FlatArray<T>
                 ? new(array2)
                 : new(array2, 0, length2);
 
-            var result = new T[length1 + length2];
+            var result = new T[unchecked(length1 + length2)];
 
             sourceSpan1.CopyTo(new Span<T>(result, 0, length1));
             sourceSpan2.CopyTo(new Span<T>(result, length1, length2));
