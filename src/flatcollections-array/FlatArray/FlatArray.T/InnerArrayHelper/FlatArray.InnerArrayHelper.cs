@@ -17,9 +17,9 @@ partial struct FlatArray<T>
         {
             Debug.Assert(length >= 0 && length <= array.Length);
 
-            var sourceSpan = length == array.Length
-                ? new ReadOnlySpan<T>(array)
-                : new ReadOnlySpan<T>(array, 0, length);
+            ReadOnlySpan<T> sourceSpan = length == array.Length
+                ? new(array)
+                : new(array, 0, length);
             return sourceSpan.ToArray();
         }
 
@@ -28,9 +28,9 @@ partial struct FlatArray<T>
         {
             Debug.Assert(InnerAllocHelper.IsSegmentWithinBounds(start, length, array.Length));
 
-            var sourceSpan = start == default && length == array.Length
-                ? new ReadOnlySpan<T>(array)
-                : new ReadOnlySpan<T>(array, start, length);
+            ReadOnlySpan<T> sourceSpan = start == default && length == array.Length
+                ? new(array)
+                : new(array, start, length);
             return sourceSpan.ToArray();
         }
 
@@ -40,17 +40,19 @@ partial struct FlatArray<T>
             Debug.Assert(length1 >= 0 && length1 <= array1.Length);
             Debug.Assert(length2 >= 0 && length2 <= array2.Length);
 
-            var sourceSpan1 = length1 == array1.Length
-                ? new ReadOnlySpan<T>(array1)
-                : new ReadOnlySpan<T>(array1, 0, length1);
+            ReadOnlySpan<T> sourceSpan1 = length1 == array1.Length
+                ? new(array1)
+                : new(array1, 0, length1);
 
-            var sourceSpan2 = length2 == array2.Length
-                ? new ReadOnlySpan<T>(array2)
-                : new ReadOnlySpan<T>(array2, 0, length2);
+            ReadOnlySpan<T> sourceSpan2 = length2 == array2.Length
+                ? new(array2)
+                : new(array2, 0, length2);
 
             var result = new T[length1 + length2];
+
             sourceSpan1.CopyTo(new Span<T>(result, 0, length1));
             sourceSpan2.CopyTo(new Span<T>(result, length1, length2));
+
             return result;
         }
     }

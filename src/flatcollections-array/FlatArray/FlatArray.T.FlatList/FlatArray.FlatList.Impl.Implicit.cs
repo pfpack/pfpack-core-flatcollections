@@ -52,13 +52,13 @@ partial struct FlatArray<T>
                 return;
             }
 
-            var sourceSpan = length == items.Length
-                ? new ReadOnlySpan<T>(items)
-                : new ReadOnlySpan<T>(items, 0, length);
+            ReadOnlySpan<T> sourceSpan = length == items.Length
+                ? new(items)
+                : new(items, 0, length);
 
-            var destSpan = arrayIndex == default && length == array.Length
-                ? new Span<T>(array)
-                : new Span<T>(array, arrayIndex, length);
+            Span<T> destSpan = arrayIndex == default && length == array.Length
+                ? new(array)
+                : new(array, arrayIndex, length);
 
             sourceSpan.CopyTo(destSpan);
         }
