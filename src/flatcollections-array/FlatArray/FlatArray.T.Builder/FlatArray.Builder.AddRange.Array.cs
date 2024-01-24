@@ -46,10 +46,13 @@ partial struct FlatArray<T>
             Debug.Assert(length > 0 && length <= items.Length);
 
             InnerBuilderBufferHelper.EnsureBufferCapacity(ref this.items, this.length, length);
-            var sourceSpan = length == items.Length
-                ? new ReadOnlySpan<T>(items)
-                : new ReadOnlySpan<T>(items, 0, length);
+
+            ReadOnlySpan<T> sourceSpan = length == items.Length
+                ? new(items)
+                : new(items, 0, length);
+
             sourceSpan.CopyTo(new Span<T>(this.items, this.length, length));
+
             this.length += length;
         }
     }
