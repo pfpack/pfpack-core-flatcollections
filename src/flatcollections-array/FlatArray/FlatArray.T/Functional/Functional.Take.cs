@@ -1,4 +1,6 @@
-﻿namespace System;
+﻿using System.Diagnostics;
+
+namespace System;
 
 partial struct FlatArray<T>
 {
@@ -25,24 +27,38 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var (start, end) = (range.Start.GetOffset(length), range.End.GetOffset(length)) switch
-        {
-            var (startUnsorted, endUnsorted) => startUnsorted <= endUnsorted
-            ? (startUnsorted, endUnsorted)
-            : (endUnsorted, startUnsorted)
-        };
+        var start = range.Start.GetOffset(length);
+        var end = range.End.GetOffset(length); // the exclusive end index
 
-        var effectiveStart = start >= 0 ? start : 0;
-        var effectiveEnd = end < length ? end : length - 1;
-        var effectiveLength = effectiveEnd - effectiveStart + 1;
-
-        if (effectiveLength == default)
+        if (start >= end)
         {
             return default;
         }
 
-        return effectiveStart == default
-            ? new(effectiveLength, items!)
-            : new(InnerArrayHelper.CopySegment(items!, effectiveStart, effectiveLength), default);
+        if (start >= length || end <= 0)
+        {
+            return default;
+        }
+
+        if (start < 0)
+        {
+            start = 0;
+        }
+
+        if (end > length)
+        {
+            end = length;
+        }
+
+        var count = end - start;
+
+        Debug.Assert(count > 0);
+
+        if (start == default)
+        {
+            return count == length ? this : new(count, items!);
+        }
+
+        return new(InnerArrayHelper.CopySegment(items!, start, count), default);
     }
 }
