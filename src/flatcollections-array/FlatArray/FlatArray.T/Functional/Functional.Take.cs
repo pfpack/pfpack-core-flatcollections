@@ -50,15 +50,15 @@ partial struct FlatArray<T>
             end = length;
         }
 
-        var takeCount = end - start;
+        var count = end - start;
 
-        Debug.Assert(takeCount > 0);
+        Debug.Assert(count > 0);
 
         if (start == default)
         {
-            return takeCount == length ? this : new(takeCount, items!);
+            return count == length ? this : new(count, items!);
         }
 
-        return new(InnerArrayHelper.CopySegment(items!, start, takeCount), default);
+        return new(InnerArrayHelper.CopySegment(items!, start, count), default);
     }
 }
