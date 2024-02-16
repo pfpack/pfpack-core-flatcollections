@@ -19,8 +19,7 @@ partial struct FlatArray<T>
         return new(count, items!);
     }
 
-    // TODO: Add the tests and make public
-    internal FlatArray<T> Take(Range range)
+    public FlatArray<T> Take(Range range)
     {
         if (length == default)
         {
