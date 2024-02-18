@@ -20,14 +20,21 @@ partial struct FlatArray<T>
 #pragma warning restore IDE0028 // Simplify collection initialization
         }
 
-        if (length == items!.Length)
-        {
-            return new(items);
-        }
+#if NET8_0_OR_GREATER
+        ReadOnlySpan<T> sourceSpan = length == items!.Length
+            ? new(items)
+            : new(items, 0, length);
 
-        // Pass FlatList to use effective collection copying
-        // (ArraySegment also applicable)
-        return new(new FlatList(length, items));
+        List<T> result = new(capacity: length);
+        result.AddRange(sourceSpan);
+        return result;
+#else
+        ICollection<T> sourceItems = length == items!.Length
+            ? items
+            : new ArraySegment<T>(items, 0, length);
+
+        return new(sourceItems);
+#endif
     }
 
     public ImmutableArray<T> ToImmutableArray()
@@ -39,19 +46,16 @@ partial struct FlatArray<T>
 #pragma warning restore IDE0301 // Simplify collection initialization
         }
 
-        if (length == items!.Length)
-        {
 #if NET7_0_OR_GREATER
-            return ImmutableArray.Create(new ReadOnlySpan<T>(items));
-#else
-            return ImmutableArray.Create(items);
-#endif
-        }
+        ReadOnlySpan<T> sourceSpan = length == items!.Length
+            ? new(items)
+            : new(items, 0, length);
 
-#if NET7_0_OR_GREATER
-        return ImmutableArray.Create(new ReadOnlySpan<T>(items, 0, length));
+        return ImmutableArray.Create(sourceSpan);
 #else
-        return ImmutableArray.Create(items, 0, length);
+        return length == items!.Length
+            ? ImmutableArray.Create(items)
+            : ImmutableArray.Create(items, 0, length);
 #endif
     }
 }
