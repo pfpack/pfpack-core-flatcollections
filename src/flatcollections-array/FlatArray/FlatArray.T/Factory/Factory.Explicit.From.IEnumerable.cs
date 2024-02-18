@@ -18,7 +18,7 @@ partial struct FlatArray<T>
 
             List<T> items
             =>
-            InnerFactoryHelper.FromICollectionTrusted(items),
+            InnerFactoryHelper.FromList(items),
 
             FlatList items
             =>
