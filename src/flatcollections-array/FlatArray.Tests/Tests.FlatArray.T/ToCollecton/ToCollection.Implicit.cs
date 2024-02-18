@@ -13,9 +13,9 @@ partial class FlatArrayTest
     public void ImplicitToArray_SourceIsDefault_ExpectEmptyArray()
     {
         StructType[] actual = default(FlatArray<StructType>);
-        var expected = Array.Empty<StructType>();
 
-        Assert.Equal(expected, actual);
+        Assert.Empty(actual);
+        Assert.Same(Array.Empty<StructType>(), actual);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ImplicitToArray_ThanModifyResult_ExpectInnerStateHasNotChanged()
+    public void ImplicitToArray_ThenModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new[]
         {
@@ -123,9 +123,9 @@ partial class FlatArrayTest
     public void ImplicitToImmutableArray_SourceIsDefault_ExpectEmptyImmutableArray()
     {
         ImmutableArray<RefType> actual = default(FlatArray<RefType>);
-        var expected = ImmutableArray<RefType>.Empty;
 
-        Assert.StrictEqual(expected, actual);
+        Assert.Empty(actual);
+        Assert.StrictEqual(ImmutableArray<RefType>.Empty, actual);
     }
 
     [Fact]
