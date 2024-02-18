@@ -22,7 +22,7 @@ partial struct FlatArray<T>
 
             FlatList items
             =>
-            InnerFactoryHelper.FromICollectionTrusted(items),
+            items.InternalToFlatArray(),
 
             ImmutableArray<T> items
             =>
