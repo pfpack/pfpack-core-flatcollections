@@ -14,7 +14,7 @@ partial class FlatArrayStaticTest
         IEnumerable<StructType> source = Array.Empty<StructType>();
         var actual = FlatArray<StructType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]

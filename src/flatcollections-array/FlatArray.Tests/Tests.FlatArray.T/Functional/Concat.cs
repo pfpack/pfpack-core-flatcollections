@@ -15,7 +15,7 @@ partial class FlatArrayTest
 
         var actual = source.Concat(other);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

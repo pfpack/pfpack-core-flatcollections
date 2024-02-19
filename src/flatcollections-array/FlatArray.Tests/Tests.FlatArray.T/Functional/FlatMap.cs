@@ -33,7 +33,7 @@ partial class FlatArrayTest
 
         var actual = source.FlatMap(Map);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
 
         static FlatArray<string> Map(RecordStruct? _)
             =>
@@ -47,7 +47,7 @@ partial class FlatArrayTest
     {
         var actual = source.InitializeFlatArray().FlatMap(Map);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
 
         static FlatArray<long> Map(int sourceValue)
             =>

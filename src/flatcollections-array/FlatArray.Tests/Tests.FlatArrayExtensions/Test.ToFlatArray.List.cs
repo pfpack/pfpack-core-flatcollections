@@ -14,7 +14,7 @@ partial class FlatArrayExtensionsTest
         List<RefType?>? source = null;
         var actual = source.ToFlatArray();
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -23,7 +23,7 @@ partial class FlatArrayExtensionsTest
         var source = new List<long>();
         var actual = source.ToFlatArray();
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

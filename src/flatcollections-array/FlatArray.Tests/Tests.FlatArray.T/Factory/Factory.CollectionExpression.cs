@@ -11,7 +11,7 @@ partial class FlatArrayTest
     public static void ConstructFromCollectionExpression_SourceIsEmpty_ExpectDefault()
     {
         FlatArray<string?> actual = [];
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

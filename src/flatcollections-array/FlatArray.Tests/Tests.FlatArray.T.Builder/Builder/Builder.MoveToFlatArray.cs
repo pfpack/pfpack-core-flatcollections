@@ -13,7 +13,7 @@ partial class FlatArrayBuilderTest
         var source = new FlatArray<string>.Builder();
         var actual = source.MoveToFlatArray();
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

@@ -15,7 +15,7 @@ partial class FlatArrayStaticTest
         var source = new StubCollection<StructType?>([]);
         var actual = FlatArray<StructType?>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

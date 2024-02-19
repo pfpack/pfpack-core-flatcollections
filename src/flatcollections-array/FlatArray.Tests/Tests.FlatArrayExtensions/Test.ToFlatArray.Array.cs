@@ -13,7 +13,7 @@ partial class FlatArrayExtensionsTest
         RecordStruct[]? source = null;
         var actual = source.ToFlatArray();
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -22,7 +22,7 @@ partial class FlatArrayExtensionsTest
         var source = Array.Empty<RefType>();
         var actual = source.ToFlatArray();
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

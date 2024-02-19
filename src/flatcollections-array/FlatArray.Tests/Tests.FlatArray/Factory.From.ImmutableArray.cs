@@ -14,7 +14,7 @@ partial class FlatArrayStaticTest
         var source = default(ImmutableArray<long?>);
         var actual = FlatArray<long?>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -37,7 +37,7 @@ partial class FlatArrayStaticTest
         ImmutableArray<RecordType>? source = null;
         var actual = FlatArray<RecordType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -46,7 +46,7 @@ partial class FlatArrayStaticTest
         ImmutableArray<RefType?>? source = new ImmutableArray<RefType?>();
         var actual = FlatArray<RefType?>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
