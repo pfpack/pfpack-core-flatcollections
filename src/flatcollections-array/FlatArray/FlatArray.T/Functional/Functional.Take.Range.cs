@@ -19,7 +19,7 @@ partial struct FlatArray<T>
             return default;
         }
 
-        if (start < 0) { start = 0; }
+        if (start < 0) { start = default; }
         if (end > length) { end = length; }
 
         var count = end - start;
