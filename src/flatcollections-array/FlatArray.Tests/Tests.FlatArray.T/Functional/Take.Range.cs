@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Xunit;
+using static PrimeFuncPack.UnitTest.TestData;
 
 namespace PrimeFuncPack.Core.Tests;
 
@@ -9,18 +11,17 @@ partial class FlatArrayTest
 {
     [Theory]
     [MemberData(nameof(TakeRange_SourceIsEmpty_ExpectEmpty_CaseSource))]
-    public void TakeRange_SourceIsEmpty_ExpectEmpty(Range range)
+    public void TakeRange_SourceIsEmpty_ExpectEmpty(FlatArray<int> source, Range range)
     {
-        FlatArray<int> source = default;
         var actual = source.Take(range);
         actual.VerifyInnerState_Default();
     }
 
-    public static TheoryData<Range> TakeRange_SourceIsEmpty_ExpectEmpty_CaseSource
+    public static TheoryData<FlatArray<int>, Range> TakeRange_SourceIsEmpty_ExpectEmpty_CaseSource
     {
         get
         {
-            Range[] source =
+            IReadOnlyCollection<Range> ranges =
             [
                 0..0,
                 (..),
@@ -48,10 +49,25 @@ partial class FlatArrayTest
                 ^2..^2,
                 ^int.MaxValue..int.MaxValue,
             ];
+            Debug.Assert(ranges.Count == ranges.Distinct().Count());
 
-            Debug.Assert(source.Length == source.Distinct().Count());
+            IReadOnlyCollection<FlatArray<int>> sources =
+            [
+                default,
+                new[] { MinusFifteen }.InitializeFlatArray(0),
+                new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(0),
+            ];
 
-            return new(source);
+            TheoryData<FlatArray<int>, Range> result = [];
+            foreach (var source in sources)
+            {
+                foreach (var range in ranges)
+                {
+                    result.Add(source, range);
+                }
+            }
+
+            return result;
         }
     }
 
