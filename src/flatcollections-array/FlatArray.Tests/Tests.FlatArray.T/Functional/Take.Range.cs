@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using Xunit;
 
 namespace PrimeFuncPack.Core.Tests;
@@ -15,27 +17,42 @@ partial class FlatArrayTest
     }
 
     public static TheoryData<Range> TakeRange_SourceIsEmpty_ExpectEmpty_CaseSource
-        =>
-        new()
+    {
+        get
         {
-            { default },
-            { Range.All },
-            { Range.StartAt(0) },
-            { Range.StartAt(1) },
-            { Range.StartAt(int.MaxValue - 1) },
-            { Range.StartAt(int.MaxValue) },
-            { Range.EndAt(0) },
-            { Range.EndAt(1) },
-            { Range.EndAt(2) },
-            { Range.EndAt(int.MaxValue - 1) },
-            { Range.EndAt(int.MaxValue) },
-            { new Range(0, 1) },
-            { new Range(0, 2) },
-            { new Range(0, int.MaxValue - 1) },
-            { new Range(0, int.MaxValue) },
-            { new Range(1, int.MaxValue - 1) },
-            { new Range(1, int.MaxValue) },
-            { new Range(2, int.MaxValue - 1) },
-            { new Range(2, int.MaxValue) },
-        };
+            Range[] source =
+            [
+                0..0,
+                (..),
+                1..,
+                2..,
+                int.MaxValue..,
+                ^1..,
+                ^2..,
+                ^int.MaxValue..,
+                ^0..,
+                (..0),
+                (..1),
+                (..2),
+                (..int.MaxValue),
+                (..^1),
+                (..^2),
+                (..^int.MaxValue),
+                0..^1,
+                0..^2,
+                0..^int.MaxValue,
+                ^1..0,
+                ^2..0,
+                ^int.MaxValue..0,
+                ^1..^1,
+                ^2..^2,
+                ^int.MaxValue..int.MaxValue,
+            ];
+
+            Debug.Assert(source.Length == source.Distinct().Count());
+
+            return new(source);
+        }
+    }
+
 }
