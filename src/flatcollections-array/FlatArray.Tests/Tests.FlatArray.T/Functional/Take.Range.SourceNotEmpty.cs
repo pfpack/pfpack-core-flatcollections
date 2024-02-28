@@ -30,8 +30,32 @@ partial class FlatArrayTest
             IReadOnlyCollection<(Range Range, int[]? ExpectedItems)> rangeExpectedItemsPairs =
             [
                 (..0, null),
+                (..^3, null),
+                (..^4, null),
+                (..^int.MaxValue, null),
+                (3..,  null),
+                (3..int.MaxValue, null),
+                (1..1, null),
+                (2..2, null),
+                (2..1, null),
+                (3..3, null),
+                (3..2, null),
+                (1..^2, null),
+                (2..^1, null),
+                (2..^2, null),
+                (3..^1, null),
+                (^1..1, null),
+                (^0..2, null),
+                (^0..1, null),
+                (^1..^2, null),
+                (^0..^1, null),
+                (^0..^2, null),
                 (.., new[] { MinusFifteen, MinusOne, Zero }),
+                (..3, new[] { MinusFifteen, MinusOne, Zero }),
+                (..4, new[] { MinusFifteen, MinusOne, Zero }),
+                (..int.MaxValue, new[] { MinusFifteen, MinusOne, Zero }),
             ];
+            //DebugAssertRangeExpectedItemsPairs();
 
             TheoryData<FlatArray<int>, Range, int[]?> result = [];
             foreach (var source in sources)
@@ -43,6 +67,12 @@ partial class FlatArrayTest
             }
 
             return result;
+
+            //void DebugAssertRangeExpectedItemsPairs()
+            //{
+            //    IReadOnlyCollection<Range> ranges = rangeExpectedItemsPairs.Select(x => x.Range).ToArray();
+            //    Debug.Assert(ranges.Count == ranges.Distinct().Count());
+            //}
         }
     }
 }
