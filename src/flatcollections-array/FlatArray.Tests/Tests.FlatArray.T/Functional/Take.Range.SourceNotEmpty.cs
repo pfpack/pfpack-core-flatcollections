@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
@@ -55,7 +57,7 @@ partial class FlatArrayTest
                 (..4, new[] { MinusFifteen, MinusOne, Zero }),
                 (..int.MaxValue, new[] { MinusFifteen, MinusOne, Zero }),
             ];
-            //DebugAssertRangeExpectedItemsPairs();
+            DebugAssertUniqueCases();
 
             TheoryData<FlatArray<int>, Range, int[]?> result = [];
             foreach (var source in sources)
@@ -68,11 +70,44 @@ partial class FlatArrayTest
 
             return result;
 
-            //void DebugAssertRangeExpectedItemsPairs()
-            //{
-            //    IReadOnlyCollection<Range> ranges = rangeExpectedItemsPairs.Select(x => x.Range).ToArray();
-            //    Debug.Assert(ranges.Count == ranges.Distinct().Count());
-            //}
+            void DebugAssertUniqueCases()
+            {
+                var uniquePairs = rangeExpectedItemsPairs.Aggregate(
+                    new List<(Range Range, int[]? ExpectedItems)>(),
+                    (accumulate, current) =>
+                    {
+                        if (accumulate.Exists(
+                            pair => DebugAssertUniqueCases_Equal(current, pair)) is false)
+                        {
+                            accumulate.Add(current);
+                        }
+                        return accumulate;
+                    });
+
+                Debug.Assert(rangeExpectedItemsPairs.Count == uniquePairs.Count);
+            }
+
+            static bool DebugAssertUniqueCases_Equal(
+                (Range Range, int[]? ExpectedItems) x,
+                (Range Range, int[]? ExpectedItems) y)
+            {
+                if (x.Range.Equals(y.Range) is false)
+                {
+                    return false;
+                }
+
+                if (x.ExpectedItems is null && y.ExpectedItems is null)
+                {
+                    return true;
+                }
+
+                if (x.ExpectedItems is null || y.ExpectedItems is null)
+                {
+                    return false;
+                }
+
+                return x.ExpectedItems.SequenceEqual(y.ExpectedItems);
+            }
         }
     }
 }
