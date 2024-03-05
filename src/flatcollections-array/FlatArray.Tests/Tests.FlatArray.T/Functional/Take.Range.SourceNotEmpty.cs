@@ -57,7 +57,7 @@ partial class FlatArrayTest
                 (..4, new[] { MinusFifteen, MinusOne, Zero }),
                 (..int.MaxValue, new[] { MinusFifteen, MinusOne, Zero }),
             ];
-            DebugAssertUniqueCases();
+            DebugAssertUniqueCases(rangeExpectedItemsPairs);
 
             TheoryData<FlatArray<int>, Range, int[]?> result = [];
             foreach (var source in sources)
@@ -70,9 +70,10 @@ partial class FlatArrayTest
 
             return result;
 
-            void DebugAssertUniqueCases()
+            static void DebugAssertUniqueCases(
+                IReadOnlyCollection<(Range Range, int[]? ExpectedItems)> testCases)
             {
-                var uniquePairs = rangeExpectedItemsPairs.Aggregate(
+                var uniquePairs = testCases.Aggregate(
                     new List<(Range Range, int[]? ExpectedItems)>(),
                     (accumulate, current) =>
                     {
@@ -84,7 +85,7 @@ partial class FlatArrayTest
                         return accumulate;
                     });
 
-                Debug.Assert(rangeExpectedItemsPairs.Count == uniquePairs.Count);
+                Debug.Assert(testCases.Count == uniquePairs.Count);
             }
 
             static bool DebugAssertUniqueCases_Equal(
