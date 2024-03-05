@@ -73,18 +73,14 @@ partial class FlatArrayTest
             static void DebugAssertUniqueCases(
                 IReadOnlyCollection<(Range Range, int[]? ExpectedItems)> testCases)
             {
-                var uniquePairs = testCases.Aggregate(
-                    new List<(Range Range, int[]? ExpectedItems)>(),
-                    (accumulate, current) =>
+                List<(Range Range, int[]? ExpectedItems)> uniquePairs = [];
+                foreach (var testCase in testCases)
+                {
+                    if (uniquePairs.Exists(pair => DebugAssertUniqueCases_Equal(testCase, pair)) is false)
                     {
-                        if (accumulate.Exists(
-                            pair => DebugAssertUniqueCases_Equal(current, pair)) is false)
-                        {
-                            accumulate.Add(current);
-                        }
-                        return accumulate;
-                    });
-
+                        uniquePairs.Add(testCase);
+                    }
+                }
                 Debug.Assert(testCases.Count == uniquePairs.Count);
             }
 
