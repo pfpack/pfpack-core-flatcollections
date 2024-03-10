@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -9,31 +10,11 @@ partial struct FlatArray<T>
     partial class InnerFactoryHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromList(List<T> source)
-        {
-            var count = source.Count;
-
-            if (count == default)
-            {
-                return default;
-            }
-
-            var array = new T[count];
-#if NET8_0_OR_GREATER
-            source.CopyTo(new Span<T>(array));
-#else
-            source.CopyTo(array);
-#endif
-
-            return new(array, default);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromList([AllowNull] List<T> source, int start, int length)
+        internal static FlatArray<T> FromImmutableArray(ImmutableArray<T> source, int start, int length)
         {
             InnerValidateRange();
 
-            if (source is null || length == default)
+            if (length == default)
             {
                 return default;
             }
@@ -46,7 +27,7 @@ partial struct FlatArray<T>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             void InnerValidateRange()
             {
-                var sourceLength = source?.Count ?? default;
+                var sourceLength = source.IsDefault ? default : source.Length;
                 if (InnerAllocHelper.IsSegmentWithinBounds(start, length, sourceLength))
                 {
                     return;
