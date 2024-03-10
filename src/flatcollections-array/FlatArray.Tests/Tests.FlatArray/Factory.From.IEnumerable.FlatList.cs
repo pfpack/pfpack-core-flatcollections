@@ -14,7 +14,7 @@ partial class FlatArrayStaticTest
         var source = Array.Empty<RefType>().InitializeFlatListAsEnumerable();
         var actual = FlatArray<RefType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

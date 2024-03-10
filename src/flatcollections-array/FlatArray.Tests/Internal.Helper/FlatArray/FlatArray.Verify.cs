@@ -5,6 +5,15 @@ namespace PrimeFuncPack.Core.Tests;
 
 partial class TestHelper
 {
+    internal static void VerifyInnerState_Default<T>(this FlatArray<T> actual)
+    {
+        var actualLength = actual.GetStructFieldValue<int>("length");
+        Assert.StrictEqual(default, actualLength);
+
+        var actualItems = actual.GetFieldValue<T[]?>("items");
+        Assert.Null(actualItems);
+    }
+
     internal static void VerifyInnerState<T>(this FlatArray<T> actual, T[]? expectedItems, int expectedLength)
     {
         var actualLength = actual.GetStructFieldValue<int>("length");

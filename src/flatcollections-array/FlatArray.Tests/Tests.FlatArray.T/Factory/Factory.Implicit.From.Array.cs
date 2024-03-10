@@ -13,14 +13,14 @@ partial class FlatArrayTest
         StructType[]? source = null;
         FlatArray<StructType> actual = source;
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
     public void ImplicitFromArray_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<RecordType> actual = Array.Empty<RecordType>();
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]

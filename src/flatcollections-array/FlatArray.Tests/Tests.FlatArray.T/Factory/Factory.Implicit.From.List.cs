@@ -14,14 +14,14 @@ partial class FlatArrayTest
         List<RefType>? source = null;
         FlatArray<RefType> actual = source;
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
     public void ImplicitFromList_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<long> actual = new List<long>();
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

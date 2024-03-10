@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace System;
@@ -14,6 +15,7 @@ partial struct FlatArray<T>
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => this[index];
+            [DoesNotReturn]
             set => throw InnerListExceptionFactory.NotSupportedOnReadOnlyArray();
         }
 

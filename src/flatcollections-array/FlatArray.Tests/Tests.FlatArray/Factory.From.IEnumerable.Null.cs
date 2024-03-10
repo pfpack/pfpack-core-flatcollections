@@ -12,6 +12,6 @@ partial class FlatArrayStaticTest
         IEnumerable<DateTime>? source = null;
         var actual = FlatArray<DateTime>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 }

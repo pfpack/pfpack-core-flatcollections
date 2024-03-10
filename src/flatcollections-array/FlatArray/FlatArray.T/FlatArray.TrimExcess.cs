@@ -4,12 +4,12 @@ partial struct FlatArray<T>
 {
     public FlatArray<T> TrimExcess()
     {
-        if (items is null || length == default)
+        if (length == default)
         {
             return default;
         }
 
-        if (length == items.Length)
+        if (length == items!.Length)
         {
             return this;
         }

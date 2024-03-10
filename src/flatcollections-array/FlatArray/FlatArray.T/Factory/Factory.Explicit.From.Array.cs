@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -11,22 +10,6 @@ partial struct FlatArray<T>
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From([AllowNull] T[] source, int start, int length)
-    {
-        InnerValidateRange();
-
-        return source is null || length == default
-            ? default
-            : new(InnerArrayHelper.CopySegment(source, start, length), default);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        void InnerValidateRange()
-        {
-            var sourceLength = source?.Length ?? default;
-            if (InnerAllocHelper.IsSegmentWithinBounds(start, length, sourceLength))
-            {
-                return;
-            }
-            throw InnerExceptionFactory.SegmentOutsideBounds(start, length, sourceLength);
-        }
-    }
+        =>
+        InnerFactoryHelper.FromArray(source, start, length);
 }

@@ -16,7 +16,7 @@ partial class FlatArrayJsonSerializerTest
         const string source = "null";
         var actual = JsonSerializer.Deserialize<FlatArray<StubItemJson>>(source, options);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -27,7 +27,7 @@ partial class FlatArrayJsonSerializerTest
         const string source = "[]";
         var actual = JsonSerializer.Deserialize<FlatArray<StubItemJson?>>(source, options);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]

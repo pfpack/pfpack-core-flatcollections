@@ -13,7 +13,7 @@ partial class FlatArrayTest
         var source = default(ImmutableArray<RefType>);
         FlatArray<RefType> actual = source;
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

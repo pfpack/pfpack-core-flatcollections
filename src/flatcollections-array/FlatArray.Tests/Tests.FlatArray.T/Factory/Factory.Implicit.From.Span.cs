@@ -11,7 +11,7 @@ partial class FlatArrayTest
     public void ImplicitFromReadOnlySpan_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<bool?> actual = default(ReadOnlySpan<bool?>);
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -30,7 +30,7 @@ partial class FlatArrayTest
     public void ImplicitFromSpan_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
         FlatArray<RefType> actual = default(Span<RefType>);
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

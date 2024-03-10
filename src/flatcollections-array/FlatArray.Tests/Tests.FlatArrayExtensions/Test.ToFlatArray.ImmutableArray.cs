@@ -14,7 +14,7 @@ partial class FlatArrayExtensionsTest
         var source = default(ImmutableArray<RecordType>);
         var actual = source.ToFlatArray();
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

@@ -33,7 +33,7 @@ partial class FlatArrayTest
 
         var actual = source.Map(Map);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
 
         static RecordType? Map(string _, int index)
             =>

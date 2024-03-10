@@ -13,11 +13,10 @@ partial class FlatArrayTest
     public void ToArray_SourceIsDefault_ExpectEmptyArray()
     {
         var source = default(FlatArray<RecordType>);
-
         var actual = source.ToArray();
-        var expected = Array.Empty<RecordType>();
 
-        Assert.Equal(expected, actual);
+        Assert.Empty(actual);
+        Assert.Same(Array.Empty<RecordType>(), actual);
     }
 
     [Fact]
@@ -54,7 +53,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToArray_ThanModifyResult_ExpectInnerStateHasNotChanged()
+    public void ToArray_ThenModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new RefType[]
         {
@@ -111,7 +110,7 @@ partial class FlatArrayTest
     }
 
     [Fact]
-    public void ToList_ThanModifyResult_ExpectInnerStateHasNotChanged()
+    public void ToList_ThenModifyResult_ExpectInnerStateHasNotChanged()
     {
         var sourceItems = new string[]
         {
@@ -131,11 +130,10 @@ partial class FlatArrayTest
     public void ToImmutableArray_SourceIsDefault_ExpectEmptyImmutableArray()
     {
         var source = default(FlatArray<DateOnly?>);
-
         var actual = source.ToImmutableArray();
-        var expected = ImmutableArray<DateOnly?>.Empty;
 
-        Assert.StrictEqual(expected, actual);
+        Assert.Empty(actual);
+        Assert.StrictEqual(ImmutableArray<DateOnly?>.Empty, actual);
     }
 
     [Fact]

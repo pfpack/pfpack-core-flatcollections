@@ -13,7 +13,7 @@ partial class FlatArrayStaticTest
         var source = default(FlatArray<RefType>);
         var actual = FlatArray<RefType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -36,7 +36,7 @@ partial class FlatArrayStaticTest
         var source = default(FlatArray<StructType?>?);
         var actual = FlatArray<StructType?>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -45,7 +45,7 @@ partial class FlatArrayStaticTest
         FlatArray<RecordType>? source = default(FlatArray<RecordType>);
         var actual = FlatArray<RecordType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

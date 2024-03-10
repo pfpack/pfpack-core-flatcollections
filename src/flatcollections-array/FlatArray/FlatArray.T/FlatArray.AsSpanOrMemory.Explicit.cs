@@ -14,12 +14,9 @@ partial struct FlatArray<T>
 #pragma warning restore IDE0301 // Simplify collection initialization
         }
 
-        if (length == items!.Length)
-        {
-            return new(items);
-        }
-
-        return new(items, 0, length);
+        return length == items!.Length
+            ? new(items)
+            : new(items, 0, length);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -30,11 +27,8 @@ partial struct FlatArray<T>
             return ReadOnlyMemory<T>.Empty;
         }
 
-        if (length == items!.Length)
-        {
-            return new(items);
-        }
-
-        return new(items, 0, length);
+        return length == items!.Length
+            ? new(items)
+            : new(items, 0, length);
     }
 }

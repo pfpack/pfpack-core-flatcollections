@@ -18,11 +18,11 @@ partial struct FlatArray<T>
 
             List<T> items
             =>
-            InnerFactoryHelper.FromICollectionTrusted(items),
+            InnerFactoryHelper.FromList(items),
 
             FlatList items
             =>
-            InnerFactoryHelper.FromICollectionTrusted(items),
+            items.InternalToFlatArray(),
 
             ImmutableArray<T> items
             =>

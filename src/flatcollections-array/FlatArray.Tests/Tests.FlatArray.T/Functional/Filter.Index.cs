@@ -33,7 +33,7 @@ partial class FlatArrayTest
 
         var actual = source.Filter(Predicate);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
 
         static bool Predicate(StructType? item, int _)
             =>
@@ -47,7 +47,7 @@ partial class FlatArrayTest
 
         var actual = source.Filter(Predicate);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
 
         static bool Predicate(decimal? item, int _)
             =>

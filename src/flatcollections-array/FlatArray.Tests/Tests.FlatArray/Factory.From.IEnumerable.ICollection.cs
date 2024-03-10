@@ -12,10 +12,10 @@ partial class FlatArrayStaticTest
     [Fact]
     public void FromIEnumerable_ICollection_SourceIsEmpty_ExpectInnerStateIsDefault()
     {
-        var source = new StubCollection<StructType?>(new());
+        var source = new StubCollection<StructType?>([]);
         var actual = FlatArray<StructType?>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

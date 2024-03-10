@@ -14,7 +14,7 @@ partial class FlatArrayStaticTest
         List<DateOnly>? source = null;
         var actual = FlatArray<DateOnly>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -23,7 +23,7 @@ partial class FlatArrayStaticTest
         var source = new List<RefType>();
         var actual = FlatArray<RefType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

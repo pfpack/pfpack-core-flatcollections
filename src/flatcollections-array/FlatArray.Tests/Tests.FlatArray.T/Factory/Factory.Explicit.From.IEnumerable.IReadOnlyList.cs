@@ -14,7 +14,7 @@ partial class FlatArrayTest
         var source = new StubReadOnlyList<RefType>(new());
         var actual = FlatArray<RefType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]

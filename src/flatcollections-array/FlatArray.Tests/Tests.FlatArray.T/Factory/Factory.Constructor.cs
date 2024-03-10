@@ -14,7 +14,7 @@ partial class FlatArrayTest
         int[]? source = null;
         var actual = new FlatArray<int>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -23,7 +23,7 @@ partial class FlatArrayTest
         var source = Array.Empty<RefType>();
         var actual = new FlatArray<RefType>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -57,7 +57,7 @@ partial class FlatArrayTest
         var source = default(FlatArray<RefType>);
         var actual = new FlatArray<RefType>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -80,7 +80,7 @@ partial class FlatArrayTest
         var source = default(FlatArray<StructType?>?);
         var actual = new FlatArray<StructType?>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -89,7 +89,7 @@ partial class FlatArrayTest
         FlatArray<RecordType>? source = default(FlatArray<RecordType>);
         var actual = new FlatArray<RecordType>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -109,7 +109,7 @@ partial class FlatArrayTest
         var source = default(ImmutableArray<long?>);
         var actual = new FlatArray<long?>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
@@ -132,7 +132,7 @@ partial class FlatArrayTest
         ImmutableArray<RecordType>? source = null;
         var actual = new FlatArray<RecordType>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -141,7 +141,7 @@ partial class FlatArrayTest
         ImmutableArray<RefType?>? source = new ImmutableArray<RefType?>();
         var actual = new FlatArray<RefType?>(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]

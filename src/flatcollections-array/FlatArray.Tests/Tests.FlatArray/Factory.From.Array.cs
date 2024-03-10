@@ -13,7 +13,7 @@ partial class FlatArrayStaticTest
         object?[]? source = null;
         var actual = FlatArray<object?>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Fact]
@@ -22,7 +22,7 @@ partial class FlatArrayStaticTest
         var source = Array.Empty<StructType>();
         var actual = FlatArray<StructType>.From(source);
 
-        actual.VerifyInnerState(default, default);
+        actual.VerifyInnerState_Default();
     }
 
     [Theory]
