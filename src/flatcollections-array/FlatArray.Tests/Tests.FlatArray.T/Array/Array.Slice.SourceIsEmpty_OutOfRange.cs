@@ -11,8 +11,8 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Theory]
-    [MemberData(nameof(Slice_SourceIsEmpty_StartLengthOutOfRange_ExpectDefault_CaseSource))]
-    public void Slice_SourceIsEmpty_StartLengthOutOfRange_ExpectDefault(
+    [MemberData(nameof(Slice_SourceIsEmpty_OutOfRange_ExpectArgumentOutOfRangeException_CaseSource))]
+    public void Slice_SourceIsEmpty_OutOfRange_ExpectArgumentOutOfRangeException(
         FlatArray<int> source,
         int start,
         int length)
@@ -23,7 +23,7 @@ partial class FlatArrayTest
         Assert.Equal(expectedMessage, actualException.Message);
     }
 
-    public static TheoryData<FlatArray<int>, int, int> Slice_SourceIsEmpty_StartLengthOutOfRange_ExpectDefault_CaseSource
+    public static TheoryData<FlatArray<int>, int, int> Slice_SourceIsEmpty_OutOfRange_ExpectArgumentOutOfRangeException_CaseSource
     {
         get
         {
