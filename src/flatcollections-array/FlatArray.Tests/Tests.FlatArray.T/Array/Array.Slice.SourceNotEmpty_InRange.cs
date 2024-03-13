@@ -7,32 +7,22 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Theory]
-    [MemberData(nameof(Slice_InRange_ExpectCorrectResult_CaseSource))]
-    public void Slice_InRange_ExpectCorrectResult(
+    [MemberData(nameof(Slice_SourceNotEmpty_InRange_ExpectCorrectResult_CaseSource))]
+    public void Slice_SourceNotEmpty_InRange_ExpectCorrectResult(
         FlatArray<int> source,
         int start,
         int length,
         int[]? expectedItems)
     {
         var actual = source.Slice(start, length);
-        actual.VerifyTruncatedState(expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems?.Length ?? default);
     }
 
-    public static TheoryData<FlatArray<int>, int, int, int[]?> Slice_InRange_ExpectCorrectResult_CaseSource
+    public static TheoryData<FlatArray<int>, int, int, int[]?> Slice_SourceNotEmpty_InRange_ExpectCorrectResult_CaseSource
     {
         get
         {
             TheoryData<FlatArray<int>, int, int, int[]?> result = [];
-
-            result.Add(
-                default,
-                0, 0,
-                null);
-
-            result.Add(
-                new[] { MinusFifteen }.InitializeFlatArray(0),
-                0, 0,
-                null);
 
             result.Add(
                 new[] { MinusFifteen }.InitializeFlatArray(),
