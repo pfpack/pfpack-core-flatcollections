@@ -55,6 +55,16 @@ partial class FlatArrayTest
 
             result.Add(
                 new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(),
+                2..2,
+                null);
+
+            result.Add(
+                new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(),
+                2..,
+                null);
+
+            result.Add(
+                new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(),
                 ..,
                 [MinusFifteen, PlusFifteen]);
 
