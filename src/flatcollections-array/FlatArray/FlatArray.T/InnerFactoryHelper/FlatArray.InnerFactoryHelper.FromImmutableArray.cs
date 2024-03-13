@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Immutable;
 using System.Runtime.CompilerServices;
 
 namespace System;
@@ -10,7 +8,7 @@ partial struct FlatArray<T>
     partial class InnerFactoryHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromImmutableArray(ImmutableArray<T> source, int start, int length)
+        internal static FlatArray<T> FromImmutableArrayValidated(ImmutableArray<T> source, int start, int length)
         {
             InnerValidateRange();
 

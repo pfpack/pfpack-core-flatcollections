@@ -12,5 +12,5 @@ partial struct FlatArray<T>
     // TODO: Add the tests and make public
     internal static FlatArray<T> From([AllowNull] List<T> source, int start, int length)
         =>
-        InnerFactoryHelper.FromList(source, start, length);
+        InnerFactoryHelper.FromListValidated(source, start, length);
 }
