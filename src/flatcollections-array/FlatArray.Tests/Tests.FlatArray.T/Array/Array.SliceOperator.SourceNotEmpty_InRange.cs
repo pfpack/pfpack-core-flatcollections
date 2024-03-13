@@ -7,31 +7,21 @@ namespace PrimeFuncPack.Core.Tests;
 partial class FlatArrayTest
 {
     [Theory]
-    [MemberData(nameof(SliceOperator_InRange_ExpectCorrectResult_CaseSource))]
-    public void SliceOperator_InRange_ExpectCorrectResult(
+    [MemberData(nameof(SliceOperator_SourceNotEmpty_InRange_ExpectCorrectResult_CaseSource))]
+    public void SliceOperator_SourceNotEmpty_InRange_ExpectCorrectResult(
         FlatArray<int> source,
         Range range,
         int[]? expectedItems)
     {
         var actual = source[range];
-        actual.VerifyTruncatedState(expectedItems);
+        actual.VerifyInnerState(expectedItems, expectedItems?.Length ?? default);
     }
 
-    public static TheoryData<FlatArray<int>, Range, int[]?> SliceOperator_InRange_ExpectCorrectResult_CaseSource
+    public static TheoryData<FlatArray<int>, Range, int[]?> SliceOperator_SourceNotEmpty_InRange_ExpectCorrectResult_CaseSource
     {
         get
         {
             TheoryData<FlatArray<int>, Range, int[]?> result = [];
-
-            result.Add(
-                default,
-                ..,
-                null);
-
-            result.Add(
-                new[] { MinusFifteen }.InitializeFlatArray(0),
-                ..,
-                null);
 
             result.Add(
                 new[] { MinusFifteen }.InitializeFlatArray(),
@@ -49,9 +39,24 @@ partial class FlatArrayTest
                 [MinusFifteen]);
 
             result.Add(
+                new[] { MinusFifteen }.InitializeFlatArray(),
+                ..1,
+                [MinusFifteen]);
+
+            result.Add(
                 new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(),
                 1..2,
                 [PlusFifteen]);
+
+            result.Add(
+                new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(),
+                ..2,
+                [MinusFifteen, PlusFifteen]);
+
+            result.Add(
+                new[] { MinusFifteen, PlusFifteen }.InitializeFlatArray(),
+                ..,
+                [MinusFifteen, PlusFifteen]);
 
             result.Add(
                 new[] { MinusFifteen, MinusOne, Zero, One, PlusFifteen }.InitializeFlatArray(),
