@@ -8,7 +8,7 @@ partial struct FlatArray<T>
     partial class InnerFactoryHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromArray([AllowNull] T[] source, int start, int length)
+        internal static FlatArray<T> FromArrayValidated([AllowNull] T[] source, int start, int length)
         {
             InnerValidateRange();
 

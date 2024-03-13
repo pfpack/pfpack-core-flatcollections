@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -16,10 +15,10 @@ partial struct FlatArray<T>
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(ImmutableArray<T> source, int start, int length)
         =>
-        InnerFactoryHelper.FromImmutableArray(source, start, length);
+        InnerFactoryHelper.FromImmutableArrayValidated(source, start, length);
 
     // TODO: Add the tests and make public
     internal static FlatArray<T> From(ImmutableArray<T>? source, int start, int length)
         =>
-        InnerFactoryHelper.FromImmutableArray(source.GetValueOrDefault(), start, length);
+        InnerFactoryHelper.FromImmutableArrayValidated(source.GetValueOrDefault(), start, length);
 }

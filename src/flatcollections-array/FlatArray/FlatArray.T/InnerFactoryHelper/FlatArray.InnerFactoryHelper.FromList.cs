@@ -29,7 +29,7 @@ partial struct FlatArray<T>
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static FlatArray<T> FromList([AllowNull] List<T> source, int start, int length)
+        internal static FlatArray<T> FromListValidated([AllowNull] List<T> source, int start, int length)
         {
             InnerValidateRange();
 
