@@ -35,6 +35,6 @@ partial struct FlatArray<T>
             chunks[i] = new(chunkLength, chunkItems);
         }
 
-        return chunks;
+        return new(chunksLength, chunks);
     }
 }
