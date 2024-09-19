@@ -49,4 +49,24 @@ partial class TestHelper
 
         Assert.Equal(expectedItems, truncatedItems);
     }
+
+    internal static void VerifyTruncatedState<T>(this FlatArray<FlatArray<T>> actual, params T[][]? expectedItems)
+    {
+        var actualLength = actual.GetStructFieldValue<int>("length");
+        Assert.StrictEqual(expectedItems?.Length ?? default, actualLength);
+
+        var actualItems = actual.GetFieldValue<FlatArray<T>[]?>("items");
+        if (actualItems is null)
+        {
+            Assert.Null(expectedItems);
+            return;
+        }
+
+        Assert.NotNull(expectedItems);
+
+        for (var i = 0; i < actualLength; i++)
+        {
+            actualItems[i].VerifyTruncatedState(expectedItems[i]);
+        }
+    }
 }

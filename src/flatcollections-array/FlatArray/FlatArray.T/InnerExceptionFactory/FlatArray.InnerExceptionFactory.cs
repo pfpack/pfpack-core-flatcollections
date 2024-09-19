@@ -14,6 +14,10 @@ partial struct FlatArray<T>
             =>
             new(null, Invariant($"Segment must be within the array bounds. Segment start was {segmentStart}. Segment length was {segmentLength}. Array length was {arrayLength}."));
 
+        internal static ArgumentOutOfRangeException SizeOutsideBounds(string paramName, int size)
+            =>
+            new(paramName, Invariant($"Size must be greater than 0 but was {size}."));
+
         internal static IndexOutOfRangeException IndexOutOfRange(int index, int length)
             =>
             new(Invariant($"Index must be greater than or equal to zero and less than the array length. Index was {index}. Array length was {length}."));
