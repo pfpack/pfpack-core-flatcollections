@@ -6,7 +6,7 @@ partial struct FlatArray<T>
     {
         if (size < 1)
         {
-            throw InnerExceptionFactory.SizeOutsideBounds(nameof(size), size);
+            throw InnerExceptionFactory.ChunkSizeOutsideBounds(nameof(size), size);
         }
 
         if (length == default)
@@ -14,27 +14,23 @@ partial struct FlatArray<T>
             return default;
         }
 
-        var chunksLength = length / size;
-        if (length % size != default)
-        {
-            chunksLength++;
-        }
+        var chunks = length % size == default ? new FlatArray<T>[length / size] : new FlatArray<T>[length / size + 1];
+        var start = 0;
 
-        var chunks = new FlatArray<T>[chunksLength];
         for (var i = 0; i < chunks.Length; i++)
         {
-            var start = i * size;
-
-            var chunkLength = length - start;
-            if (chunkLength > size)
+            var effectiveSize = length - start;
+            if (effectiveSize > size)
             {
-                chunkLength = size;
+                effectiveSize = size;
             }
 
-            var chunkItems = InnerArrayHelper.CopySegment(items!, start, chunkLength);
-            chunks[i] = new(chunkLength, chunkItems);
+            var chunkItems = InnerArrayHelper.CopySegment(items!, start, effectiveSize);
+            chunks[i] = new(chunkItems, default);
+
+            start += effectiveSize;
         }
 
-        return new(chunksLength, chunks);
+        return new(chunks, default);
     }
 }
