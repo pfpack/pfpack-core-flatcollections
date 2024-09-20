@@ -16,7 +16,7 @@ partial struct FlatArray<T>
 
         internal static ArgumentOutOfRangeException ChunkSizeOutsideBounds(string paramName, int size)
             =>
-            new(paramName, Invariant($"Chunk size must be greater than 0 but was {size}."));
+            new(paramName, Invariant($"Chunk size must be greater than zero but was {size}."));
 
         internal static IndexOutOfRangeException IndexOutOfRange(int index, int length)
             =>
