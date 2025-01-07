@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -10,9 +9,6 @@ partial struct FlatArray<T>
     {
         public override FlatArray<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            Debug.Assert(reader.TokenType is not JsonTokenType.None);
-            Debug.Assert(options is not null);
-
             if (reader.TokenType is JsonTokenType.Null)
             {
                 return default;

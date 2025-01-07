@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,13 +10,8 @@ partial struct FlatArray<T>
         private readonly JsonConverter<T> itemConverter;
 
         public JsonConverter(JsonSerializerOptions options)
-        {
-            Debug.Assert(options is not null);
-
+            =>
             itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
-
-            Debug.Assert(itemConverter is not null);
-        }
 
         private static class InnerItemType
         {
