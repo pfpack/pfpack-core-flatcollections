@@ -4,9 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace System;
 
-#if NET8_0_OR_GREATER
 [CollectionBuilder(typeof(FlatArray), nameof(FlatArray.From))]
-#endif
 [JsonConverter(typeof(FlatArrayJsonConverterFactory))]
 [DebuggerDisplay($"{nameof(Length)} = {{{nameof(Length)}}}")]
 public readonly partial struct FlatArray<T> : IEquatable<FlatArray<T>>
