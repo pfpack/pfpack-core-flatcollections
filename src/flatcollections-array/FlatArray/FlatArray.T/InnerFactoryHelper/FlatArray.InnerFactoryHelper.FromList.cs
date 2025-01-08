@@ -19,11 +19,7 @@ partial struct FlatArray<T>
             }
 
             var array = new T[count];
-#if NET8_0_OR_GREATER
             source.CopyTo(new Span<T>(array));
-#else
-            source.CopyTo(array);
-#endif
 
             return new(array, default);
         }

@@ -20,7 +20,6 @@ partial struct FlatArray<T>
 #pragma warning restore IDE0028 // Simplify collection initialization
         }
 
-#if NET8_0_OR_GREATER
         ReadOnlySpan<T> sourceSpan = length == items!.Length
             ? new(items)
             : new(items, 0, length);
@@ -28,13 +27,6 @@ partial struct FlatArray<T>
         List<T> result = new(capacity: length);
         result.AddRange(sourceSpan);
         return result;
-#else
-        ICollection<T> sourceItems = length == items!.Length
-            ? items
-            : new ArraySegment<T>(items, 0, length);
-
-        return new(sourceItems);
-#endif
     }
 
     public ImmutableArray<T> ToImmutableArray()
@@ -46,16 +38,10 @@ partial struct FlatArray<T>
 #pragma warning restore IDE0301 // Simplify collection initialization
         }
 
-#if NET7_0_OR_GREATER
         ReadOnlySpan<T> sourceSpan = length == items!.Length
             ? new(items)
             : new(items, 0, length);
 
         return ImmutableArray.Create(sourceSpan);
-#else
-        return length == items!.Length
-            ? ImmutableArray.Create(items)
-            : ImmutableArray.Create(items, 0, length);
-#endif
     }
 }

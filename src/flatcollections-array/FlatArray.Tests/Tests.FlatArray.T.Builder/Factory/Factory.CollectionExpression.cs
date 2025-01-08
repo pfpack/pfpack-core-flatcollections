@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using System;
+﻿using System;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
@@ -23,4 +22,3 @@ partial class FlatArrayBuilderTest
         actual.VerifyInnerState(expectedItems, expectedItems.Length);
     }
 }
-#endif
