@@ -10,7 +10,7 @@ partial class FlatArrayJsonConverterFactory
         =>
         (JsonConverter?)Activator.CreateInstance(
             type: typeof(FlatArray<>.JsonConverter).MakeGenericType(typeToConvert.GetGenericArguments()[0]),
-            bindingAttr: BindingFlags.Instance | BindingFlags.Public,
+            bindingAttr: BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
             binder: null,
             args: [options],
             culture: null);
