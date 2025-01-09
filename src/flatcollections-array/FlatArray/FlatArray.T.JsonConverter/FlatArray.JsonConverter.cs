@@ -1,5 +1,3 @@
-#pragma warning disable IDE0290 // Use primary constructor
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,7 +9,7 @@ partial struct FlatArray<T>
     {
         private readonly JsonConverter<T> itemConverter;
 
-        public JsonConverter(JsonSerializerOptions options)
+        internal JsonConverter(JsonSerializerOptions options)
             =>
             itemConverter = (JsonConverter<T>)options.GetConverter(InnerItemType.Value);
 

@@ -13,6 +13,7 @@ partial struct FlatArray<T>
 
         internal FlatList(int length, T[] items)
         {
+            Debug.Assert(items is not null);
             Debug.Assert(length >= 0 && length <= items.Length);
 
             this.length = length;
