@@ -20,7 +20,7 @@ partial class FlatArrayTest
         new()
         {
             {
-                default
+                new(default)
             },
             {
                 new byte[] { 1 }.InitializeFlatArray()
@@ -43,7 +43,7 @@ partial class FlatArrayTest
         new()
         {
             {
-                default
+                new(default)
             },
             {
                 new byte[] { 1 }.InitializeFlatArray()
@@ -66,7 +66,7 @@ partial class FlatArrayTest
         new()
         {
             {
-                default
+                new(default)
             },
             {
                 new byte[] { 1 }.InitializeFlatArray()
@@ -91,7 +91,7 @@ partial class FlatArrayTest
         new()
         {
             {
-                default
+                new(default)
             },
             {
                 new[] { "1" }.InitializeFlatArray()
@@ -117,7 +117,7 @@ partial class FlatArrayTest
         new()
         {
             {
-                default
+                new(default)
             },
             {
                 new[] { "1" }.InitializeFlatArray()
@@ -143,7 +143,7 @@ partial class FlatArrayTest
         new()
         {
             {
-                default
+                new(default)
             },
             {
                 new[] { new object() }.InitializeFlatArray()

@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/.sln/">
+    <File Path="../.github/workflows/dotnet.yml" />
+    <File Path="../LICENSE" />
+    <File Path="../.gitignore" />
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/flatcollections-array/">
+    <Project Path="flatcollections-array/FlatArray.Tests/FlatArray.Tests.csproj" />
+    <Project Path="flatcollections-array/FlatArray/FlatArray.csproj" />
+  </Folder>
+  <Folder Name="/flatcollections/">
+    <Project Path="flatcollections/FlatCollections/FlatCollections.csproj" />
+  </Folder>
+</Solution>
