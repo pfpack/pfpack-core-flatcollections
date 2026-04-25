@@ -4,12 +4,8 @@ on:
   push:
     branches: [ main, dev, feature/*, fix/*, release/* ]
 
-  pull_request:
-    branches: [ main ]
-
   release:
     types: [ published ]
-    branches: [ main ]
 
 jobs:
   build:
@@ -17,51 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: |
-            8.0.x
-            9.0.x
-
-    # Create Local NuGet Source
+          10.0.x
+      # dotnet-quality: 'preview' # When using preview versions
+        dotnet-quality: 'ga' # General Availability
 
     - name: Create Local NuGet Directory
       run: mkdir ~/nuget
 
-    - name: Add Local Nuget Source
-      run: dotnet nuget add source ~/nuget
+    - name: Restore solution
+      run: dotnet restore src/Core.FlatCollections.slnx
 
-    # FlatArray
+    - name: Build solution
+      run: dotnet build src/Core.FlatCollections.slnx --no-restore  -c Release
 
-    - name: Restore FlatArray
-      run: dotnet restore ./src/*/*/FlatArray.csproj
+    - name: Test solution
+      run: dotnet test src/Core.FlatCollections.slnx --no-restore  -c Release
 
-    - name: Build FlatArray
-      run: dotnet build ./src/*/*/FlatArray.csproj --no-restore  -c Release
-
-    - name: Pack FlatArray
-      run: dotnet pack ./src/*/*/FlatArray.csproj --no-restore -o ~/nuget  -c Release
-
-    - name: Restore FlatArray.Tests
-      run: dotnet restore ./src/*/*/FlatArray.Tests.csproj
-
-    - name: Test FlatArray.Tests
-      run: dotnet test ./src/*/*/FlatArray.Tests.csproj --no-restore  -c Release
-
-    # FlatCollections
-
-    - name: Restore FlatCollections
-      run: dotnet restore ./src/*/*/FlatCollections.csproj
-
-    - name: Build FlatCollections
-      run: dotnet build ./src/*/*/FlatCollections.csproj --no-restore  -c Release
-
-    - name: Pack FlatCollections
-      run: dotnet pack ./src/*/*/FlatCollections.csproj --no-restore -o ~/nuget  -c Release
-
-      # Push
+    - name: Pack solution
+      run: dotnet pack src/Core.FlatCollections.slnx --no-restore -o ~/nuget  -c Release
 
     - name: Push Packages
       if: ${{ github.event_name == 'release' }}

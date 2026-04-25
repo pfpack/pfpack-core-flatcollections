@@ -11,7 +11,7 @@ internal static class JsonSerializerTestSource
         new()
         {
             {
-                null
+                new(null)
             },
             {
                 new JsonSerializerOptions()
