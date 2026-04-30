@@ -26,7 +26,7 @@ partial struct FlatArray<T>
     // the caller MUST ensure the length is GREATER than zero
     //
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private FlatArray(int length, T[] items)
+    internal FlatArray(int length, T[] items)
     {
         Debug.Assert(items is not null);
         Debug.Assert(length > 0 && length <= items.Length);
