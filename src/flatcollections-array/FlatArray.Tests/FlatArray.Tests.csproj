@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>$(NoWarn);CA1861;IDE0130;xUnit1046</NoWarn>
+    <NoWarn>$(NoWarn);CA1861;IDE0130;xUnit1044;xUnit1046</NoWarn>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <Authors>Andrei Sergeev, Pavel Moskovoy</Authors>
