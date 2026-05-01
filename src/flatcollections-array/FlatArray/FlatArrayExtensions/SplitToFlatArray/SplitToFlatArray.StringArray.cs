@@ -12,7 +12,7 @@ partial class FlatArrayExtensions
 
         var array = source.Split(separators, options);
 
-        return FlatArray<string>.InternalCreate(array);
+        return FlatArray<string>.InternalCreateOrDefault(array);
     }
 
     public static FlatArray<string> SplitToFlatArray(
@@ -25,6 +25,6 @@ partial class FlatArrayExtensions
 
         var array = source.Split(separators, count, options);
 
-        return FlatArray<string>.InternalCreate(array);
+        return FlatArray<string>.InternalCreateOrDefault(array);
     }
 }
