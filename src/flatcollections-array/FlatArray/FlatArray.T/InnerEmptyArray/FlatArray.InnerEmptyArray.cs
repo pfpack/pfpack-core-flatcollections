@@ -1,7 +1,4 @@
-﻿#pragma warning disable IDE0300 // Simplify collection initialization
-#pragma warning disable CA1825 // Avoid zero-length array allocations
-
-namespace System;
+﻿namespace System;
 
 partial struct FlatArray<T>
 {
@@ -14,7 +11,9 @@ partial struct FlatArray<T>
 
         private static class InnerInstance
         {
+#pragma warning disable CA1825 // Avoid zero-length array allocations
             internal static readonly T[] Value = new T[default];
+#pragma warning restore CA1825 // Avoid zero-length array allocations
         }
     }
 }

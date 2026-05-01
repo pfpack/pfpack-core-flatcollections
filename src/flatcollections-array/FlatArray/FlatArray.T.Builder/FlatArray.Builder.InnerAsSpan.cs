@@ -11,9 +11,7 @@ partial struct FlatArray<T>
         {
             if (length == default)
             {
-#pragma warning disable IDE0301 // Simplify collection initialization
                 return Span<T>.Empty;
-#pragma warning restore IDE0301 // Simplify collection initialization
             }
 
             if (length == items.Length)
