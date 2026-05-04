@@ -11,9 +11,7 @@ partial struct FlatArray<T>
         public Builder(T item0)
         {
             length = 1;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[] { item0 };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 1);
             Debug.Assert(items.Length == 1);
@@ -25,13 +23,11 @@ partial struct FlatArray<T>
             T item1)
         {
             length = 2;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
                 item1
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 2);
             Debug.Assert(items.Length == 2);
@@ -44,14 +40,12 @@ partial struct FlatArray<T>
             T item2)
         {
             length = 3;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
                 item1,
                 item2
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 3);
             Debug.Assert(items.Length == 3);
@@ -65,7 +59,6 @@ partial struct FlatArray<T>
             T item3)
         {
             length = 4;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -73,7 +66,6 @@ partial struct FlatArray<T>
                 item2,
                 item3
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 4);
             Debug.Assert(items.Length == 4);
@@ -88,7 +80,6 @@ partial struct FlatArray<T>
             T item4)
         {
             length = 5;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -97,7 +88,6 @@ partial struct FlatArray<T>
                 item3,
                 item4
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 5);
             Debug.Assert(items.Length == 5);
@@ -113,7 +103,6 @@ partial struct FlatArray<T>
             T item5)
         {
             length = 6;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -123,7 +112,6 @@ partial struct FlatArray<T>
                 item4,
                 item5
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 6);
             Debug.Assert(items.Length == 6);
@@ -140,7 +128,6 @@ partial struct FlatArray<T>
             T item6)
         {
             length = 7;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -151,7 +138,6 @@ partial struct FlatArray<T>
                 item5,
                 item6
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 7);
             Debug.Assert(items.Length == 7);
@@ -169,7 +155,6 @@ partial struct FlatArray<T>
             T item7)
         {
             length = 8;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -181,7 +166,6 @@ partial struct FlatArray<T>
                 item6,
                 item7
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 8);
             Debug.Assert(items.Length == 8);
@@ -200,7 +184,6 @@ partial struct FlatArray<T>
             T item8)
         {
             length = 9;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -213,7 +196,6 @@ partial struct FlatArray<T>
                 item7,
                 item8
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 9);
             Debug.Assert(items.Length == 9);
@@ -233,7 +215,6 @@ partial struct FlatArray<T>
             T item9)
         {
             length = 10;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -247,7 +228,6 @@ partial struct FlatArray<T>
                 item8,
                 item9
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 10);
             Debug.Assert(items.Length == 10);
@@ -268,7 +248,6 @@ partial struct FlatArray<T>
             T item10)
         {
             length = 11;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -283,7 +262,6 @@ partial struct FlatArray<T>
                 item9,
                 item10
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 11);
             Debug.Assert(items.Length == 11);
@@ -305,7 +283,6 @@ partial struct FlatArray<T>
             T item11)
         {
             length = 12;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -321,7 +298,6 @@ partial struct FlatArray<T>
                 item10,
                 item11
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 12);
             Debug.Assert(items.Length == 12);
@@ -344,7 +320,6 @@ partial struct FlatArray<T>
             T item12)
         {
             length = 13;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -361,7 +336,6 @@ partial struct FlatArray<T>
                 item11,
                 item12
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 13);
             Debug.Assert(items.Length == 13);
@@ -385,7 +359,6 @@ partial struct FlatArray<T>
             T item13)
         {
             length = 14;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -403,7 +376,6 @@ partial struct FlatArray<T>
                 item12,
                 item13
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 14);
             Debug.Assert(items.Length == 14);
@@ -428,7 +400,6 @@ partial struct FlatArray<T>
             T item14)
         {
             length = 15;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -447,7 +418,6 @@ partial struct FlatArray<T>
                 item13,
                 item14
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 15);
             Debug.Assert(items.Length == 15);
@@ -473,7 +443,6 @@ partial struct FlatArray<T>
             T item15)
         {
             length = 16;
-#pragma warning disable IDE0300 // Simplify collection initialization
             items = new[]
             {
                 item0,
@@ -493,7 +462,6 @@ partial struct FlatArray<T>
                 item14,
                 item15
             };
-#pragma warning restore IDE0300 // Simplify collection initialization
 
             Debug.Assert(length == 16);
             Debug.Assert(items.Length == 16);
